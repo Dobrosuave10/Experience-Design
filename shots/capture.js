@@ -5,11 +5,11 @@ async (page) => {
   // Puntos: [nombre, selector, fracción de scroll dentro de la sección]
   const stops = [
     ['01-hero', '.hero', 0], ['02-hero-travel', '.hero', 0.45], ['03-idea', '.idea', 0.35], ['04-idea-verbs', '.idea', 0.62],
-    ['05-closing', '.idea__after', 0], ['06-worlds', '.worlds', 0.18], ['07-touch', '.touch', 0.2], ['08-milan-open', '.milan__open', 0.12],
+    ['05-closing', '.idea__after', 0], ['06-worlds', '.worlds', 0.12], ['06b-triangle', '.tri', 0.0], ['07-touch', '.touch', 0.2], ['08-milan-open', '.milan__open', 0.12],
     ['09-milan-full', '.milan__open', 0.55], ['10-chapters', '.chapters', 0.02], ['11-chapters-mid', '.chapters', 0.5],
     ['12-pending', '.milan__close', 0.15], ['13-late', '.late', 0.3], ['14-late-answer', '.late', 0.6], ['15-formation', '.formation', 0.1],
     ['16-formation-2', '.formation', 0.5], ['17-community', '.community', 0.05], ['18-community-sheet', '.community', 0.55],
-    ['19-pb', '.pb', 0.1], ['20-pb-steps', '.pb', 0.5], ['21-founders', '.founders', 0.05], ['22-founders-2', '.founders', 0.5],
+    ['19-pb', '.pb', 0.1], ['20-pb-steps', '.pb', 0.5], ['21-founders', '.founders', 0.05], ['22-founders-2', '.founders', 0.45], ['22b-founders-3', '.founders', 0.75],
     ['23-archive', '.archive', 0.1], ['24-contact', '.contact', 0.1], ['25-footer', '.footer', 0.0],
   ];
   const out = [];
@@ -22,7 +22,7 @@ async (page) => {
       return y;
     }, [sel, f]);
     if (y < 0) { out.push(name + ' missing'); continue; }
-    await page.waitForTimeout(1400);
+    await page.waitForTimeout(name.startsWith('06b') ? 4200 : 1500);
     await page.screenshot({ path: `shots/${prefix}-${name}.png`, scale: 'css' });
     out.push(name);
   }

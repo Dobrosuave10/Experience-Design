@@ -7,6 +7,7 @@
  */
 
 import type { MaterialName } from "../lib/materials";
+import type { ImageName } from "./images.gen";
 
 export const brand = {
   name: "Experience Design",
@@ -25,8 +26,8 @@ export const brand = {
 };
 
 export type ImageSlot = {
-  /** Foto real. Si falta, se muestra una placa de material como sustituto. */
-  src?: string;
+  /** Foto real (nombre en images.gen.ts). Si falta, se muestra una placa de material como sustituto. */
+  image?: ImageName;
   alt: string;
   material: MaterialName;
   /** Qué foto debería ir aquí (documentación para el equipo). */
@@ -41,6 +42,7 @@ export const nav = [
 ];
 
 export const hero = {
+  wordmark: { ink: "wordmark-ink", paper: "wordmark-paper" } as const,
   titleA: "Abrir la mirada",
   titleB: "hacia nuevas posibilidades.",
   sub: "Experiencias de diseño, formación y conexiones para quienes quieren seguir descubriendo.",
@@ -78,6 +80,8 @@ export const worlds = {
       keywords: ["Ciudades", "Showrooms", "Estudios", "Materiales", "Personas"],
       text: "Viajar a donde el diseño está ocurriendo.",
       material: "travertine" as MaterialName,
+      image: "milan-esferas" as ImageName,
+      alt: "Instalación de esferas espejadas frente a un palacio en Milán, al atardecer",
       tone: "light" as const,
     },
     {
@@ -88,6 +92,8 @@ export const worlds = {
       keywords: ["Workshops", "Conversaciones", "Casos", "Materiales"],
       text: "Convertir lo que viste en algo que puedes usar.",
       material: "walnut" as MaterialName,
+      image: "materiales" as ImageName,
+      alt: "Muestras de piedra, madera y metal sobre una mesa de trabajo",
       tone: "dark" as const,
     },
     {
@@ -98,6 +104,8 @@ export const worlds = {
       keywords: ["Historia", "Mirada", "Posicionamiento", "Voz"],
       text: "Reconocer tu valor y saber contarlo.",
       material: "linen" as MaterialName,
+      image: "fundadores-showroom" as ImageName,
+      alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
       tone: "light" as const,
     },
   ],
@@ -107,6 +115,7 @@ export const milan = {
   city: "Milán",
   year: "2027",
   event: "Milan Design Week",
+  openingImage: { image: "milan-showroom" as ImageName, alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada" },
   topics: ["Salone del Mobile", "Showrooms", "Estudios", "Materiales", "Cultura", "Conexiones"],
   statementA: "No venimos a mirar desde afuera.",
   statementB: "Venimos a entrar.",
@@ -116,36 +125,48 @@ export const milan = {
       title: "Milán",
       text: "Una ciudad que lleva generaciones pensando cómo vivimos. La recorremos con la atención de quien diseña.",
       material: "plaster" as MaterialName,
+      image: "milan-ciudad" as ImageName,
+      alt: "Catedral de Milán al atardecer, con gente en la plaza",
     },
     {
       n: "02",
       title: "Design Week",
       text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición. Vamos a donde ocurre.",
       material: "terrazzo" as MaterialName,
+      image: "salone-pabellon" as ImageName,
+      alt: "Pasillo del Salone del Mobile con visitantes",
     },
     {
       n: "03",
       title: "La ciudad",
       text: "Patios, fachadas, tranvías, cafés. La arquitectura también se aprende caminando.",
       material: "travertine" as MaterialName,
+      image: "milan-patio" as ImageName,
+      alt: "Patio porticado con una instalación de tela iluminada",
     },
     {
       n: "04",
       title: "Las personas",
       text: "Detrás de cada showroom y cada estudio hay alguien que tomó decisiones. Queremos escucharlas.",
       material: "walnut" as MaterialName,
+      image: "salone-personas" as ImageName,
+      alt: "Visitantes frente al muro rojo del Salone del Mobile",
     },
     {
       n: "05",
       title: "Los materiales",
       text: "Superficies, revestimientos, texturas. Verlos en persona, con luz real, a la distancia de la mano.",
       material: "terracotta" as MaterialName,
+      image: "showroom-piedra" as ImageName,
+      alt: "Showroom con mesa de piedra, sillas tapizadas y arcos",
     },
     {
       n: "06",
       title: "Las conexiones",
       text: "Vuelves con referencias, preguntas y personas con las que seguir conversando.",
       material: "linen" as MaterialName,
+      image: "instalacion-roja" as ImageName,
+      alt: "Instalación de mallas rojas en un pabellón, con personas recorriéndola",
     },
   ],
   pending: {
@@ -153,6 +174,7 @@ export const milan = {
     body: "Te enviamos el programa, qué incluye y el valor. Sin formularios largos.",
     items: ["Fechas", "Programa", "Valor", "Cupos"],
     status: "Por confirmar",
+    image: { image: "salone-banderas" as ImageName, alt: "Banderas del Salone del Mobile.Milano frente al pabellón" },
   },
   cta: "Quiero conocer la experiencia",
 };
@@ -183,9 +205,10 @@ export const formation = {
   status: "Programa en desarrollo",
   cta: "Avísame",
   image: {
-    alt: "",
+    image: "materiales",
+    alt: "Muestras de piedra, madera y metal sobre una mesa de trabajo",
     material: "plaster",
-    brief: "Workshop o sesión de materiales: manos, muestras, mesa de trabajo. Formato 4:5.",
+    brief: "Sesión de materiales.",
   } as ImageSlot,
 };
 
@@ -207,12 +230,12 @@ export const community = {
   title: "Más que viajes, creamos relaciones.",
   disciplines: ["Arquitectura", "Interiorismo", "Diseño", "Marcas", "Materiales", "Iluminación", "Mobiliario", "Industrias creativas"],
   body: "El viaje dura unos días. Las conversaciones que empiezan ahí duran bastante más.",
-  images: [
-    { alt: "", material: "travertine", brief: "Grupo conversando en un showroom (foto real de una experiencia). 4:5." },
-    { alt: "", material: "terrazzo", brief: "Detalle de manos tocando un material. 1:1." },
-    { alt: "", material: "walnut", brief: "Sobremesa o café con el grupo en Milán. 3:4." },
-    { alt: "", material: "plaster", brief: "Recorrido por la calle o un patio milanés. 4:3." },
-  ] as ImageSlot[],
+  image: {
+    image: "charla-showroom",
+    alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
+    material: "travertine",
+    brief: "Grupo conversando en un showroom (foto real).",
+  } as ImageSlot,
 };
 
 export const founders = {
@@ -222,13 +245,13 @@ export const founders = {
       name: "Danae Barla",
       field: "Arquitectura, interiorismo y diseño.",
       bio: null as string | null,
-      image: { alt: "Retrato de Danae Barla", material: "terracotta", brief: "Retrato real de Danae, luz natural. 4:5." } as ImageSlot,
+      image: { image: "danae", alt: "Retrato de Danae Barla", material: "terracotta", brief: "Retrato real de Danae, luz natural. 4:5." } as ImageSlot,
     },
     {
       name: "Christian Erdmann",
       field: "Arquitectura, interiorismo y diseño. Parte del proyecto desde 2025.",
       bio: null as string | null,
-      image: { alt: "Retrato de Christian Erdmann", material: "walnut", brief: "Retrato real de Christian, luz natural. 4:5." } as ImageSlot,
+      image: { image: "christian", alt: "Retrato de Christian Erdmann", material: "walnut", brief: "Retrato real de Christian, luz natural. 4:5." } as ImageSlot,
     },
   ],
   bioPending: "Biografía en preparación.",

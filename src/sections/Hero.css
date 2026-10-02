@@ -58,6 +58,11 @@
 .hero__content button {
   pointer-events: auto;
 }
+.hero__wordmark {
+  width: clamp(240px, 25vw, 400px);
+  height: auto;
+  margin-bottom: clamp(4px, 1.4vh, 16px);
+}
 .hero__title {
   font-size: clamp(3rem, 5vw, 6.2rem);
   line-height: 0.95;
@@ -89,6 +94,10 @@
 @media (max-width: 767px) {
   .hero {
     height: 200vh;
+  }
+  .hero__wordmark {
+    width: min(54vw, 240px);
+    margin-bottom: 0;
   }
   .hero__title {
     font-size: clamp(2.4rem, 10.4vw, 3.6rem);

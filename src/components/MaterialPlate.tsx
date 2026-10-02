@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { materialURL, type MaterialName } from "../lib/materials";
 import type { ImageSlot } from "../content/site";
+import { Photo } from "./Photo";
 import "./MaterialPlate.css";
 
 type PlateProps = {
@@ -63,9 +64,9 @@ type FigureProps = {
  */
 export function Figure({ slot, className = "", ratio = "4 / 5", sizes = "50vw" }: FigureProps) {
   return (
-    <figure className={`figure ${className}`} style={{ aspectRatio: ratio }} data-photo-brief={slot.src ? undefined : slot.brief}>
-      {slot.src ? (
-        <img src={slot.src} alt={slot.alt} loading="lazy" decoding="async" sizes={sizes} />
+    <figure className={`figure ${className}`} style={{ aspectRatio: ratio }} data-photo-brief={slot.image ? undefined : slot.brief}>
+      {slot.image ? (
+        <Photo name={slot.image} alt={slot.alt} sizes={sizes} />
       ) : (
         <>
           <MaterialPlate material={slot.material} />

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { formation } from "../content/site";
 import { goToContact } from "../lib/events";
-import { Figure } from "../components/MaterialPlate";
 import { MagneticButton } from "../components/MagneticButton";
 import { RevealText } from "../components/RevealText";
+import { Photo } from "../components/Photo";
 import "./Formation.css";
 
 /**
@@ -35,7 +35,9 @@ export function Formation() {
         </div>
 
         <aside className="formation__side" aria-label="Modalidades">
-          <Figure slot={formation.image} ratio="4 / 5" />
+          <figure className="formation__img">
+            {formation.image.image && <Photo name={formation.image.image} alt={formation.image.alt} sizes="(max-width: 899px) 90vw, 30vw" />}
+          </figure>
           <div className="formation__modes">
             <div className="formation__tabs" role="tablist" aria-label="Modalidad">
               {formation.modalities.map((m) => (

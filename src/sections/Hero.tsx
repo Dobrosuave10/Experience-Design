@@ -8,6 +8,7 @@ import { goToContact, onReady } from "../lib/events";
 import { RevealText } from "../components/RevealText";
 import { MagneticButton } from "../components/MagneticButton";
 import { Logo } from "../components/Logo";
+import { images } from "../content/images.gen";
 import type { HeroScene } from "../three/HeroScene";
 import "./Hero.css";
 
@@ -84,6 +85,8 @@ export function Hero() {
 
         const off = onReady(() => {
           gsap.fromTo(".hero__stage", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 2.4, ease: "expo.out" });
+          // El wordmark se "escribe" de izquierda a derecha, como el trazo de su caligrafía
+          gsap.fromTo(".hero__wordmark", { clipPath: "inset(0 100% 0 0)", opacity: 1 }, { clipPath: "inset(0 0% 0 0)", duration: 2.2, ease: "power2.inOut", delay: 0.15 });
           gsap.fromTo(".hero__fade", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.4, ease: "expo.out", delay: 0.7, stagger: 0.12 });
         });
         return () => off();
@@ -107,6 +110,15 @@ export function Hero() {
         </div>
 
         <div className="hero__content wrap">
+          <img
+            className="hero__wordmark"
+            src={images["wordmark-paper"].src}
+            width={images["wordmark-paper"].w}
+            height={images["wordmark-paper"].h}
+            alt="Experience Design"
+            fetchPriority="high"
+            draggable={false}
+          />
           <RevealText
             as="h1"
             id="hero-title"

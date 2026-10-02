@@ -20,6 +20,19 @@
   inset: 0;
   overflow: hidden;
   clip-path: inset(0);
+  background: var(--umber);
+}
+.milan__window img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Velo para leer la tipografía sobre la foto, sin filtros sobre la imagen */
+.milan__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(23, 21, 19, 0.35) 0%, rgba(23, 21, 19, 0.05) 35%, rgba(23, 21, 19, 0.15) 60%, rgba(23, 21, 19, 0.7) 100%);
 }
 .milan__city {
   position: relative;
@@ -30,9 +43,9 @@
   line-height: 0.8;
   letter-spacing: -0.045em;
   color: #f5f1ea;
-  mix-blend-mode: difference;
   white-space: nowrap;
   padding-bottom: 0.08em;
+  text-shadow: 0 2px 40px rgba(23, 21, 19, 0.25);
 }
 .milan__year {
   font-family: var(--sans);
@@ -51,7 +64,6 @@
   align-items: flex-end;
   gap: 24px;
   color: #f5f1ea;
-  mix-blend-mode: difference;
 }
 .milan__topics {
   display: flex;
@@ -85,16 +97,21 @@
 .chapter {
   position: relative;
   flex: none;
-  width: clamp(380px, 38vw, 620px);
-  display: grid;
-  grid-template-rows: 1fr auto;
+  width: clamp(380px, 36vw, 560px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   gap: 28px;
 }
 .chapter--low {
-  grid-template-rows: auto 1fr;
+  justify-content: flex-start;
 }
 .chapter--low .chapter__plate {
   order: 2;
+}
+/* Cada foto conserva su proporción; el tamaño varía con la imagen y da ritmo */
+.chapter:nth-child(3n) .chapter__plate {
+  align-self: flex-end;
 }
 .chapter--intro {
   width: clamp(420px, 44vw, 720px);
@@ -111,10 +128,20 @@
 .chapter__plate {
   position: relative;
   overflow: hidden;
-  min-height: 0;
+  margin: 0;
+  width: 100%;
+  max-height: 54vh;
+  flex: none;
+  background: var(--umber);
 }
-.chapter__plate .plate {
-  inset: 0 -12%;
+.chapter__plate img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 112%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
 }
 .chapter__text {
   display: grid;
@@ -146,9 +173,22 @@
   max-width: 14ch;
   margin-bottom: clamp(40px, 7vh, 80px);
 }
+.milan__flag {
+  margin: 0;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 322 / 384;
+  overflow: hidden;
+  align-self: end;
+}
+.milan__flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .milan__pending {
   display: grid;
-  grid-template-columns: 7fr 5fr;
+  grid-template-columns: 3fr 6fr 4fr;
   gap: clamp(32px, 6vw, 120px);
   align-items: end;
 }
@@ -219,23 +259,31 @@
   }
   .chapter,
   .chapter--low {
-    grid-template-rows: auto auto;
     gap: 20px;
   }
   .chapter--low .chapter__plate {
     order: 0;
   }
   .chapter__plate {
-    aspect-ratio: 4 / 3;
+    max-height: none;
   }
-  .chapter__plate .plate {
-    inset: 0;
+  /* En móvil las fotos alternan su alineación para no formar una columna rígida */
+  .chapter:nth-child(odd) .chapter__plate {
+    align-self: flex-end;
+    width: 86%;
+  }
+  .chapter__plate img {
+    left: 0;
+    width: 100%;
   }
   .chapter__statement {
     font-size: clamp(2.6rem, 12vw, 3.6rem);
   }
   .milan__pending {
     grid-template-columns: 1fr;
+  }
+  .milan__flag {
+    max-width: 62%;
   }
   .milan__facts {
     gap: 24px 20px;

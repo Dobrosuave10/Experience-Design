@@ -4,7 +4,8 @@ import { milan } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { DESKTOP, MOTION_OK } from "../lib/env";
 import { goToContact } from "../lib/events";
-import { MaterialPlate } from "../components/MaterialPlate";
+import { Photo } from "../components/Photo";
+import { images } from "../content/images.gen";
 import { MagneticButton } from "../components/MagneticButton";
 import { RevealText } from "../components/RevealText";
 import "./Milan.css";
@@ -25,7 +26,8 @@ export function Milan() {
         gsap
           .timeline({ scrollTrigger: { trigger: ".milan__open", start: "top top", end: "bottom bottom", scrub: 0.8 } })
           .fromTo(".milan__window", { clipPath: "inset(30% 34% 30% 34%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.inOut", duration: 1 })
-          .fromTo(".milan__window .plate", { scale: 1.5 }, { scale: 1, ease: "power2.inOut", duration: 1 }, 0)
+          .fromTo(".milan__window img", { scale: 1.35 }, { scale: 1, ease: "power2.inOut", duration: 1 }, 0)
+          .fromTo(".milan__shade", { opacity: 0 }, { opacity: 1, ease: "none", duration: 0.6 }, 0.5)
           .fromTo(".milan__city", { yPercent: 18 }, { yPercent: -6, ease: "none", duration: 1.3 }, 0)
           .fromTo(".milan__topic", { opacity: 0, y: 12 }, { opacity: 1, y: 0, stagger: 0.05, duration: 0.3 }, 0.8);
       });
@@ -50,8 +52,8 @@ export function Milan() {
             },
           },
         });
-        gsap.utils.toArray<HTMLElement>(".chapter__plate .plate", el).forEach((p) => {
-          gsap.fromTo(p, { xPercent: -10 }, { xPercent: 10, ease: "none", scrollTrigger: { trigger: p.parentElement, containerAnimation: tween, start: "left right", end: "right left", scrub: true } });
+        gsap.utils.toArray<HTMLElement>(".chapter__plate img", el).forEach((p) => {
+          gsap.fromTo(p, { xPercent: 0 }, { xPercent: -10, ease: "none", scrollTrigger: { trigger: p.parentElement, containerAnimation: tween, start: "left right", end: "right left", scrub: true } });
         });
         return () => {
           wrap.style.height = "";
@@ -67,7 +69,8 @@ export function Milan() {
       <div className="milan__open">
         <div className="milan__open-sticky">
           <div className="milan__window">
-            <MaterialPlate material="terrazzo" light={false} />
+            <Photo name={milan.openingImage.image} alt={milan.openingImage.alt} sizes="(max-aspect-ratio: 1/1) 182vh, 100vw" />
+            <div className="milan__shade" aria-hidden="true" />
           </div>
           <h2 id="milan-title" className="milan__city display" aria-label={`${milan.city} ${milan.year}`}>
             <span aria-hidden="true">{milan.city}</span>
@@ -97,9 +100,9 @@ export function Milan() {
             </li>
             {milan.chapters.map((c, i) => (
               <li key={c.n} className={`chapter ${i % 2 ? "chapter--low" : ""}`}>
-                <div className="chapter__plate">
-                  <MaterialPlate material={c.material} />
-                </div>
+                <figure className="chapter__plate" style={{ aspectRatio: `${images[c.image].w} / ${images[c.image].h}`, maxWidth: Math.round(images[c.image].w * 1.15) }}>
+                  <Photo name={c.image} alt={c.alt} sizes="(max-width: 767px) 92vw, 30vw" />
+                </figure>
                 <div className="chapter__text">
                   <span className="chapter__n label">{c.n}</span>
                   <h3 className="chapter__title display">{c.title}</h3>
@@ -115,6 +118,9 @@ export function Milan() {
       <div className="wrap milan__close">
         <RevealText className="milan__pending-title display" lines={[milan.pending.title]} />
         <div className="milan__pending">
+          <figure className="milan__flag">
+            <Photo name={milan.pending.image.image} alt={milan.pending.image.alt} sizes="(max-width: 767px) 60vw, 300px" />
+          </figure>
           <dl className="milan__facts">
             {milan.pending.items.map((it) => (
               <div key={it} className="milan__fact">

@@ -44,6 +44,17 @@
   gap: 28px;
   margin-top: clamp(80px, 18vh, 220px);
 }
+.formation__img {
+  margin: 0;
+  aspect-ratio: 266 / 332;
+  overflow: hidden;
+  background: var(--umber);
+}
+.formation__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .formation__tabs {
   display: flex;
   gap: 28px;
@@ -111,7 +122,7 @@
   .formation__side {
     margin-top: 72px;
   }
-  .formation__side .figure {
-    aspect-ratio: 4 / 3 !important;
+  .formation__img {
+    aspect-ratio: 4 / 3;
   }
 }

@@ -4,3 +4,4 @@ dist
 *.png
 !public/**/*.png
 .env.local
+!assets-src/**/*.png
