@@ -1,0 +1,86 @@
+.idea {
+  /* el tramo fijo + el cierre */
+  padding-bottom: clamp(120px, 22vh, 260px);
+}
+.idea__pin {
+  height: 330vh;
+}
+.idea__inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-content: center;
+  row-gap: clamp(24px, 5vh, 56px);
+}
+.idea__lead {
+  grid-column: 1 / span 7;
+  font-size: clamp(2.2rem, 4.6vw, 5rem);
+  line-height: 1;
+  max-width: 14ch;
+}
+.idea__verbs {
+  grid-column: 6 / span 7;
+  display: grid;
+}
+.idea__verb {
+  font-size: clamp(3.2rem, 8.6vw, 10rem);
+  line-height: 1.02;
+  padding-bottom: 0.06em;
+  color: var(--accent);
+}
+.idea__verb:nth-child(2) {
+  padding-left: 0.6em;
+}
+.idea__verb:nth-child(3) {
+  padding-left: 0.2em;
+}
+.idea__verb:nth-child(4) {
+  padding-left: 0.9em;
+}
+.idea__after {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.idea__closing {
+  grid-column: 2 / span 7;
+  font-size: clamp(1.7rem, 3vw, 3.1rem);
+  line-height: 1.15;
+  max-width: 22ch;
+}
+
+@media (max-width: 767px) {
+  .idea__pin {
+    height: 260vh;
+  }
+  .idea__inner {
+    grid-template-columns: 1fr;
+  }
+  .idea__lead,
+  .idea__verbs,
+  .idea__closing {
+    grid-column: 1 / -1;
+  }
+  .idea__verb {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+  .idea__verb:nth-child(n) {
+    padding-left: 0;
+  }
+  .idea__verb:nth-child(2),
+  .idea__verb:nth-child(4) {
+    padding-left: 0.4em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .idea__pin {
+    height: auto;
+  }
+  .idea__inner {
+    position: static;
+    height: auto;
+    padding-block: 18vh;
+  }
+}

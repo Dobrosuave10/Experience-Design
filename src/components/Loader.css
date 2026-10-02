@@ -1,0 +1,35 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+}
+.loader__mark {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+}
+.loader__disc {
+  opacity: 0;
+  transform: scale(0.92);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.loader__glyph {
+  opacity: 0;
+}
+.loader__name {
+  opacity: 0;
+  color: var(--muted-dark);
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader__disc,
+  .loader__glyph,
+  .loader__name {
+    opacity: 1;
+    transform: none;
+  }
+}

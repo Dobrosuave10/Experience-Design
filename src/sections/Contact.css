@@ -1,0 +1,60 @@
+.contact {
+  padding-block: clamp(140px, 22vh, 260px) clamp(120px, 18vh, 200px);
+}
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+  row-gap: 64px;
+}
+.contact__intro {
+  grid-column: 1 / span 5;
+  display: grid;
+  align-content: start;
+  gap: 28px;
+}
+.contact__title {
+  font-size: clamp(2.8rem, 5.6vw, 6.2rem);
+  line-height: 0.98;
+  max-width: 12ch;
+}
+.contact__body {
+  max-width: 38ch;
+  font-size: 1.08rem;
+}
+.contact__channels {
+  display: grid;
+  gap: 6px;
+}
+.contact__channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-weight: 500;
+}
+.contact__channel:hover {
+  color: var(--accent);
+}
+.contact__b2b {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.contact__b2b-link {
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  min-height: 44px;
+}
+.contact__form {
+  grid-column: 7 / span 6;
+  padding-top: 12px;
+}
+
+@media (max-width: 899px) {
+  .contact__intro,
+  .contact__form {
+    grid-column: 1 / -1;
+  }
+}

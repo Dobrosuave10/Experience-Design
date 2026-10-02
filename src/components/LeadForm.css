@@ -1,0 +1,124 @@
+.lead {
+  display: grid;
+  gap: clamp(24px, 3.4vh, 36px);
+}
+.lead__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 2.4vw, 40px);
+}
+.lead__field {
+  display: grid;
+  gap: 10px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.lead__field .label {
+  color: var(--muted);
+}
+.lead__optional {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+.lead input:not([type="radio"]) {
+  width: 100%;
+  min-height: 48px;
+  padding: 6px 0 10px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--muted);
+  border-radius: 0;
+  color: var(--fg);
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  transition: border-color 0.4s var(--ease-out);
+}
+.lead input:not([type="radio"]):focus {
+  outline: none;
+  border-bottom-color: var(--fg);
+  box-shadow: 0 1.5px 0 0 var(--accent);
+}
+.lead input[aria-invalid="true"] {
+  border-bottom-color: #e59a85;
+}
+.lead__interests legend {
+  margin-bottom: 14px;
+  padding: 0;
+}
+.lead__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.lead__chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
+}
+.lead__chip:hover {
+  border-color: var(--fg);
+}
+.lead__chip input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.lead__chip:has(input:focus-visible) {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+}
+.lead__chip.is-on {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.lead__error {
+  color: #f0ad98; /* 8:1 sobre ink */
+  font-size: 0.9rem;
+}
+.lead__submit {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+  margin-top: 8px;
+}
+.lead__status {
+  flex: 1 1 260px;
+}
+.lead__note {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.lead__note a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lead--done {
+  gap: 14px;
+}
+.lead__done-title {
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+@media (max-width: 767px) {
+  .lead__row {
+    grid-template-columns: 1fr;
+  }
+}

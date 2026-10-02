@@ -1,0 +1,66 @@
+:root {
+  /* Paleta de marca */
+  --clay: #a6533f;
+  --clay-soft: #b7664f;
+  --sand: #efe7dc;
+  --paper: #f5f1ea;
+  --ink: #171513;
+  --umber: #2a2521;
+  --muted-light: #675c54; /* 5.4:1 sobre paper */
+  --muted-dark: #a89d92; /* 7:1 sobre ink */
+
+  /* Tipografía: 1 serif + 1 sans */
+  --serif: "Cormorant Garamond", "Iowan Old Style", "Times New Roman", serif;
+  --sans: "Manrope Variable", "Manrope", "Helvetica Neue", system-ui, sans-serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --gutter: clamp(16px, 4.2vw, 64px);
+  --nav-h: 72px;
+  --maxw: 1520px;
+
+  /* Escala de capas */
+  --z-content: 1;
+  --z-nav: 50;
+  --z-menu: 60;
+  --z-cursor: 70;
+  --z-grain: 80;
+  --z-loader: 90;
+
+  /* Tono activo (lo cambia el ToneController según la sección visible) */
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --muted: var(--muted-dark);
+  --accent: var(--clay-soft);
+  --line: rgba(245, 241, 234, 0.16);
+}
+
+html[data-tone="paper"] {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --muted: var(--muted-light);
+  --accent: var(--clay);
+  --line: rgba(23, 21, 19, 0.14);
+}
+html[data-tone="sand"] {
+  --bg: var(--sand);
+  --fg: var(--ink);
+  --muted: #62574f;
+  --accent: var(--clay);
+  --line: rgba(23, 21, 19, 0.14);
+}
+html[data-tone="clay"] {
+  --bg: #9e4f3c;
+  --fg: var(--paper);
+  --muted: rgba(245, 241, 234, 0.82);
+  --accent: var(--paper);
+  --line: rgba(245, 241, 234, 0.3);
+}
+html[data-tone="ink"] {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --muted: var(--muted-dark);
+  --accent: var(--clay-soft);
+  --line: rgba(245, 241, 234, 0.16);
+}

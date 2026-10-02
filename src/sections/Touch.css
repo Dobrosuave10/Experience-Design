@@ -1,0 +1,59 @@
+.touch {
+  padding-bottom: clamp(120px, 20vh, 240px);
+}
+.touch__head {
+  display: grid;
+  gap: 22px;
+  margin-bottom: clamp(40px, 7vh, 80px);
+}
+.touch__title {
+  font-size: clamp(2.6rem, 6vw, 6.6rem);
+  max-width: 13ch;
+}
+.touch__body {
+  max-width: 42ch;
+  font-size: 1.05rem;
+}
+.touch__strip {
+  display: flex;
+  gap: 6px;
+  height: clamp(320px, 62vh, 640px);
+}
+.touch__swatch {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  transition: flex-grow 1s var(--ease-out);
+}
+.touch__swatch.is-active {
+  flex-grow: 5;
+}
+.touch__swatch .plate {
+  transition: transform 1.4s var(--ease-out);
+  transform: scale(1.08);
+}
+.touch__swatch.is-active .plate {
+  transform: scale(1);
+}
+.touch__name {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-top: 20px;
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  line-height: 1;
+}
+.touch__count {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 767px) {
+  .touch__strip {
+    height: 52vh;
+    gap: 4px;
+  }
+  .touch__swatch.is-active {
+    flex-grow: 4;
+  }
+}

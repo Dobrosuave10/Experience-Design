@@ -1,0 +1,96 @@
+.community {
+  padding-block: clamp(140px, 22vh, 260px) clamp(120px, 20vh, 240px);
+  overflow: hidden;
+}
+.community__title {
+  font-size: clamp(2.8rem, 7.4vw, 8.4rem);
+  line-height: 0.95;
+  max-width: 15ch;
+}
+
+.community__marquee {
+  margin-block: clamp(56px, 10vh, 120px);
+  border-block: 1px solid var(--line);
+  padding-block: 18px;
+  overflow: hidden;
+}
+.community__marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 48s linear infinite;
+}
+.community__disc {
+  font-size: clamp(1.6rem, 2.6vw, 2.8rem);
+  line-height: 1.2;
+  padding-inline: clamp(20px, 2.6vw, 44px);
+  white-space: nowrap;
+}
+.community__disc:nth-child(3n + 2) {
+  color: var(--accent);
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .community__marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+  }
+}
+
+/* Hoja de contactos: alturas y anchos distintos, como fotos sobre una mesa */
+.community__sheet {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(12px, 1.6vw, 24px);
+  row-gap: clamp(24px, 4vh, 48px);
+  align-items: start;
+}
+.community__img--a {
+  grid-column: 1 / span 4;
+}
+.community__img--b {
+  grid-column: 6 / span 3;
+  margin-top: 22vh;
+}
+.community__body {
+  grid-column: 10 / span 3;
+  align-self: end;
+  font-size: clamp(1.4rem, 1.8vw, 1.9rem);
+  line-height: 1.25;
+}
+.community__img--c {
+  grid-column: 2 / span 3;
+  margin-top: 4vh;
+}
+.community__img--d {
+  grid-column: 7 / span 5;
+  margin-top: 14vh;
+}
+
+@media (max-width: 767px) {
+  .community__sheet {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .community__img--a {
+    grid-column: 1 / span 4;
+  }
+  .community__img--b {
+    grid-column: 4 / span 3;
+    margin-top: -14vh;
+  }
+  .community__body {
+    grid-column: 1 / -1;
+    padding-block: 24px;
+  }
+  .community__img--c {
+    grid-column: 1 / span 3;
+    margin-top: 0;
+  }
+  .community__img--d {
+    grid-column: 2 / -1;
+  }
+}
