@@ -29,6 +29,7 @@ export function LeadForm() {
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const whatsapp = String(data.get("whatsapp") ?? "").trim();
+    const gotcha = String(data.get("_gotcha") ?? "");
     const next: Errors = {};
     if (!name) next.name = "Escribe tu nombre.";
     if (!EMAIL_RE.test(email)) next.email = "Revisa el email.";
@@ -43,12 +44,27 @@ export function LeadForm() {
       setStatus("unconfigured");
       return;
     }
+    // Un bot llenó el campo trampa: fingimos éxito y no enviamos nada.
+    if (gotcha) {
+      setStatus("sent");
+      return;
+    }
+    const interestLabel = interests.find((it) => it.id === interest)?.label ?? interest;
     setStatus("sending");
     try {
       const res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name, email, whatsapp, interest, source: brand.website }),
+        body: JSON.stringify({
+          name,
+          email,
+          whatsapp,
+          interest,
+          interestLabel,
+          source: brand.website,
+          // Formspree usa _subject como asunto del email; otros endpoints lo ignoran.
+          _subject: `Nuevo contacto: ${interestLabel} · ${name}`,
+        }),
       });
       setStatus(res.ok ? "sent" : "error");
     } catch {
@@ -67,6 +83,11 @@ export function LeadForm() {
 
   return (
     <form className="lead" onSubmit={submit} noValidate>
+      {/* Campo trampa contra spam: invisible para personas, los bots lo llenan. */}
+      <div className="sr-only" aria-hidden="true">
+        <label htmlFor={`${uid}-gotcha`}>No llenar</label>
+        <input id={`${uid}-gotcha`} name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="lead__row">
         <div className="lead__field">
           <label htmlFor={`${uid}-name`} className="label">
