@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "@phosphor-icons/react";
 import { worlds } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK, hasFinePointer, prefersReducedMotion } from "../lib/env";
+import { MOTION_OK, prefersReducedMotion } from "../lib/env";
 import { Logo } from "./Logo";
 import { Photo } from "./Photo";
 import { Link } from "./Link";
@@ -88,37 +88,15 @@ export function AxesTriangle() {
         });
         const tl = gsap.timeline({ paused: true });
         tl.to(edges, { strokeDashoffset: 0, duration: 1.6, ease: "power2.inOut", stagger: 0.35 })
-          .fromTo(".tri__disc", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(50% at 50% 50%)", duration: 1.3, ease: "expo.out", stagger: 0.25 }, 0.5)
+          .fromTo(".tri__disc", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(50% at 50% 50%)", duration: 1.3, ease: "expo.out", stagger: 0.25, clearProps: "clipPath" }, 0.5)
           .fromTo(".tri__label", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out", stagger: 0.2 }, 1)
           .fromTo(".tri__spokes", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 1.4)
           .fromTo(".tri__center", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "expo.out" }, 1.5)
           .fromTo(".tri__detail", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out" }, 1.7);
         ScrollTrigger.create({ trigger: el, start: "top 72%", once: true, onEnter: () => tl.play() });
-
-        // Profundidad: cada esquina se desplaza distinto con el cursor
-        if (!hasFinePointer()) return;
-        const nodes = gsap.utils.toArray<HTMLElement>(".tri__node", el);
-        const movers = nodes.map((n, i) => ({
-          x: gsap.quickTo(n, "x", { duration: 1.2, ease: "power3.out" }),
-          y: gsap.quickTo(n, "y", { duration: 1.2, ease: "power3.out" }),
-          d: [14, 22, 18][i],
-        }));
-        const center = el.querySelector<HTMLElement>(".tri__center");
-        const cx = center ? gsap.quickTo(center, "x", { duration: 1.4, ease: "power3.out" }) : null;
-        const cy = center ? gsap.quickTo(center, "y", { duration: 1.4, ease: "power3.out" }) : null;
-        const move = (e: PointerEvent) => {
-          const r = el.getBoundingClientRect();
-          const nx = (e.clientX - r.left) / r.width - 0.5;
-          const ny = (e.clientY - r.top) / r.height - 0.5;
-          movers.forEach((m) => {
-            m.x(nx * m.d);
-            m.y(ny * m.d);
-          });
-          cx?.(-nx * 8);
-          cy?.(-ny * 8);
-        };
-        el.addEventListener("pointermove", move);
-        return () => el.removeEventListener("pointermove", move);
+        // Las fotos quedan fijas en sus vértices (sin parallax con el cursor): sólo el hilo
+        // de los radios se mueve, y únicamente mientras el triángulo está en pantalla.
+        ScrollTrigger.create({ trigger: el, start: "top bottom", end: "bottom top", toggleClass: "is-live" });
       });
     },
     root,

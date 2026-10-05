@@ -46,7 +46,12 @@
   stroke-dasharray: 2 7;
   opacity: 0.35;
   animation: tri-flow 2.6s linear infinite;
+  /* Sólo corre con el triángulo en pantalla (.is-live lo pone un ScrollTrigger) */
+  animation-play-state: paused;
   transition: opacity 0.8s var(--ease-out);
+}
+.tri.is-live .tri__spoke {
+  animation-play-state: running;
 }
 .tri__spoke.is-hot {
   stroke: var(--accent);
@@ -69,7 +74,9 @@
   pointer-events: none;
 }
 .tri__center svg {
-  filter: drop-shadow(0 10px 24px rgba(42, 37, 33, 0.18));
+  /* Sombra como box-shadow (no filter): no se recalcula en cada cuadro de los radios animados */
+  border-radius: 50%;
+  box-shadow: 0 10px 24px rgba(42, 37, 33, 0.18);
 }
 .tri__thread {
   font-size: 1.15rem;
@@ -93,6 +100,9 @@
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
+  /* Capa propia: el zoom de la foto no repinta el resto del triángulo */
+  isolation: isolate;
+  transform: translateZ(0);
   background: var(--umber);
   outline: 1px solid transparent;
   outline-offset: 8px;
@@ -105,6 +115,7 @@
   height: 100%;
   object-fit: cover;
   scale: 1.06;
+  will-change: scale;
   transition: scale 1.4s var(--ease-out);
 }
 .tri__node--0 .tri__disc img {

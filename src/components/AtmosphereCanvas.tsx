@@ -34,10 +34,17 @@ export function AtmosphereCanvas({ color, className = "" }: Props) {
       a.setPointer((e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height);
     };
     window.addEventListener("pointermove", move, { passive: true });
+    // Si el navegador pierde el contexto, el canvas se esconde en vez de tapar el texto
+    const lost = () => {
+      a.stop();
+      el.style.visibility = "hidden";
+    };
+    el.addEventListener("webglcontextlost", lost);
     return () => {
       ro.disconnect();
       io.disconnect();
       window.removeEventListener("pointermove", move);
+      el.removeEventListener("webglcontextlost", lost);
       a.dispose();
       atmo.current = null;
     };

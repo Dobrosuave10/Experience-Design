@@ -1,5 +1,6 @@
 .hero {
-  height: 240vh;
+  /* Tramo corto: el texto sale, la cámara cruza los arcos y la página pasa a papel sin pausa vacía */
+  height: 160vh;
   color: var(--paper);
 }
 .hero__sticky {
@@ -93,7 +94,7 @@
 
 @media (max-width: 767px) {
   .hero {
-    height: 200vh;
+    height: 145vh;
   }
   .hero__wordmark {
     width: min(54vw, 240px);

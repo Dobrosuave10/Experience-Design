@@ -1,18 +1,24 @@
 .idea {
   /* el tramo fijo + el cierre */
   padding-bottom: clamp(120px, 22vh, 260px);
+  /* Siempre en papel: continúa el velo del hero sin esperar al cambio de tono */
+  --fg: var(--ink);
+  --muted: var(--muted-light);
+  --accent: var(--clay);
+  background: var(--paper);
+  color: var(--fg);
 }
-.idea__pin {
-  height: 330vh;
+/* En Inicio la hoja de papel sube sobre el final del hero: no queda una pantalla vacía entre ambos */
+.hero + .idea {
+  margin-top: -40vh;
 }
 .idea__inner {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100dvh;
+  /* Sin fijar la pantalla: la frase y los cuatro verbos se ven juntos mientras la página sigue bajando */
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  align-content: center;
+  align-content: start;
+  padding-top: calc(var(--nav-h) + clamp(32px, 9vh, 110px));
+  padding-bottom: clamp(64px, 12vh, 140px);
   row-gap: clamp(24px, 5vh, 56px);
 }
 .idea__lead {
@@ -52,9 +58,6 @@
 }
 
 @media (max-width: 767px) {
-  .idea__pin {
-    height: 260vh;
-  }
   .idea__inner {
     grid-template-columns: 1fr;
   }
@@ -75,13 +78,8 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .idea__pin {
-    height: auto;
-  }
-  .idea__inner {
-    position: static;
-    height: auto;
-    padding-block: 18vh;
+  .hero + .idea {
+    margin-top: 0;
   }
 }
 .idea__kicker {

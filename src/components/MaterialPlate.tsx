@@ -20,17 +20,20 @@ export function MaterialPlate({ material, className = "", style, light = true }:
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let alive = true;
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting) return;
         io.disconnect();
-        const run = () => setUrl(materialURL(material));
-        "requestIdleCallback" in window ? requestIdleCallback(run, { timeout: 400 }) : setTimeout(run, 0);
+        materialURL(material).then((u) => alive && setUrl(u));
       },
       { rootMargin: "60% 0px" },
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      alive = false;
+      io.disconnect();
+    };
   }, [material]);
 
   const onMove = (e: React.PointerEvent<HTMLDivElement>) => {

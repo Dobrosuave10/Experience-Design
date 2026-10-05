@@ -55,11 +55,21 @@ const mix = (a: RGB, b: RGB, t: number): RGB => [a[0] + (b[0] - a[0]) * t, a[1] 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const hex = (h: string): RGB => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
 
-function paint(fn: (x: number, y: number, u: number, v: number) => RGB, w = W, h = H) {
+/** En el documento es un <canvas>; dentro del worker, un OffscreenCanvas. */
+type Canvas = HTMLCanvasElement | OffscreenCanvas;
+
+function createCanvas(w: number, h: number): Canvas {
+  if (typeof document === "undefined") return new OffscreenCanvas(w, h);
   const c = document.createElement("canvas");
   c.width = w;
   c.height = h;
-  const ctx = c.getContext("2d")!;
+  return c;
+}
+
+function paint(fn: (x: number, y: number, u: number, v: number) => RGB, w = W, h = H) {
+  const c = createCanvas(w, h);
+  // Los dos contextos 2D comparten la API que se usa aquí
+  const ctx = c.getContext("2d") as CanvasRenderingContext2D;
   const img = ctx.createImageData(w, h);
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
@@ -77,7 +87,7 @@ function paint(fn: (x: number, y: number, u: number, v: number) => RGB, w = W, h
 
 const S = W / 360; // factor respecto al diseño original
 
-const generators: Record<MaterialName, () => HTMLCanvasElement> = {
+const generators: Record<MaterialName, () => Canvas> = {
   terracotta() {
     const { fbm, noise } = makeNoise(11);
     const a = hex("#9A4A37"), b = hex("#B7664F"), dark = hex("#7E3B2C");
@@ -170,23 +180,54 @@ const generators: Record<MaterialName, () => HTMLCanvasElement> = {
   },
 };
 
-const cache = new Map<MaterialName, string>();
+/** Genera la placa en el contexto actual (documento o worker). */
+export function generateMaterial(name: MaterialName): Canvas {
+  return generators[name]();
+}
+
 const canvasCache = new Map<MaterialName, HTMLCanvasElement>();
 
+/** Sólo para la escena del hero (necesita el canvas como textura, una vez). */
 export function materialCanvas(name: MaterialName): HTMLCanvasElement {
   let c = canvasCache.get(name);
   if (!c) {
-    c = generators[name]();
+    c = generators[name]() as HTMLCanvasElement;
     canvasCache.set(name, c);
   }
   return c;
 }
 
-export function materialURL(name: MaterialName): string {
-  let url = cache.get(name);
+/*
+ * Las placas se pintan píxel a píxel (300–400 ms cada una): en el hilo principal
+ * trababan el scroll al llegar a Programas. Se generan en un worker con OffscreenCanvas
+ * y vuelven como blob; sin soporte, se pintan en el documento como antes.
+ */
+const urls = new Map<MaterialName, Promise<string>>();
+let worker: Worker | null = null;
+const pending = new Map<MaterialName, (url: string) => void>();
+
+function getWorker() {
+  if (!worker) {
+    worker = new Worker(new URL("./materials.worker.ts", import.meta.url), { type: "module" });
+    worker.onmessage = (e: MessageEvent<{ name: MaterialName; blob: Blob }>) => {
+      pending.get(e.data.name)?.(URL.createObjectURL(e.data.blob));
+      pending.delete(e.data.name);
+    };
+  }
+  return worker;
+}
+
+export function materialURL(name: MaterialName): Promise<string> {
+  let url = urls.get(name);
   if (!url) {
-    url = materialCanvas(name).toDataURL("image/jpeg", 0.86);
-    cache.set(name, url);
+    url =
+      typeof OffscreenCanvas !== "undefined" && typeof Worker !== "undefined"
+        ? new Promise((resolve) => {
+            pending.set(name, resolve);
+            getWorker().postMessage(name);
+          })
+        : Promise.resolve(materialCanvas(name).toDataURL("image/jpeg", 0.86));
+    urls.set(name, url);
   }
   return url;
 }

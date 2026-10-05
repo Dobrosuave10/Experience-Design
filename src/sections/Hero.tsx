@@ -80,8 +80,8 @@ export function Hero() {
         });
         gsap
           .timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true } })
-          .to(".hero__content", { opacity: 0, y: -60, ease: "none", duration: 0.18 }, 0.02)
-          .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.2 }, 0.8);
+          .to(".hero__content", { opacity: 0, y: -60, ease: "none", duration: 0.3 }, 0.02)
+          .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.35 }, 0.65);
 
         const off = onPageShown(() => {
           gsap.fromTo(".hero__stage", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 2.4, ease: "expo.out" });

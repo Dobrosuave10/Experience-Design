@@ -8,7 +8,7 @@ import "./Idea.css";
 
 /**
  * 02 Mirar. Sección casi vacía: una frase y cuatro verbos que aparecen
- * uno a uno con el scroll, como si se dijeran en voz baja.
+ * uno tras otro al entrar en pantalla, como si se dijeran en voz baja.
  */
 export function Idea({ label }: { label?: string }) {
   const ref = useRef<HTMLElement>(null);
@@ -17,17 +17,15 @@ export function Idea({ label }: { label?: string }) {
     (mm, el) => {
       mm.add(MOTION_OK, () => {
         const verbs = gsap.utils.toArray<HTMLElement>(".idea__verb", el);
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: 0.6 },
+        // Sin fijar la pantalla: al entrar, los cuatro verbos aparecen seguidos y quedan todos visibles
+        gsap.from(verbs, {
+          yPercent: 40,
+          opacity: 0,
+          duration: 1.1,
+          ease: "expo.out",
+          stagger: 0.14,
+          scrollTrigger: { trigger: el.querySelector(".idea__verbs"), start: "top 85%", once: true },
         });
-        tl.from(".idea__lead", { opacity: 0.15, duration: 0.6 });
-        verbs.forEach((v, i) => {
-          tl.from(v, { yPercent: 60, opacity: 0, duration: 1, ease: "power2.out" }, 0.6 + i * 1.1);
-          if (i > 0) tl.to(verbs[i - 1], { opacity: 0.35, duration: 0.8 }, 0.6 + i * 1.1);
-        });
-        tl.to(verbs[verbs.length - 1], { opacity: 0.35, duration: 0.8 }, "+=0.4");
-        tl.to(verbs, { opacity: 1, duration: 0.8 }, "<");
-        tl.to({}, { duration: 0.6 });
       });
     },
     ref,

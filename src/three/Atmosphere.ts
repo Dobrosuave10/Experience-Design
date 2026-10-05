@@ -71,7 +71,7 @@ export class Atmosphere {
     opts: { reduced: boolean },
   ) {
     const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
-    if (!gl) throw new Error("WebGL no disponible");
+    if (!gl || gl.isContextLost()) throw new Error("WebGL no disponible");
     this.gl = gl;
     this.reduced = opts.reduced;
     this.color = hexToRgb(color);
@@ -156,8 +156,13 @@ export class Atmosphere {
     cancelAnimationFrame(this.raf);
   }
 
+  /**
+   * No se fuerza loseContext(): el canvas puede volver a montarse (StrictMode en dev)
+   * y un contexto perdido se pinta como un velo blanco sobre el texto.
+   * El navegador libera el contexto cuando el canvas sale del DOM.
+   */
   dispose() {
     this.stop();
-    this.gl.getExtension("WEBGL_lose_context")?.loseContext();
+    this.gl.deleteProgram(this.prog);
   }
 }
