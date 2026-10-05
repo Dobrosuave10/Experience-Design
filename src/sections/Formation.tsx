@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { formation } from "../content/site";
+import { formation, type InterestId } from "../content/site";
 import { goToContact } from "../lib/events";
 import { MagneticButton } from "../components/MagneticButton";
 import { RevealText } from "../components/RevealText";
@@ -7,15 +7,15 @@ import { Photo } from "../components/Photo";
 import "./Formation.css";
 
 /**
- * 05 Aprender. No una academia: formatos dichos como texto corrido, y la
- * modalidad (presencial / online) como una elección dentro del mismo eje.
+ * Formatos y modalidades de un programa. No una academia: formatos dichos como
+ * texto corrido, y la modalidad (presencial / online) como una elección.
  */
-export function Formation() {
+export function Formation({ interest, tone = "paper", showStatus = true }: { interest: InterestId; tone?: "paper" | "sand" | "ink"; showStatus?: boolean }) {
   const [mode, setMode] = useState(formation.modalities[0].id);
   const current = formation.modalities.find((m) => m.id === mode)!;
 
   return (
-    <section id="formacion" className="formation section" data-tone="paper" aria-labelledby="formation-title">
+    <section className="formation section" data-tone={tone} aria-labelledby="formation-title">
       <div className="wrap formation__grid">
         <div className="formation__main">
           <RevealText id="formation-title" className="formation__title display" lines={[formation.title]} stagger={0.035} />
@@ -66,12 +66,12 @@ export function Formation() {
             <p id="mode-panel" role="tabpanel" aria-labelledby={`tab-${mode}`} className="formation__mode-text" key={mode}>
               {current.text}
             </p>
-            <div className="formation__status">
+            {showStatus && <div className="formation__status">
               <span className="label">{formation.status}</span>
-              <MagneticButton variant="line" href="#contacto" onClick={() => goToContact("formacion")}>
+              <MagneticButton variant="line" href="/contacto" onClick={() => goToContact(interest)}>
                 {formation.cta}
               </MagneticButton>
-            </div>
+            </div>}
           </div>
         </aside>
       </div>

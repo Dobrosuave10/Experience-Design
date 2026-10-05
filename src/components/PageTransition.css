@@ -1,0 +1,21 @@
+.pt {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  display: grid;
+  place-items: center;
+  background: #9e4f3c;
+  color: var(--paper);
+  visibility: hidden;
+  pointer-events: none;
+}
+.pt__mark {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  opacity: 0;
+}
+.pt__mark svg {
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(245, 241, 234, 0.6);
+}

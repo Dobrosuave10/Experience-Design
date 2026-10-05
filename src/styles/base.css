@@ -186,3 +186,32 @@ html[data-tone="ink"] .grain {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---------- Piezas compartidas entre páginas ---------- */
+.programs__question {
+  font-size: clamp(1.3rem, 1.7vw, 1.75rem);
+  line-height: 1.2;
+  font-style: italic;
+  color: var(--accent);
+}
+.notfound {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+.notfound__inner {
+  display: grid;
+  gap: 32px;
+  justify-items: start;
+}
+.notfound__title {
+  font-size: clamp(3rem, 8vw, 8rem);
+  max-width: 12ch;
+}
+.notfound__link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px solid currentColor;
+}

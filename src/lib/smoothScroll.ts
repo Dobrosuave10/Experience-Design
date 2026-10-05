@@ -33,6 +33,17 @@ export function scrollToTarget(target: string | HTMLElement) {
   el.focus({ preventScroll: true });
 }
 
+export function scrollToY(y: number, immediate = false) {
+  if (lenis) lenis.scrollTo(y, { duration: 1.4, immediate, force: true });
+  else window.scrollTo({ top: y, behavior: immediate || prefersReducedMotion() ? "auto" : "smooth" });
+}
+
+/** Cambio de página: arriba de inmediato, también si Lenis está detenido. */
+export function resetScroll() {
+  lenis?.scrollTo(0, { immediate: true, force: true });
+  window.scrollTo(0, 0);
+}
+
 export function lockScroll(locked: boolean) {
   if (locked) lenis?.stop();
   else lenis?.start();

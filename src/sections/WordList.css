@@ -1,0 +1,111 @@
+.wl {
+  padding-block: clamp(110px, 18vh, 220px);
+}
+.wl__inner {
+  display: grid;
+  gap: clamp(56px, 10vh, 110px);
+}
+.wl__intro {
+  font-size: clamp(1.6rem, 2.8vw, 2.9rem);
+  line-height: 1.1;
+  max-width: 24ch;
+}
+.wl__group {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+  row-gap: 24px;
+}
+.wl__label {
+  grid-column: 1 / span 3;
+  color: var(--muted);
+}
+.wl__items {
+  grid-column: 4 / -1;
+}
+
+/* index: lista editorial numerada (Marca personal) */
+.wl--index .wl__items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(24px, 4vw, 64px);
+}
+.wl--index .wl__item {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 16px 0 14px;
+  border-top: 1px solid var(--line);
+}
+.wl--index .wl__n {
+  color: var(--accent);
+  min-width: 2.4ch;
+}
+.wl--index .wl__word {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+  line-height: 1.05;
+}
+
+/* cloud: palabras en texto corrido (Estudiantes) */
+.wl--cloud .wl__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em 0.5em;
+  font-family: var(--sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-size: clamp(1.7rem, 3.6vw, 3.8rem);
+  line-height: 1.05;
+}
+.wl--cloud .wl__item:nth-child(3n + 2) .wl__word {
+  color: var(--accent);
+}
+.wl--cloud .wl__item:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.5em;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* grid: retícula arquitectónica (Profesionales) */
+.wl--grid .wl__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.wl--grid .wl__item {
+  display: flex;
+  align-items: flex-end;
+  min-height: 112px;
+  padding: 16px 18px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 1.8vw, 1.8rem);
+  line-height: 1.05;
+  transition: background-color 0.5s var(--ease-out);
+}
+.wl--grid .wl__item:hover {
+  background: rgba(183, 102, 79, 0.12);
+}
+
+@media (max-width: 899px) {
+  .wl__label,
+  .wl__items {
+    grid-column: 1 / -1;
+  }
+  .wl--index .wl__items {
+    grid-template-columns: 1fr;
+  }
+  .wl--grid .wl__items {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wl--grid .wl__item {
+    min-height: 88px;
+    padding: 12px;
+  }
+}

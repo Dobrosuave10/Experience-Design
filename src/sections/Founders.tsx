@@ -12,7 +12,7 @@ import "./Founders.css";
  * Danae aparece primero, Christian entra con el scroll y se cruza con ella.
  * Sin biografías inventadas: lo verificado y lo pendiente.
  */
-export function Founders() {
+export function Founders({ label }: { label?: string }) {
   const ref = useRef<HTMLElement>(null);
 
   useGsap(
@@ -40,6 +40,7 @@ export function Founders() {
   return (
     <section ref={ref} id="nosotros" className="founders section" data-tone="paper" aria-labelledby="founders-title">
       <div className="wrap">
+        {label && <p className="label founders__kicker">{label}</p>}
         <RevealText id="founders-title" className="founders__statement display" lines={[founders.statement]} stagger={0.03} />
 
         <div className="founders__people">

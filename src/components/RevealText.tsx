@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK } from "../lib/env";
-import { onReady } from "../lib/events";
+import { onPageShown } from "../lib/events";
 
 export type Line = string | { text: string; em?: boolean; className?: string };
 
@@ -12,7 +12,7 @@ type Props = {
   lines: Line[];
   className?: string;
   id?: string;
-  /** "scroll": al entrar en viewport. "ready": cuando termina el loader. */
+  /** "scroll": al entrar en viewport. "ready": cuando la página se muestra (loader o telón). */
   trigger?: "scroll" | "ready";
   delay?: number;
   stagger?: number;
@@ -35,7 +35,7 @@ export function RevealText({ as: Tag = "h2", lines, className, id, trigger = "sc
         gsap.set(words, { yPercent: 115 });
         const play = () => gsap.to(words, { yPercent: 0, duration: 1.25, ease: "expo.out", stagger, delay });
         if (trigger === "ready") {
-          const off = onReady(play);
+          const off = onPageShown(play);
           return () => off();
         }
         ScrollTrigger.create({ trigger: el, start: "top 88%", once: true, onEnter: play });

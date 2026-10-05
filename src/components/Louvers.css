@@ -1,0 +1,28 @@
+.louvers {
+  position: relative;
+  overflow: hidden;
+  background: var(--umber);
+}
+.louvers__behind {
+  position: absolute;
+  inset: 0;
+}
+.louvers__slats {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  perspective: 1400px;
+}
+.louver {
+  flex: 1;
+  height: 100%;
+  transform-origin: center;
+  background: linear-gradient(90deg, #cdbba3 0%, #efe7dc 38%, #e2d5c3 70%, #b9a58b 100%);
+  box-shadow: inset -1px 0 0 rgba(23, 21, 19, 0.12);
+  backface-visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .louver {
+    transform: rotateY(68deg);
+  }
+}

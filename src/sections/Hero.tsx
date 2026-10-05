@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { hero } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
-import { goToContact, onReady } from "../lib/events";
+import { goToContact, onPageShown } from "../lib/events";
 import { RevealText } from "../components/RevealText";
 import { MagneticButton } from "../components/MagneticButton";
 import { Logo } from "../components/Logo";
@@ -83,7 +83,7 @@ export function Hero() {
           .to(".hero__content", { opacity: 0, y: -60, ease: "none", duration: 0.18 }, 0.02)
           .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.2 }, 0.8);
 
-        const off = onReady(() => {
+        const off = onPageShown(() => {
           gsap.fromTo(".hero__stage", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 2.4, ease: "expo.out" });
           // El wordmark se "escribe" de izquierda a derecha, como el trazo de su caligrafía
           gsap.fromTo(".hero__wordmark", { clipPath: "inset(0 100% 0 0)", opacity: 1 }, { clipPath: "inset(0 0% 0 0)", duration: 2.2, ease: "power2.inOut", delay: 0.15 });
@@ -131,7 +131,7 @@ export function Hero() {
           <div className="hero__foot">
             <p className="hero__sub hero__fade">{hero.sub}</p>
             <div className="hero__fade">
-              <MagneticButton href="#contacto" onClick={() => goToContact("milan")}>
+              <MagneticButton href="/contacto" onClick={() => goToContact("milan")}>
                 {hero.cta}
               </MagneticButton>
             </div>

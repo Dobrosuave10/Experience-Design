@@ -1,0 +1,117 @@
+.dpanels {
+  color: #f5f1ea;
+}
+.dpanel {
+  position: relative;
+  height: 220vh;
+}
+.dpanel__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.dpanel__media {
+  position: absolute !important;
+  inset: 0;
+  height: 100%;
+}
+.dpanel__shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(23, 21, 19, 0.3) 0%, rgba(23, 21, 19, 0) 35%, rgba(23, 21, 19, 0.2) 60%, rgba(23, 21, 19, 0.78) 100%);
+}
+.dpanel--sao-paulo .dpanel__shade {
+  background: linear-gradient(180deg, rgba(23, 21, 19, 0.15) 0%, rgba(23, 21, 19, 0) 40%, rgba(23, 21, 19, 0.55) 100%);
+}
+.dpanel__content {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding-bottom: clamp(28px, 6vh, 64px);
+}
+.dpanel__n {
+  color: rgba(245, 241, 234, 0.82);
+}
+.dpanel__name {
+  font-size: clamp(5rem, 19vw, 21rem);
+  line-height: 0.8;
+  letter-spacing: -0.045em;
+  margin-left: -0.05em;
+  text-shadow: 0 2px 40px rgba(23, 21, 19, 0.25);
+}
+.dpanel--sao-paulo .dpanel__name {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(3.6rem, 14vw, 16rem);
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+.dpanel__meta {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+  row-gap: 14px;
+  align-items: end;
+  padding-top: 18px;
+  border-top: 1px solid rgba(245, 241, 234, 0.3);
+}
+.dpanel__event {
+  grid-column: 1 / span 3;
+  display: grid;
+  gap: 6px;
+}
+.dpanel__sub {
+  font-size: 0.9rem;
+  color: rgba(245, 241, 234, 0.82);
+}
+.dpanel__text {
+  grid-column: 4 / span 4;
+  font-size: clamp(1.3rem, 1.8vw, 1.9rem);
+  line-height: 1.15;
+}
+.dpanel__when {
+  grid-column: 8 / span 2;
+  color: rgba(245, 241, 234, 0.82);
+}
+.dpanel__go {
+  grid-column: 10 / span 3;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.dpanel__go span {
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+  padding-bottom: 5px;
+}
+
+@media (max-width: 899px) {
+  .dpanel {
+    height: 170vh;
+  }
+  .dpanel__event,
+  .dpanel__text,
+  .dpanel__when,
+  .dpanel__go {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dpanel {
+    height: auto;
+  }
+  .dpanel__sticky {
+    position: relative;
+  }
+}

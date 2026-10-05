@@ -1,0 +1,423 @@
+/* ---------- Escritorio: sala fija, el scroll elige la puerta ---------- */
+.doors--pinned {
+  position: relative;
+}
+.doors__marker {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  pointer-events: none;
+}
+.doors__pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+.doors__plates,
+.doors__plate {
+  position: absolute;
+  inset: 0;
+}
+.doors__plate {
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
+}
+.doors__plate.is-on {
+  opacity: 0.12;
+}
+.doors__stage {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+  padding-top: calc(var(--nav-h) + 3vh);
+  padding-bottom: 5vh;
+}
+
+/* Índice: los tres caminos, siempre a la vista */
+.doors__index {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+  align-self: center;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 18px;
+  padding-left: 18px;
+}
+.doors__hint {
+  color: var(--muted);
+}
+.doors__tab {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-height: 44px;
+  text-align: left;
+  color: var(--muted);
+  transition: color 0.6s var(--ease-out);
+}
+.doors__tab-name {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 1.6vw, 1.7rem);
+  line-height: 1.1;
+}
+.doors__tab.is-active,
+.doors__tab:hover {
+  color: var(--fg);
+}
+.doors__tab.is-active .label {
+  color: var(--accent);
+}
+.doors__progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+.doors__progress span {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top;
+  transition: transform 0.9s var(--ease-out);
+}
+
+/* Cada puerta ocupa la misma celda; sólo una está abierta */
+.doors--pinned .door {
+  grid-column: 4 / -1;
+  grid-row: 1;
+  min-height: 0;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.6s var(--ease-out),
+    visibility 0s linear 0.6s;
+}
+.doors--pinned .door.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 0.9s var(--ease-out) 0.1s,
+    visibility 0s;
+}
+
+/* ---------- La puerta ---------- */
+.door {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+  align-items: center;
+}
+.door__frame-wrap {
+  position: relative;
+  z-index: 1;
+}
+.door__frame {
+  overflow: hidden;
+  transform: translateY(14%);
+  clip-path: inset(100% 0 0 0);
+  transition:
+    clip-path 1.3s var(--ease-out),
+    transform 1.3s var(--ease-out);
+}
+.door.is-active .door__frame {
+  clip-path: inset(0 0 0 0);
+  transform: none;
+}
+.door__frame img {
+  scale: 1.12;
+  transition: scale 2s var(--ease-out);
+}
+.door.is-active .door__frame img {
+  scale: 1;
+}
+.door__text {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+}
+.door__n {
+  color: var(--muted);
+}
+.door__mood {
+  color: var(--accent);
+}
+.door__name {
+  margin: 0;
+  font-weight: 400;
+  line-height: 0.9;
+}
+.door__line {
+  display: grid;
+  font-size: clamp(1.5rem, 2.3vw, 2.5rem);
+  line-height: 1.08;
+}
+.door__line-row {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 1.1s var(--ease-out);
+}
+.door.is-active .door__line-row {
+  opacity: 1;
+  transform: none;
+}
+.door__keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+.door__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.door__go span {
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+  padding-bottom: 5px;
+  transition: background-size 0.6s var(--ease-out);
+}
+.door__go:hover span {
+  background-size: 0% 1px;
+  background-position: right bottom;
+}
+.door__go svg {
+  transition: transform 0.5s var(--ease-out);
+}
+.door__go:hover svg {
+  transform: translateX(4px);
+}
+.door__big {
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.2em;
+  z-index: 0;
+  font-family: var(--serif);
+  font-size: clamp(10rem, 34vh, 26rem);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line);
+  pointer-events: none;
+}
+
+/* 01 Marca personal: íntima, retrato en arco, serif en cursiva */
+.door--marca-personal .door__text {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+}
+.door--marca-personal .door__frame-wrap {
+  grid-column: 6 / span 4;
+  grid-row: 1;
+}
+.door--marca-personal .door__frame {
+  max-height: 72vh;
+  border-radius: 999px 999px 0 0;
+}
+.door--marca-personal .door__frame img {
+  object-position: 50% 30%;
+}
+.door--marca-personal .door__name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(3.6rem, 7vw, 8.2rem);
+  letter-spacing: -0.03em;
+}
+.door--marca-personal .door__keys {
+  flex-direction: column;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  letter-spacing: 0;
+  color: var(--fg);
+}
+.door--marca-personal .door__keys li + li::before {
+  content: "↓";
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 2px 0;
+}
+
+/* 02 Estudiantes: exploración, sans en mayúsculas, imagen horizontal que se sale */
+.door--estudiantes .door__text {
+  grid-column: 1 / span 6;
+  grid-row: 1;
+  align-self: start;
+  padding-top: 4vh;
+}
+.door--estudiantes .door__frame-wrap {
+  grid-column: 4 / span 6;
+  grid-row: 1;
+  align-self: end;
+  margin-bottom: 2vh;
+}
+.door--estudiantes .door__frame {
+  max-height: 46vh;
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(6%);
+}
+.door--estudiantes.is-active .door__frame {
+  clip-path: inset(0 0 0 0);
+  transform: none;
+}
+.door--estudiantes .door__name {
+  font-family: var(--sans);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 6.6vw, 7.6rem);
+  letter-spacing: -0.04em;
+}
+.door--estudiantes .door__line {
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
+  grid-auto-flow: row;
+}
+.door--estudiantes .door__keys li + li::before {
+  content: "→";
+  margin: 0 10px;
+  color: var(--accent);
+}
+
+/* 03 Profesionales: arquitectónica, retícula con líneas finas, material de cerca */
+.door--profesionales .door__frame-wrap {
+  grid-column: 1 / span 4;
+  margin-right: 12%;
+  grid-row: 1;
+}
+.door--profesionales .door__frame {
+  max-height: 62vh;
+  clip-path: inset(50% 50% 50% 50%);
+  transform: none;
+}
+.door--profesionales.is-active .door__frame {
+  clip-path: inset(0 0 0 0);
+}
+.door--profesionales .door__detail {
+  position: absolute;
+  right: -22%;
+  bottom: -8%;
+  width: 38%;
+  border: 6px solid var(--bg);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.9s var(--ease-out) 0.5s,
+    transform 1.1s var(--ease-out) 0.5s;
+}
+.door--profesionales.is-active .door__detail {
+  opacity: 1;
+  transform: none;
+}
+.door--profesionales .door__text {
+  grid-column: 5 / span 5;
+  grid-row: 1;
+}
+.door--profesionales .door__name {
+  font-family: var(--serif);
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 3.6vw, 4.6rem);
+  letter-spacing: 0.01em;
+}
+.door--profesionales .door__keys {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 420px;
+  border-top: 1px solid var(--line);
+}
+.door--profesionales .door__keys li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.door--profesionales .door__keys li:nth-child(odd) {
+  border-right: 1px solid var(--line);
+}
+.door--profesionales .door__keys li:nth-child(even) {
+  padding-left: 14px;
+}
+
+/* ---------- Móvil y reduced motion: puertas apiladas ---------- */
+.doors__stacked-item {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--nav-h) + 24px) var(--gutter) 88px;
+}
+.doors__stacked-item + .doors__stacked-item {
+  border-top: 1px solid var(--line);
+}
+.doors--stacked .door {
+  grid-template-columns: 1fr;
+  row-gap: 32px;
+}
+.doors--stacked .door__frame-wrap,
+.doors--stacked .door__text {
+  grid-column: 1 !important;
+  grid-row: auto !important;
+}
+.doors--stacked .door__frame-wrap {
+  margin: 0;
+}
+.doors--stacked .door__frame {
+  clip-path: none !important;
+  transform: none !important;
+  max-height: none;
+}
+.doors--stacked .door--marca-personal .door__frame-wrap {
+  width: 78%;
+  justify-self: end;
+}
+.doors--stacked .door--estudiantes .door__text {
+  order: -1;
+  padding-top: 0;
+}
+.doors--stacked .door--profesionales .door__frame-wrap {
+  width: 74%;
+}
+.doors--stacked .door--profesionales .door__detail {
+  right: -30%;
+  width: 46%;
+}
+.doors--stacked .door__big {
+  font-size: 44vw;
+  bottom: auto;
+  top: -0.1em;
+}
+.doors--stacked .door__line-row {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 899px) {
+  .door--marca-personal .door__name {
+    font-size: clamp(3.2rem, 15vw, 5rem);
+  }
+  .door--estudiantes .door__name {
+    font-size: clamp(2.6rem, 12.6vw, 4.6rem);
+  }
+  .door--profesionales .door__name {
+    font-size: clamp(2rem, 9.6vw, 4.2rem);
+  }
+}

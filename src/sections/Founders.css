@@ -109,3 +109,7 @@
     font-size: clamp(2.6rem, 13vw, 3.6rem);
   }
 }
+.founders__kicker {
+  color: var(--accent);
+  margin-bottom: 22px;
+}

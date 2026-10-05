@@ -74,9 +74,73 @@ html[data-tone="clay"] .menu__top svg {
   transition: transform 0.6s var(--ease-out);
 }
 .nav__link:hover::after,
-.nav__link:focus-visible::after {
+.nav__link:focus-visible::after,
+.nav__link[aria-current="page"]::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+.nav__link[aria-current="page"]::after {
+  background: var(--accent);
+}
+
+/* Subpáginas de Programas y Destinos: una lámina que cae bajo la palabra */
+.nav__item {
+  position: relative;
+}
+.nav__sub {
+  position: absolute;
+  top: 100%;
+  left: -23px;
+  padding-top: 14px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.4s var(--ease-out),
+    transform 0.5s var(--ease-out),
+    visibility 0s linear 0.4s;
+}
+.nav__item.has-sub:hover .nav__sub,
+.nav__item.has-sub:focus-within .nav__sub {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+.nav__sub-list {
+  min-width: 260px;
+  padding: 10px 22px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--fg);
+}
+.nav__sub-list li + li {
+  border-top: 1px solid var(--line);
+}
+.nav__sub-link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  align-items: baseline;
+  padding: 12px 0;
+  transition: color 0.4s var(--ease-out);
+}
+.nav__sub-n {
+  color: var(--muted);
+  grid-row: span 2;
+}
+.nav__sub-name {
+  font-size: 1.45rem;
+  line-height: 1.05;
+}
+.nav__sub-note {
+  grid-column: 2;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+.nav__sub-link:hover,
+.nav__sub-link[aria-current="page"] {
+  color: var(--accent);
 }
 .nav__cta {
   justify-self: end;
@@ -143,7 +207,7 @@ html[data-tone="clay"] .menu__top svg {
   flex-direction: column;
   justify-content: center;
   flex: 1;
-  padding-block: 32px;
+  padding-block: 20px 28px;
 }
 .menu__row {
   overflow: hidden;
@@ -156,18 +220,54 @@ html[data-tone="clay"] .menu__top svg {
   display: flex;
   align-items: baseline;
   gap: 18px;
-  padding: 14px 0 12px;
+  padding: 10px 0 8px;
 }
 .menu__n {
   color: var(--muted-dark);
   min-width: 2ch;
 }
 .menu__label {
-  font-size: clamp(2.4rem, 11vw, 4rem);
+  font-size: clamp(2.1rem, 9.6vw, 3.6rem);
   line-height: 1;
 }
 .menu__item--cta .menu__label {
   color: var(--clay-soft);
+}
+.menu__item[aria-current="page"] .menu__n {
+  color: var(--clay-soft);
+}
+
+/* Segundo nivel: subpáginas, más pequeñas y claramente subordinadas */
+.menu__subs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-bottom: 24px;
+  flex: none;
+}
+.menu__group-title {
+  color: var(--muted-dark);
+  margin-bottom: 6px;
+}
+.menu__group li {
+  overflow: hidden;
+}
+.menu__sub {
+  display: grid;
+  min-height: 44px;
+  align-content: center;
+  padding-block: 4px;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.menu__sub[aria-current="page"] {
+  color: var(--clay-soft);
+}
+.menu__sub-note {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted-dark);
 }
 .menu__ig {
   display: inline-flex;

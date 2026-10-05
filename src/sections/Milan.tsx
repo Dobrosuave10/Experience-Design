@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
-import { milan } from "../content/site";
+import { milan, routes } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { DESKTOP, MOTION_OK } from "../lib/env";
 import { goToContact } from "../lib/events";
@@ -8,10 +8,11 @@ import { Photo } from "../components/Photo";
 import { images } from "../content/images.gen";
 import { MagneticButton } from "../components/MagneticButton";
 import { RevealText } from "../components/RevealText";
+import { Link } from "../components/Link";
 import "./Milan.css";
 
 /**
- * ExperienceSection: Milán 2027.
+ * Destino 01: Milán, Milan Design Week / Salone del Mobile.
  * 1) Apertura: el terrazzo milanés se abre desde una ventana hasta ocupar todo,
  *    con "Milán" en blend difference encima.
  * 2) Seis capítulos en recorrido horizontal (escritorio) o lista editorial (móvil).
@@ -72,14 +73,21 @@ export function Milan() {
             <Photo name={milan.openingImage.image} alt={milan.openingImage.alt} sizes="(max-aspect-ratio: 1/1) 182vh, 100vw" />
             <div className="milan__shade" aria-hidden="true" />
           </div>
-          <h2 id="milan-title" className="milan__city display" aria-label={`${milan.city} ${milan.year}`}>
+          <nav className="milan__crumbs wrap label" aria-label="Estás en">
+            <Link to={routes.destinos}>Destinos</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">01 {milan.city}</span>
+          </nav>
+          <h1 id="milan-title" className="milan__city display" aria-label={`${milan.city}, ${milan.event}, ${milan.fair} ${milan.year}`}>
             <span aria-hidden="true">{milan.city}</span>
             <span aria-hidden="true" className="milan__year">
               {milan.year}
             </span>
-          </h2>
+          </h1>
           <div className="milan__meta wrap">
-            <p className="label">{milan.event}</p>
+            <p className="label">
+              {milan.event} · {milan.fair}
+            </p>
             <ul className="milan__topics">
               {milan.topics.map((t) => (
                 <li key={t} className="milan__topic">
@@ -133,7 +141,7 @@ export function Milan() {
           </dl>
           <div className="milan__cta">
             <p className="muted">{milan.pending.body}</p>
-            <MagneticButton href="#contacto" onClick={() => goToContact("milan")}>
+            <MagneticButton href="/contacto" onClick={() => goToContact("milan")}>
               {milan.cta}
             </MagneticButton>
           </div>

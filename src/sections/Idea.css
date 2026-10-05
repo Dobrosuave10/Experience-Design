@@ -84,3 +84,8 @@
     padding-block: 18vh;
   }
 }
+.idea__kicker {
+  grid-column: 1 / -1;
+  color: var(--accent);
+  margin-bottom: 22px;
+}

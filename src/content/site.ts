@@ -34,11 +34,72 @@ export type ImageSlot = {
   brief: string;
 };
 
-export const nav = [
-  { label: "Experiencias", href: "#experiencias" },
-  { label: "Formación", href: "#formacion" },
-  { label: "Marca personal", href: "#marca-personal" },
-  { label: "Nosotros", href: "#nosotros" },
+/** Rutas del sitio. La jerarquía (5 entradas principales) no cambia. */
+export const routes = {
+  inicio: "/",
+  nosotros: "/nosotros",
+  programas: "/programas",
+  marcaPersonal: "/programas/marca-personal",
+  estudiantes: "/programas/estudiantes",
+  profesionales: "/programas/profesionales",
+  destinos: "/destinos",
+  milan: "/destinos/milan",
+  saoPaulo: "/destinos/sao-paulo",
+  contacto: "/contacto",
+} as const;
+
+export type NavItem = { label: string; href: string; children?: { label: string; note?: string; href: string }[] };
+
+/** Navegación principal: Inicio, Nosotros, Programas, Destinos (+ Contacto como CTA). */
+export const nav: NavItem[] = [
+  { label: "Inicio", href: routes.inicio },
+  { label: "Nosotros", href: routes.nosotros },
+  {
+    label: "Programas",
+    href: routes.programas,
+    children: [
+      { label: "Marca personal", href: routes.marcaPersonal },
+      { label: "Estudiantes", href: routes.estudiantes },
+      { label: "Profesionales", href: routes.profesionales },
+    ],
+  },
+  {
+    label: "Destinos",
+    href: routes.destinos,
+    children: [
+      { label: "Milán", note: "Salone del Mobile", href: routes.milan },
+      { label: "São Paulo", note: "CASACOR", href: routes.saoPaulo },
+    ],
+  },
+];
+export const navContact = { label: "Contacto", href: routes.contacto };
+
+/** Títulos de pestaña por ruta. */
+export const pageTitles: Record<string, string> = {
+  [routes.inicio]: "Experience Design · Abrir la mirada hacia nuevas posibilidades",
+  [routes.nosotros]: "Nosotros · Experience Design",
+  [routes.programas]: "Programas · Experience Design",
+  [routes.marcaPersonal]: "Marca personal · Programas · Experience Design",
+  [routes.estudiantes]: "Estudiantes · Programas · Experience Design",
+  [routes.profesionales]: "Profesionales · Programas · Experience Design",
+  [routes.destinos]: "Destinos · Experience Design",
+  [routes.milan]: "Milán, Salone del Mobile · Destinos · Experience Design",
+  [routes.saoPaulo]: "São Paulo, CASACOR · Destinos · Experience Design",
+  [routes.contacto]: "Contacto · Experience Design",
+};
+
+/** Cada página termina invitando a la siguiente: un mismo libro, distintos capítulos. */
+export const chapterOrder: { href: string; label: string }[] = [
+  { href: routes.inicio, label: "Inicio" },
+  { href: routes.nosotros, label: "Nosotros" },
+  { href: routes.programas, label: "Programas" },
+  { href: routes.marcaPersonal, label: "Marca personal" },
+  { href: routes.estudiantes, label: "Estudiantes" },
+  { href: routes.profesionales, label: "Profesionales" },
+  { href: routes.destinos, label: "Destinos" },
+  { href: routes.milan, label: "Milán" },
+  { href: routes.saoPaulo, label: "São Paulo" },
+  { href: routes.contacto, label: "Contacto" },
 ];
 
 export const hero = {
@@ -69,36 +130,12 @@ export const touch = {
 };
 
 export const worlds = {
-  title: "Tres formas de abrir la mirada.",
+  title: "Tres caminos. Un mismo mundo.",
   thread: "Conectar",
   items: [
     {
-      id: "experiencias",
-      href: "#experiencias",
-      verb: "Descubrir",
-      name: "Experiencias",
-      keywords: ["Ciudades", "Showrooms", "Estudios", "Materiales", "Personas"],
-      text: "Viajar a donde el diseño está ocurriendo.",
-      material: "travertine" as MaterialName,
-      image: "milan-esferas" as ImageName,
-      alt: "Instalación de esferas espejadas frente a un palacio en Milán, al atardecer",
-      tone: "light" as const,
-    },
-    {
-      id: "formacion",
-      href: "#formacion",
-      verb: "Aprender",
-      name: "Formación",
-      keywords: ["Workshops", "Conversaciones", "Casos", "Materiales"],
-      text: "Convertir lo que viste en algo que puedes usar.",
-      material: "walnut" as MaterialName,
-      image: "materiales" as ImageName,
-      alt: "Muestras de piedra, madera y metal sobre una mesa de trabajo",
-      tone: "dark" as const,
-    },
-    {
       id: "marca-personal",
-      href: "#marca-personal",
+      href: routes.marcaPersonal,
       verb: "Expresar",
       name: "Marca personal",
       keywords: ["Historia", "Mirada", "Posicionamiento", "Voz"],
@@ -108,6 +145,30 @@ export const worlds = {
       alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
       tone: "light" as const,
     },
+    {
+      id: "estudiantes",
+      href: routes.estudiantes,
+      verb: "Descubrir",
+      name: "Estudiantes",
+      keywords: ["Aprender", "Descubrir", "Conectar", "Imaginar"],
+      text: "El mundo del diseño también se aprende fuera del aula.",
+      material: "travertine" as MaterialName,
+      image: "charla-showroom" as ImageName,
+      alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
+      tone: "light" as const,
+    },
+    {
+      id: "profesionales",
+      href: routes.profesionales,
+      verb: "Profundizar",
+      name: "Profesionales",
+      keywords: ["Referencias", "Industria", "Materiales", "Conexiones"],
+      text: "Seguir aprendiendo también es parte de una carrera.",
+      material: "walnut" as MaterialName,
+      image: "showroom-piedra" as ImageName,
+      alt: "Showroom con mesa de piedra, sillas tapizadas y arcos",
+      tone: "dark" as const,
+    },
   ],
 };
 
@@ -115,6 +176,7 @@ export const milan = {
   city: "Milán",
   year: "2027",
   event: "Milan Design Week",
+  fair: "Salone del Mobile",
   openingImage: { image: "milan-showroom" as ImageName, alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada" },
   topics: ["Salone del Mobile", "Showrooms", "Estudios", "Materiales", "Cultura", "Conexiones"],
   statementA: "No venimos a mirar desde afuera.",
@@ -122,7 +184,7 @@ export const milan = {
   chapters: [
     {
       n: "01",
-      title: "Milán",
+      title: "La ciudad",
       text: "Una ciudad que lleva generaciones pensando cómo vivimos. La recorremos con la atención de quien diseña.",
       material: "plaster" as MaterialName,
       image: "milan-ciudad" as ImageName,
@@ -130,7 +192,7 @@ export const milan = {
     },
     {
       n: "02",
-      title: "Design Week",
+      title: "El diseño",
       text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición. Vamos a donde ocurre.",
       material: "terrazzo" as MaterialName,
       image: "salone-pabellon" as ImageName,
@@ -138,27 +200,27 @@ export const milan = {
     },
     {
       n: "03",
-      title: "La ciudad",
-      text: "Patios, fachadas, tranvías, cafés. La arquitectura también se aprende caminando.",
-      material: "travertine" as MaterialName,
-      image: "milan-patio" as ImageName,
-      alt: "Patio porticado con una instalación de tela iluminada",
-    },
-    {
-      n: "04",
-      title: "Las personas",
-      text: "Detrás de cada showroom y cada estudio hay alguien que tomó decisiones. Queremos escucharlas.",
-      material: "walnut" as MaterialName,
-      image: "salone-personas" as ImageName,
-      alt: "Visitantes frente al muro rojo del Salone del Mobile",
-    },
-    {
-      n: "05",
       title: "Los materiales",
       text: "Superficies, revestimientos, texturas. Verlos en persona, con luz real, a la distancia de la mano.",
       material: "terracotta" as MaterialName,
       image: "showroom-piedra" as ImageName,
       alt: "Showroom con mesa de piedra, sillas tapizadas y arcos",
+    },
+    {
+      n: "04",
+      title: "Los espacios",
+      text: "Patios, fachadas, showrooms, estudios. La arquitectura también se aprende caminando.",
+      material: "travertine" as MaterialName,
+      image: "milan-patio" as ImageName,
+      alt: "Patio porticado con una instalación de tela iluminada",
+    },
+    {
+      n: "05",
+      title: "Las personas",
+      text: "Detrás de cada showroom y cada estudio hay alguien que tomó decisiones. Queremos escucharlas.",
+      material: "walnut" as MaterialName,
+      image: "salone-personas" as ImageName,
+      alt: "Visitantes frente al muro rojo del Salone del Mobile",
     },
     {
       n: "06",
@@ -223,7 +285,7 @@ export const personalBrand = {
     { title: "Tu posicionamiento", text: "Dónde te ubicas, con quién trabajas y por qué." },
     { title: "Tu voz", text: "Cómo lo cuentas, con coherencia, en cada lugar donde apareces." },
   ],
-  cta: "Descubrir marca personal",
+  cta: "Quiero saber más",
 };
 
 export const community = {
@@ -317,20 +379,289 @@ export const archive = {
   ] as ArchiveEntry[],
 };
 
+/* ---------------------------------------------------------------------------
+ * NOSOTROS
+ * ------------------------------------------------------------------------- */
+
+export const about = {
+  title: "Nosotros",
+  statement: "Abrir la mirada hacia nuevas posibilidades.",
+  image: {
+    image: "fundadores-showroom",
+    alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
+    material: "travertine",
+    brief: "Danae y Christian juntos, en un lugar de diseño.",
+  } as ImageSlot,
+  who: {
+    label: "Quiénes somos",
+    text: "Experience Design crea experiencias de diseño que conectan viajes, aprendizaje y personas con el mundo de la arquitectura, el interiorismo y el diseño.",
+    history: "Empezó como un experimento con pocas personas. Sigue igual de cerca.",
+  },
+  /**
+   * BORRADOR para validar con Danae y Christian: misión, visión y valores están
+   * redactados sólo a partir de frases que ya usa la marca (hero, ejes, comunidad).
+   */
+  principles: [
+    { id: "mision", label: "Misión", text: "Crear experiencias de diseño, formación y conexiones para quienes quieren seguir descubriendo." },
+    { id: "vision", label: "Visión", text: "Que el diseño se viva en primera persona: mirado, tocado y conversado donde está ocurriendo." },
+  ],
+  valuesLabel: "Valores",
+  values: [
+    { name: "Mirar", text: "Abrir la mirada hacia nuevas posibilidades." },
+    { name: "Tocar", text: "Si no lo tocas, no lo viste." },
+    { name: "Aprender", text: "Nunca es tarde para mirar distinto." },
+    { name: "Conectar", text: "Más que viajes, creamos relaciones." },
+  ],
+  philosophyLabel: "Filosofía",
+  foundersLabel: "Danae + Christian",
+};
+
+/* ---------------------------------------------------------------------------
+ * PROGRAMAS: tres programas independientes. Nunca mezclar con destinos.
+ * ------------------------------------------------------------------------- */
+
+export type ProgramId = "marca-personal" | "estudiantes" | "profesionales";
+
+export type Program = {
+  id: ProgramId;
+  n: string;
+  name: string;
+  href: string;
+  /** Idea central del programa. */
+  lines: string[];
+  intro: string;
+  keywords: string[];
+  /** Tono del sitio mientras el programa está activo. */
+  tone: "clay" | "sand" | "ink";
+  /** Color de la luz WebGL sobre ese tono. */
+  glow: string;
+  material: MaterialName;
+  image: ImageSlot;
+  /** Segunda imagen pequeña (sólo Profesionales: el material de cerca). */
+  detail?: ImageSlot;
+  interest: InterestId;
+  cta: string;
+  mood: string;
+};
+
+export const programs = {
+  title: "Programas",
+  lead: "Experiencias diseñadas para distintos momentos de tu camino.",
+  body: "Experience Design tiene distintas formas de participar, según quién eres y qué estás buscando.",
+  question: "¿Qué camino dentro de Experience Design es para mí?",
+  hint: "Tres puertas al mismo mundo",
+  items: [
+    {
+      id: "marca-personal",
+      n: "01",
+      name: "Marca personal",
+      href: routes.marcaPersonal,
+      lines: ["Tienes una mirada.", "¿Qué hacemos con ella?"],
+      intro: "Reconocer tu identidad profesional y aprender a contarla. No se trata de seguidores: se trata de tu valor.",
+      keywords: ["Tu historia", "Tu mirada", "Tu posicionamiento", "Tu voz"],
+      tone: "clay",
+      glow: "#F1D6BF",
+      material: "linen",
+      image: {
+        image: "fundadores-showroom",
+        alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
+        material: "linen",
+        brief: "Retrato íntimo, luz natural, vertical. Reemplazar por la foto oficial de Marca personal cuando exista.",
+      },
+      interest: "marca",
+      cta: "Conocer Marca personal",
+      mood: "Íntimo",
+    },
+    {
+      id: "estudiantes",
+      n: "02",
+      name: "Estudiantes",
+      href: routes.estudiantes,
+      lines: ["El mundo del diseño", "también se aprende", "fuera del aula."],
+      intro: "Para estudiantes de pregrado y posgrado de arquitectura, interiorismo, diseño y disciplinas creativas afines.",
+      keywords: ["Aprender", "Descubrir", "Conectar", "Imaginar tu camino"],
+      tone: "sand",
+      glow: "#C9765C",
+      material: "terrazzo",
+      image: {
+        image: "charla-showroom",
+        alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
+        material: "terrazzo",
+        brief: "Estudiantes en un recorrido o conversación fuera del aula.",
+      },
+      interest: "estudiantes",
+      cta: "Conocer el programa",
+      mood: "Exploración",
+    },
+    {
+      id: "profesionales",
+      n: "03",
+      name: "Profesionales",
+      href: routes.profesionales,
+      lines: ["Seguir aprendiendo", "también es parte", "de una carrera."],
+      intro: "Para quienes ya trabajan en arquitectura, interiorismo, diseño y en las industrias que los rodean.",
+      keywords: ["Referencias", "Industria", "Materiales", "Conexiones"],
+      tone: "ink",
+      glow: "#B7664F",
+      material: "walnut",
+      image: {
+        image: "showroom-piedra",
+        alt: "Showroom con mesa de piedra, sillas tapizadas y arcos",
+        material: "walnut",
+        brief: "Showroom o estudio, arquitectura y material.",
+      },
+      detail: {
+        image: "materiales",
+        alt: "Muestras de piedra, madera y metal sobre una mesa de trabajo",
+        material: "travertine",
+        brief: "Material de cerca.",
+      },
+      interest: "profesionales",
+      cta: "Conocer el programa",
+      mood: "Profundidad",
+    },
+  ] as Program[],
+};
+
+export const programPending = {
+  label: "Lo concreto",
+  status: "Por confirmar",
+};
+
+export const personalBrandPage = {
+  notLabel: "Lo que no es",
+  not: ["Crecer en redes sociales.", "Ser influencer.", "Hacerte famoso en internet."],
+  notAnswer: "Se trata de tu valor profesional.",
+  notBody: "Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
+  focusLabel: "En qué se enfoca",
+  focus: ["Tu experiencia", "Tu trayectoria", "Tu perspectiva", "Tus fortalezas", "Tu posicionamiento", "Tu identidad profesional", "Tu voz", "Tu narrativa"],
+  closeTitle: "Empecemos por tu historia.",
+  closeBody: "Cuéntanos dónde estás. Te respondemos con lo concreto cuando el programa esté confirmado.",
+  pending: ["Formato", "Fechas", "Valor"],
+};
+
+export const studentsPage = {
+  audienceLabel: "Para quién",
+  levels: ["Pregrado", "Posgrado"],
+  disciplines: ["Arquitectura", "Interiorismo", "Diseño", "Disciplinas creativas afines"],
+  journeyLabel: "Un recorrido",
+  journey: [
+    { title: "Aprender", text: "Lo que no cabe en una clase: el oficio visto de cerca." },
+    { title: "Descubrir", text: "Lugares, estudios y materiales que hasta ahora eran una foto." },
+    { title: "Conectar", text: "Personas de la industria con las que seguir conversando." },
+    { title: "Imaginar tu camino", text: "Volver con otra idea de lo que puedes llegar a hacer." },
+  ],
+  gainsLabel: "Lo que se vive",
+  gains: ["Exposición profesional", "Inspiración", "Conexiones con la industria", "Cultura del diseño", "Referencias reales", "Aprendizaje", "Networking", "Nuevas perspectivas"],
+  closeTitle: "La propuesta para estudiantes está en definición.",
+  closeBody: "Déjanos tus datos y te contamos apenas tengamos lo concreto.",
+  pending: ["Formato", "Fechas", "Valor", "Cupos"],
+};
+
+export const professionalsPage = {
+  audienceLabel: "Para quién",
+  audience: ["Arquitectos", "Interioristas", "Diseñadores", "Profesionales creativos", "Fundadores de estudios", "Profesionales independientes"],
+  industriesLabel: "Y quienes trabajan en",
+  industries: ["Materiales", "Mobiliario", "Iluminación", "Arquitectura", "Interiorismo", "Decoración", "Industria del diseño"],
+  gainsLabel: "Lo que se lleva",
+  gains: ["Desarrollo profesional", "Nuevas referencias", "Conocimiento de la industria", "Cultura del diseño", "Conexiones", "Nuevas perspectivas", "Aprendizaje continuo", "Experiencias reales"],
+  closeTitle: "Lo concreto, apenas esté confirmado.",
+  closeBody: "Te enviamos formato, fechas y valor. Sin formularios largos.",
+  pending: ["Formato", "Fechas", "Valor", "Cupos"],
+};
+
+/* ---------------------------------------------------------------------------
+ * DESTINOS: experiencias para vivir. No son programas.
+ * ------------------------------------------------------------------------- */
+
+export const destinations = {
+  title: "Destinos",
+  lead: "Hay lugares que cambian tu forma de mirar.",
+  question: "¿Qué experiencia puedo vivir?",
+  items: [
+    {
+      id: "milan",
+      n: "01",
+      name: "Milán",
+      event: "Milan Design Week",
+      sub: "Salone del Mobile",
+      href: routes.milan,
+      when: "2027 · Fechas por confirmar",
+      text: "La semana en que una ciudad entera se vuelve exposición.",
+      image: { image: "milan-showroom", alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada", material: "terrazzo", brief: "Milán, Design Week." } as ImageSlot,
+      cta: "Entrar a Milán",
+    },
+    {
+      id: "sao-paulo",
+      n: "02",
+      name: "São Paulo",
+      event: "CASACOR São Paulo",
+      sub: "Arquitectura, interiorismo y paisajismo",
+      href: routes.saoPaulo,
+      when: "Año por confirmar",
+      text: "Una casa entera convertida en ambientes para recorrer.",
+      image: { alt: "", material: "terracotta", brief: "Foto real de CASACOR São Paulo (pendiente)." } as ImageSlot,
+      cta: "Entrar a São Paulo",
+    },
+  ],
+};
+
+export const saoPaulo = {
+  city: "São Paulo",
+  event: "CASACOR São Paulo",
+  year: "Año por confirmar",
+  statementA: "Una casa no se entiende en una foto.",
+  statementB: "Se recorre.",
+  intro: "En CASACOR, arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Cada uno es una forma distinta de resolver cómo vivimos.",
+  origin: "Aquí empezó todo: en 2023, la primera prueba de Experience Design fue en São Paulo, con tres participantes.",
+  /** Sin fotos reales todavía: cada ambiente usa una placa de material. Reemplazar por fotos de CASACOR. */
+  rooms: [
+    { n: "01", title: "La casa", text: "Una muestra que se recorre de puerta en puerta, ambiente por ambiente.", material: "plaster" as MaterialName, brief: "Fachada o acceso de CASACOR São Paulo." },
+    { n: "02", title: "Los ambientes", text: "Cada espacio es una propuesta distinta. Recorrerlos es comparar miradas.", material: "terracotta" as MaterialName, brief: "Un ambiente completo, plano general." },
+    { n: "03", title: "Los materiales", text: "Lo que en catálogo es un nombre, aquí es luz, peso y temperatura.", material: "travertine" as MaterialName, brief: "Detalle de material en un ambiente." },
+    { n: "04", title: "La ciudad", text: "Una de las grandes capitales de la arquitectura moderna, a escala de calle.", material: "terrazzo" as MaterialName, brief: "São Paulo, arquitectura de la ciudad." },
+    { n: "05", title: "Las personas", text: "Quienes diseñan cada ambiente, y quienes lo recorren con nosotros.", material: "walnut" as MaterialName, brief: "Grupo recorriendo un ambiente." },
+  ],
+  pending: {
+    title: "Lo concreto, apenas esté confirmado.",
+    body: "Te avisamos cuando definamos la próxima experiencia en São Paulo.",
+    items: ["Año", "Fechas", "Programa", "Valor"],
+    status: "Por confirmar",
+  },
+  cta: "Quiero saber de São Paulo",
+};
+
+/* ---------------------------------------------------------------------------
+ * CONTACTO
+ * ------------------------------------------------------------------------- */
+
 export const interests = [
-  { id: "milan", label: "Milán 2027" },
-  { id: "formacion", label: "Formación" },
   { id: "marca", label: "Marca personal" },
-  { id: "empresas", label: "Empresas y universidades" },
+  { id: "estudiantes", label: "Estudiantes" },
+  { id: "profesionales", label: "Profesionales" },
+  { id: "milan", label: "Milán" },
+  { id: "sao-paulo", label: "São Paulo" },
+  { id: "colaboraciones", label: "Colaboraciones" },
+  { id: "otro", label: "Otro" },
 ] as const;
 export type InterestId = (typeof interests)[number]["id"];
 
 export const contact = {
-  title: "¿Nos vemos en el camino?",
+  title: "¿Conversamos?",
   body: "Cuéntanos qué te interesa. Te respondemos con lo concreto: qué es, qué incluye y cuánto cuesta.",
   b2b: "¿Eres una marca, una empresa o una universidad?",
-  b2bCta: "Hablemos",
+  b2bCta: "Hablemos de colaborar",
   submit: "Enviar",
+};
+
+export const invite = {
+  title: "¿Nos vemos en el camino?",
+  body: "Cuatro datos y te escribimos. Nada más.",
+  cta: "Conversemos",
+};
+
+export const nextChapter = {
+  label: "Siguiente capítulo",
 };
 
 export const footer = {

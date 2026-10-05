@@ -2,19 +2,27 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { InstagramLogo, X } from "@phosphor-icons/react";
-import { brand, nav } from "../content/site";
+import { brand, nav, navContact, routes } from "../content/site";
 import { prefersReducedMotion } from "../lib/env";
-import { goToContact, onReady } from "../lib/events";
-import { lockScroll, scrollToTarget } from "../lib/smoothScroll";
+import { onReady } from "../lib/events";
+import { isActive, navigate, usePath } from "../lib/router";
+import { lockScroll } from "../lib/smoothScroll";
+import { Link } from "./Link";
 import { Logo } from "./Logo";
 import { MagneticButton } from "./MagneticButton";
 import "./Navigation.css";
 
+/**
+ * Navegación principal: Inicio, Nosotros, Programas, Destinos y Contacto (CTA).
+ * Programas y Destinos despliegan sus subpáginas en escritorio; en móvil, el menú
+ * a pantalla completa muestra las cinco entradas y debajo, más pequeño, sus subpáginas.
+ */
 export function Navigation() {
   const header = useRef<HTMLElement>(null);
   const menu = useRef<HTMLDivElement>(null);
   const toggleBtn = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
+  const path = usePath();
 
   // Entrada tras el loader + ocultar al bajar / mostrar al subir
   useEffect(() => {
@@ -27,7 +35,7 @@ export function Navigation() {
       end: "max",
       onUpdate: (self) => {
         const past = self.scroll() > window.innerHeight * 0.25;
-        el.classList.toggle("is-hidden", past && self.direction === 1);
+        el.classList.toggle("is-hidden", past && self.direction === 1 && !el.matches(":focus-within"));
         el.classList.toggle("is-solid", past);
       },
     });
@@ -36,6 +44,11 @@ export function Navigation() {
       st.kill();
     };
   }, []);
+
+  // Al cambiar de página la barra vuelve a verse
+  useEffect(() => {
+    header.current?.classList.remove("is-hidden", "is-solid");
+  }, [path]);
 
   // Menú móvil: bloqueo de scroll, Escape, foco y trampa de foco
   const mounted = useRef(false);
@@ -48,8 +61,8 @@ export function Navigation() {
     lockScroll(open);
     const m = menu.current!;
     if (!open) return;
-    const items = m.querySelectorAll<HTMLElement>(".menu__item");
-    if (!prefersReducedMotion()) gsap.fromTo(items, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.06, ease: "expo.out", delay: 0.15 });
+    const items = m.querySelectorAll<HTMLElement>(".menu__item, .menu__sub");
+    if (!prefersReducedMotion()) gsap.fromTo(items, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.04, ease: "expo.out", delay: 0.15 });
     const focusables = m.querySelectorAll<HTMLElement>("a, button");
     focusables[0]?.focus();
     const onKey = (e: KeyboardEvent) => {
@@ -72,47 +85,54 @@ export function Navigation() {
     };
   }, [open]);
 
-  const go = (href: string) => {
+  // En el menú móvil: cerrar y navegar
+  const go = (href: string) => (e: React.MouseEvent) => {
+    if (e.metaKey || e.ctrlKey) return;
+    e.preventDefault();
     setOpen(false);
-    // Esperar a que se libere el scroll antes de desplazarse
-    requestAnimationFrame(() => scrollToTarget(href));
+    requestAnimationFrame(() => navigate(href));
   };
+  const current = (href: string) => (isActive(path, href) ? { "aria-current": "page" as const } : {});
+  const all = [...nav, navContact];
+  const groups = nav.filter((n) => n.children);
 
   return (
     <>
       <header ref={header} className="nav">
         <div className="nav__bar">
-          <a
-            href="#inicio"
-            className="nav__brand"
-            onClick={(e) => {
-              e.preventDefault();
-              go("#inicio");
-            }}
-          >
-            <Logo size={34} />
+          <Link to={routes.inicio} className="nav__brand" aria-label={`${brand.name}, inicio`}>
+            <Logo size={34} decorative />
             <span className="nav__name">Experience Design</span>
-          </a>
+          </Link>
 
           <nav className="nav__links" aria-label="Principal">
             {nav.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="nav__link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  go(n.href);
-                }}
-              >
-                {n.label}
-              </a>
+              <div key={n.href} className={`nav__item ${n.children ? "has-sub" : ""}`}>
+                <Link to={n.href} className="nav__link" {...current(n.href)}>
+                  {n.label}
+                </Link>
+                {n.children && (
+                  <div className="nav__sub">
+                    <ul className="nav__sub-list">
+                      {n.children.map((c, i) => (
+                        <li key={c.href}>
+                          <Link to={c.href} className="nav__sub-link" {...current(c.href)}>
+                            <span className="nav__sub-n label">0{i + 1}</span>
+                            <span className="nav__sub-name serif">{c.label}</span>
+                            {c.note && <span className="nav__sub-note">{c.note}</span>}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 
           <div className="nav__cta">
-            <MagneticButton href="#contacto" onClick={() => goToContact()}>
-              Vamos
+            <MagneticButton href={navContact.href} onClick={() => navigate(navContact.href)}>
+              {navContact.label}
             </MagneticButton>
           </div>
 
@@ -144,38 +164,32 @@ export function Navigation() {
           </button>
         </div>
         <nav className="menu__list" aria-label="Menú móvil">
-          {nav.map((n, i) => (
+          {all.map((n, i) => (
             <div className="menu__row" key={n.href}>
-              <a
-                href={n.href}
-                className="menu__item"
-                onClick={(e) => {
-                  e.preventDefault();
-                  go(n.href);
-                }}
-              >
+              <a href={n.href} className={`menu__item ${n === navContact ? "menu__item--cta" : ""}`} onClick={go(n.href)} {...current(n.href)}>
                 <span className="menu__n label">0{i + 1}</span>
-                <span className="menu__label serif">{n.label}</span>
+                <span className="menu__label serif">{n === navContact ? <em>{n.label}</em> : n.label}</span>
               </a>
             </div>
           ))}
-          <div className="menu__row">
-            <a
-              href="#contacto"
-              className="menu__item menu__item--cta"
-              onClick={(e) => {
-                e.preventDefault();
-                setOpen(false);
-                requestAnimationFrame(() => goToContact());
-              }}
-            >
-              <span className="menu__n label">05</span>
-              <span className="menu__label serif">
-                <em>Vamos</em>
-              </span>
-            </a>
-          </div>
         </nav>
+        <div className="menu__subs">
+          {groups.map((g) => (
+            <div key={g.href} className="menu__group">
+              <p className="menu__group-title label">{g.label}</p>
+              <ul>
+                {g.children!.map((c) => (
+                  <li key={c.href}>
+                    <a href={c.href} className="menu__sub" onClick={go(c.href)} {...current(c.href)}>
+                      {c.label}
+                      {c.note && <span className="menu__sub-note">{c.note}</span>}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
         <a className="menu__ig label" href={brand.instagram.url} target="_blank" rel="noopener noreferrer">
           <InstagramLogo size={18} weight="light" aria-hidden />
           {brand.instagram.handle}

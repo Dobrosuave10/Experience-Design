@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { brand, contact, interests, type InterestId } from "../content/site";
-import { onInterest } from "../lib/events";
+import { interestFromUrl, onInterest } from "../lib/events";
 import { MagneticButton } from "./MagneticButton";
 import "./LeadForm.css";
 
@@ -14,7 +14,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 /** Cuatro campos, nada más: nombre, email, WhatsApp (opcional) e interés. */
 export function LeadForm() {
   const uid = useId();
-  const [interest, setInterest] = useState<InterestId | null>(null);
+  const [interest, setInterest] = useState<InterestId | null>(() => interestFromUrl());
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
 

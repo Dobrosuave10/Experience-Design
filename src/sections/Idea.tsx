@@ -10,7 +10,7 @@ import "./Idea.css";
  * 02 Mirar. Sección casi vacía: una frase y cuatro verbos que aparecen
  * uno a uno con el scroll, como si se dijeran en voz baja.
  */
-export function Idea() {
+export function Idea({ label }: { label?: string }) {
   const ref = useRef<HTMLElement>(null);
 
   useGsap(
@@ -37,6 +37,7 @@ export function Idea() {
     <section ref={ref} className="idea section" data-tone="paper" aria-labelledby="idea-lead">
       <div className="idea__pin">
         <div className="wrap idea__inner">
+          {label && <p className="label idea__kicker">{label}</p>}
           <h2 id="idea-lead" className="idea__lead display">
             {idea.lead}
           </h2>

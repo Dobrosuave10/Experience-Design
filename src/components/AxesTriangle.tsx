@@ -5,14 +5,14 @@ import { ArrowRight } from "@phosphor-icons/react";
 import { worlds } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK, hasFinePointer, prefersReducedMotion } from "../lib/env";
-import { scrollToTarget } from "../lib/smoothScroll";
 import { Logo } from "./Logo";
 import { Photo } from "./Photo";
+import { Link } from "./Link";
 import "./AxesTriangle.css";
 
 /**
  * Los tres ejes como un sistema: un triángulo dibujado en SVG cuyas esquinas son
- * imágenes (Experiencias, Formación, Marca personal) y cuyo centro es el sello.
+ * imágenes (los tres programas: Marca personal, Estudiantes, Profesionales) y cuyo centro es el sello.
  * Los radios punteados que salen del centro son el hilo invisible: Conectar.
  *
  * Geometría en unidades del viewBox; el DOM se posiciona en % sobre el mismo plano,
@@ -193,17 +193,10 @@ function Detail({ item }: { item: (typeof worlds.items)[number] }) {
             <li key={k}>{k}</li>
           ))}
         </ul>
-        <a
-          className="tri__go"
-          href={item.href}
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToTarget(item.href);
-          }}
-        >
-          <span>Ir a {item.name}</span>
+        <Link className="tri__go" to={item.href}>
+          <span>Conocer {item.name}</span>
           <ArrowRight size={16} aria-hidden />
-        </a>
+        </Link>
       </div>
     </div>
   );

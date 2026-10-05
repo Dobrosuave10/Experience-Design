@@ -12,3 +12,7 @@
     margin-bottom: 40px;
   }
 }
+.worlds__kicker {
+  color: var(--accent);
+  margin-bottom: 18px;
+}

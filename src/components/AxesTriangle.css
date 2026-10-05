@@ -107,7 +107,7 @@
   scale: 1.06;
   transition: scale 1.4s var(--ease-out);
 }
-.tri__node--2 .tri__disc img {
+.tri__node--0 .tri__disc img {
   object-position: 50% 30%;
 }
 .tri__node.is-active .tri__disc {

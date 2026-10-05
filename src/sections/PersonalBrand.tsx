@@ -42,7 +42,7 @@ export function PersonalBrand() {
             <p className="pb__note serif">
               <em>{personalBrand.note}</em>
             </p>
-            <MagneticButton href="#contacto" onClick={() => goToContact("marca")}>
+            <MagneticButton href="/contacto" onClick={() => goToContact("marca")}>
               {personalBrand.cta}
             </MagneticButton>
           </div>

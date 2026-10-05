@@ -1,0 +1,32 @@
+.next {
+  border-top: 1px solid var(--line);
+}
+.next__link {
+  display: grid;
+  gap: 14px;
+  padding-block: clamp(72px, 14vh, 160px);
+}
+.next__label {
+  color: var(--muted);
+}
+.next__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18em;
+  font-size: clamp(3.2rem, 11vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  transition: color 0.6s var(--ease-out);
+}
+.next__arrow {
+  width: 0.5em;
+  height: 0.5em;
+  flex: none;
+  transition: transform 0.7s var(--ease-out);
+}
+.next__link:hover .next__title {
+  color: var(--accent);
+}
+.next__link:hover .next__arrow {
+  transform: translateX(0.12em);
+}
