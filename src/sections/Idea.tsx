@@ -11,44 +11,35 @@ const SEQUENCE = idea.verbs.slice(0, 3);
 
 /**
  * 02 Mirar. Sección casi vacía: una frase y los verbos que la completan.
- * En Inicio (`cycle`) la frase queda fija mientras se avanza y el progreso del
- * scroll, y nada más, decide qué verbo se ve: Se vive → Se toca → Se reflexiona.
- * Cada uno emerge (fundido, nitidez, unos píxeles hacia arriba) y se disuelve en
- * el siguiente; al subir, la secuencia se recorre al revés. Sin temporizadores.
+ * En Inicio (`sequence`) cada verbo es un elemento propio en el flujo normal de la
+ * página: se revela (fundido, difuminado que se aclara, unos píxeles hacia arriba)
+ * a medida que entra en pantalla y, una vez visible, queda. Se acumulan:
+ * Se vive, Se toca, Se reflexiona. Sin sticky, sin tramos extra, sin temporizadores.
  * En el resto del sitio, y con movimiento reducido, los verbos se muestran juntos.
  */
-export function Idea({ label, cycle = false }: { label?: string; cycle?: boolean }) {
+export function Idea({ label, sequence = false }: { label?: string; sequence?: boolean }) {
   const ref = useRef<HTMLElement>(null);
 
   useGsap(
     (mm, el) => {
-      if (cycle) {
+      if (sequence) {
         mm.add(MOTION_OK, () => {
-          const words = gsap.utils.toArray<HTMLElement>(".idea__word", el);
-          const track = el.querySelector<HTMLElement>(".idea__track")!;
-          gsap.set(words, { autoAlpha: 0, y: 14, filter: "blur(8px)" });
-
-          // Línea de tiempo medida en tramo de scroll (no en segundos): 0 → 10 recorre la sección.
-          // Cada entrada se cruza con la salida anterior: nunca queda un hueco sin palabra.
-          const enter = { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.3, ease: "power1.out" };
-          const leave = { autoAlpha: 0, y: -8, filter: "blur(8px)", duration: 1.3, ease: "power1.in" };
-          gsap
-            .timeline({
-              defaults: { ease: "none" },
-              scrollTrigger: { trigger: track, start: "top 70%", end: "bottom bottom", scrub: true },
-            })
-            .to(words[0], enter, 0) //         Se vive: aparece al entrar
-            .to(words[0], leave, 2.9) //       se disuelve…
-            .to(words[1], enter, 3.3) //       …mientras emerge Se toca
-            .to(words[1], leave, 6.0)
-            .to(words[2], enter, 6.4) //       Se reflexiona
-            .to({}, { duration: 2.3 }, 7.7); // queda presente hasta que la sección se va
-
-          gsap.fromTo(
-            ".idea__lead",
-            { opacity: 0.25 },
-            { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "top 25%", scrub: true } },
-          );
+          // Cada frase sigue su propia posición en el viewport: entra mientras sube
+          // desde el borde inferior hasta un poco más arriba del centro. Al volver
+          // hacia arriba la entrada se deshace con naturalidad; nunca se reemplazan.
+          gsap.utils.toArray<HTMLElement>(".idea__phrase", el).forEach((phrase) => {
+            gsap.fromTo(
+              phrase,
+              { autoAlpha: 0, y: 18, filter: "blur(8px)" },
+              {
+                autoAlpha: 1,
+                y: 0,
+                filter: "blur(0px)",
+                ease: "power1.out",
+                scrollTrigger: { trigger: phrase, start: "top 92%", end: "top 62%", scrub: true },
+              },
+            );
+          });
         });
         return;
       }
@@ -70,24 +61,20 @@ export function Idea({ label, cycle = false }: { label?: string; cycle?: boolean
 
   return (
     <section ref={ref} className="idea section" data-tone="paper" aria-labelledby="idea-lead">
-      <div className={cycle ? "idea__track" : "idea__pin"}>
-        <div className={`wrap idea__inner ${cycle ? "idea__inner--sticky" : ""}`}>
+      <div className="idea__pin">
+        <div className="wrap idea__inner">
           {label && <p className="label idea__kicker">{label}</p>}
           <h2 id="idea-lead" className="idea__lead display">
             {idea.lead}
           </h2>
-          {cycle ? (
-            <div className="idea__cycle">
-              {/* Lectores de pantalla: la frase completa, sin depender de la animación */}
-              <p className="sr-only">{SEQUENCE.join(" ")}</p>
-              <div className="idea__stage" aria-hidden="true">
-                {SEQUENCE.map((v) => (
-                  <span key={v} className="idea__word idea__verb display">
-                    <em>{v}</em>
-                  </span>
-                ))}
-              </div>
-            </div>
+          {sequence ? (
+            <ol className="idea__verbs idea__verbs--sequence" aria-label="El diseño">
+              {SEQUENCE.map((v) => (
+                <li key={v} className="idea__phrase idea__verb display">
+                  <em>{v}</em>
+                </li>
+              ))}
+            </ol>
           ) : (
             <ul className="idea__verbs" aria-label="El diseño">
               {idea.verbs.map((v) => (

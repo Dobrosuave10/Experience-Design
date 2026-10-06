@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Idea cycle />
+      <Idea sequence />
       <ProgramsSpine />
       <Touch />
       <HomeDestinations />
