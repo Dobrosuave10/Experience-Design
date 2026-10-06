@@ -87,3 +87,78 @@
   color: var(--accent);
   margin-bottom: 22px;
 }
+
+/* ---------- Inicio: un verbo a la vez ---------- */
+.idea__cycle {
+  grid-column: 6 / span 7;
+  display: grid;
+  gap: clamp(18px, 3vh, 32px);
+}
+/* Las tres palabras comparten celda: la altura no cambia nunca (sin saltos de layout) */
+.idea__stage {
+  display: grid;
+  align-items: end;
+  will-change: transform;
+}
+.idea__word {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  color: #9b4819;
+  will-change: opacity, transform, filter;
+}
+.idea__word:nth-child(2) {
+  padding-left: 0.6em;
+}
+.idea__word:nth-child(3) {
+  padding-left: 0.2em;
+}
+/* Tres trazos finos marcan dónde está el discurso: vivir, tocar, reflexionar */
+.idea__ticks {
+  display: flex;
+  gap: 10px;
+  padding-left: 0.2em;
+}
+.idea__tick {
+  position: relative;
+  width: 44px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+}
+.idea__tick-fill {
+  position: absolute;
+  inset: 0;
+  background: #9b4819;
+  transform: scaleX(0);
+}
+
+@media (max-width: 1023px) {
+  .idea__word {
+    font-size: clamp(3rem, 9.4vw, 6.4rem);
+  }
+}
+@media (max-width: 767px) {
+  .idea__cycle {
+    grid-column: 1 / -1;
+  }
+  .idea__word {
+    font-size: clamp(2.6rem, 12.6vw, 4.4rem);
+  }
+  .idea__word:nth-child(n) {
+    padding-left: 0;
+  }
+  .idea__ticks {
+    padding-left: 0;
+  }
+}
+
+/* Sin animación: los tres verbos quedan apilados y visibles, como el resto del sitio */
+@media (prefers-reduced-motion: reduce) {
+  .idea__word {
+    position: static;
+    grid-area: auto;
+  }
+  .idea__ticks {
+    display: none;
+  }
+}
