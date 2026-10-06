@@ -1,0 +1,499 @@
+/* Inicio · Programas: eje vertical con tres bloques alternados.
+   Paleta del manual: negro, tierra (sólo acento), beige, gris claro y blanco cálido. */
+.spine {
+  --ed-black: #000000;
+  --ed-earth: #9b4819;
+  --ed-beige: #ebcfc4;
+  --ed-grey: #e9dfd6;
+  --ed-white: #fffdf8;
+  --mid: clamp(96px, 11vw, 190px); /* calle central donde corre la línea */
+  padding-block: clamp(120px, 18vh, 220px) clamp(140px, 20vh, 240px);
+  color: var(--ed-black);
+  font-family: var(--glacial);
+}
+
+/* ---------- Encabezado ---------- */
+.spine__head {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 18px;
+  margin-bottom: clamp(56px, 9vh, 110px);
+}
+.spine__kicker {
+  font-family: var(--glacial);
+  color: var(--ed-earth);
+  letter-spacing: 0.3em;
+}
+.spine__title {
+  font-size: clamp(2.6rem, 5.2vw, 5.8rem);
+  max-width: 14ch;
+}
+
+/* ---------- Línea central ---------- */
+.spine__body {
+  position: relative;
+}
+.spine__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  translate: -0.5px 0;
+  background: rgba(0, 0, 0, 0.12);
+}
+.spine__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--ed-black);
+  transform-origin: top;
+}
+/* remate superior e inferior de la línea, como en un plano */
+.spine__line::before,
+.spine__line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 11px;
+  height: 1px;
+  translate: -50% 0;
+  background: var(--ed-black);
+}
+.spine__line::before {
+  top: 0;
+}
+.spine__line::after {
+  bottom: 0;
+}
+
+/* ---------- Bloques ---------- */
+.spine__list {
+  position: relative;
+  display: grid;
+  padding-block: clamp(48px, 8vh, 96px);
+}
+.spine__block {
+  display: grid;
+  grid-template-columns: 1fr var(--mid) 1fr;
+}
+/* los bloques se intercalan: cada uno empieza antes de que termine el anterior */
+.spine__block + .spine__block {
+  margin-top: clamp(-260px, -18vh, -120px);
+}
+.spine__block--left .spine__article {
+  grid-column: 1;
+}
+.spine__block--right .spine__article {
+  grid-column: 3;
+}
+
+.spine__article {
+  position: relative;
+  display: grid;
+  align-content: start;
+}
+
+/* cota que une el bloque con la línea */
+.spine__connector {
+  position: absolute;
+  top: clamp(56px, 9vh, 96px);
+  width: calc(var(--mid) / 2);
+  height: 1px;
+  background: var(--ed-black);
+  opacity: 0.55;
+}
+.spine__block--left .spine__connector {
+  left: 100%;
+  transform-origin: left;
+}
+.spine__block--right .spine__connector {
+  right: 100%;
+  transform-origin: right;
+}
+.spine__node {
+  position: absolute;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  translate: 0 -50%;
+  border: 1px solid var(--ed-black);
+  border-radius: 50%;
+  background: var(--ed-white);
+  transition:
+    background-color 0.6s var(--ease-out),
+    border-color 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+}
+.spine__block--left .spine__node {
+  right: -5.5px;
+}
+.spine__block--right .spine__node {
+  left: -5.5px;
+}
+.spine__block.is-current .spine__node {
+  background: var(--ed-earth);
+  border-color: var(--ed-earth);
+  transform: scale(1.25);
+}
+
+/* ---------- Imagen ---------- */
+.spine__media {
+  position: relative;
+}
+.spine__frame {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--ed-grey);
+}
+.spine__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.spine__block--viajes .spine__frame {
+  aspect-ratio: 5 / 4;
+}
+.spine__block--marca-personal .spine__frame {
+  aspect-ratio: 4 / 5;
+  width: 82%;
+  margin-left: auto;
+  /* la imagen sobrepasa levemente el bloque hacia afuera */
+  margin-right: calc(var(--gutter) * -0.6);
+}
+/* Recorte al detalle (textil, collar, manos): identidad sin retrato corporativo */
+.spine__block--marca-personal .spine__frame img {
+  position: absolute;
+  left: -30%;
+  top: -55%;
+  width: 160%;
+  height: auto;
+  max-width: none;
+}
+.spine__block--formacion .spine__frame {
+  aspect-ratio: 16 / 10;
+}
+
+/* pieza secundaria superpuesta */
+.spine__inset-wrap {
+  position: absolute;
+  z-index: 2;
+}
+.spine__block--viajes .spine__inset-wrap {
+  right: -9%;
+  bottom: -14%;
+  width: 30%;
+}
+.spine__block--marca-personal .spine__inset-wrap {
+  left: -4%;
+  bottom: -12%;
+  width: 56%;
+}
+.spine__block--formacion .spine__inset-wrap {
+  left: -4%;
+  bottom: -18%;
+  width: 28%;
+}
+.spine__detail {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  outline: 10px solid var(--ed-white);
+}
+.spine__detail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.spine__block--formacion .spine__detail {
+  aspect-ratio: 1;
+}
+
+/* Marca personal: hoja de cuaderno con boceto y notas */
+.spine__sheet {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: clamp(16px, 1.6vw, 26px);
+  background: var(--ed-white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-image: repeating-linear-gradient(0deg, transparent 0 27px, rgba(155, 72, 25, 0.12) 27px 28px);
+  rotate: -2.2deg;
+  box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.35);
+}
+.spine__sketch {
+  width: 72%;
+  stroke: var(--ed-black);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.spine__sketch-dim {
+  stroke: var(--ed-earth);
+}
+.spine__notes {
+  display: grid;
+  gap: 4px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.25vw, 1.35rem);
+  line-height: 1.25;
+}
+.spine__notes li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.spine__note-n {
+  font-family: var(--glacial);
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--ed-earth);
+}
+.spine__swatch {
+  position: absolute;
+  right: clamp(14px, 1.4vw, 22px);
+  bottom: clamp(14px, 1.4vw, 22px);
+  width: clamp(48px, 4.4vw, 72px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.spine__swatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Texto ---------- */
+.spine__text {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  margin-top: clamp(64px, 10vh, 110px);
+  max-width: 30rem;
+}
+.spine__block--right .spine__text {
+  margin-top: clamp(80px, 12vh, 130px);
+}
+.spine__index {
+  display: flex;
+  gap: 16px;
+  font-family: var(--glacial);
+  letter-spacing: 0.28em;
+  color: rgba(0, 0, 0, 0.55);
+}
+.spine__verb {
+  color: var(--ed-earth);
+}
+.spine__name {
+  font-size: clamp(2.8rem, 4.6vw, 5.2rem);
+  line-height: 0.95;
+}
+.spine__desc {
+  font-size: clamp(1rem, 0.3vw + 0.94rem, 1.14rem);
+  line-height: 1.65;
+  color: rgba(0, 0, 0, 0.74);
+  max-width: 40ch;
+}
+
+/* Viajes: experiencias realizadas y la próxima, claramente separadas */
+.spine__history {
+  width: 100%;
+  margin-top: 10px;
+  display: grid;
+  gap: 12px;
+}
+.spine__history-label,
+.spine__next .label {
+  font-family: var(--glacial);
+  letter-spacing: 0.26em;
+  color: rgba(0, 0, 0, 0.55);
+}
+.spine__past {
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+}
+.spine__past li,
+.spine__next-line {
+  display: grid;
+  grid-template-columns: 4.2ch auto 1fr;
+  align-items: baseline;
+  gap: 18px;
+  padding-block: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+}
+.spine__year {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  color: rgba(0, 0, 0, 0.55);
+}
+.spine__place {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.spine__note {
+  font-size: 0.82rem;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: right;
+}
+.spine__next {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+.spine__next-line {
+  grid-template-columns: auto 1fr;
+  border-top: 1px solid var(--ed-earth);
+  border-bottom: 0;
+}
+.spine__next .spine__place {
+  color: var(--ed-earth);
+}
+
+.spine__formats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.spine__formats span::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 1px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: var(--ed-earth);
+}
+
+.spine__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.spine__cta span {
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+  padding-bottom: 5px;
+  transition: background-size 0.6s var(--ease-out);
+}
+.spine__cta svg {
+  transition: transform 0.5s var(--ease-out);
+}
+.spine__cta:hover span {
+  background-size: 0% 1px;
+  background-position: right bottom;
+}
+.spine__cta:hover svg {
+  transform: translateX(4px);
+  color: var(--ed-earth);
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1023px) {
+  .spine {
+    --mid: 72px;
+  }
+  .spine__block + .spine__block {
+    margin-top: -80px;
+  }
+  .spine__name {
+    font-size: clamp(2.4rem, 5.6vw, 3.4rem);
+  }
+}
+
+/* ---------- Móvil: la línea pasa al borde izquierdo y los bloques mantienen la alternancia ---------- */
+@media (max-width: 767px) {
+  .spine {
+    --rail: 26px;
+  }
+  .spine__head {
+    justify-items: start;
+    text-align: left;
+    padding-left: var(--rail);
+  }
+  .spine__line {
+    left: 0;
+    translate: 0 0;
+  }
+  .spine__block {
+    grid-template-columns: 1fr;
+    padding-left: var(--rail);
+  }
+  .spine__block + .spine__block {
+    margin-top: 96px;
+  }
+  .spine__block--left .spine__article,
+  .spine__block--right .spine__article {
+    grid-column: 1;
+  }
+  .spine__block--left .spine__connector,
+  .spine__block--right .spine__connector {
+    left: auto;
+    right: 100%;
+    width: var(--rail);
+    top: 40px;
+    transform-origin: right;
+  }
+  .spine__block--left .spine__node,
+  .spine__block--right .spine__node {
+    left: -5.5px;
+    right: auto;
+  }
+  /* alternancia: la imagen se recuesta a uno u otro lado */
+  .spine__block--viajes .spine__frame,
+  .spine__block--formacion .spine__frame {
+    width: 90%;
+  }
+  .spine__block--marca-personal .spine__frame {
+    width: 84%;
+    margin-right: calc(var(--gutter) * -1);
+  }
+  .spine__block--viajes .spine__inset-wrap {
+    right: 0;
+    bottom: -12%;
+    width: 34%;
+  }
+  .spine__block--marca-personal .spine__inset-wrap {
+    left: 0;
+    bottom: -10%;
+    width: 62%;
+  }
+  .spine__block--formacion .spine__inset-wrap {
+    left: auto;
+    right: 0;
+    bottom: -16%;
+    width: 30%;
+  }
+  .spine__text,
+  .spine__block--right .spine__text {
+    margin-top: 72px;
+  }
+  .spine__block--right .spine__text {
+    justify-self: end;
+    padding-left: 12%;
+  }
+  .spine__note {
+    text-align: left;
+    grid-column: 2 / -1;
+  }
+  .spine__past li {
+    grid-template-columns: 4.2ch 1fr;
+    row-gap: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spine__fill {
+    transform: none;
+  }
+}

@@ -16,7 +16,12 @@ export const brand = {
   /** Correo verificado. null = no se muestra. */
   email: null as string | null,
   /** WhatsApp verificado en formato internacional (ej. "56912345678"). null = no se muestra. */
-  whatsapp: null as string | null,
+  whatsapp: "56991979117" as string | null,
+  whatsappLabel: "+56 9 9197 9117",
+  linkedin: {
+    label: "Studio Barla Interiorismo",
+    url: "https://www.linkedin.com/company/studiobarlainteriorismo/posts/?feedView=all",
+  },
   /**
    * Ruta al logo oficial (SVG o PNG con fondo transparente), ej. "/brand/logo.svg".
    * Mientras sea null se usa una reconstrucción provisoria del sello (círculo terracota + "E.").
@@ -129,45 +134,55 @@ export const touch = {
   ] as { name: MaterialName; label: string }[],
 };
 
-export const worlds = {
+/** Inicio · Programas: tres bloques sobre una línea vertical (Viajes, Marca personal, Formación). */
+export const programsSpine = {
+  kicker: "Programas",
   title: "Tres caminos. Un mismo mundo.",
-  thread: "Conectar",
   items: [
     {
+      id: "viajes",
+      n: "01",
+      verb: "Descubrir",
+      name: "Viajes",
+      text: "Experiencias internacionales curadas alrededor del diseño, la cultura y las formas de vivirlo. Vamos a conocer lugares, marcas y personas: observar, cuestionar y aprender, para volver con algo propio.",
+      href: routes.destinos,
+      cta: "Ver destinos",
+      main: { image: "milan-showroom" as ImageName, alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada" },
+      detail: { image: "salone-banderas" as ImageName, alt: "Banderas del Salone del Mobile.Milano frente al pabellón" },
+      history: {
+        pastLabel: "Experiencias realizadas",
+        past: [
+          { year: "2023", place: "São Paulo", note: "Piloto" },
+          { year: "2024", place: "Milán", note: "Piloto" },
+          { year: "2025", place: "Milán", note: "Primera experiencia abierta" },
+        ],
+        nextLabel: "Próxima experiencia",
+        next: { year: "2027", place: "Milán", note: "Milan Design Week. Fechas por confirmar" },
+      },
+    },
+    {
       id: "marca-personal",
-      href: routes.marcaPersonal,
+      n: "02",
       verb: "Expresar",
       name: "Marca personal",
-      keywords: ["Historia", "Mirada", "Posicionamiento", "Voz"],
-      text: "Reconocer tu valor y saber contarlo.",
-      material: "linen" as MaterialName,
-      image: "fundadores-showroom" as ImageName,
-      alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
-      tone: "light" as const,
+      text: "Tu trayectoria ya dice mucho. Te ayudamos a ordenarla y darle criterio, proyección y una voz profesional propia, coherente en cada lugar donde apareces.",
+      href: routes.marcaPersonal,
+      cta: "Conocer Marca personal",
+      main: { image: "danae" as ImageName, alt: "Detalle de un retrato: textil de lino, collar de cerámica y una silla tejida" },
+      detail: { image: "materiales" as ImageName, alt: "Muestras de piedra, madera y metal" },
+      notes: ["Historia", "Mirada", "Criterio", "Voz"],
     },
     {
-      id: "estudiantes",
-      href: routes.estudiantes,
-      verb: "Descubrir",
-      name: "Estudiantes",
-      keywords: ["Aprender", "Descubrir", "Conectar", "Imaginar"],
-      text: "El mundo del diseño también se aprende fuera del aula.",
-      material: "travertine" as MaterialName,
-      image: "charla-showroom" as ImageName,
-      alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
-      tone: "light" as const,
-    },
-    {
-      id: "profesionales",
-      href: routes.profesionales,
-      verb: "Profundizar",
-      name: "Profesionales",
-      keywords: ["Referencias", "Industria", "Materiales", "Conexiones"],
-      text: "Seguir aprendiendo también es parte de una carrera.",
-      material: "walnut" as MaterialName,
-      image: "showroom-piedra" as ImageName,
-      alt: "Showroom con mesa de piedra, sillas tapizadas y arcos",
-      tone: "dark" as const,
+      id: "formacion",
+      n: "03",
+      verb: "Aprender",
+      name: "Formación",
+      text: "Conocimiento que sigue después del viaje: conversaciones con profesionales, herramientas y casos reales, con un formato flexible para seguir aprendiendo.",
+      href: routes.programas,
+      cta: "Ver programas",
+      main: { image: "charla-showroom" as ImageName, alt: "Conversación con un diseñador invitado en un showroom de Milán, con público alrededor" },
+      detail: { image: "materiales" as ImageName, alt: "Muestras de materiales sobre una mesa de trabajo" },
+      formats: ["Webinars", "Masterclasses", "Cursos", "Conversaciones"],
     },
   ],
 };
@@ -333,14 +348,6 @@ export const archive = {
   body: "Empezó como un experimento con pocas personas. Sigue igual de cerca.",
   entries: [
     {
-      year: "2027",
-      place: "Milán",
-      tag: "Milan Design Week",
-      text: "La próxima experiencia. Programa, fechas y valor en definición.",
-      status: "next",
-      material: "terrazzo",
-    },
-    {
       year: "2025",
       place: "Milán",
       tag: "Primera experiencia abierta",
@@ -349,7 +356,7 @@ export const archive = {
     },
     {
       year: "2024",
-      place: "Italia",
+      place: "Milán",
       tag: "Piloto",
       text: "Un segundo grupo pequeño. El concepto toma forma junto a empresas de revestimientos, materiales y decoración.",
       material: "travertine",
@@ -360,21 +367,6 @@ export const archive = {
       tag: "Piloto",
       text: "La primera prueba, con tres participantes.",
       material: "terracotta",
-    },
-    {
-      year: "",
-      place: "Venecia",
-      tag: "Italia",
-      text: "Parte del universo de experiencias italianas.",
-      material: "linen",
-    },
-    {
-      year: "",
-      place: "Próximo destino",
-      tag: "Próximamente",
-      text: "Estamos explorando nuevos lugares donde el diseño está ocurriendo.",
-      status: "soon",
-      material: "walnut",
     },
   ] as ArchiveEntry[],
 };

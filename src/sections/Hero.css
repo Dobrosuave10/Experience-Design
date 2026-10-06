@@ -52,7 +52,8 @@
   inset: auto 0 0 0;
   display: grid;
   gap: clamp(20px, 3vh, 36px);
-  padding-bottom: clamp(28px, 6vh, 64px);
+  /* +30px: la composición sube y reduce el vacío sobre el wordmark */
+  padding-bottom: calc(clamp(28px, 6vh, 64px) + var(--hero-lift, 30px));
   pointer-events: none;
 }
 .hero__content a,
@@ -93,6 +94,9 @@
 }
 
 @media (max-width: 767px) {
+  .hero__content {
+    --hero-lift: 20px;
+  }
   .hero {
     height: 145vh;
   }

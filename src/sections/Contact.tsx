@@ -1,4 +1,4 @@
-import { InstagramLogo, EnvelopeSimple, WhatsappLogo } from "@phosphor-icons/react";
+import { InstagramLogo, EnvelopeSimple, WhatsappLogo, LinkedinLogo } from "@phosphor-icons/react";
 import { brand, contact } from "../content/site";
 import { goToContact } from "../lib/events";
 import { LeadForm } from "../components/LeadForm";
@@ -31,12 +31,30 @@ export function Contact() {
             )}
             {brand.whatsapp && (
               <li>
-                <a href={`https://wa.me/${brand.whatsapp}`} target="_blank" rel="noopener noreferrer" className="contact__channel">
+                <a
+                  href={`https://wa.me/${brand.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact__channel"
+                  aria-label={`WhatsApp ${brand.whatsappLabel}`}
+                >
                   <WhatsappLogo size={20} weight="light" aria-hidden />
-                  WhatsApp
+                  {brand.whatsappLabel}
                 </a>
               </li>
             )}
+            <li>
+              <a
+                href={brand.linkedin.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact__channel"
+                aria-label={`LinkedIn de ${brand.linkedin.label}`}
+              >
+                <LinkedinLogo size={20} weight="light" aria-hidden />
+                {brand.linkedin.label}
+              </a>
+            </li>
           </ul>
 
           <p className="contact__b2b">

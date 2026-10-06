@@ -98,7 +98,7 @@ export function Navigation() {
 
   return (
     <>
-      <header ref={header} className="nav">
+      <header ref={header} className={`nav ${path === routes.inicio ? "nav--hero" : ""}`}>
         <div className="nav__bar">
           <Link to={routes.inicio} className="nav__brand" aria-label={`${brand.name}, inicio`}>
             <Logo size={34} decorative />
