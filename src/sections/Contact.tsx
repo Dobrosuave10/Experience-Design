@@ -32,7 +32,7 @@ export function Contact() {
             {brand.whatsapp && (
               <li>
                 <a
-                  href={`https://wa.me/${brand.whatsapp}`}
+                  href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hola, equipo de Experience Design. Me gustaría conocer más información.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact__channel"
