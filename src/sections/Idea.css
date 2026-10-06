@@ -98,7 +98,17 @@
 .idea__stage {
   display: grid;
   align-items: end;
-  will-change: transform;
+}
+/* Tramo de scroll de la secuencia: la escena queda fija mientras el progreso avanza */
+.idea__track {
+  height: 280vh;
+}
+.idea__inner--sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  align-content: center;
 }
 .idea__word {
   grid-area: 1 / 1;
@@ -112,32 +122,15 @@
 .idea__word:nth-child(3) {
   padding-left: 0.2em;
 }
-/* Tres trazos finos marcan dónde está el discurso: vivir, tocar, reflexionar */
-.idea__ticks {
-  display: flex;
-  gap: 10px;
-  padding-left: 0.2em;
-}
-.idea__tick {
-  position: relative;
-  width: 44px;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.14);
-  overflow: hidden;
-}
-.idea__tick-fill {
-  position: absolute;
-  inset: 0;
-  background: #9b4819;
-  transform: scaleX(0);
-}
-
 @media (max-width: 1023px) {
   .idea__word {
     font-size: clamp(3rem, 9.4vw, 6.4rem);
   }
 }
 @media (max-width: 767px) {
+  .idea__track {
+    height: 240vh;
+  }
   .idea__cycle {
     grid-column: 1 / -1;
   }
@@ -145,9 +138,6 @@
     font-size: clamp(2.6rem, 12.6vw, 4.4rem);
   }
   .idea__word:nth-child(n) {
-    padding-left: 0;
-  }
-  .idea__ticks {
     padding-left: 0;
   }
 }
@@ -158,7 +148,11 @@
     position: static;
     grid-area: auto;
   }
-  .idea__ticks {
-    display: none;
+  .idea__track {
+    height: auto;
+  }
+  .idea__inner--sticky {
+    position: static;
+    min-height: 0;
   }
 }
