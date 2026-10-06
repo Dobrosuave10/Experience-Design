@@ -12,6 +12,9 @@ import { Logo } from "./Logo";
 import { MagneticButton } from "./MagneticButton";
 import "./Navigation.css";
 
+/** Texto del CTA de la barra (mismo destino que Contacto). */
+const CTA_LABEL = "Conversemos";
+
 /**
  * Navegación principal: Inicio, Nosotros, Programas, Destinos y Contacto (CTA).
  * Programas y Destinos despliegan sus subpáginas en escritorio; en móvil, el menú
@@ -102,7 +105,11 @@ export function Navigation() {
         <div className="nav__bar">
           <Link to={routes.inicio} className="nav__brand" aria-label={`${brand.name}, inicio`}>
             <Logo size={34} decorative />
-            <span className="nav__name">Experience Design</span>
+            {/* El wordmark del Hero, en versión horizontal: EXPERIENCE (serif) + Design (script) */}
+            <span className="nav__name" aria-hidden="true">
+              <span className="nav__wm nav__wm--experience" />
+              <span className="nav__wm nav__wm--design" />
+            </span>
           </Link>
 
           <nav className="nav__links" aria-label="Principal">
@@ -131,8 +138,8 @@ export function Navigation() {
           </nav>
 
           <div className="nav__cta">
-            <MagneticButton href={navContact.href} onClick={() => navigate(navContact.href)}>
-              {navContact.label}
+            <MagneticButton variant="line" href={navContact.href} onClick={() => navigate(navContact.href)}>
+              {CTA_LABEL}
             </MagneticButton>
           </div>
 
@@ -168,7 +175,7 @@ export function Navigation() {
             <div className="menu__row" key={n.href}>
               <a href={n.href} className={`menu__item ${n === navContact ? "menu__item--cta" : ""}`} onClick={go(n.href)} {...current(n.href)}>
                 <span className="menu__n label">0{i + 1}</span>
-                <span className="menu__label serif">{n === navContact ? <em>{n.label}</em> : n.label}</span>
+                <span className="menu__label serif">{n === navContact ? <em>{CTA_LABEL}</em> : n.label}</span>
               </a>
             </div>
           ))}
