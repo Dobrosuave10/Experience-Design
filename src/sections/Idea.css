@@ -8,9 +8,17 @@
   background: var(--paper);
   color: var(--fg);
 }
-/* En Inicio la hoja de papel sube sobre el final del hero: no queda una pantalla vacía entre ambos */
+/* En Inicio la sección sube por dentro del túnel mientras la cámara se acerca al último
+   arco: su parte alta es transparente (se ve la escena detrás) y el papel empieza más abajo,
+   cuando el canvas ya es papel. Así no existe una línea entre la escena y la página. */
 .hero + .idea {
-  margin-top: -40vh;
+  margin-top: -45vh;
+  background: linear-gradient(180deg, transparent 0, transparent 55vh, var(--paper) 85vh);
+}
+@media (max-width: 767px) {
+  .hero + .idea {
+    margin-top: -60vh;
+  }
 }
 .idea__inner {
   /* Sin fijar la pantalla: la frase y los cuatro verbos se ven juntos mientras la página sigue bajando */

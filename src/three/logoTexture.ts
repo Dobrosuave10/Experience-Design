@@ -86,3 +86,103 @@ export async function makeLogoCanvases() {
   }
   return { color, relief };
 }
+
+/**
+ * Medalla escultórica: mapas para una "E." grabada en la terracota.
+ *  - color: terracota cocida con variación de cocción y moteado; el grabado sólo
+ *    se oscurece un poco (sombra de fondo), nunca en negro.
+ *  - normal: calculado desde un mapa de alturas (E. hundida con bisel suave),
+ *    para que la letra aparezca con la luz rasante y no como un dibujo pegado.
+ *  - roughness: mate en toda la pieza, apenas más pulido en el fondo del grabado.
+ */
+export async function makeMedalMaps(size = 1024) {
+  const mk = () => {
+    const c = document.createElement("canvas");
+    c.width = c.height = size;
+    return c;
+  };
+  const height = mk(), color = mk(), rough = mk(), normal = mk();
+  const h = height.getContext("2d")!, c = color.getContext("2d")!, r = rough.getContext("2d")!;
+
+  try {
+    await document.fonts.load(`500 400px "Cormorant Garamond"`);
+  } catch {
+    /* serif de respaldo */
+  }
+
+  // Altura: blanco = superficie, gris = fondo del grabado (bisel por desenfoque)
+  h.fillStyle = "#fff";
+  h.fillRect(0, 0, size, size);
+  h.font = `500 ${size * 0.5}px "Cormorant Garamond", "Times New Roman", serif`;
+  h.textAlign = "center";
+  h.textBaseline = "alphabetic";
+  const m = h.measureText("E.");
+  const glyphH = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+  const gx = size / 2 + size * 0.012, gy = size / 2 + glyphH / 2 - m.actualBoundingBoxDescent;
+  h.filter = `blur(${size * 0.0035}px)`;
+  h.fillStyle = "#5c5c5c";
+  h.fillText("E.", gx, gy);
+  h.filter = "none";
+
+  // Microtextura cerámica en la altura (muy sutil)
+  const hd = h.getImageData(0, 0, size, size);
+  for (let i = 0; i < hd.data.length; i += 4) {
+    const n = (Math.random() - 0.5) * 6;
+    hd.data[i] = hd.data[i + 1] = hd.data[i + 2] = Math.max(0, Math.min(255, hd.data[i] + n));
+  }
+  h.putImageData(hd, 0, 0);
+
+  // Normal desde la altura (Sobel)
+  const H = h.getImageData(0, 0, size, size).data;
+  const nCtx = normal.getContext("2d")!;
+  const N = nCtx.createImageData(size, size);
+  const at = (x: number, y: number) => H[(Math.min(size - 1, Math.max(0, y)) * size + Math.min(size - 1, Math.max(0, x))) * 4] / 255;
+  const strength = 2.4;
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const dx = (at(x + 1, y - 1) + 2 * at(x + 1, y) + at(x + 1, y + 1) - at(x - 1, y - 1) - 2 * at(x - 1, y) - at(x - 1, y + 1)) * strength;
+      const dy = (at(x - 1, y + 1) + 2 * at(x, y + 1) + at(x + 1, y + 1) - at(x - 1, y - 1) - 2 * at(x, y - 1) - at(x + 1, y - 1)) * strength;
+      const len = Math.hypot(dx, dy, 1);
+      const i = (y * size + x) * 4;
+      N.data[i] = ((-dx / len) * 0.5 + 0.5) * 255;
+      N.data[i + 1] = ((dy / len) * 0.5 + 0.5) * 255;
+      N.data[i + 2] = ((1 / len) * 0.5 + 0.5) * 255;
+      N.data[i + 3] = 255;
+    }
+  }
+  nCtx.putImageData(N, 0, 0);
+
+  // Color: terracota cocida, con zonas más claras/oscuras y moteado fino
+  const g = c.createRadialGradient(size * 0.38, size * 0.32, size * 0.05, size / 2, size / 2, size * 0.62);
+  g.addColorStop(0, "#b8684f");
+  g.addColorStop(0.55, "#a6533f");
+  g.addColorStop(1, "#924634");
+  c.fillStyle = g;
+  c.fillRect(0, 0, size, size);
+  for (let i = 0; i < 5200; i++) {
+    const px = Math.random() * size, py = Math.random() * size, rad = Math.random() * 1.4 + 0.3;
+    c.fillStyle = Math.random() > 0.55 ? "rgba(70,30,18,0.16)" : "rgba(255,226,204,0.10)";
+    c.beginPath();
+    c.arc(px, py, rad, 0, Math.PI * 2);
+    c.fill();
+  }
+  // el fondo del grabado, apenas más oscuro (sombra de oclusión, no pintura)
+  c.globalCompositeOperation = "multiply";
+  c.font = h.font;
+  c.textAlign = "center";
+  c.filter = `blur(${size * 0.004}px)`;
+  c.fillStyle = "#c79a88";
+  c.fillText("E.", gx, gy);
+  c.filter = "none";
+  c.globalCompositeOperation = "source-over";
+
+  // Rugosidad: mate (claro) en general, el fondo del grabado algo más pulido
+  r.fillStyle = "#e6e6e6";
+  r.fillRect(0, 0, size, size);
+  r.font = h.font;
+  r.textAlign = "center";
+  r.fillStyle = "#b5b5b5";
+  r.fillText("E.", gx, gy);
+
+  return { color, normal, rough };
+}

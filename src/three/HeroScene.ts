@@ -1,11 +1,15 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { materialCanvas } from "../lib/materials";
-import { makeLogoCanvases } from "./logoTexture";
+import { makeMedalMaps } from "./logoTexture";
 
 type Options = { mobile: boolean; reduced: boolean };
 
 const INK = new THREE.Color("#171513");
+/** El papel de la página (--paper): al otro lado del último arco está la web. */
+const PAPER = new THREE.Color("#f5f1ea");
+/** La misma salida vista desde lejos: luz cálida, todavía no papel. */
+const EXIT_FAR = new THREE.Color("#d9b294");
 const FLOOR_Y = -2.2;
 const OPENING_HALF = 1.3;
 const SPRING_Y = 1.4;
@@ -43,41 +47,34 @@ function archGeometry() {
   });
 }
 
-/** Moneda/sello con canto redondeado (torno) y dos caras con el logo. */
-function coinGeometry(R: number, h: number) {
-  const pts: THREE.Vector2[] = [];
-  for (let i = 0; i <= 20; i++) {
-    const a = -Math.PI / 2 + (i / 20) * Math.PI;
-    pts.push(new THREE.Vector2(R - h + h * Math.cos(a), h * Math.sin(a)));
+/**
+ * Medalla escultórica: un disco fino (canto visible pero delgado) con un bisel
+ * discreto hacia la cara. Se monta contra el muro: no tiene cara trasera.
+ */
+function medalGeometry(R: number, depth: number, bevel: number) {
+  const pts: THREE.Vector2[] = [new THREE.Vector2(R - 0.02, 0), new THREE.Vector2(R, 0.012), new THREE.Vector2(R, depth - bevel)];
+  for (let i = 1; i <= 8; i++) {
+    const a = (i / 8) * (Math.PI / 2);
+    pts.push(new THREE.Vector2(R - bevel + bevel * Math.cos(a), depth - bevel + bevel * Math.sin(a)));
   }
-  const rim = new THREE.LatheGeometry(pts, 128);
+  const rim = new THREE.LatheGeometry(pts, 160);
   rim.rotateX(Math.PI / 2);
-  const face = new THREE.CircleGeometry(R - h, 128);
+  rim.rotateX(Math.PI); // el canto crece hacia +z (hacia la cámara)
+  const face = new THREE.CircleGeometry(R - bevel, 160);
+  face.translate(0, 0, depth);
   return { rim, face };
-}
-
-function backdropTexture() {
-  const c = document.createElement("canvas");
-  c.width = 512;
-  c.height = 512;
-  const ctx = c.getContext("2d")!;
-  const g = ctx.createRadialGradient(256, 300, 10, 256, 280, 360);
-  g.addColorStop(0, "#F7EBDD");
-  g.addColorStop(0.28, "#E9C9AE");
-  g.addColorStop(0.62, "#B7664F");
-  g.addColorStop(1, "#3a221a");
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, 512, 512);
-  const t = new THREE.CanvasTexture(c);
-  t.colorSpace = THREE.SRGBColorSpace;
-  return t;
 }
 
 export class HeroScene {
   private renderer: THREE.WebGLRenderer;
   private scene = new THREE.Scene();
   private camera: THREE.PerspectiveCamera;
-  private coin = new THREE.Group();
+  private medal = new THREE.Group();
+  private exitMat!: THREE.MeshBasicMaterial;
+  private exitLight!: THREE.PointLight;
+  private grazeLight!: THREE.PointLight;
+  /** Profundidad del último arco (el umbral) y de la posición final de la cámara. */
+  private lastArchZ = -21;
   private t0 = 0;
   private raf = 0;
   private running = false;
@@ -104,8 +101,8 @@ export class HeroScene {
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
 
     this.camera = new THREE.PerspectiveCamera(32, 1, 0.1, 90);
-    this.scene.background = INK;
-    this.scene.fog = new THREE.Fog(INK, 9, 36);
+    this.scene.background = INK.clone();
+    this.scene.fog = new THREE.Fog(INK.clone(), 9, 36);
   }
 
   async init() {
@@ -145,64 +142,73 @@ export class HeroScene {
     const wallMat = new THREE.MeshStandardMaterial({ color: "#3a2f28", roughness: 0.94, bumpMap: plaster, bumpScale: 2.2 });
     const archGeo = archGeometry();
     const depths = opts.mobile ? [0, -7, -14] : [0, -7, -14, -21];
+    this.lastArchZ = depths[depths.length - 1];
     depths.forEach((z, i) => {
       const wall = new THREE.Mesh(archGeo, wallMat);
       wall.position.z = z - 0.8;
       wall.receiveShadow = i === 0;
       scene.add(wall);
       // Luz cálida dentro de cada tramo: la luz llama hacia adentro
-      const p = new THREE.PointLight("#ffb48c", 14 + i * 4, 0, 2);
-      p.position.set(0, 1.2, z - 3.5);
-      scene.add(p);
+      if (i < depths.length - 1) {
+        const p = new THREE.PointLight("#ffb48c", 12 + i * 4, 0, 2);
+        p.position.set(0, 1.2, z - 3.5);
+        scene.add(p);
+      }
     });
 
+    // El suelo termina en el último umbral: más allá sólo existe la luz de la salida
+    const floorLen = 12 - (this.lastArchZ - 0.8);
     const floor = new THREE.Mesh(
-      new THREE.PlaneGeometry(40, 70),
+      new THREE.PlaneGeometry(40, floorLen),
       new THREE.MeshStandardMaterial({ color: "#221d19", roughness: 0.82 }),
     );
     floor.rotation.x = -Math.PI / 2;
-    floor.position.set(0, FLOOR_Y, -20);
+    floor.position.set(0, FLOOR_Y, 12 - floorLen / 2);
     floor.receiveShadow = !opts.mobile;
     scene.add(floor);
 
-    const backdrop = new THREE.Mesh(
-      new THREE.PlaneGeometry(46, 30),
-      new THREE.MeshBasicMaterial({ map: backdropTexture(), fog: false, toneMapped: false }),
-    );
-    backdrop.position.set(0, 2, -32);
-    scene.add(backdrop);
+    // Al otro lado del último arco: un plano de luz que termina siendo el papel de la página.
+    // Sin niebla ni tone mapping, para que su color final sea exactamente --paper.
+    this.exitMat = new THREE.MeshBasicMaterial({ color: EXIT_FAR.clone(), fog: false, toneMapped: false });
+    const exit = new THREE.Mesh(new THREE.PlaneGeometry(80, 60), this.exitMat);
+    exit.position.set(0, 2, this.lastArchZ - 4);
+    scene.add(exit);
+    // La luz de la salida entra al túnel y baña el último tramo
+    this.exitLight = new THREE.PointLight("#ffd2b0", 0, 0, 2);
+    this.exitLight.position.set(0, 0.8, this.lastArchZ - 1.2);
+    scene.add(this.exitLight);
 
-    // ---- El sello: el logo como objeto físico de terracota ----
-    const { color, relief } = await makeLogoCanvases();
+    // ---- La medalla: terracota grabada, montada sobre el muro del primer arco ----
+    const maps = await makeMedalMaps(opts.mobile ? 512 : 1024);
     if (this.disposed) return;
-    const map = new THREE.CanvasTexture(color);
+    const map = new THREE.CanvasTexture(maps.color);
     map.colorSpace = THREE.SRGBColorSpace;
     map.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
-    const bump = new THREE.CanvasTexture(relief);
+    const normalMap = new THREE.CanvasTexture(maps.normal);
+    const roughnessMap = new THREE.CanvasTexture(maps.rough);
 
-    const R = 1.05, h = 0.1;
-    const { rim, face } = coinGeometry(R, h);
-    const rimMat = new THREE.MeshPhysicalMaterial({ color: "#9c4c39", roughness: 0.8, side: THREE.DoubleSide });
-    const faceMat = new THREE.MeshPhysicalMaterial({
+    const R = 1.1;
+    const { rim, face } = medalGeometry(R, 0.075, 0.028);
+    const rimMat = new THREE.MeshStandardMaterial({ color: "#94473a", roughness: 0.9 });
+    const faceMat = new THREE.MeshStandardMaterial({
       map,
-      bumpMap: bump,
-      bumpScale: 3,
-      roughness: 0.86,
-      roughnessMap: bump,
-      clearcoat: 0.05,
+      normalMap,
+      normalScale: new THREE.Vector2(1.15, 1.15),
+      roughness: 1,
+      roughnessMap,
+      envMapIntensity: 0.6,
     });
     const rimMesh = new THREE.Mesh(rim, rimMat);
-    const front = new THREE.Mesh(face, faceMat);
-    front.position.z = h;
-    const back = new THREE.Mesh(face, faceMat);
-    back.position.z = -h;
-    back.rotation.y = Math.PI;
-    for (const m of [rimMesh, front, back]) {
+    const faceMesh = new THREE.Mesh(face, faceMat);
+    for (const m of [rimMesh, faceMesh]) {
       m.castShadow = !opts.mobile;
-      this.coin.add(m);
+      this.medal.add(m);
     }
-    this.coin.position.set(0, 0.35, 1.4);
-    scene.add(this.coin);
+    scene.add(this.medal);
+
+    // Luz rasante que acompaña al cursor y revela el grabado
+    this.grazeLight = new THREE.PointLight("#ffe2c8", 6, 5, 2);
+    scene.add(this.grazeLight);
 
     this.resize();
     this.renderer.compile(scene, this.camera);
@@ -231,10 +237,18 @@ export class HeroScene {
     // Retrato: lente más abierta y sello en la mitad superior (el texto vive abajo)
     const portrait = aspect < 0.85;
     this.camera.fov = portrait ? 46 : aspect < 1.3 ? 38 : 30;
-    this.lookY = portrait ? -1.25 : 0.15;
+    this.lookY = portrait ? 0.95 : 0.15;
     this.baseZ = portrait ? 9.5 : 8.5;
-    this.coin.scale.setScalar(portrait ? 0.9 : 0.8);
-    this.side = portrait ? 0 : aspect > 1.45 ? 1.55 : 0.9;
+    // La medalla vive en el muro del primer arco (cara del muro en z = 0)
+    if (portrait) {
+      this.medal.position.set(0, 3.7, 0.005);
+      this.medal.scale.setScalar(0.62);
+    } else {
+      this.medal.position.set(aspect > 1.45 ? 2.75 : 2.55, 0.55, 0.005);
+      this.medal.scale.setScalar(aspect > 1.45 ? 1 : 0.88);
+    }
+    // El encuadre deja el arco y el titular a la izquierda y la medalla en el tercio derecho
+    this.side = portrait ? 0 : aspect > 1.45 ? -0.55 : -0.35;
     this.camera.updateProjectionMatrix();
     if (!this.running) this.render(0);
   }
@@ -257,26 +271,44 @@ export class HeroScene {
   }
 
   private render(t: number) {
-    const { camera, coin, opts } = this;
-    const k = opts.reduced ? 1 : 0.075;
+    const { camera, medal, opts } = this;
+    const k = opts.reduced ? 1 : 0.06;
     this.progressSmooth += (this.progress - this.progressSmooth) * k;
-    this.pointerSmooth.lerp(this.pointer, opts.reduced ? 1 : 0.05);
+    this.pointerSmooth.lerp(this.pointer, opts.reduced ? 1 : 0.04);
     const p = this.progressSmooth;
-    const travel = easeInOut(p);
     const px = this.pointerSmooth.x, py = this.pointerSmooth.y;
 
-    // Cámara: avanza a través de los arcos hacia la luz
-    const side = this.side * (1 - smooth(0, 0.3, p));
-    camera.position.set(-side + px * 0.35 * (1 - travel), 0.25 + py * 0.18 * (1 - travel), this.baseZ - travel * 36);
-    camera.lookAt(-side + px * 0.15, this.lookY + (0.2 - this.lookY) * travel, camera.position.z - 8.5);
+    // A · Aproximación: la cámara avanza por la galería hasta cruzar el último umbral
+    // avance casi lineal (paso humano): sale despacio y cruza el último arco al final del tramo
+    const travel = 0.82 * p + 0.18 * easeInOut(p);
+    const endZ = this.lastArchZ - 1.6;
+    const z = this.baseZ + (endZ - this.baseZ) * travel;
+    const settle = 1 - smooth(0, 0.3, p);
+    const side = -this.side * settle;
+    camera.position.set(side + px * 0.12 * settle, 0.25 + py * 0.06 * settle, z);
+    const lookY = this.lookY + (0.35 - this.lookY) * smooth(0, 0.45, p);
+    camera.lookAt(side * 0.6 + px * 0.06 * settle, lookY, z - 8.5);
 
-    // Sello: respira, sigue al cursor y se eleva al entrar
-    const lift = smooth(0.02, 0.32, p);
+    // B · La salida se revela: la luz del otro lado pasa de cálida a papel
+    const reveal = smooth(0.45, 0.92, p);
+    this.exitMat.color.copy(EXIT_FAR).lerp(PAPER, reveal);
+    this.exitLight.intensity = 34 * smooth(0.35, 0.88, p);
+    // C · Al cruzar el umbral todo lo que queda en cuadro es papel (sin líneas ni cortes)
+    const crossed = smooth(0.9, 0.99, p);
+    (this.scene.background as THREE.Color).copy(INK).lerp(PAPER, crossed);
+    (this.scene.fog as THREE.Fog).color.copy(this.scene.background as THREE.Color);
+
+    // Medalla: montada en el muro, sólo la luz y una mínima perspectiva responden al cursor
     const idle = opts.reduced ? 0 : 1;
-    coin.position.y = 0.35 + Math.sin(t * 0.8) * 0.04 * idle + lift * 3.4;
-    coin.rotation.y = px * 0.5 + Math.sin(t * 0.35) * 0.2 * idle + lift * 1.2;
-    coin.rotation.x = -py * 0.32 - lift * 0.9;
-    coin.rotation.z = Math.sin(t * 0.27) * 0.03 * idle;
+    medal.rotation.y = px * 0.035 * idle;
+    medal.rotation.x = -py * 0.025 * idle;
+    // la luz rasante recorre el relieve
+    this.grazeLight.position.set(
+      medal.position.x + (opts.reduced ? -1.2 : -1.4 + px * 1.6 + Math.sin(t * 0.25) * 0.15),
+      medal.position.y + (opts.reduced ? 1 : 0.9 + py * 0.8),
+      medal.position.z + 0.9,
+    );
+    this.grazeLight.intensity = 6 * (1 - smooth(0.15, 0.4, p));
 
     this.renderer.render(this.scene, camera);
   }

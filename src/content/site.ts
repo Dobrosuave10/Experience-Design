@@ -111,8 +111,8 @@ export const hero = {
   wordmark: { ink: "wordmark-ink", paper: "wordmark-paper" } as const,
   titleA: "Abrir la mirada",
   titleB: "hacia nuevas posibilidades.",
-  sub: "Experiencias de diseño, formación y conexiones para quienes quieren seguir descubriendo.",
-  cta: "Quiero conocer la experiencia",
+  sub: "Experiencias cuidadosamente curadas para descubrir el diseño desde sus lugares, su cultura y sus personas. Una invitación a inspirarte, conectar y reencontrarte con los fundamentos de lo que te mueve a crear.",
+  cta: "Descubre Milán 2027",
 };
 
 export const idea = {
