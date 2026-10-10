@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { materialCanvas } from "../lib/materials";
-import { makeSealMaps } from "./logoTexture";
+import { SEAL, createSealMaterials, plateGeometry, sealShape } from "./seal";
 
 type Options = { mobile: boolean; reduced: boolean };
 
@@ -49,43 +49,6 @@ function archGeometry() {
     bevelSegments: 2,
     curveSegments: 64,
   });
-}
-
-function roundedSquare(half: number, radius: number) {
-  const s = new THREE.Shape();
-  s.moveTo(-half + radius, -half);
-  s.lineTo(half - radius, -half);
-  s.quadraticCurveTo(half, -half, half, -half + radius);
-  s.lineTo(half, half - radius);
-  s.quadraticCurveTo(half, half, half - radius, half);
-  s.lineTo(-half + radius, half);
-  s.quadraticCurveTo(-half, half, -half, half - radius);
-  s.lineTo(-half, -half + radius);
-  s.quadraticCurveTo(-half, -half, -half + radius, -half);
-  return s;
-}
-
-/**
- * Sello cuadrado: una placa fina de esquinas suavemente redondeadas, con un chaflán
- * preciso. La cara es una pieza aparte (con la "E." grabada) apoyada sobre el cuerpo.
- */
-function sealGeometry(half: number) {
-  const depth = 0.05, bevel = 0.022;
-  const body = new THREE.ExtrudeGeometry(roundedSquare(half - bevel, 0.16), {
-    depth,
-    bevelEnabled: true,
-    bevelThickness: bevel,
-    bevelSize: bevel,
-    bevelSegments: 4,
-    curveSegments: 16,
-  });
-  body.translate(0, 0, -depth / 2);
-  const face = new THREE.ShapeGeometry(roundedSquare(half - bevel, 0.16), 16);
-  // UV 0..1 sobre la cara
-  const pos = face.attributes.position, uv = face.attributes.uv;
-  for (let i = 0; i < pos.count; i++) uv.setXY(i, (pos.getX(i) + half) / (2 * half), (pos.getY(i) + half) / (2 * half));
-  face.translate(0, 0, depth / 2 + bevel + 0.001);
-  return { body, face };
 }
 
 function backdropTexture() {
@@ -264,33 +227,12 @@ export class HeroScene {
     scene.add(glow);
     this.endZ = lastZ - 3;
 
-    // ---- El sello: placa cuadrada de bronce, fina, con la "E." grabada ----
-    const maps = await makeSealMaps(opts.mobile ? 512 : 1024);
+    // ---- El sello: la misma placa que arma la apertura (especificación compartida) ----
+    const { face, edge } = await createSealMaterials(this.renderer, opts.mobile ? 512 : 1024);
     if (this.disposed) return;
-    const map = new THREE.CanvasTexture(maps.color);
-    map.colorSpace = THREE.SRGBColorSpace;
-    map.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
-    const normalMap = new THREE.CanvasTexture(maps.normal);
-    const roughnessMap = new THREE.CanvasTexture(maps.rough);
-
-    const { body, face } = sealGeometry(0.78);
-    // Bronce satinado: algo de metal y rugosidad media; nada de laca ni brillo de plástico
-    const bodyMat = new THREE.MeshStandardMaterial({ color: "#7a3f25", metalness: 0.6, roughness: 0.46, envMapIntensity: 0.9 });
-    const faceMat = new THREE.MeshStandardMaterial({
-      map,
-      normalMap,
-      normalScale: new THREE.Vector2(1, 1),
-      roughnessMap,
-      roughness: 1,
-      metalness: 0.55,
-      envMapIntensity: 0.8,
-    });
-    const bodyMesh = new THREE.Mesh(body, bodyMat);
-    const faceMesh = new THREE.Mesh(face, faceMat);
-    for (const m of [bodyMesh, faceMesh]) {
-      m.castShadow = !opts.mobile;
-      this.seal.add(m);
-    }
+    const plate = new THREE.Mesh(plateGeometry(sealShape()), [face, edge]);
+    plate.castShadow = !opts.mobile;
+    this.seal.add(plate);
     scene.add(this.seal);
 
     this.resize();
@@ -310,6 +252,21 @@ export class HeroScene {
   setSafeLeft(fraction: number) {
     this.safeLeft = fraction;
     this.resize();
+  }
+
+  /** Centro y lado aparente del sello en el canvas (px), con el encuadre inicial. */
+  sealScreen() {
+    const { w, h } = this.size;
+    this.seal.updateWorldMatrix(true, true);
+    this.camera.updateMatrixWorld();
+    const toPx = (v: THREE.Vector3) => {
+      v.applyMatrix4(this.seal.matrixWorld).project(this.camera);
+      return { x: (v.x * 0.5 + 0.5) * w, y: (-v.y * 0.5 + 0.5) * h };
+    };
+    const c = toPx(new THREE.Vector3(0, 0, 0));
+    const top = toPx(new THREE.Vector3(0, SEAL.half, 0));
+    const bottom = toPx(new THREE.Vector3(0, -SEAL.half, 0));
+    return { x: c.x, y: c.y, size: Math.abs(bottom.y - top.y), rotY: this.frame.seal.ry };
   }
 
   setPointer(x: number, y: number) {
@@ -335,7 +292,7 @@ export class HeroScene {
     if (f.axisX !== 0.5 && this.safeLeft > 0) {
       const tan = Math.tan(THREE.MathUtils.degToRad(f.fov / 2)) * (w / h);
       const archLeft = (OPENING_HALF + 0.1 + f.camX) / (2 * f.dist * tan);
-      const sealRight = (s.x - f.camX + 0.86 * s.scale) / (2 * (f.dist - s.z) * tan);
+      const sealRight = (s.x - f.camX + SEAL.half * 1.1 * s.scale) / (2 * (f.dist - s.z) * tan);
       this.axisX = Math.min(Math.max(f.axisX, this.safeLeft + archLeft), 0.98 - sealRight);
     }
     if (!this.running) this.render();

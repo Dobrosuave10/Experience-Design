@@ -154,6 +154,23 @@ export async function makeSealMaps(size = 1024) {
   g2.addColorStop(1, "rgba(92, 44, 26, 0)");
   c.fillStyle = g2;
   c.fillRect(0, 0, size, size);
+  // Fundición: manchas amplias y difusas de bajo contraste (detalle de material, no grano)
+  c.filter = `blur(${size * 0.03}px)`;
+  for (let i = 0; i < 90; i++) {
+    const x = Math.random() * size, y = Math.random() * size, rad = size * (0.03 + Math.random() * 0.06);
+    c.fillStyle = Math.random() > 0.5 ? "rgba(70, 32, 18, 0.03)" : "rgba(214, 150, 104, 0.028)";
+    c.beginPath();
+    c.arc(x, y, rad, 0, Math.PI * 2);
+    c.fill();
+  }
+  c.filter = "none";
+  // Pátina: los bordes, un tono más oscuro y frío, como el bronce envejecido
+  const edgeG = c.createRadialGradient(size / 2, size / 2, size * 0.36, size / 2, size / 2, size * 0.74);
+  edgeG.addColorStop(0, "rgba(48, 26, 16, 0)");
+  edgeG.addColorStop(1, "rgba(48, 26, 16, 0.32)");
+  c.fillStyle = edgeG;
+  c.fillRect(0, 0, size, size);
+
   // fondo del grabado: un tono más profundo, como la oclusión del metal trabajado
   c.globalCompositeOperation = "multiply";
   c.font = font;

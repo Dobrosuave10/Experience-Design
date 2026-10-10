@@ -40,6 +40,21 @@ export function onPageShown(fn: () => void) {
   return () => shownListeners.delete(fn);
 }
 
+/**
+ * Dónde se ve el sello del Hero (centro y lado aparente, en px de viewport, y su giro).
+ * El Hero lo publica cuando su escena está lista; la apertura lo consulta para terminar
+ * su sello exactamente encima. Si no hay Hero o no hay WebGL, no hay destino y la
+ * apertura simplemente se funde.
+ */
+export type SealTarget = { x: number; y: number; size: number; rotY: number };
+let sealTarget: (() => SealTarget | null) | null = null;
+export function setSealTarget(fn: (() => SealTarget | null) | null) {
+  sealTarget = fn;
+}
+export function getSealTarget() {
+  return sealTarget?.() ?? null;
+}
+
 /** Cualquier CTA puede llevar al formulario con un interés preseleccionado. */
 const INTEREST_EVENT = "ed:interest";
 export function goToContact(interest?: InterestId) {

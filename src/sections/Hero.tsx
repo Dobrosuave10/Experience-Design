@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { hero, routes } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
-import { onPageShown } from "../lib/events";
+import { onPageShown, setSealTarget } from "../lib/events";
 import { navigate } from "../lib/router";
 import { RevealText } from "../components/RevealText";
 import { MagneticButton } from "../components/MagneticButton";
@@ -40,6 +40,8 @@ export function Hero() {
       if (cancelled) return;
       await document.fonts.ready;
       measure();
+      // La apertura termina su sello sobre éste (sólo con el Hero arriba, en su encuadre inicial)
+      setSealTarget(() => (window.scrollY < 2 && sceneRef.current ? sceneRef.current.sealScreen() : null));
       setSceneReady(true);
     });
 
@@ -72,6 +74,7 @@ export function Hero() {
       io.disconnect();
       document.removeEventListener("visibilitychange", vis);
       window.removeEventListener("pointermove", move);
+      setSealTarget(null);
       scene?.dispose();
       sceneRef.current = null;
     };
