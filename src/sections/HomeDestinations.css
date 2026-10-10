@@ -6,9 +6,15 @@
   grid-template-columns: repeat(12, 1fr);
   column-gap: clamp(16px, 2vw, 32px);
   row-gap: clamp(40px, 7vh, 72px);
+  /* la imagen se centra respecto de todo el bloque de la izquierda (titular + lista) */
+  align-items: center;
+}
+.hdest__text {
+  grid-column: 1 / span 7;
+  display: grid;
+  row-gap: clamp(40px, 7vh, 72px);
 }
 .hdest__head {
-  grid-column: 1 / span 8;
   display: grid;
   gap: 18px;
 }
@@ -21,7 +27,6 @@
   max-width: 16ch;
 }
 .hdest__list {
-  grid-column: 1 / span 7;
   border-top: 1px solid var(--line);
 }
 .hdest__item {
@@ -68,23 +73,37 @@
 .hdest__item.is-active .hdest__event {
   color: var(--accent);
 }
-/* Los dos carruseles ocupan el mismo lugar; el del destino elegido se descubre desde abajo */
+/* Presentación: proporción fija (sin saltos de altura) y fundido entre imágenes */
 .hdest__media {
   grid-column: 9 / span 4;
-  grid-row: 2 / span 2;
-  display: grid;
-  align-self: start;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #241c18;
 }
-.hdest__frame {
-  grid-area: 1 / 1;
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.1s var(--ease-out);
+.hdest__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1.3s var(--ease-in-out);
 }
-.hdest__frame.is-on {
-  clip-path: inset(-12px -12px -12px -12px);
+.hdest__slide.is-on {
+  opacity: 1;
+}
+.hdest__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* un acercamiento muy lento mientras la imagen está en pantalla */
+  scale: 1.04;
+  transition: scale 6s linear;
+}
+.hdest__slide.is-on img {
+  scale: 1;
 }
 .hdest__all {
-  grid-column: 1 / span 6;
+  grid-column: 1 / -1;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -101,13 +120,21 @@
 }
 
 @media (max-width: 899px) {
-  .hdest__head,
-  .hdest__list,
-  .hdest__all {
+  .hdest__text,
+  .hdest__media {
     grid-column: 1 / -1;
   }
   .hdest__media {
-    grid-column: 1 / -1;
-    grid-row: auto;
+    max-height: 72vh;
+    width: 100%;
+    justify-self: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hdest__slide,
+  .hdest__slide img {
+    transition: none;
+    scale: 1;
   }
 }
