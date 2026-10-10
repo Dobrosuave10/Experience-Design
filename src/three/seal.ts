@@ -58,8 +58,8 @@ export function sealShape() {
  * Materiales del sello: [cara, canto] para las ExtrudeGeometry (grupo 0 = caras, 1 = canto).
  * Bronce envejecido satinado: metal moderado, rugosidad media, reflejos contenidos.
  */
-export async function createSealMaterials(renderer: THREE.WebGLRenderer, size = 1024) {
-  const maps = await makeSealMaps(size);
+export async function createSealMaterials(renderer: THREE.WebGLRenderer, size = 1024, markSrc?: string) {
+  const maps = await makeSealMaps(size, markSrc);
   const toPlate = (t: THREE.Texture) => {
     // UV de la forma (-half..half) → 0..1
     t.repeat.set(1 / (2 * SEAL.half), 1 / (2 * SEAL.half));

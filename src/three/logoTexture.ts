@@ -93,7 +93,7 @@ export async function makeLogoCanvases() {
  *  - normal: "E." grabada con poca profundidad y bisel ancho, desde un mapa de alturas.
  *  - rough: satinado parejo; el fondo del grabado, apenas más mate.
  */
-export async function makeSealMaps(size = 1024) {
+export async function makeSealMaps(size = 1024, markSrc?: string) {
   const mk = () => {
     const c = document.createElement("canvas");
     c.width = c.height = size;
@@ -114,19 +114,44 @@ export async function makeSealMaps(size = 1024) {
   const glyphH = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
   const gx = size / 2 + size * 0.015, gy = size / 2 + glyphH / 2 - m.actualBoundingBoxDescent;
 
+  // La marca oficial (máscara extraída del logo) reemplaza la "E." tipográfica cuando se pide.
+  // Sus trazos finos piden un bisel más fino para no perderse.
+  let mark: HTMLImageElement | null = null;
+  if (markSrc) {
+    try {
+      mark = await loadImage(markSrc);
+    } catch {
+      mark = null;
+    }
+  }
+  const drawMark = (ctx: CanvasRenderingContext2D, fill: string, blur: number) => {
+    if (blur) ctx.filter = `blur(${blur}px)`;
+    if (mark) {
+      const t = document.createElement("canvas");
+      t.width = t.height = size;
+      const tc = t.getContext("2d")!;
+      tc.fillStyle = fill;
+      tc.fillRect(0, 0, size, size);
+      tc.globalCompositeOperation = "destination-in";
+      tc.drawImage(mark, 0, 0, size, size);
+      ctx.drawImage(t, 0, 0);
+    } else {
+      ctx.fillStyle = fill;
+      ctx.fillText("E.", gx, gy);
+    }
+    ctx.filter = "none";
+  };
+
   // Altura: superficie blanca, grabado gris con bisel por desenfoque
   h.fillStyle = "#fff";
   h.fillRect(0, 0, size, size);
-  h.filter = `blur(${size * 0.004}px)`;
-  h.fillStyle = "#8a8a8a";
-  h.fillText("E.", gx, gy);
-  h.filter = "none";
+  drawMark(h, "#8a8a8a", size * (mark ? 0.0016 : 0.004));
 
   const H = h.getImageData(0, 0, size, size).data;
   const nCtx = normal.getContext("2d")!;
   const N = nCtx.createImageData(size, size);
   const at = (x: number, y: number) => H[(Math.min(size - 1, Math.max(0, y)) * size + Math.min(size - 1, Math.max(0, x))) * 4] / 255;
-  const strength = 2.6 * (size / 1024);
+  const strength = (mark ? 3.4 : 2.6) * (size / 1024);
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       const dx = (at(x + 1, y - 1) + 2 * at(x + 1, y) + at(x + 1, y + 1) - at(x - 1, y - 1) - 2 * at(x - 1, y) - at(x - 1, y + 1)) * strength;
@@ -175,18 +200,14 @@ export async function makeSealMaps(size = 1024) {
   c.globalCompositeOperation = "multiply";
   c.font = font;
   c.textAlign = "center";
-  c.filter = `blur(${size * 0.003}px)`;
-  c.fillStyle = "#b8917c";
-  c.fillText("E.", gx, gy);
-  c.filter = "none";
+  drawMark(c, mark ? "#a27c69" : "#b8917c", size * (mark ? 0.001 : 0.003));
   c.globalCompositeOperation = "source-over";
 
   r.fillStyle = "#8c8c8c";
   r.fillRect(0, 0, size, size);
   r.font = font;
   r.textAlign = "center";
-  r.fillStyle = "#c4c4c4";
-  r.fillText("E.", gx, gy);
+  drawMark(r, "#c4c4c4", 0);
 
   return { color, normal, rough };
 }

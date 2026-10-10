@@ -257,7 +257,8 @@ export class HeroScene {
     this.endZ = lastZ - 3;
 
     // ---- El sello: la misma placa que arma la apertura (especificación compartida) ----
-    const { face, edge } = await createSealMaterials(this.renderer, opts.mobile ? 512 : 1024);
+    // La "E." del sello es la marca oficial (máscara del logo), no una aproximación tipográfica
+    const { face, edge } = await createSealMaterials(this.renderer, opts.mobile ? 512 : 1024, "/img/logo-e-mark.png");
     if (this.disposed) return;
     const plate = new THREE.Mesh(plateGeometry(sealShape()), [face, edge]);
     plate.castShadow = !opts.mobile;
