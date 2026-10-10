@@ -548,6 +548,9 @@ export const professionalsPage = {
 export const destinations = {
   title: "Destinos",
   lead: "Hay lugares que cambian tu forma de mirar.",
+  /** Sólo en la página Destinos (Inicio sigue usando `lead`). */
+  pageLead: "Hay viajes que amplían tu mirada. Y otros que transforman lo que eres capaz de imaginar.",
+  pageBody: "Experiencias curadas para descubrir nuevas referencias, encontrarte con otras formas de entender el diseño y volver con ideas, aprendizajes y posibilidades que antes no veías.",
   question: "¿Qué experiencia puedo vivir?",
   items: [
     {
@@ -561,6 +564,13 @@ export const destinations = {
       text: "La semana en que una ciudad entera se vuelve exposición.",
       image: { image: "milan-showroom", alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada", material: "terrazzo", brief: "Milán, Design Week." } as ImageSlot,
       cta: "Entrar a Milán",
+      gallery: [
+        { image: "milan-salone-pabellon" as ImageName, alt: "Pabellón del Salone del Mobile.Milano, con el muro rojo de la feria y visitantes bajo la cubierta de acero" },
+        { image: "milan-linternas" as ImageName, alt: "Instalación de grandes lámparas de papel suspendidas que se reflejan en el suelo" },
+        { image: "milan-butaca" as ImageName, alt: "Butaca tapizada en tono caramelo junto a una lámpara de pie y una mesa auxiliar de piedra" },
+        { image: "milan-cortinas" as ImageName, alt: "Instalación de cortinas de hilos luminosos en círculo, con visitantes recorriéndola" },
+        { image: "milan-sofas" as ImageName, alt: "Sofás de bouclé, mesa de piedra y una lámpara escultórica en un stand de la feria" },
+      ],
     },
     {
       id: "sao-paulo",
@@ -573,6 +583,13 @@ export const destinations = {
       text: "Una casa entera convertida en ambientes para recorrer.",
       image: { alt: "", material: "terracotta", brief: "Foto real de CASACOR São Paulo (pendiente)." } as ImageSlot,
       cta: "Entrar a São Paulo",
+      gallery: [
+        { image: "sp-casacor-acceso" as ImageName, alt: "Acceso a CASACOR São Paulo: el nombre sobre un muro de hormigón entre vegetación" },
+        { image: "sp-celosias" as ImageName, alt: "Estar abierto con celosías de cuentas colgantes, sofás claros y plantas" },
+        { image: "sp-patio-terracota" as ImageName, alt: "Patio de muros terracota con un óculo de luz, un árbol y un espejo de agua" },
+        { image: "sp-estar-nocturno" as ImageName, alt: "Estar de sofás curvos al anochecer, con árboles interiores y una pieza de arte en relieve" },
+        { image: "sp-comedor-jardin" as ImageName, alt: "Comedor de madera bajo una lámpara de fibra, abierto a un jardín tropical" },
+      ],
     },
   ],
 };

@@ -61,11 +61,23 @@ export const images = {
     "w": 266,
     "h": 332
   },
+  "milan-butaca": {
+    "src": "/img/milan-butaca-314.webp",
+    "srcSet": "/img/milan-butaca-314.webp 314w",
+    "w": 314,
+    "h": 522
+  },
   "milan-ciudad": {
     "src": "/img/milan-ciudad-558.webp",
     "srcSet": "/img/milan-ciudad-480.webp 480w, /img/milan-ciudad-558.webp 558w",
     "w": 558,
     "h": 388
+  },
+  "milan-cortinas": {
+    "src": "/img/milan-cortinas-294.webp",
+    "srcSet": "/img/milan-cortinas-294.webp 294w",
+    "w": 294,
+    "h": 512
   },
   "milan-esferas": {
     "src": "/img/milan-esferas-368.webp",
@@ -73,17 +85,35 @@ export const images = {
     "w": 368,
     "h": 364
   },
+  "milan-linternas": {
+    "src": "/img/milan-linternas-284.webp",
+    "srcSet": "/img/milan-linternas-284.webp 284w",
+    "w": 284,
+    "h": 508
+  },
   "milan-patio": {
     "src": "/img/milan-patio-416.webp",
     "srcSet": "/img/milan-patio-416.webp 416w",
     "w": 416,
     "h": 336
   },
+  "milan-salone-pabellon": {
+    "src": "/img/milan-salone-pabellon-454.webp",
+    "srcSet": "/img/milan-salone-pabellon-454.webp 454w",
+    "w": 454,
+    "h": 468
+  },
   "milan-showroom": {
     "src": "/img/milan-showroom-1391.webp",
     "srcSet": "/img/milan-showroom-480.webp 480w, /img/milan-showroom-960.webp 960w, /img/milan-showroom-1391.webp 1391w",
     "w": 1391,
     "h": 766
+  },
+  "milan-sofas": {
+    "src": "/img/milan-sofas-454.webp",
+    "srcSet": "/img/milan-sofas-454.webp 454w",
+    "w": 454,
+    "h": 474
   },
   "salone-banderas": {
     "src": "/img/salone-banderas-322.webp",
@@ -114,6 +144,36 @@ export const images = {
     "srcSet": "/img/showroom-piedra-334.webp 334w",
     "w": 334,
     "h": 364
+  },
+  "sp-casacor-acceso": {
+    "src": "/img/sp-casacor-acceso-496.webp",
+    "srcSet": "/img/sp-casacor-acceso-480.webp 480w, /img/sp-casacor-acceso-496.webp 496w",
+    "w": 496,
+    "h": 466
+  },
+  "sp-celosias": {
+    "src": "/img/sp-celosias-280.webp",
+    "srcSet": "/img/sp-celosias-280.webp 280w",
+    "w": 280,
+    "h": 514
+  },
+  "sp-comedor-jardin": {
+    "src": "/img/sp-comedor-jardin-402.webp",
+    "srcSet": "/img/sp-comedor-jardin-402.webp 402w",
+    "w": 402,
+    "h": 474
+  },
+  "sp-estar-nocturno": {
+    "src": "/img/sp-estar-nocturno-296.webp",
+    "srcSet": "/img/sp-estar-nocturno-296.webp 296w",
+    "w": 296,
+    "h": 516
+  },
+  "sp-patio-terracota": {
+    "src": "/img/sp-patio-terracota-322.webp",
+    "srcSet": "/img/sp-patio-terracota-322.webp 322w",
+    "w": 322,
+    "h": 518
   },
   "wordmark-ink": {
     "src": "/img/wordmark-ink.png",

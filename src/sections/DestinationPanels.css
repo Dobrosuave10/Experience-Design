@@ -14,19 +14,115 @@
   display: flex;
   align-items: flex-end;
 }
-.dpanel__media {
-  position: absolute !important;
-  inset: 0;
-  height: 100%;
+.dpanel__sticky {
+  /* fondo oscuro con una luz cálida detrás de las imágenes; São Paulo, más terracota */
+  background: radial-gradient(60% 70% at 78% 38%, rgba(166, 83, 63, 0.16), rgba(23, 21, 19, 0) 70%), #171513;
 }
-.dpanel__shade {
+.dpanel--sao-paulo .dpanel__sticky {
+  background: radial-gradient(60% 70% at 78% 38%, rgba(183, 102, 79, 0.24), rgba(23, 21, 19, 0) 72%), #1d1512;
+}
+/* Las imágenes, a la derecha: un marco vertical a escala de las fotos */
+.dpanel__media {
+  position: absolute;
+  top: calc(var(--nav-h) + 5vh);
+  right: var(--gutter);
+  height: min(52vh, 540px);
+  aspect-ratio: 3 / 4.4;
+  /* por encima del bloque del nombre (que ocupa todo el ancho): sus controles siempre responden */
+  z-index: 2;
+}
+
+/* ---------- Carrusel de cada destino ---------- */
+.dcar {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 14px;
+}
+.dcar__viewport {
+  position: relative;
+  overflow: hidden;
+  background: #241c18;
+  touch-action: pan-y;
+  outline: none;
+}
+.dcar__viewport:focus-visible {
+  outline: 1px solid rgba(245, 241, 234, 0.9);
+  outline-offset: 4px;
+}
+.dcar__slide {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(23, 21, 19, 0.3) 0%, rgba(23, 21, 19, 0) 35%, rgba(23, 21, 19, 0.2) 60%, rgba(23, 21, 19, 0.78) 100%);
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-in-out);
 }
-.dpanel--sao-paulo .dpanel__shade {
-  background: linear-gradient(180deg, rgba(23, 21, 19, 0.15) 0%, rgba(23, 21, 19, 0) 40%, rgba(23, 21, 19, 0.55) 100%);
+.dcar__slide.is-active {
+  opacity: 1;
+}
+.dcar__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dcar__slide img {
+  scale: 1.035;
+  transition: scale 1.6s var(--ease-out);
+}
+.dcar__slide.is-active img {
+  scale: 1;
+}
+.dcar__ui {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  color: rgba(245, 241, 234, 0.9);
+}
+.dcar__count {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.18em;
+}
+.dcar__of {
+  color: rgba(245, 241, 234, 0.5);
+}
+.dcar__dots {
+  display: flex;
+  gap: 6px;
+}
+.dcar__dots li {
+  flex: 1;
+  height: 1px;
+  background: rgba(245, 241, 234, 0.22);
+  transition: background-color 0.6s var(--ease-out);
+}
+.dcar__dots li.is-active {
+  background: #c98a72;
+}
+.dcar__nav {
+  display: flex;
+  gap: 8px;
+}
+.dcar__btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(245, 241, 234, 0.32);
+  border-radius: 50%;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    border-color 0.4s var(--ease-out),
+    background-color 0.4s var(--ease-out);
+}
+.dcar__btn:hover {
+  border-color: rgba(245, 241, 234, 0.85);
+  background: rgba(245, 241, 234, 0.06);
+}
+.dcar__btn:focus-visible {
+  outline: 1px solid #f5f1ea;
+  outline-offset: 3px;
 }
 .dpanel__content {
   position: relative;
@@ -96,8 +192,31 @@
 }
 
 @media (max-width: 899px) {
+  /* Móvil y tablet: cada destino es un bloque normal; primero las imágenes, después el texto */
   .dpanel {
-    height: 170vh;
+    height: auto;
+  }
+  .dpanel__sticky {
+    position: relative;
+    height: auto;
+    display: block;
+    padding: calc(var(--nav-h) + 24px) 0 clamp(48px, 9vh, 80px);
+  }
+  .dpanel__media {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    height: auto;
+    aspect-ratio: auto;
+    margin-inline: var(--gutter);
+  }
+  .dpanel__media .dcar__viewport {
+    aspect-ratio: 4 / 5;
+    max-height: 68vh;
+  }
+  .dpanel__content {
+    padding-top: clamp(28px, 5vh, 48px);
   }
   .dpanel__event,
   .dpanel__text,
@@ -113,5 +232,9 @@
   }
   .dpanel__sticky {
     position: relative;
+  }
+  .dcar__slide,
+  .dcar__slide img {
+    transition: none;
   }
 }

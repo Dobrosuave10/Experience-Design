@@ -11,7 +11,8 @@ export default function Destinations() {
       <PageHero
         id="destinos"
         title={destinations.title}
-        lead={destinations.lead}
+        lead={destinations.pageLead}
+        body={destinations.pageBody}
         crumbs={[{ label: "Experience Design", href: routes.inicio }, { label: destinations.title }]}
         tone="ink"
         glow="#B7664F"
