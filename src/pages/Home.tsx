@@ -1,7 +1,6 @@
 import { Hero } from "../sections/Hero";
 import { Idea } from "../sections/Idea";
 import { ProgramsSpine } from "../sections/ProgramsSpine";
-import { Touch } from "../sections/Touch";
 import { HomeDestinations } from "../sections/HomeDestinations";
 import { NeverLate } from "../sections/NeverLate";
 import { Community } from "../sections/Community";
@@ -14,7 +13,6 @@ export default function Home() {
       <Hero />
       <Idea sequence />
       <ProgramsSpine />
-      <Touch />
       <HomeDestinations />
       <NeverLate />
       <Community />

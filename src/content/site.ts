@@ -123,19 +123,6 @@ export const idea = {
   beyond: { lead: "Más allá de la pantalla,", rest: "el diseño se convierte en", accent: "experiencia." },
 };
 
-export const touch = {
-  title: "Si no lo tocas, no lo viste.",
-  body: "Mirar y tocar es lo esencial en el interiorismo. Un material cambia con la luz, con la mano, con la distancia.",
-  materials: [
-    { name: "terracotta", label: "Terracota" },
-    { name: "travertine", label: "Travertino" },
-    { name: "walnut", label: "Nogal" },
-    { name: "terrazzo", label: "Terrazzo" },
-    { name: "linen", label: "Lino" },
-    { name: "plaster", label: "Estuco" },
-  ] as { name: MaterialName; label: string }[],
-};
-
 /** Inicio · Programas: tres bloques sobre una línea vertical (Viajes, Marca personal, Formación). */
 export const programsSpine = {
   kicker: "Experience Design",
