@@ -548,9 +548,8 @@ export const professionalsPage = {
 export const destinations = {
   title: "Destinos",
   lead: "Hay lugares que cambian tu forma de mirar.",
-  /** Sólo en la página Destinos (Inicio sigue usando `lead`). */
-  pageLead: "Hay viajes que amplían tu mirada. Y otros que transforman lo que eres capaz de imaginar.",
-  pageBody: "Experiencias curadas para descubrir nuevas referencias, encontrarte con otras formas de entender el diseño y volver con ideas, aprendizajes y posibilidades que antes no veías.",
+  /** Sólo en Inicio: la sección Destinos (la página Destinos sigue usando `lead`). */
+  homeLead: "Hay mundos que, cuando los vives, amplían el tuyo.",
   question: "¿Qué experiencia puedo vivir?",
   items: [
     {
@@ -564,6 +563,8 @@ export const destinations = {
       text: "La semana en que una ciudad entera se vuelve exposición.",
       image: { image: "milan-showroom", alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada", material: "terrazzo", brief: "Milán, Design Week." } as ImageSlot,
       cta: "Entrar a Milán",
+      /** Inicio: la etiqueta del selector y su carrusel. */
+      homeLabel: "Salone del Mobile",
       gallery: [
         { image: "milan-salone-pabellon" as ImageName, alt: "Pabellón del Salone del Mobile.Milano, con el muro rojo de la feria y visitantes bajo la cubierta de acero" },
         { image: "milan-linternas" as ImageName, alt: "Instalación de grandes lámparas de papel suspendidas que se reflejan en el suelo" },
@@ -583,6 +584,7 @@ export const destinations = {
       text: "Una casa entera convertida en ambientes para recorrer.",
       image: { alt: "", material: "terracotta", brief: "Foto real de CASACOR São Paulo (pendiente)." } as ImageSlot,
       cta: "Entrar a São Paulo",
+      homeLabel: "CASACOR",
       gallery: [
         { image: "sp-casacor-acceso" as ImageName, alt: "Acceso a CASACOR São Paulo: el nombre sobre un muro de hormigón entre vegetación" },
         { image: "sp-celosias" as ImageName, alt: "Estar abierto con celosías de cuentas colgantes, sofás claros y plantas" },

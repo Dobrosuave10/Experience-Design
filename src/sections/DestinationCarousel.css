@@ -1,0 +1,98 @@
+/* Carrusel de un destino: visor con fundido, contador, progreso fino y dos flechas discretas */
+.dcar {
+  display: grid;
+  gap: 14px;
+}
+.dcar__viewport {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #241c18;
+  touch-action: pan-y;
+  outline: none;
+}
+.dcar__viewport:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 4px;
+}
+.dcar__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-in-out);
+}
+.dcar__slide.is-active {
+  opacity: 1;
+}
+.dcar__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* un acercamiento lentísimo mientras la imagen está en pantalla */
+  scale: 1.04;
+  transition: scale 6s linear;
+}
+.dcar__slide.is-active img {
+  scale: 1;
+}
+.dcar__ui {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  color: var(--muted);
+}
+.dcar__count {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.18em;
+  color: var(--fg);
+}
+.dcar__of {
+  color: var(--muted);
+}
+.dcar__dots {
+  display: flex;
+  gap: 6px;
+}
+.dcar__dots li {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  transition: background-color 0.6s var(--ease-out);
+}
+.dcar__dots li.is-active {
+  background: var(--accent);
+}
+.dcar__nav {
+  display: flex;
+  gap: 6px;
+}
+.dcar__btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--fg);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.4s var(--ease-out);
+}
+.dcar__btn:hover {
+  border-color: var(--fg);
+}
+.dcar__btn:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dcar__slide,
+  .dcar__slide img {
+    transition: none;
+  }
+  .dcar__slide img {
+    scale: 1;
+  }
+}
