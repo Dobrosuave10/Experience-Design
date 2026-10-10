@@ -38,10 +38,22 @@ export function Hero() {
       sceneRef.current = scene;
       await scene.init();
       if (cancelled) return;
+      await document.fonts.ready;
+      measure();
       setSceneReady(true);
     });
 
-    const ro = new ResizeObserver(() => sceneRef.current?.resize());
+    // Dónde termina el titular: la escena deja libre ese lado del cuadro
+    const measure = () => {
+      const words = section.current?.querySelectorAll<HTMLElement>(".hero__title .rv-word");
+      if (!words?.length) return;
+      const right = Math.max(...Array.from(words, (w) => w.getBoundingClientRect().right));
+      sceneRef.current?.setSafeLeft((right + 24) / window.innerWidth);
+    };
+    const ro = new ResizeObserver(() => {
+      sceneRef.current?.resize();
+      measure();
+    });
     ro.observe(canvas.current.parentElement!);
     const io = new IntersectionObserver(([e]) => (e.isIntersecting ? sceneRef.current?.start() : sceneRef.current?.stop()));
     io.observe(section.current!);
@@ -105,7 +117,7 @@ export function Hero() {
           ) : (
             <div className="hero__fallback">
               <span className="hero__fallback-arch" />
-              <Logo size="min(34vw, 260px)" decorative className="hero__fallback-logo" />
+              <Logo size="min(34vw, 260px)" decorative shape="square" className="hero__fallback-logo" />
             </div>
           )}
         </div>

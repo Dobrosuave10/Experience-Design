@@ -44,7 +44,7 @@
 .hero__fallback-logo {
   position: relative;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-  border-radius: 50%;
+  border-radius: 12%;
 }
 
 .hero__content {
