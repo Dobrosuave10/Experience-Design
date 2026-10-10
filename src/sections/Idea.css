@@ -1,12 +1,24 @@
 .idea {
   /* el tramo fijo + el cierre */
   padding-bottom: clamp(120px, 22vh, 260px);
-  /* Siempre en papel, sin esperar al cambio de tono de la página */
+  /* Siempre en papel: continúa el velo del hero sin esperar al cambio de tono */
   --fg: var(--ink);
   --muted: var(--muted-light);
   --accent: var(--clay);
   background: var(--paper);
   color: var(--fg);
+}
+/* En Inicio la sección sube por dentro del túnel mientras la cámara se acerca al último
+   arco: su parte alta es transparente (se ve la escena detrás) y el papel empieza más abajo,
+   cuando el canvas ya es papel. Así no existe una línea entre la escena y la página. */
+.hero + .idea {
+  margin-top: -45vh;
+  background: linear-gradient(180deg, transparent 0, transparent 55vh, var(--paper) 85vh);
+}
+@media (max-width: 767px) {
+  .hero + .idea {
+    margin-top: -60vh;
+  }
 }
 .idea__inner {
   /* Sin fijar la pantalla: la frase y los cuatro verbos se ven juntos mientras la página sigue bajando */
@@ -73,68 +85,28 @@
     padding-left: 0.4em;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .hero + .idea {
+    margin-top: 0;
+  }
+}
 .idea__kicker {
   grid-column: 1 / -1;
   color: var(--accent);
   margin-bottom: 22px;
 }
 
-/* ---------- Inicio: la frase se escribe y los cuatro verbos se acumulan ---------- */
-/* Misma composición y tipografía que la lista; más aire entre frases para que cada
-   una tenga su propio momento al bajar. El estado final (sin JS o con movimiento
-   reducido) es siempre el visible. */
-.idea--sequence .idea__verbs--sequence {
-  margin-top: clamp(32px, 11vh, 140px);
+/* ---------- Inicio: los verbos se revelan de a uno y se acumulan ---------- */
+/* Mismo lugar y misma tipografía que la lista; sólo más aire entre frases,
+   para que cada una tenga su propio momento al bajar. */
+.idea__verbs--sequence {
   row-gap: clamp(36px, 9vh, 110px);
 }
-.idea__word {
-  display: inline-block;
-  white-space: nowrap;
-}
-.idea__phrase em {
-  display: inline-block;
-  /* las itálicas sobresalen de su caja: margen para que ningún trazo quede recortado */
-  padding-inline: 0.06em 0.14em;
-  margin-inline: -0.06em -0.14em;
+.idea__phrase {
   will-change: opacity, transform, filter;
 }
-
-/* Se vive: una franja de luz cálida pasa por la letra (texto pintado por su fondo) */
-.idea__phrase--vive em {
-  color: transparent;
-  background: linear-gradient(100deg, var(--accent) 0 38%, #dc9a76 50%, var(--accent) 62% 100%) 0% 0% / 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-/* Se toca: relieve de papel prensado (luz arriba, borde de sombra) */
-.idea__phrase--toca em {
-  text-shadow:
-    0 1px 0 rgba(255, 244, 236, 0.7),
-    0 -1px 0 rgba(96, 40, 26, 0.22),
-    0.01em 0.01em 0.02em rgba(96, 40, 26, 0.1);
-}
-
-/* Se admira: más espacio antes, y una luz tenue que queda detrás */
-.idea__phrase--admira {
-  --glow: 1;
-  position: relative;
-  isolation: isolate;
-  margin-top: clamp(12px, 4vh, 48px);
-}
-.idea__phrase--admira::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -35% -12% -25% -12%;
-  background: radial-gradient(50% 50% at 42% 55%, rgba(220, 154, 118, 0.15), rgba(220, 154, 118, 0) 70%);
-  opacity: var(--glow);
-  pointer-events: none;
-}
-
 @media (max-width: 767px) {
-  .idea--sequence .idea__verbs--sequence {
-    margin-top: clamp(48px, 10vh, 96px);
+  .idea__verbs--sequence {
     row-gap: clamp(28px, 7vh, 64px);
   }
 }
