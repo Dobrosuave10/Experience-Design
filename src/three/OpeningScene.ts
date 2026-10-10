@@ -67,7 +67,8 @@ export class OpeningScene {
     this.sweep = new THREE.PointLight("#ffe6cf", 0, 4, 2);
     scene.add(this.sweep);
 
-    const { face, edge } = await createSealMaterials(this.renderer, this.opts.mobile ? 512 : 1024);
+    // La misma marca oficial "E." que el sello del Hero: la apertura termina en ese objeto
+    const { face, edge } = await createSealMaterials(this.renderer, this.opts.mobile ? 512 : 1024, "/img/logo-e-mark.png");
     if (this.disposed) return;
 
     // Fragmentos: la placa cortada en una retícula irregular. Las esquinas exteriores
