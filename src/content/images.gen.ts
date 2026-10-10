@@ -1,6 +1,18 @@
 // Generado por scripts/optimize-images.mjs. No editar a mano.
 export type ImageAsset = { src: string; srcSet: string; w: number; h: number };
 export const images = {
+  "casacor-sao-paulo": {
+    "src": "/img/casacor-sao-paulo-1258.webp",
+    "srcSet": "/img/casacor-sao-paulo-480.webp 480w, /img/casacor-sao-paulo-960.webp 960w, /img/casacor-sao-paulo-1258.webp 1258w",
+    "w": 1258,
+    "h": 1260
+  },
+  "charla-diseno": {
+    "src": "/img/charla-diseno-1536.webp",
+    "srcSet": "/img/charla-diseno-480.webp 480w, /img/charla-diseno-960.webp 960w, /img/charla-diseno-1536.webp 1536w",
+    "w": 1536,
+    "h": 1024
+  },
   "charla-showroom": {
     "src": "/img/charla-showroom-1366.webp",
     "srcSet": "/img/charla-showroom-480.webp 480w, /img/charla-showroom-960.webp 960w, /img/charla-showroom-1366.webp 1366w",
@@ -30,6 +42,12 @@ export const images = {
     "srcSet": "/img/instalacion-roja-400.webp 400w",
     "w": 400,
     "h": 326
+  },
+  "marca-personal-estudio": {
+    "src": "/img/marca-personal-estudio-1536.webp",
+    "srcSet": "/img/marca-personal-estudio-480.webp 480w, /img/marca-personal-estudio-960.webp 960w, /img/marca-personal-estudio-1536.webp 1536w",
+    "w": 1536,
+    "h": 1024
   },
   "materiales": {
     "src": "/img/materiales-266.webp",
@@ -66,6 +84,12 @@ export const images = {
     "srcSet": "/img/salone-banderas-322.webp 322w",
     "w": 322,
     "h": 384
+  },
+  "salone-milano": {
+    "src": "/img/salone-milano-1256.webp",
+    "srcSet": "/img/salone-milano-480.webp 480w, /img/salone-milano-960.webp 960w, /img/salone-milano-1256.webp 1256w",
+    "w": 1256,
+    "h": 1272
   },
   "salone-pabellon": {
     "src": "/img/salone-pabellon-366.webp",

@@ -55,7 +55,7 @@ export function ProgramsSpine() {
       <div className="wrap">
         <header className="spine__head">
           <p className="label spine__kicker">{programsSpine.kicker}</p>
-          <RevealText id="spine-title" className="spine__title display" lines={[programsSpine.title]} />
+          <RevealText id="spine-title" className="spine__title display" lines={programsSpine.title} />
         </header>
 
         <div className="spine__body">
@@ -101,10 +101,12 @@ function Block({ item }: { item: Item }) {
         </h3>
         <p className="spine__desc spine__reveal">{item.text}</p>
         <Extra item={item} />
-        <Link to={item.href} className="spine__cta spine__reveal" data-cursor="Entrar">
-          <span>{item.cta}</span>
-          <ArrowRight size={16} aria-hidden />
-        </Link>
+        {item.href && item.cta && (
+          <Link to={item.href} className="spine__cta spine__reveal" data-cursor="Entrar">
+            <span>{item.cta}</span>
+            <ArrowRight size={16} aria-hidden />
+          </Link>
+        )}
       </div>
     </article>
   );
@@ -112,71 +114,58 @@ function Block({ item }: { item: Item }) {
 
 /** Pieza secundaria que se superpone a la imagen principal: el gesto propio de cada programa. */
 function Inset({ item }: { item: Item }) {
-  if (item.notes) {
-    // Marca personal: una hoja de cuaderno con la trayectoria en construcción
+  if (item.board) {
+    // Marca personal: una lámina de dirección creativa (tipografía, paleta y referencias)
+    const b = item.board;
     return (
-      <div className="spine__inset spine__sheet" aria-hidden="true">
-        <svg className="spine__sketch" viewBox="0 0 200 120" fill="none">
-          <path d="M20 110V52a40 40 0 0 1 80 0v58" />
-          <path d="M34 110V56a26 26 0 0 1 52 0v54" />
-          <path d="M8 110h184M120 110V30h60v80M120 30l30-18 30 18" />
-          <path d="M20 118h80M20 115v6M100 115v6" className="spine__sketch-dim" />
-        </svg>
-        <ul className="spine__notes">
-          {item.notes.map((n, i) => (
-            <li key={n}>
-              <span className="spine__note-n">{String(i + 1).padStart(2, "0")}</span>
-              {n}
-            </li>
+      <div className="spine__inset spine__board" aria-hidden="true">
+        <div className="spine__board-type">
+          <span className="spine__board-serif serif">{b.type}</span>
+          <span className="spine__board-sans">{b.type}</span>
+        </div>
+        <ul className="spine__board-palette">
+          {b.palette.map((c) => (
+            <li key={c} style={{ background: c }} />
           ))}
         </ul>
-        <span className="spine__swatch">
-          <Photo name={item.detail.image} alt="" sizes="80px" />
-        </span>
+        <div className="spine__board-refs">
+          {b.references.map((r) => (
+            <span key={r} className="spine__board-ref">
+              <Photo name={r} alt="" sizes="120px" />
+            </span>
+          ))}
+        </div>
+        <span className="spine__board-rule" />
       </div>
     );
   }
   return (
     <figure className="spine__inset spine__detail">
-      <Photo name={item.detail.image} alt={item.detail.alt} sizes="200px" />
+      <Photo name={item.detail.image} alt={item.detail.alt} sizes="240px" />
     </figure>
   );
 }
 
 function Extra({ item }: { item: Item }) {
-  if (item.history) {
-    const h = item.history;
+  if (item.destinations && item.next) {
+    // Viajes: los dos destinos y la próxima experiencia
     return (
       <div className="spine__history spine__reveal">
-        <p className="label spine__history-label">{h.pastLabel}</p>
-        <ul className="spine__past">
-          {h.past.map((p) => (
-            <li key={p.year}>
-              <span className="spine__year">{p.year}</span>
-              <span className="spine__place serif">{p.place}</span>
-              <span className="spine__note">{p.note}</span>
+        <ul className="spine__past spine__places">
+          {item.destinations.map((d) => (
+            <li key={d}>
+              <span className="spine__place serif">{d}</span>
             </li>
           ))}
         </ul>
         <p className="spine__next">
-          <span className="label">{h.nextLabel}</span>
+          <span className="label">{item.next.label}</span>
           <span className="spine__next-line">
-            <span className="spine__place serif">
-              {h.next.place} {h.next.year}
-            </span>
-            <span className="spine__note">{h.next.note}</span>
+            <span className="spine__place serif">{item.next.place}</span>
+            <span className="spine__note">{item.next.note}</span>
           </span>
         </p>
       </div>
-    );
-  }
-  if (item.formats) {
-    return (
-      <p className="spine__formats spine__reveal">
-        {item.formats.map((f) => (
-          <span key={f}>{f}</span>
-        ))}
-      </p>
     );
   }
   return null;

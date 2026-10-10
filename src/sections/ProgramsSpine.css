@@ -155,6 +155,10 @@
 .spine__block--viajes .spine__frame {
   aspect-ratio: 5 / 4;
 }
+/* el nombre de la feria vive en la parte alta de la foto: el encuadre parte desde arriba */
+.spine__block--viajes .spine__frame img {
+  object-position: 50% 0%;
+}
 .spine__block--marca-personal .spine__frame {
   aspect-ratio: 4 / 5;
   width: 82%;
@@ -164,12 +168,8 @@
 }
 /* Recorte al detalle (textil, collar, manos): identidad sin retrato corporativo */
 .spine__block--marca-personal .spine__frame img {
-  position: absolute;
-  left: -30%;
-  top: -55%;
-  width: 160%;
-  height: auto;
-  max-width: none;
+  /* el cuaderno con el mapa de la marca y la mano que lo escribe */
+  object-position: 58% 70%;
 }
 .spine__block--formacion .spine__frame {
   aspect-ratio: 16 / 10;
@@ -192,8 +192,8 @@
 }
 .spine__block--formacion .spine__inset-wrap {
   left: -4%;
-  bottom: -18%;
-  width: 28%;
+  bottom: -10%;
+  width: 34%;
 }
 .spine__detail {
   margin: 0;
@@ -207,64 +207,77 @@
   object-fit: cover;
 }
 .spine__block--formacion .spine__detail {
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 3;
 }
 
-/* Marca personal: hoja de cuaderno con boceto y notas */
-.spine__sheet {
+/* Marca personal: lámina de dirección creativa (tipografía, paleta, referencias) */
+.spine__board {
   position: relative;
   display: grid;
-  gap: 14px;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: clamp(12px, 1.2vw, 18px);
   padding: clamp(16px, 1.6vw, 26px);
   background: var(--ed-white);
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background-image: repeating-linear-gradient(0deg, transparent 0 27px, rgba(155, 72, 25, 0.12) 27px 28px);
-  rotate: -2.2deg;
+  rotate: -1.6deg;
   box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.35);
 }
-.spine__sketch {
-  width: 72%;
-  stroke: var(--ed-black);
-  stroke-width: 0.9;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.spine__sketch-dim {
-  stroke: var(--ed-earth);
-}
-.spine__notes {
-  display: grid;
-  gap: 4px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.05rem, 1.25vw, 1.35rem);
-  line-height: 1.25;
-}
-.spine__notes li {
+.spine__board-type {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 14px;
+  line-height: 0.9;
 }
-.spine__note-n {
+.spine__board-serif {
+  font-size: clamp(2.6rem, 3.6vw, 4rem);
+}
+.spine__board-sans {
   font-family: var(--glacial);
-  font-style: normal;
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
+  font-size: clamp(1.4rem, 1.8vw, 2rem);
+  letter-spacing: 0.08em;
   color: var(--ed-earth);
 }
-.spine__swatch {
-  position: absolute;
-  right: clamp(14px, 1.4vw, 22px);
-  bottom: clamp(14px, 1.4vw, 22px);
-  width: clamp(48px, 4.4vw, 72px);
+.spine__board-palette {
+  display: grid;
+  grid-template-columns: repeat(2, clamp(18px, 1.8vw, 28px));
+  gap: 6px;
+  align-self: center;
+}
+.spine__board-palette li {
   aspect-ratio: 1;
   border-radius: 50%;
-  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
-.spine__swatch img {
+.spine__board-refs {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 8px;
+}
+.spine__board-ref {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--ed-grey);
+}
+.spine__board-ref:last-child {
+  aspect-ratio: 1;
+  align-self: end;
+}
+.spine__board-ref img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* una cota fina, como en un pliego de identidad */
+.spine__board-rule {
+  position: absolute;
+  left: clamp(16px, 1.6vw, 26px);
+  right: clamp(16px, 1.6vw, 26px);
+  bottom: 8px;
+  height: 1px;
+  background: var(--ed-earth);
+  opacity: 0.5;
 }
 
 /* ---------- Texto ---------- */
@@ -311,6 +324,16 @@
   font-family: var(--glacial);
   letter-spacing: 0.26em;
   color: rgba(0, 0, 0, 0.55);
+}
+.spine__places {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: clamp(20px, 2.4vw, 36px);
+}
+.spine__places li,
+.spine__past.spine__places li {
+  display: block;
+  border-bottom: 0;
 }
 .spine__past {
   border-top: 1px solid rgba(0, 0, 0, 0.14);
