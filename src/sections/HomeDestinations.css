@@ -138,3 +138,27 @@
     scale: 1;
   }
 }
+
+/* ---------- Unión con "Nunca es tarde para mirar distinto" (sólo en Inicio) ----------
+   Antes se sumaban el aire inferior de Destinos y el superior de la sección siguiente
+   (~430px de vacío). Cada lado cede su parte y queda una pausa de ~100px. */
+.hdest:has(+ .late) {
+  padding-bottom: clamp(40px, 6vh, 60px);
+}
+.hdest + .late {
+  padding-top: clamp(40px, 6vh, 60px);
+}
+/* El párrafo, ahora más largo, se apoya bajo el titular y no queda suelto en la esquina */
+.hdest + .late .late__body {
+  grid-column: 2 / span 6;
+  margin-top: clamp(28px, 5vh, 48px);
+  font-size: clamp(1.05rem, 0.3vw + 0.98rem, 1.2rem);
+  line-height: 1.7;
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+@media (max-width: 767px) {
+  .hdest + .late .late__body {
+    grid-column: 1 / -1;
+  }
+}

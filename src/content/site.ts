@@ -239,6 +239,8 @@ export const neverLate = {
   doubts: ["Ya es tarde para estudiar.", "Debí hacerlo antes.", "No sé si este mundo es para mí."],
   answer: "Nunca es tarde para mirar distinto.",
   body: "Para quienes trabajan en arquitectura, interiorismo y diseño. Para quienes recién empiezan. Y para quienes deciden empezar otra vez.",
+  /** Sólo en Inicio (Profesionales sigue usando `body`). */
+  homeBody: "Para quienes saben que siempre pueden ir más allá. Para quienes buscan experiencias que los reten, nuevas perspectivas que los inspiren y oportunidades para reinventarse. Para quienes eligen seguir creciendo, explorar lo desconocido y descubrir todo lo que todavía es posible.",
 };
 
 export const formation = {
