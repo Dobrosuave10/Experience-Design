@@ -206,78 +206,12 @@
   height: 100%;
   object-fit: cover;
 }
+/* Marca personal: la presentación de taller, apaisada como la escena que muestra */
+.spine__block--marca-personal .spine__detail {
+  aspect-ratio: 3 / 2;
+}
 .spine__block--formacion .spine__detail {
   aspect-ratio: 4 / 3;
-}
-
-/* Marca personal: lámina de dirección creativa (tipografía, paleta, referencias) */
-.spine__board {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
-  gap: clamp(12px, 1.2vw, 18px);
-  padding: clamp(16px, 1.6vw, 26px);
-  background: var(--ed-white);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  rotate: -1.6deg;
-  box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.35);
-}
-.spine__board-type {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  line-height: 0.9;
-}
-.spine__board-serif {
-  font-size: clamp(2.6rem, 3.6vw, 4rem);
-}
-.spine__board-sans {
-  font-family: var(--glacial);
-  font-size: clamp(1.4rem, 1.8vw, 2rem);
-  letter-spacing: 0.08em;
-  color: var(--ed-earth);
-}
-.spine__board-palette {
-  display: grid;
-  grid-template-columns: repeat(2, clamp(18px, 1.8vw, 28px));
-  gap: 6px;
-  align-self: center;
-}
-.spine__board-palette li {
-  aspect-ratio: 1;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-}
-.spine__board-refs {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 8px;
-}
-.spine__board-ref {
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--ed-grey);
-}
-.spine__board-ref:last-child {
-  aspect-ratio: 1;
-  align-self: end;
-}
-.spine__board-ref img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* una cota fina, como en un pliego de identidad */
-.spine__board-rule {
-  position: absolute;
-  left: clamp(16px, 1.6vw, 26px);
-  right: clamp(16px, 1.6vw, 26px);
-  bottom: 8px;
-  height: 1px;
-  background: var(--ed-earth);
-  opacity: 0.5;
 }
 
 /* ---------- Texto ---------- */

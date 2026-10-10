@@ -49,6 +49,12 @@ export const images = {
     "w": 1536,
     "h": 1024
   },
+  "marca-personal-taller": {
+    "src": "/img/marca-personal-taller-1536.webp",
+    "srcSet": "/img/marca-personal-taller-480.webp 480w, /img/marca-personal-taller-960.webp 960w, /img/marca-personal-taller-1536.webp 1536w",
+    "w": 1536,
+    "h": 1024
+  },
   "materiales": {
     "src": "/img/materiales-266.webp",
     "srcSet": "/img/materiales-266.webp 266w",

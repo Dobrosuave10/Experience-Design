@@ -114,31 +114,6 @@ function Block({ item }: { item: Item }) {
 
 /** Pieza secundaria que se superpone a la imagen principal: el gesto propio de cada programa. */
 function Inset({ item }: { item: Item }) {
-  if (item.board) {
-    // Marca personal: una lámina de dirección creativa (tipografía, paleta y referencias)
-    const b = item.board;
-    return (
-      <div className="spine__inset spine__board" aria-hidden="true">
-        <div className="spine__board-type">
-          <span className="spine__board-serif serif">{b.type}</span>
-          <span className="spine__board-sans">{b.type}</span>
-        </div>
-        <ul className="spine__board-palette">
-          {b.palette.map((c) => (
-            <li key={c} style={{ background: c }} />
-          ))}
-        </ul>
-        <div className="spine__board-refs">
-          {b.references.map((r) => (
-            <span key={r} className="spine__board-ref">
-              <Photo name={r} alt="" sizes="120px" />
-            </span>
-          ))}
-        </div>
-        <span className="spine__board-rule" />
-      </div>
-    );
-  }
   return (
     <figure className="spine__inset spine__detail">
       <Photo name={item.detail.image} alt={item.detail.alt} sizes="240px" />
