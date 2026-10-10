@@ -1,6 +1,6 @@
 .hero {
-  /* Tramo de la travesía: la cámara cruza la galería y el último umbral hacia el papel de la página */
-  height: 240vh;
+  /* Tramo corto: el texto sale, la cámara cruza los arcos y la página pasa a papel sin pausa vacía */
+  height: 160vh;
   color: var(--paper);
 }
 .hero__sticky {
@@ -79,16 +79,18 @@
   gap: 32px;
 }
 .hero__sub {
-  max-width: 44ch;
-  font-size: clamp(1rem, 0.25vw + 0.94rem, 1.12rem);
-  line-height: 1.7;
+  max-width: 34ch;
+  font-size: clamp(1rem, 0.3vw + 0.92rem, 1.15rem);
+  line-height: 1.55;
   color: #d9cfc4;
 }
-.hero__content {
-  transform-origin: 20% 100%;
-}
-.hero__scrim {
-  display: none;
+
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (max-width: 767px) {
@@ -96,15 +98,7 @@
     --hero-lift: 20px;
   }
   .hero {
-    height: 180vh;
-  }
-  /* En móvil el titular cae sobre la luz del túnel: una penumbra baja lo asienta */
-  .hero__scrim {
-    display: block;
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(23, 21, 19, 0) 34%, rgba(23, 21, 19, 0.72) 62%, rgba(23, 21, 19, 0.82));
+    height: 145vh;
   }
   .hero__wordmark {
     width: min(54vw, 240px);
@@ -119,8 +113,7 @@
     gap: 22px;
   }
   .hero__sub {
-    font-size: 0.98rem;
-    line-height: 1.6;
+    font-size: 1rem;
   }
 }
 

@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { hero, routes } from "../content/site";
+import { hero } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
-import { onPageShown } from "../lib/events";
-import { navigate } from "../lib/router";
+import { goToContact, onPageShown } from "../lib/events";
 import { RevealText } from "../components/RevealText";
 import { MagneticButton } from "../components/MagneticButton";
 import { Logo } from "../components/Logo";
@@ -15,11 +14,9 @@ import "./Hero.css";
 
 /**
  * 01 Entrar.
- * Escena WebGL: una galería de arcos con la medalla E. de terracota montada en el muro.
- * Al hacer scroll la cámara atraviesa la galería; al fondo, la luz del último arco
- * se vuelve el papel de la página. La cámara cruza ese umbral y la sección siguiente
- * emerge desde el otro lado por una abertura en arco. Sin WebGL hay una composición
- * estática equivalente.
+ * Escena WebGL: el sello de terracota suspendido frente a una galería de arcos.
+ * Al hacer scroll la cámara atraviesa los arcos hacia la luz y la luz se vuelve papel:
+ * así empieza la siguiente sección. Sin WebGL hay una composición estática equivalente.
  */
 export function Hero() {
   const section = useRef<HTMLElement>(null);
@@ -81,30 +78,10 @@ export function Hero() {
           end: "bottom bottom",
           onUpdate: (self) => sceneRef.current?.setProgress(self.progress),
         });
-        // El titular se queda atrás mientras la cámara avanza (no un simple fundido)
         gsap
           .timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true } })
-          .to(".hero__content", { opacity: 0, y: -40, scale: 0.97, filter: "blur(6px)", ease: "none", duration: 0.26 }, 0.03)
-          .to(".hero__scrim", { opacity: 0, ease: "none", duration: 0.25 }, 0.05)
-          .to({}, { duration: 0.71 }, 0.29); // la línea de tiempo cubre todo el tramo: el titular sale en el primer cuarto
-
-        // D · Del otro lado del umbral: la sección siguiente emerge por una abertura en arco,
-        // desde un poco más de profundidad, ligada al scroll (siempre visible al final)
-        const next = el.nextElementSibling?.querySelector<HTMLElement>(".idea__inner");
-        if (next) {
-          gsap.fromTo(
-            next,
-            { clipPath: "inset(16% 3% 0% 3% round 50% 50% 0% 0% / 22% 22% 0% 0%)", y: 50, scale: 0.97, filter: "blur(6px)" },
-            {
-              clipPath: "inset(0% 0% 0% 0% round 0% 0% 0% 0% / 0% 0% 0% 0%)",
-              y: 0,
-              scale: 1,
-              filter: "blur(0px)",
-              ease: "power1.out",
-              scrollTrigger: { trigger: next, start: "top bottom", end: "top 18%", scrub: true },
-            },
-          );
-        }
+          .to(".hero__content", { opacity: 0, y: -60, ease: "none", duration: 0.3 }, 0.02)
+          .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.35 }, 0.65);
 
         const off = onPageShown(() => {
           gsap.fromTo(".hero__stage", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 2.4, ease: "expo.out" });
@@ -132,7 +109,6 @@ export function Hero() {
           )}
         </div>
 
-        <div className="hero__scrim" aria-hidden="true" />
         <div className="hero__content wrap">
           <img
             className="hero__wordmark"
@@ -155,13 +131,14 @@ export function Hero() {
           <div className="hero__foot">
             <p className="hero__sub hero__fade">{hero.sub}</p>
             <div className="hero__fade">
-              <MagneticButton href={routes.milan} onClick={() => navigate(routes.milan)}>
+              <MagneticButton href="/contacto" onClick={() => goToContact("milan")}>
                 {hero.cta}
               </MagneticButton>
             </div>
           </div>
         </div>
 
+        <div className="hero__veil" aria-hidden="true" />
       </div>
     </section>
   );
