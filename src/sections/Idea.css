@@ -88,17 +88,106 @@
   margin-bottom: 22px;
 }
 
-/* ---------- Inicio: los verbos se revelan de a uno y se acumulan ---------- */
-/* Mismo lugar y misma tipografía que la lista; sólo más aire entre frases,
-   para que cada una tenga su propio momento al bajar. */
+/* ---------- Inicio: la frase se escribe, los cuatro verbos se acumulan y cierra ---------- */
+/* Composición asimétrica sobre la retícula de 12 columnas: los verbos se alternan
+   derecha / izquierda / centro-derecha y "Se admira." se abre al centro, con más aire. */
+.idea--sequence .idea__inner {
+  padding-bottom: clamp(40px, 8vh, 96px);
+}
 .idea__verbs--sequence {
-  row-gap: clamp(36px, 9vh, 110px);
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(12, 1fr);
+  row-gap: clamp(40px, 10vh, 120px);
+  margin-top: clamp(40px, 12vh, 150px);
 }
-.idea__phrase {
-  will-change: opacity, transform, filter;
+.idea__verbs--sequence .idea__verb:nth-child(n) {
+  padding-left: 0;
 }
+.idea__phrase--vive {
+  grid-column: 7 / -1;
+}
+.idea__phrase--toca {
+  grid-column: 2 / span 7;
+}
+.idea__phrase--reflexiona {
+  grid-column: 5 / -1;
+}
+.idea__phrase--admira {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: clamp(16px, 6vh, 72px);
+}
+.idea__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.idea__char {
+  display: inline-block;
+}
+.idea__phrase em {
+  display: inline-block;
+  /* las itálicas sobresalen de su caja: margen para que ningún trazo quede recortado */
+  padding-inline: 0.06em 0.14em;
+  margin-inline: -0.06em -0.14em;
+}
+
+/* Cierre: dos tiempos, cada línea con su máscara */
+.idea--sequence .idea__after {
+  padding-top: clamp(48px, 12vh, 150px);
+}
+.idea__beyond {
+  grid-column: 2 / span 10;
+  font-size: clamp(2rem, 4.2vw, 4.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+}
+.idea__beyond-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.idea__beyond-line > span {
+  display: inline-block;
+}
+.idea__beyond-line--rest {
+  padding-left: clamp(0px, 8vw, 160px);
+}
+.idea__beyond-accent {
+  color: var(--accent);
+}
+
 @media (max-width: 767px) {
+  /* Móvil: una secuencia vertical legible, alternando el apoyo a izquierda y derecha */
   .idea__verbs--sequence {
+    grid-template-columns: 1fr;
     row-gap: clamp(28px, 7vh, 64px);
+    margin-top: clamp(48px, 10vh, 96px);
+  }
+  .idea__phrase--vive,
+  .idea__phrase--toca,
+  .idea__phrase--reflexiona,
+  .idea__phrase--admira {
+    grid-column: 1;
+  }
+  .idea__phrase--vive,
+  .idea__phrase--reflexiona {
+    justify-self: start;
+  }
+  .idea__phrase--toca,
+  .idea__phrase--admira {
+    justify-self: end;
+  }
+  .idea__phrase--admira {
+    margin-top: clamp(8px, 3vh, 32px);
+  }
+  .idea--sequence .idea__verb {
+    font-size: clamp(2.8rem, 13vw, 4.6rem);
+  }
+  .idea__beyond {
+    grid-column: 1 / -1;
+    font-size: clamp(1.9rem, 8.4vw, 2.6rem);
+  }
+  .idea__beyond-line--rest {
+    padding-left: 0;
   }
 }

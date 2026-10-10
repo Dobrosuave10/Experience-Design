@@ -119,6 +119,8 @@ export const idea = {
   lead: "El diseño no solo se observa.",
   verbs: ["Se vive.", "Se toca.", "Se reflexiona.", "Se admira."],
   closing: "Hay cosas que una pantalla puede mostrarte, pero no puede hacerte sentir.",
+  /** Cierre de la secuencia en Inicio, en dos tiempos. */
+  beyond: { lead: "Más allá de la pantalla,", rest: "el diseño se convierte en", accent: "experiencia." },
 };
 
 export const touch = {
