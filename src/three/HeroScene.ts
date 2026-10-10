@@ -138,32 +138,36 @@ export class HeroScene {
     // Reflejos de estudio tenues: le dan lectura al bronce sin volverlo brillante
     const pmrem = new THREE.PMREMGenerator(this.renderer);
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environmentIntensity = 0.3;
+    scene.environmentIntensity = 0.22;
     pmrem.dispose();
 
-    // ---- Luz: clave cálida y suave desde arriba a la izquierda ----
-    scene.add(new THREE.HemisphereLight("#f3e3d2", "#2a2521", 0.2));
-    const key = new THREE.DirectionalLight("#ffe2c6", 1.5);
-    key.position.set(-5, 6, 9);
-    key.target.position.set(0.5, 0, 0);
+    // ---- Luz: una jerarquía clara, cada fuente con un papel ----
+    // 1 · Ambiente mínimo: las zonas más oscuras siguen legibles, sin levantar las sombras
+    scene.add(new THREE.HemisphereLight("#e9cdb6", "#1c1511", 0.07));
+    // 2 · Clave cálida y rasante desde arriba a la izquierda: dibuja el muro frontal, el canto
+    //     de cada arco y la cara del sello; sus sombras entran en el primer tramo
+    const key = new THREE.DirectionalLight("#ffdcbc", 1.35);
+    key.position.set(-6.5, 5.5, 8);
+    key.target.position.set(0.6, -0.2, -3);
     scene.add(key, key.target);
     if (!opts.mobile) {
+      // sombra blanda del sello sobre el muro y de los cantos del primer arco
       key.castShadow = true;
-      key.shadow.mapSize.set(1024, 1024);
+      // el volumen de sombra abarca toda la galería: ningún borde del mapa queda a la vista
+      key.shadow.mapSize.set(2048, 2048);
       const sc = key.shadow.camera;
-      sc.left = -5;
-      sc.right = 5;
-      sc.top = 5;
-      sc.bottom = -5;
+      sc.left = -11;
+      sc.right = 11;
+      sc.top = 11;
+      sc.bottom = -11;
       sc.near = 1;
-      sc.far = 26;
+      sc.far = 48;
       key.shadow.bias = -0.0004;
       key.shadow.normalBias = 0.02;
-      key.shadow.radius = 9;
+      key.shadow.radius = 8;
     }
-
-    // Un foco amplio y muy difuso baña el muro alrededor del arco: el resto cae en penumbra
-    const wash = new THREE.SpotLight("#ffcfa8", 60, 26, 0.5, 1, 1.6);
+    // 3 · Foco amplio y difuso sobre el muro, alrededor del arco: el resto cae en penumbra
+    const wash = new THREE.SpotLight("#ffc9a0", 46, 24, 0.48, 1, 1.6);
     wash.position.set(-2.5, 5.5, 9);
     wash.target.position.set(0.8, 0.2, 0);
     scene.add(wash, wash.target);
@@ -173,8 +177,8 @@ export class HeroScene {
     plaster.wrapS = plaster.wrapT = THREE.RepeatWrapping;
     plaster.repeat.set(0.22, 0.22);
     // Revoque marrón oscuro con un fondo terracota; relieve contenido, acabado mate
-    const wallMat = new THREE.MeshStandardMaterial({ color: "#4a362c", roughness: 0.93, bumpMap: plaster, bumpScale: 0.8 });
-    const bayMat = new THREE.MeshStandardMaterial({ color: "#523b2f", roughness: 0.95, bumpMap: plaster, bumpScale: 0.6, side: THREE.DoubleSide });
+    const wallMat = new THREE.MeshStandardMaterial({ color: "#4e372b", roughness: 0.93, bumpMap: plaster, bumpScale: 0.8, envMapIntensity: 0.5 });
+    const bayMat = new THREE.MeshStandardMaterial({ color: "#4a3328", roughness: 0.95, bumpMap: plaster, bumpScale: 0.6, side: THREE.DoubleSide, envMapIntensity: 0.4 });
     const archGeo = archGeometry();
     const count = opts.mobile ? 4 : 5;
     const depths = Array.from({ length: count }, (_, i) => -i * BAY);
@@ -183,7 +187,8 @@ export class HeroScene {
     depths.forEach((z, i) => {
       const wall = new THREE.Mesh(archGeo, wallMat);
       wall.position.z = z - WALL_DEPTH;
-      wall.receiveShadow = i === 0;
+      wall.castShadow = !opts.mobile;
+      wall.receiveShadow = !opts.mobile;
       scene.add(wall);
       if (i === depths.length - 1) return;
       // Tramo entre este arco y el siguiente: muros laterales y bóveda plana
@@ -192,22 +197,26 @@ export class HeroScene {
         const side = new THREE.Mesh(sideGeo, bayMat);
         side.rotation.y = (sx * -Math.PI) / 2;
         side.position.set(sx * BAY_HALF, (BAY_TOP + FLOOR_Y) / 2, mid);
+        side.receiveShadow = !opts.mobile;
         scene.add(side);
       }
       const ceil = new THREE.Mesh(ceilGeo, bayMat);
       ceil.rotation.x = Math.PI / 2;
       ceil.position.set(0, BAY_TOP, mid);
+      ceil.receiveShadow = !opts.mobile;
       scene.add(ceil);
-      // Luz cálida en cada tramo, cada vez más intensa hacia el fondo
-      const p = new THREE.PointLight("#ffb48c", 7 + i * 3, 9, 2);
-      p.position.set(0.4, 2.4, mid);
-      scene.add(p);
+      // Rebote tenue y bajo en cada tramo: la luz del fondo que vuelve desde el suelo.
+      // Más débil cerca de la cámara: el brillo crece hacia la abertura.
+      const bounce = new THREE.PointLight("#d98a5f", 1.2 + i * 1.6, 5.5, 2);
+      bounce.position.set(0, FLOOR_Y + 0.6, mid - 0.8);
+      scene.add(bounce);
     });
 
-    // Suelo satinado: recoge charcos de luz bajo cada arco
+    // Suelo de piedra apenas satinada: recoge la luz de la abertura y se apaga hacia la cámara.
+    // Sin niebla: junto a la abertura debe ser la parte más clara del suelo, no hundirse en la penumbra.
     const floor = new THREE.Mesh(
       new THREE.PlaneGeometry(40, 70),
-      new THREE.MeshStandardMaterial({ color: "#3a2a21", roughness: 0.55, metalness: 0.05 }),
+      new THREE.MeshStandardMaterial({ color: "#3a261b", roughness: 0.72, metalness: 0.02, envMapIntensity: 0.35, fog: false }),
     );
     floor.rotation.x = -Math.PI / 2;
     floor.position.set(0, FLOOR_Y, -20);
@@ -222,9 +231,29 @@ export class HeroScene {
     );
     backdrop.position.set(0, 2, lastZ - 9);
     scene.add(backdrop);
-    const glow = new THREE.PointLight("#ffd2ae", 22, 14, 2);
-    glow.position.set(0, 0.8, lastZ - 1.5);
+    // 4 · La luz de la abertura: entra desde el otro espacio hacia la cámara. Cada arco
+    //     recorta su sombra hacia adelante; los intradós y el suelo reciben luz por capas.
+    const opening = new THREE.SpotLight("#ffc596", 70, 34, 0.4, 0.8, 1.35);
+    opening.position.set(0.15, 1.1, lastZ - 3.2);
+    opening.target.position.set(-0.3, 1.8, 6);
+    scene.add(opening, opening.target);
+    if (!opts.mobile) {
+      opening.castShadow = true;
+      opening.shadow.mapSize.set(1024, 1024);
+      opening.shadow.camera.near = 0.5;
+      opening.shadow.camera.far = 34;
+      opening.shadow.bias = -0.0006;
+      opening.shadow.normalBias = 0.03;
+      opening.shadow.radius = 4;
+    }
+    // un halo cálido justo detrás del último arco: la transición desde el marfil
+    const glow = new THREE.PointLight("#ffcfa6", 16, 8, 2);
+    glow.position.set(0, -0.6, lastZ - 1.2);
     scene.add(glow);
+    // y el suelo del otro lado, hasta la luz: la parte más clara del piso
+    const beyond = new THREE.PointLight("#ffd3ad", 14, 9, 2);
+    beyond.position.set(0, -1.2, lastZ - 5.5);
+    scene.add(beyond);
     this.endZ = lastZ - 3;
 
     // ---- El sello: la misma placa que arma la apertura (especificación compartida) ----
