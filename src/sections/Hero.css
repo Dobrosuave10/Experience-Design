@@ -79,9 +79,11 @@
   gap: 32px;
 }
 .hero__sub {
-  max-width: 34ch;
+  /* el párrafo es más largo: una medida algo más ancha lo mantiene en pocas líneas */
+  max-width: 44ch;
   font-size: clamp(1rem, 0.3vw + 0.92rem, 1.15rem);
-  line-height: 1.55;
+  line-height: 1.65;
+  text-wrap: pretty;
   color: #d9cfc4;
 }
 

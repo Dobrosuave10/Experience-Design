@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { InstagramLogo, X } from "@phosphor-icons/react";
 import { brand, nav, navContact, routes } from "../content/site";
-import { prefersReducedMotion } from "../lib/env";
+import { hasFinePointer, prefersReducedMotion } from "../lib/env";
 import { onReady } from "../lib/events";
 import { isActive, navigate, usePath } from "../lib/router";
 import { lockScroll } from "../lib/smoothScroll";
@@ -27,29 +27,113 @@ export function Navigation() {
   const [open, setOpen] = useState(false);
   const path = usePath();
 
-  // Entrada tras el loader + ocultar al bajar / mostrar al subir
+  // Entrada tras el loader + visibilidad.
+  // En Inicio la barra se ve durante todo el Hero (la travesía del túnel). Pasado el túnel
+  // —cuando el Hero termina su recorrido— queda en modo discreto: oculta mientras se lee,
+  // aparece al llevar el cursor al borde superior (o, en táctil, al subir o tocar arriba)
+  // y se vuelve a ocultar con una pausa cuando el cursor se va y nadie la está usando.
+  // En el resto de las páginas se mantiene el comportamiento de siempre.
+  const openRef = useRef(open);
+  /** Modo discreto activo (sólo pasado el túnel de Inicio). */
+  const autoRef = useRef(false);
+  openRef.current = open;
   useEffect(() => {
     const el = header.current!;
     const off = onReady(() => {
-      if (!prefersReducedMotion()) gsap.fromTo(el, { yPercent: -100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.2, delay: 0.5, ease: "expo.out" });
+      if (!prefersReducedMotion()) gsap.fromTo(el, { yPercent: -100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.2, delay: 0.5, ease: "expo.out", clearProps: "transform,opacity" });
     });
+
+    const fine = hasFinePointer();
+    let hideTimer = 0;
+    const inUse = () => openRef.current || el.matches(":hover") || el.matches(":focus-within");
+    const show = () => {
+      window.clearTimeout(hideTimer);
+      el.classList.remove("is-hidden");
+    };
+    const hide = () => {
+      window.clearTimeout(hideTimer);
+      if (!inUse()) el.classList.add("is-hidden");
+    };
+    const hideSoon = () => {
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(hide, 650);
+    };
+
+    /** Fin de la travesía: el Hero de Inicio deja de estar fijo y entra el contenido. */
+    const pastTunnel = (y: number) => {
+      const hero = document.querySelector<HTMLElement>("main .hero");
+      if (!hero) return null;
+      return y >= hero.offsetTop + hero.offsetHeight - window.innerHeight - 1;
+    };
+
     const st = ScrollTrigger.create({
       start: 0,
       end: "max",
       onUpdate: (self) => {
-        const past = self.scroll() > window.innerHeight * 0.25;
-        el.classList.toggle("is-hidden", past && self.direction === 1 && !el.matches(":focus-within"));
+        const y = self.scroll();
+        const past = y > window.innerHeight * 0.25;
         el.classList.toggle("is-solid", past);
+        const tunnel = pastTunnel(y);
+        if (tunnel === null) {
+          // Páginas sin túnel: ocultar al bajar / mostrar al subir
+          autoRef.current = false;
+          el.classList.toggle("is-hidden", past && self.direction === 1 && !el.matches(":focus-within"));
+          return;
+        }
+        if (!tunnel) {
+          // Dentro del Hero y del túnel: siempre visible
+          autoRef.current = false;
+          show();
+          return;
+        }
+        if (!autoRef.current) {
+          autoRef.current = true;
+          hide();
+          return;
+        }
+        // Táctil: subir es pedir la barra; bajar es seguir leyendo
+        if (!fine) {
+          if (self.direction === -1) show();
+          else hide();
+        }
       },
     });
+
+    // Cursor: el borde superior la llama; mientras esté sobre ella (o un submenú) se queda
+    const onMove = (e: PointerEvent) => {
+      if (!autoRef.current || e.pointerType !== "mouse") return;
+      if (e.clientY <= 24) show();
+      else if (!el.classList.contains("is-hidden") && !inUse()) hideSoon();
+      else if (inUse()) window.clearTimeout(hideTimer);
+    };
+    // Táctil: tocar la franja superior también la muestra
+    const onTouch = (e: TouchEvent) => {
+      if (autoRef.current && e.touches[0] && e.touches[0].clientY <= 28) show();
+    };
+    // Teclado: al recibir foco aparece; al perderlo se oculta con la misma pausa
+    const onFocusIn = () => autoRef.current && show();
+    const onFocusOut = () => autoRef.current && hideSoon();
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("touchstart", onTouch, { passive: true });
+    el.addEventListener("focusin", onFocusIn);
+    el.addEventListener("focusout", onFocusOut);
+    el.addEventListener("pointerleave", onFocusOut);
+
     return () => {
       off();
       st.kill();
+      window.clearTimeout(hideTimer);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("touchstart", onTouch);
+      el.removeEventListener("focusin", onFocusIn);
+      el.removeEventListener("focusout", onFocusOut);
+      el.removeEventListener("pointerleave", onFocusOut);
     };
   }, []);
 
   // Al cambiar de página la barra vuelve a verse
   useEffect(() => {
+    autoRef.current = false;
     header.current?.classList.remove("is-hidden", "is-solid");
   }, [path]);
 
