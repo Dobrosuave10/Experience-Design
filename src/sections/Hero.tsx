@@ -15,11 +15,10 @@ import "./Hero.css";
 
 /**
  * 01 Entrar.
- * Escena WebGL: una galería de arcos con la medalla E. de terracota montada en el muro.
- * Al hacer scroll la cámara atraviesa la galería; al fondo, la luz del último arco
- * se vuelve el papel de la página. La cámara cruza ese umbral y la sección siguiente
- * emerge desde el otro lado por una abertura en arco. Sin WebGL hay una composición
- * estática equivalente.
+ * Escena WebGL: una galería de arcos con el tondo E. de terracota empotrado en el muro.
+ * Al hacer scroll la cámara atraviesa la galería; la galería se disuelve en la luz del
+ * último arco, que es el blanco de Programas: la sección siguiente aparece del otro
+ * lado del umbral, sobre el mismo eje. Sin WebGL hay una composición estática equivalente.
  */
 export function Hero() {
   const section = useRef<HTMLElement>(null);
@@ -40,10 +39,22 @@ export function Hero() {
       sceneRef.current = scene;
       await scene.init();
       if (cancelled) return;
+      await document.fonts.ready;
+      measure();
       setSceneReady(true);
     });
 
-    const ro = new ResizeObserver(() => sceneRef.current?.resize());
+    // Dónde termina el titular: la escena deja libre ese lado del cuadro
+    const measure = () => {
+      const words = section.current?.querySelectorAll<HTMLElement>(".hero__title .rv-word");
+      if (!words?.length) return;
+      const right = Math.max(...Array.from(words, (w) => w.getBoundingClientRect().right));
+      sceneRef.current?.setSafeLeft((right + 24) / window.innerWidth);
+    };
+    const ro = new ResizeObserver(() => {
+      sceneRef.current?.resize();
+      measure();
+    });
     ro.observe(canvas.current.parentElement!);
     const io = new IntersectionObserver(([e]) => (e.isIntersecting ? sceneRef.current?.start() : sceneRef.current?.stop()));
     io.observe(section.current!);
@@ -88,24 +99,6 @@ export function Hero() {
           .to(".hero__scrim", { opacity: 0, ease: "none", duration: 0.25 }, 0.05)
           .to({}, { duration: 0.71 }, 0.29); // la línea de tiempo cubre todo el tramo: el titular sale en el primer cuarto
 
-        // D · Del otro lado del umbral: la sección siguiente emerge por una abertura en arco,
-        // desde un poco más de profundidad, ligada al scroll (siempre visible al final)
-        const next = el.nextElementSibling?.querySelector<HTMLElement>(".idea__inner");
-        if (next) {
-          gsap.fromTo(
-            next,
-            { clipPath: "inset(16% 3% 0% 3% round 50% 50% 0% 0% / 22% 22% 0% 0%)", y: 50, scale: 0.97, filter: "blur(6px)" },
-            {
-              clipPath: "inset(0% 0% 0% 0% round 0% 0% 0% 0% / 0% 0% 0% 0%)",
-              y: 0,
-              scale: 1,
-              filter: "blur(0px)",
-              ease: "power1.out",
-              scrollTrigger: { trigger: next, start: "top bottom", end: "top 18%", scrub: true },
-            },
-          );
-        }
-
         const off = onPageShown(() => {
           gsap.fromTo(".hero__stage", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 2.4, ease: "expo.out" });
           // El wordmark se "escribe" de izquierda a derecha, como el trazo de su caligrafía
@@ -119,7 +112,7 @@ export function Hero() {
   );
 
   return (
-    <section ref={section} id="inicio" className="hero section" data-tone="ink" aria-labelledby="hero-title">
+    <section ref={section} id="inicio" className={`hero section${gl ? "" : " hero--static"}`} data-tone="ink" aria-labelledby="hero-title">
       <div className="hero__sticky">
         <div className="hero__stage" aria-hidden="true">
           {gl ? (
@@ -127,7 +120,7 @@ export function Hero() {
           ) : (
             <div className="hero__fallback">
               <span className="hero__fallback-arch" />
-              <Logo size="min(34vw, 260px)" decorative className="hero__fallback-logo" />
+              <Logo size="clamp(64px, 9vw, 150px)" decorative className="hero__fallback-logo" />
             </div>
           )}
         </div>

@@ -7,13 +7,14 @@ import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK } from "../lib/env";
 import { Link } from "../components/Link";
 import { Photo } from "../components/Photo";
-import { RevealText } from "../components/RevealText";
 import "./ProgramsSpine.css";
 
 type Item = (typeof programsSpine.items)[number];
 
 /**
- * Inicio · Programas. Una línea vertical recorre la sección y se dibuja con el scroll:
+ * Inicio · Programas. Llega del túnel del Hero: su eje se prolonga como una línea
+ * terracota hasta el encabezado, y el encabezado se abre desde ese eje.
+ * Una línea vertical recorre la sección y se dibuja con el scroll:
  * es el hilo que une Viajes, Marca personal y Formación. Los bloques se apoyan
  * alternadamente a cada lado y se conectan a la línea con una cota horizontal.
  */
@@ -23,6 +24,26 @@ export function ProgramsSpine() {
   useGsap(
     (mm, el) => {
       mm.add(MOTION_OK, () => {
+        // Umbral: el eje que viene del túnel del Hero baja hasta el título; después
+        // se abren, desde ese mismo eje, primero la etiqueta y luego el titular.
+        // Ligado a la posición del encabezado: al volver hacia arriba se deshace.
+        const head = el.querySelector<HTMLElement>(".spine__head")!;
+        gsap
+          .timeline({ scrollTrigger: { trigger: head, start: "top 75%", end: "bottom 40%", scrub: true } })
+          .fromTo(".spine__axis", { scaleY: 0 }, { scaleY: 1, ease: "none", duration: 0.45 }, 0)
+          .fromTo(
+            ".spine__kicker",
+            { clipPath: "inset(0% 50% 0% 50%)", opacity: 0 },
+            { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, ease: "power1.out", duration: 0.3 },
+            0.3,
+          )
+          .fromTo(
+            ".spine__title",
+            { clipPath: "inset(-10% 50% -10% 50%)", filter: "blur(5px)", y: 14 },
+            { clipPath: "inset(-10% 0% -10% 0%)", filter: "blur(0px)", y: 0, ease: "power2.out", duration: 0.5 },
+            0.45,
+          );
+
         // La línea crece con la lectura
         gsap.fromTo(
           ".spine__fill",
@@ -54,8 +75,11 @@ export function ProgramsSpine() {
     <section ref={ref} id="programas-inicio" className="spine section" data-tone="warm" aria-labelledby="spine-title">
       <div className="wrap">
         <header className="spine__head">
+          <span className="spine__axis" aria-hidden="true" />
           <p className="label spine__kicker">{programsSpine.kicker}</p>
-          <RevealText id="spine-title" className="spine__title display" lines={[programsSpine.title]} />
+          <h2 id="spine-title" className="spine__title display">
+            {programsSpine.title}
+          </h2>
         </header>
 
         <div className="spine__body">

@@ -116,6 +116,8 @@ export const hero = {
 };
 
 export const idea = {
+  /** La declaración completa: es lo que se lee con tecnologías de asistencia en Inicio. */
+  declaration: "En Experience Design creemos que el diseño no solo se observa: se vive, se toca, se reflexiona y se admira.",
   lead: "El diseño no solo se observa.",
   verbs: ["Se vive.", "Se toca.", "Se reflexiona.", "Se admira."],
   closing: "Hay cosas que una pantalla puede mostrarte, pero no puede hacerte sentir.",

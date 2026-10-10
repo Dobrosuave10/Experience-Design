@@ -12,13 +12,44 @@
   font-family: var(--glacial);
 }
 
+/* En Inicio la sección sube por dentro del último tramo del Hero: su parte alta es
+   transparente y el eje terracota nace mientras la galería se disuelve en este mismo
+   blanco (el último color del túnel). Desde donde termina el Hero, la sección es opaca.
+   El cambio de tono de la página ocurre así a mitad del cruce, no sobre el blanco ya quieto. */
+.hero + .spine {
+  position: relative;
+  margin-top: -70vh;
+  background: linear-gradient(180deg, transparent 0, transparent 70vh, var(--ed-white) 70vh);
+}
+/* Sin la travesía (movimiento reducido o sin WebGL) la sección empieza después del Hero */
+.hero--static + .spine {
+  margin-top: 0;
+  background: var(--ed-white);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero + .spine {
+    margin-top: 0;
+    background: var(--ed-white);
+  }
+}
+
 /* ---------- Encabezado ---------- */
 .spine__head {
+  position: relative;
   display: grid;
   justify-items: center;
   text-align: center;
   gap: 18px;
   margin-bottom: clamp(56px, 9vh, 110px);
+}
+/* el eje del túnel, prolongado: baja desde el umbral hasta la etiqueta */
+.spine__axis {
+  justify-self: center;
+  width: 1px;
+  height: clamp(72px, 14vh, 150px);
+  margin-bottom: 10px;
+  background: linear-gradient(180deg, rgba(155, 72, 25, 0), var(--ed-earth) 45%);
+  transform-origin: top;
 }
 .spine__kicker {
   font-family: var(--glacial);
@@ -420,6 +451,11 @@
     justify-items: start;
     text-align: left;
     padding-left: var(--rail);
+  }
+  /* el eje baja sobre el riel de la línea */
+  .spine__axis {
+    justify-self: start;
+    margin-left: calc(var(--rail) * -1);
   }
   .spine__line {
     left: 0;

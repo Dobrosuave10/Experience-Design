@@ -7,13 +7,13 @@ import { NeverLate } from "../sections/NeverLate";
 import { Community } from "../sections/Community";
 import { InviteBand } from "../sections/InviteBand";
 
-/** Inicio: la entrada (WebGL), la idea, los tres programas, los destinos y la invitación. */
+/** Inicio: la entrada (WebGL) que se abre a los tres programas, la idea, los destinos y la invitación. */
 export default function Home() {
   return (
     <>
       <Hero />
-      <Idea sequence />
       <ProgramsSpine />
+      <Idea sequence />
       <Touch />
       <HomeDestinations />
       <NeverLate />

@@ -25,26 +25,39 @@
   opacity: 1;
 }
 
-/* Sin WebGL: arco y sello estáticos */
+/* Sin WebGL: la misma composición, quieta (arco a la derecha del titular, tondo junto a él) */
 .hero__fallback {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(60% 70% at 50% 46%, #3a2a22 0%, var(--ink) 70%);
+  background: radial-gradient(60% 70% at 64% 46%, #3a2a22 0%, var(--ink) 70%);
 }
 .hero__fallback-arch {
   position: absolute;
-  width: min(44vw, 340px);
+  left: 64%;
+  top: 14%;
+  width: min(24vw, 340px);
   aspect-ratio: 2.6 / 4.9;
+  translate: -50% 0;
   border-radius: 999px 999px 0 0;
   background: radial-gradient(80% 60% at 50% 70%, #e9c9ae, #b7664f 60%, #3a221a);
   opacity: 0.55;
 }
 .hero__fallback-logo {
-  position: relative;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-  border-radius: 50%;
+  position: absolute;
+  left: 86%;
+  top: 26%;
+  translate: -50% 0;
+}
+@media (max-width: 767px) {
+  .hero__fallback-arch {
+    left: 50%;
+    top: 12%;
+    width: 40vw;
+  }
+  .hero__fallback-logo {
+    left: 84%;
+    top: 16%;
+  }
 }
 
 .hero__content {
@@ -127,16 +140,5 @@
 @media (prefers-reduced-motion: reduce) {
   .hero {
     height: auto;
-  }
-}
-
-/* Sin WebGL, en pantallas anchas: misma composición que la escena (sello a la derecha) */
-@media (min-width: 1024px) {
-  .hero__fallback {
-    place-items: center end;
-    padding-right: 14vw;
-  }
-  .hero__fallback-arch {
-    right: calc(14vw + (min(34vw, 260px) - min(44vw, 340px)) / 2);
   }
 }
