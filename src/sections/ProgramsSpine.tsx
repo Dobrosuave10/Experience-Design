@@ -102,7 +102,7 @@ function Block({ item }: { item: Item }) {
         <p className="spine__desc spine__reveal">{item.text}</p>
         <Extra item={item} />
         {item.href && item.cta && (
-          <Link to={item.href} className="spine__cta spine__reveal" data-cursor="Entrar">
+          <Link to={item.href} className="spine__cta spine__reveal">
             <span>{item.cta}</span>
             <ArrowRight size={16} aria-hidden />
           </Link>

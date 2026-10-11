@@ -12,7 +12,7 @@ export function NextChapter({ tone = "ink" }: { tone?: "ink" | "paper" | "sand" 
 
   return (
     <section className="next section" data-tone={tone} aria-label={nextChapter.label}>
-      <Link to={next.href} className="next__link wrap" data-cursor="Seguir">
+      <Link to={next.href} className="next__link wrap">
         <span className="next__label label">
           {nextChapter.label} · {String(((i + 1) % chapterOrder.length) + 1).padStart(2, "0")}
         </span>

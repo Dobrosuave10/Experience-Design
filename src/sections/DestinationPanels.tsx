@@ -71,7 +71,7 @@ export function DestinationPanels() {
                   <em>{d.text}</em>
                 </p>
                 <p className="dpanel__when label dpanel__fade">{d.when}</p>
-                <Link to={d.href} className="dpanel__go dpanel__fade" data-cursor="Entrar">
+                <Link to={d.href} className="dpanel__go dpanel__fade">
                   <span>{d.cta}</span>
                   <ArrowRight size={16} aria-hidden />
                 </Link>

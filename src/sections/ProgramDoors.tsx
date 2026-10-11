@@ -146,7 +146,7 @@ function Door({ program: p, index, active }: { program: Program; index: number; 
             <li key={k}>{k}</li>
           ))}
         </ol>
-        <Link to={p.href} className="door__go" tabIndex={active ? 0 : -1} data-cursor="Entrar">
+        <Link to={p.href} className="door__go" tabIndex={active ? 0 : -1}>
           <span>{p.cta}</span>
           <ArrowRight size={16} aria-hidden />
         </Link>

@@ -6,7 +6,6 @@ import { onSamePage, usePath } from "./lib/router";
 import { pageTitles, routes } from "./content/site";
 import { Loader } from "./components/Loader";
 import { Navigation } from "./components/Navigation";
-import { Cursor } from "./components/Cursor";
 import { PageTransition } from "./components/PageTransition";
 import { Footer } from "./sections/Footer";
 import Home from "./pages/Home";
@@ -94,7 +93,6 @@ export default function App() {
       </a>
       <Loader />
       <Navigation />
-      <Cursor />
       <PageTransition />
       <main id="contenido" key={path}>
         <Page />
