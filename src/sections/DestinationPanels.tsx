@@ -21,9 +21,16 @@ export function DestinationPanels() {
     (mm, el) => {
       mm.add(MOTION_OK, () => {
         const milan = el.querySelector(".dpanel--milan")!;
+        // La ventana inicial guarda una proporción de foto: en un teléfono vertical,
+        // el recorte de escritorio (30% por lado) dejaba una franja angosta.
+        const portrait = window.innerWidth < window.innerHeight;
         gsap
           .timeline({ scrollTrigger: { trigger: milan, start: "top top", end: "bottom bottom", scrub: 0.8 } })
-          .fromTo(milan.querySelector(".dpanel__media"), { clipPath: "inset(22% 30% 22% 30%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.inOut" })
+          .fromTo(
+            milan.querySelector(".dpanel__media"),
+            { clipPath: portrait ? "inset(28% 10% 30% 10%)" : "inset(22% 30% 22% 30%)" },
+            { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.inOut" },
+          )
           .fromTo(milan.querySelector(".dpanel__media img"), { scale: 1.3 }, { scale: 1, ease: "power2.inOut" }, 0)
           .fromTo(milan.querySelectorAll(".dpanel__fade"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.05, duration: 0.3 }, 0.55);
 

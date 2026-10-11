@@ -21,6 +21,12 @@
   gap: 10px;
   color: var(--muted);
 }
+.ph__crumbs a {
+  /* Área táctil de 44px sin mover la línea */
+  display: inline-block;
+  padding-block: 14px;
+  margin-block: -14px;
+}
 .ph__crumbs [aria-current] {
   color: var(--fg);
 }

@@ -215,3 +215,22 @@ html[data-tone="ink"] .grain {
   align-items: center;
   border-bottom: 1px solid currentColor;
 }
+
+/* ---------- Móvil: ritmo vertical ----------
+   En escritorio el aire entre secciones se mide en vh; en un teléfono alto esos
+   mismos vh dejaban pantallas casi vacías entre bloques (300–400px). Aquí el
+   espaciado se acota para que siempre haya contenido a la vista al bajar. */
+@media (max-width: 767px) {
+  html :is(.about, .principles, .archive, .community, .founders, .hdest, .invite, .journey, .milan__close, .late, .pb, .spine, .sp__intro, .wl, .pending) {
+    padding-block: clamp(72px, 10vh, 104px);
+  }
+  html .formation {
+    padding-block: 48px clamp(72px, 10vh, 104px);
+  }
+  html .contact {
+    padding-block: calc(var(--nav-h) + 48px) clamp(72px, 10vh, 104px);
+  }
+  html .idea {
+    padding-bottom: clamp(72px, 10vh, 104px);
+  }
+}

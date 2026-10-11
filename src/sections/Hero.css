@@ -98,6 +98,17 @@
 @media (max-width: 767px) {
   .hero__content {
     --hero-lift: 20px;
+    isolation: isolate;
+  }
+  /* En vertical el texto cae sobre la galería de arcos: una sombra desde abajo
+     separa wordmark, titular y párrafo de la luz del túnel sin tapar la escena. */
+  .hero__content::before {
+    content: "";
+    position: absolute;
+    inset: -18vh 0 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(23, 21, 19, 0) 0%, rgba(23, 21, 19, 0.55) 30%, rgba(23, 21, 19, 0.82) 70%);
+    pointer-events: none;
   }
   .hero {
     height: 145vh;

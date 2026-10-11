@@ -275,7 +275,7 @@ html[data-tone="warm"] .nav__cta .mbtn--line .mbtn__label {
   transform: translate(6px, -3.5px);
 }
 .nav__toggle {
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.26em;
   font-weight: 400;
 }
