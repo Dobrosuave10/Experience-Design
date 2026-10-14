@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initSmoothScroll, resetScroll } from "./lib/smoothScroll";
 import { onReady } from "./lib/events";
 import { onSamePage, usePath } from "./lib/router";
-import { pageTitles, routes } from "./content/site";
+import { defaultDescription, notFoundTitle, pageDescriptions, pageTitles, routes } from "./content/site";
 import { Loader } from "./components/Loader";
 import { Navigation } from "./components/Navigation";
 import { PageTransition } from "./components/PageTransition";
@@ -80,7 +80,8 @@ export default function App() {
   useLayoutEffect(() => {
     resetScroll();
     const raf = requestAnimationFrame(() => ScrollTrigger.refresh());
-    document.title = pageTitles[path] ?? "Experience Design";
+    document.title = pageTitles[path] ?? notFoundTitle;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", pageDescriptions[path] ?? defaultDescription);
     return () => cancelAnimationFrame(raf);
   }, [path]);
 

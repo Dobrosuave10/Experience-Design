@@ -92,6 +92,36 @@ export const pageTitles: Record<string, string> = {
   [routes.saoPaulo]: "São Paulo, CASACOR · Destinos · Experience Design",
   [routes.contacto]: "Contacto · Experience Design",
 };
+/** Título de rutas que no existen (página 404). */
+export const notFoundTitle = "Página no encontrada · Experience Design";
+
+/**
+ * Descripción de cada página para buscadores y enlaces compartidos. Hechas sólo con frases
+ * que ya aparecen en la página correspondiente. Las rutas sin entrada usan la de Inicio.
+ */
+export const defaultDescription =
+  "Experience Design crea experiencias de diseño que conectan viajes, aprendizaje y personas con el mundo de la arquitectura, el interiorismo y el diseño.";
+export const pageDescriptions: Record<string, string> = {
+  [routes.inicio]: defaultDescription,
+  [routes.nosotros]:
+    "Experience Design crea experiencias de diseño, formación y conexiones para quienes quieren seguir descubriendo. Empezó como un experimento con pocas personas. Sigue igual de cerca.",
+  [routes.programas]:
+    "Experiencias diseñadas para distintos momentos de tu camino. Experience Design tiene distintas formas de participar, según quién eres y qué estás buscando.",
+  [routes.marcaPersonal]:
+    "Marca personal: reconocer tu identidad profesional y aprender a contarla. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
+  [routes.estudiantes]:
+    "El mundo del diseño también se aprende fuera del aula. Para estudiantes de pregrado y posgrado de arquitectura, interiorismo, diseño y disciplinas creativas afines.",
+  [routes.profesionales]:
+    "Seguir aprendiendo también es parte de una carrera. Para quienes ya trabajan en arquitectura, interiorismo, diseño y en las industrias que los rodean.",
+  [routes.destinos]:
+    "Hay lugares que cambian tu forma de mirar. Milán, durante la Milan Design Week y el Salone del Mobile, y São Paulo, en CASACOR.",
+  [routes.milan]:
+    "Milán, Milan Design Week y Salone del Mobile 2027. Una ciudad que lleva generaciones pensando cómo vivimos. La recorremos con la atención de quien diseña.",
+  [routes.saoPaulo]:
+    "São Paulo, CASACOR. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
+  [routes.contacto]:
+    "Cuéntanos qué te interesa. Te respondemos con lo concreto: qué es, qué incluye y cuánto cuesta.",
+};
 
 /** Cada página termina invitando a la siguiente: un mismo libro, distintos capítulos. */
 export const chapterOrder: { href: string; label: string }[] = [

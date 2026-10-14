@@ -35,8 +35,10 @@ export function LeadForm() {
     if (!interest) next.interest = "Elige al menos una opción.";
     setErrors(next);
     if (Object.keys(next).length) {
-      const first = e.currentTarget.querySelector<HTMLElement>("[aria-invalid='true']");
-      first?.focus();
+      // El foco va al primer campo con error (se busca por nombre: el marcado aria-invalid
+      // todavía no está en el DOM en este momento)
+      const firstKey = (["name", "email", "interest"] as const).find((k) => next[k]);
+      e.currentTarget.querySelector<HTMLElement>(`[name="${firstKey}"]`)?.focus();
       return;
     }
     if (!ENDPOINT) {
