@@ -30,11 +30,13 @@
 .ph__crumbs [aria-current] {
   color: var(--fg);
 }
+/* Con el interlineado de 0.88 la máscara cortaba el acento de FORMACIÓN y las colas: se agranda
+   por arriba y por abajo y los márgenes negativos devuelven el espacio. */
 .ph__mask {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  padding-block: 0.2em 0.24em;
+  margin-block: -0.2em -0.24em;
 }
 .ph__name-in,
 .ph__line-row {

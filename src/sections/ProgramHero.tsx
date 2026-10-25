@@ -20,7 +20,8 @@ export function ProgramHero({ program: p }: { program: Program }) {
   useGsap(
     (mm, el) => {
       mm.add(MOTION_OK, () => {
-        gsap.set([".ph__name-in", ".ph__line-row"], { yPercent: 110 });
+        // Por debajo del relleno inferior de .ph__mask, para que no asomen antes de entrar
+        gsap.set([".ph__name-in", ".ph__line-row"], { yPercent: 160 });
         gsap.set(".ph__fade", { opacity: 0, y: 16 });
         gsap.set(".ph__frame", { clipPath: p.id === "formacion" ? "inset(50% 50% 50% 50%)" : "inset(100% 0 0 0)" });
         const off = onPageShown(() => {

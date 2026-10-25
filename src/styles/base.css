@@ -155,12 +155,14 @@ ol {
   z-index: var(--z-content);
 }
 
-/* Línea de revelado por palabra */
+/* Línea de revelado por palabra. Los titulares grandes van con interlineado muy cerrado (0.82):
+   la máscara se agranda por arriba (acentos de mayúsculas) y por abajo (colas de g, p, ç) y los
+   márgenes negativos devuelven el espacio, así que el resto del diseño no se mueve. */
 .rv-line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14em;
+  padding-block: 0.12em 0.32em;
+  margin-block: -0.12em -0.32em;
 }
 .rv-word {
   display: inline-block;

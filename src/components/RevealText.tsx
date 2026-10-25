@@ -32,7 +32,8 @@ export function RevealText({ as: Tag = "h2", lines, className, id, trigger = "sc
     (mm, el) => {
       mm.add(MOTION_OK, () => {
         const words = el.querySelectorAll(".rv-word");
-        gsap.set(words, { yPercent: 115 });
+        // Bajan lo suficiente para quedar por debajo del relleno inferior de la máscara (ver .rv-line)
+        gsap.set(words, { yPercent: 165 });
         const play = () => gsap.to(words, { yPercent: 0, duration: 1.25, ease: "expo.out", stagger, delay });
         if (trigger === "ready") {
           const off = onPageShown(play);
