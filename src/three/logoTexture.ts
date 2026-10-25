@@ -56,11 +56,11 @@ export async function makeLogoCanvases() {
     r.fillRect(0, 0, SIZE, SIZE);
 
     try {
-      await document.fonts.load(`500 400px "Cormorant Garamond"`);
+      await document.fonts.load(`500 400px "Bodoni Moda Variable"`);
     } catch {
       /* usa serif de respaldo */
     }
-    const font = `500 ${SIZE * 0.56}px "Cormorant Garamond", "Times New Roman", serif`;
+    const font = `500 ${SIZE * 0.56}px "Bodoni Moda Variable", "Times New Roman", serif`;
     for (const ctx of [c, r]) {
       ctx.font = font;
       ctx.textAlign = "center";
@@ -102,11 +102,11 @@ export async function makeSealMaps(size = 1024, markSrc?: string) {
   const height = mk(), color = mk(), normal = mk(), rough = mk();
   const h = height.getContext("2d")!, c = color.getContext("2d")!, r = rough.getContext("2d")!;
   try {
-    await document.fonts.load(`500 400px "Cormorant Garamond"`);
+    await document.fonts.load(`500 400px "Bodoni Moda Variable"`);
   } catch {
     /* serif de respaldo */
   }
-  const font = `500 ${size * 0.6}px "Cormorant Garamond", "Times New Roman", serif`;
+  const font = `500 ${size * 0.6}px "Bodoni Moda Variable", "Times New Roman", serif`;
   h.font = font;
   h.textAlign = "center";
   h.textBaseline = "alphabetic";

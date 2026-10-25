@@ -39,7 +39,7 @@
   align-self: end;
   font-size: clamp(4.2rem, 16.5vw, 19rem);
   line-height: 0.82;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.03em;
   margin-left: -0.05em;
   padding-top: 0.4em;
 }

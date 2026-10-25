@@ -15,6 +15,7 @@ import path from "node:path";
 const SRC = "assets-src";
 const OUT = "public/img";
 const WIDTHS = [480, 960, 1600];
+const MAX_W = 1920;
 
 await mkdir(OUT, { recursive: true });
 const files = (await readdir(SRC)).filter((f) => /\.(png|jpe?g|webp)$/i.test(f));
@@ -57,7 +58,9 @@ for (const file of files) {
   }
 
   const meta = await sharp(input).metadata();
-  const widths = [...new Set([...WIDTHS.filter((w) => w < meta.width), meta.width])];
+  // Nunca más de MAX_W: las fotos de 2400 px no ganan nada visible por sobre eso y pesan el doble
+  const top = Math.min(meta.width, MAX_W);
+  const widths = [...new Set([...WIDTHS.filter((w) => w < top), top])];
   const set = [];
   for (const w of widths) {
     const out = `${OUT}/${name}-${w}.webp`;

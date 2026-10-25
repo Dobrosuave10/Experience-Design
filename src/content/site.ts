@@ -23,11 +23,15 @@ export const brand = {
     url: "https://www.linkedin.com/company/studiobarlainteriorismo/posts/?feedView=all",
   },
   /**
-   * Ruta al logo oficial (SVG o PNG con fondo transparente), ej. "/brand/logo.svg".
-   * Mientras sea null se usa una reconstrucción provisoria del sello (círculo terracota + "E.").
-   * Al definirla, el logo se usa en navegación, loader, footer y como textura del objeto 3D.
+   * Logo oficial, extraído en vector del PDF del manual (LOGO_EXPERIENCEN1.pdf).
+   * `logoAsset` es la marca "E." en negro; el componente Logo la usa como máscara,
+   * así toma el color del tono activo (negro sobre claro, marfil sobre oscuro).
    */
-  logoAsset: null as string | null,
+  logoAsset: "/brand/mark-dark.svg" as string | null,
+  logo: {
+    mark: { dark: "/brand/mark-dark.svg", light: "/brand/mark-light.svg" },
+    wordmark: { dark: "/brand/wordmark-dark.svg", light: "/brand/wordmark-light.svg" },
+  },
 };
 
 export type ImageSlot = {
@@ -44,14 +48,19 @@ export const routes = {
   inicio: "/",
   nosotros: "/nosotros",
   programas: "/programas",
+  formacion: "/programas/formacion",
   marcaPersonal: "/programas/marca-personal",
-  estudiantes: "/programas/estudiantes",
-  profesionales: "/programas/profesionales",
   destinos: "/destinos",
   milan: "/destinos/milan",
   saoPaulo: "/destinos/sao-paulo",
   contacto: "/contacto",
 } as const;
+
+/** Rutas antiguas que ya no existen como página: se redirigen sin dejar rastro en el historial. */
+export const redirects: Record<string, string> = {
+  "/programas/estudiantes": routes.programas,
+  "/programas/profesionales": routes.programas,
+};
 
 export type NavItem = { label: string; href: string; children?: { label: string; note?: string; href: string }[] };
 
@@ -63,9 +72,8 @@ export const nav: NavItem[] = [
     label: "Programas",
     href: routes.programas,
     children: [
-      { label: "Marca personal", href: routes.marcaPersonal },
-      { label: "Estudiantes", href: routes.estudiantes },
-      { label: "Profesionales", href: routes.profesionales },
+      { label: "Formación", note: "Aprender", href: routes.formacion },
+      { label: "Marca personal", note: "Expresar", href: routes.marcaPersonal },
     ],
   },
   {
@@ -84,9 +92,8 @@ export const pageTitles: Record<string, string> = {
   [routes.inicio]: "Experience Design · Abrir la mirada hacia nuevas posibilidades",
   [routes.nosotros]: "Nosotros · Experience Design",
   [routes.programas]: "Programas · Experience Design",
+  [routes.formacion]: "Formación · Programas · Experience Design",
   [routes.marcaPersonal]: "Marca personal · Programas · Experience Design",
-  [routes.estudiantes]: "Estudiantes · Programas · Experience Design",
-  [routes.profesionales]: "Profesionales · Programas · Experience Design",
   [routes.destinos]: "Destinos · Experience Design",
   [routes.milan]: "Milán, Salone del Mobile · Destinos · Experience Design",
   [routes.saoPaulo]: "São Paulo, CASACOR · Destinos · Experience Design",
@@ -100,23 +107,21 @@ export const notFoundTitle = "Página no encontrada · Experience Design";
  * que ya aparecen en la página correspondiente. Las rutas sin entrada usan la de Inicio.
  */
 export const defaultDescription =
-  "Experience Design crea experiencias de diseño que conectan viajes, aprendizaje y personas con el mundo de la arquitectura, el interiorismo y el diseño.";
+  "Experience Design crea experiencias curadas para vivir el diseño desde dentro: experiencias en las capitales del diseño, formación y marca personal. Más que viajar. Vivir el diseño para ampliar la mirada.";
 export const pageDescriptions: Record<string, string> = {
   [routes.inicio]: defaultDescription,
   [routes.nosotros]:
-    "Experience Design crea experiencias de diseño, formación y conexiones para quienes quieren seguir descubriendo. Empezó como un experimento con pocas personas. Sigue igual de cerca.",
+    "Experience Design crea experiencias curadas para vivir el diseño desde dentro. Propósito, misión, visión y valores, y quiénes están detrás: Danae Barla y Christian Erdmann.",
   [routes.programas]:
-    "Experiencias diseñadas para distintos momentos de tu camino. Experience Design tiene distintas formas de participar, según quién eres y qué estás buscando.",
+    "Dos programas para llevar lo vivido a la propia práctica: Formación, para aprender, y Marca personal, para expresar el sello propio. Para estudiantes y profesionales del diseño.",
+  [routes.formacion]:
+    "Formación: cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca, para capitalizar la experiencia.",
   [routes.marcaPersonal]:
-    "Marca personal: reconocer tu identidad profesional y aprender a contarla. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
-  [routes.estudiantes]:
-    "El mundo del diseño también se aprende fuera del aula. Para estudiantes de pregrado y posgrado de arquitectura, interiorismo, diseño y disciplinas creativas afines.",
-  [routes.profesionales]:
-    "Seguir aprendiendo también es parte de una carrera. Para quienes ya trabajan en arquitectura, interiorismo, diseño y en las industrias que los rodean.",
+    "Marca personal: construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
   [routes.destinos]:
-    "Hay lugares que cambian tu forma de mirar. Milán, durante la Milan Design Week y el Salone del Mobile, y São Paulo, en CASACOR.",
+    "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias de 2025 y 2026.",
   [routes.milan]:
-    "Milán, Milan Design Week y Salone del Mobile 2027. Una ciudad que lleva generaciones pensando cómo vivimos. La recorremos con la atención de quien diseña.",
+    "Milán 2027, Salone del Mobile. Itinerario del 12 al 17 de abril de 2027: la feria, el Fuori Salone, showrooms, materiales y la ciudad, recorridos con la atención de quien diseña.",
   [routes.saoPaulo]:
     "São Paulo, CASACOR. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
   [routes.contacto]:
@@ -128,9 +133,8 @@ export const chapterOrder: { href: string; label: string }[] = [
   { href: routes.inicio, label: "Inicio" },
   { href: routes.nosotros, label: "Nosotros" },
   { href: routes.programas, label: "Programas" },
+  { href: routes.formacion, label: "Formación" },
   { href: routes.marcaPersonal, label: "Marca personal" },
-  { href: routes.estudiantes, label: "Estudiantes" },
-  { href: routes.profesionales, label: "Profesionales" },
   { href: routes.destinos, label: "Destinos" },
   { href: routes.milan, label: "Milán" },
   { href: routes.saoPaulo, label: "São Paulo" },
@@ -153,45 +157,45 @@ export const idea = {
   beyond: { lead: "Más allá de la pantalla,", rest: "el diseño se convierte en", accent: "experiencia." },
 };
 
-/** Inicio · Programas: tres bloques sobre una línea vertical (Viajes, Marca personal, Formación). */
+/** Inicio · los tres ejes sobre una línea vertical: Descubrir, Aprender, Expresar. */
 export const programsSpine = {
   kicker: "Experience Design",
-  title: ["Una experiencia.", "Más allá del viaje."],
+  title: ["Tres ejes.", "Una misma experiencia."],
   items: [
     {
-      id: "viajes",
+      id: "experiencias",
       n: "01",
       verb: "Descubrir",
-      name: "Viajes",
-      text: "Experiencias internacionales curadas para vivir el diseño desde dentro. Recorremos ferias, showrooms, estudios y espacios que marcan nuevas tendencias, conectando con sus materiales, procesos y protagonistas. Una invitación a mirar más allá de lo conocido, encontrar nuevas referencias y volver con una perspectiva propia.",
+      name: "Experiencias",
+      text: "Experiencias curadas en las capitales del diseño, conocidas en su propio contexto. Recorremos ferias, showrooms, estudios y espacios donde nacen las ideas, en contacto con sus materiales, procesos y protagonistas. Para volver con referencias propias y criterio para aplicarlas.",
       href: routes.destinos as string | undefined,
       cta: "Milán 2027" as string | undefined,
-      main: { image: "salone-milano" as ImageName, alt: "Salone del Mobile.Milano: sofás curvos, lámparas escultóricas y visitantes recorriendo el pabellón" },
-      detail: { image: "casacor-sao-paulo" as ImageName, alt: "CASACOR São Paulo: un estar abierto al jardín, con un espejo de agua" },
+      main: { image: "salone-cocina-bosque" as ImageName, alt: "Salone del Mobile 2026: visitantes en un stand de cocina rodeado por una pantalla envolvente con un bosque" },
+      detail: { image: "casacor-arco-verde-mural" as ImageName, alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
       destinations: ["São Paulo", "Milán"],
       next: { label: "Próxima experiencia", place: "Milán 2027", note: "Abril de 2027" },
     },
     {
-      id: "marca-personal",
-      n: "02",
-      verb: "Expresar",
-      name: "Marca personal",
-      text: "Cada persona tiene una mirada, unos intereses y una forma propia de hacer las cosas. Te acompañamos a descubrir qué te diferencia, construir una identidad profesional auténtica y comunicarla con claridad, coherencia y propósito. A través del diseño, tus referentes y tus aspiraciones, trabajamos en una marca personal que refleje quién eres y hacia dónde quieres crecer.",
-      href: undefined,
-      cta: undefined,
-      main: { image: "marca-personal-estudio" as ImageName, alt: "Mesa de trabajo de una profesional creativa: un mapa de su marca personal a mano, referencias visuales y libros de identidad" },
-      detail: { image: "marca-personal-taller" as ImageName, alt: "Presentación de marca personal: un profesional explica cómo construirla frente a un grupo, con referencias visuales en el muro" },
-    },
-    {
       id: "formacion",
-      n: "03",
+      n: "02",
       verb: "Aprender",
       name: "Formación",
-      text: "Cada encuentro abre una oportunidad para aprender algo nuevo. A lo largo del viaje, el diseño se convierte también en una forma de aprendizaje: fotografía para observar y contar historias, marketing para comprender cómo se construyen las marcas, y charlas e intercambios con profesionales que comparten sus conocimientos, procesos y perspectivas. Ideas que nacen de lo vivido y que puedes llevar a tu propia práctica.",
-      href: undefined as string | undefined,
-      cta: undefined as string | undefined,
-      main: { image: "charla-showroom" as ImageName, alt: "Conversación con un diseñador invitado en un showroom de Milán, con público alrededor" },
-      detail: { image: "charla-diseno" as ImageName, alt: "Charla con profesionales del diseño frente a una pantalla, con el público tomando notas" },
+      text: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca. Aprender prepara la mirada antes de viajar y ayuda a capitalizar lo vivido después: ideas que nacen de la experiencia y que puedes llevar a tu propia práctica.",
+      href: routes.formacion as string | undefined,
+      cta: "Conocer Formación" as string | undefined,
+      main: { image: "verona-antolini-veta" as ImageName, alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona" },
+      detail: { image: "fuori-charla-arcos" as ImageName, alt: "Charla durante el Fuori Salone de Milán: el público sentado bajo una galería de arcos frente a una pantalla" },
+    },
+    {
+      id: "marca-personal",
+      n: "03",
+      verb: "Expresar",
+      name: "Marca personal",
+      text: "Cada persona tiene una mirada, unos intereses y una forma propia de hacer las cosas. Acompañamos a construir la propia marca y a encontrar el sello que distingue a cada persona, estudio o empresa, para comunicarlo con criterio y coherencia. Expresar convierte lo vivido en criterio propio.",
+      href: routes.marcaPersonal as string | undefined,
+      cta: "Conocer Marca personal" as string | undefined,
+      main: { image: "marca-vestidor-retrato" as ImageName, alt: "Participante sentada en un puf capitoné de un showroom de vestidores en Milán, con la bolsa de Experience Design" },
+      detail: { image: "marca-retrato-backdrop" as ImageName, alt: "Participante sonriendo frente al muro de prensa de un evento de diseño en Milán" },
     },
   ],
 };
@@ -201,7 +205,7 @@ export const milan = {
   year: "2027",
   event: "Milan Design Week",
   fair: "Salone del Mobile",
-  openingImage: { image: "milan-showroom" as ImageName, alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada" },
+  openingImage: { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuori Salone en Milán: pilares de piedra, sofás bajos y una gran biblioteca iluminada al fondo" },
   topics: ["Salone del Mobile", "Showrooms", "Estudios", "Materiales", "Cultura", "Conexiones"],
   statementA: "No venimos a mirar desde afuera.",
   statementB: "Venimos a entrar.",
@@ -211,57 +215,94 @@ export const milan = {
       title: "La ciudad",
       text: "Una ciudad que lleva generaciones pensando cómo vivimos. La recorremos con la atención de quien diseña.",
       material: "plaster" as MaterialName,
-      image: "milan-ciudad" as ImageName,
-      alt: "Catedral de Milán al atardecer, con gente en la plaza",
+      image: "milan-galleria-cupula" as ImageName,
+      alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico",
     },
     {
       n: "02",
       title: "El diseño",
       text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición. Vamos a donde ocurre.",
       material: "terrazzo" as MaterialName,
-      image: "salone-pabellon" as ImageName,
-      alt: "Pasillo del Salone del Mobile con visitantes",
+      image: "salone-escalinata-roja" as ImageName,
+      alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Rho Fiera",
     },
     {
       n: "03",
       title: "Los materiales",
       text: "Superficies, revestimientos, texturas. Verlos en persona, con luz real, a la distancia de la mano.",
       material: "terracotta" as MaterialName,
-      image: "showroom-piedra" as ImageName,
-      alt: "Showroom con mesa de piedra, sillas tapizadas y arcos",
+      image: "verona-marmol-book-match" as ImageName,
+      alt: "Placa de mármol en espejo, con vetas violáceas, en el showroom de Antolini en Verona",
     },
     {
       n: "04",
       title: "Los espacios",
       text: "Patios, fachadas, showrooms, estudios. La arquitectura también se aprende caminando.",
       material: "travertine" as MaterialName,
-      image: "milan-patio" as ImageName,
-      alt: "Patio porticado con una instalación de tela iluminada",
+      image: "fuori-galeria-arcos" as ImageName,
+      alt: "Galería de arcos blancos de un espacio del Fuori Salone, con lámparas suspendidas y piso de madera",
     },
     {
       n: "05",
       title: "Las personas",
       text: "Detrás de cada showroom y cada estudio hay alguien que tomó decisiones. Queremos escucharlas.",
       material: "walnut" as MaterialName,
-      image: "salone-personas" as ImageName,
-      alt: "Visitantes frente al muro rojo del Salone del Mobile",
+      image: "milan-grupo-gessi" as ImageName,
+      alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milan Design Week",
     },
     {
       n: "06",
       title: "Las conexiones",
       text: "Vuelves con referencias, preguntas y personas con las que seguir conversando.",
       material: "linen" as MaterialName,
-      image: "instalacion-roja" as ImageName,
-      alt: "Instalación de mallas rojas en un pabellón, con personas recorriéndola",
+      image: "venecia-grupo-escalinata" as ImageName,
+      alt: "Participantes sentados en una escalinata de piedra en Venecia, con la bolsa de Experience Design",
     },
   ],
-  pending: {
-    title: "Lo concreto, apenas esté confirmado.",
-    body: "Te enviamos el programa, qué incluye y el valor. Sin formularios largos.",
-    items: ["Fechas", "Programa", "Valor", "Cupos"],
-    status: "Por confirmar",
-    image: { image: "salone-banderas" as ImageName, alt: "Banderas del Salone del Mobile.Milano frente al pabellón" },
+  /** Itinerario 2027, tomado del programa publicado en el sitio anterior. Sin horarios: se confirman con cada grupo. */
+  itinerary: {
+    label: "Milán 2027",
+    title: "Seis días, del 12 al 17 de abril.",
+    body: "La Milan Design Week y el Salone del Mobile.Milano (13 al 18 de abril de 2027), recorridos en grupo reducido y con una agenda exigente.",
+    days: [
+      { day: "Día 1", date: "Lunes 12", title: "Fuori Salone", text: "Llegada a Milán y primer encuentro en Milano Centrale. Recorremos la ciudad y sus showrooms para entender cómo se vive el diseño fuera de la feria." },
+      { day: "Día 2", date: "Martes 13", title: "Salone del Mobile", text: "Primera jornada completa en la feria, en Rho Fiera. Una selección previa de pabellones, marcas y piezas, para mirar con criterio y no solo recorrer." },
+      { day: "Día 3", date: "Miércoles 14", title: "Salone del Mobile", text: "Segunda jornada en la feria. Nos reunimos en Milano Centrale y volvemos a los pabellones: materiales, procesos y referentes en directo." },
+      { day: "Día 4", date: "Jueves 15", title: "Salone del Mobile", text: "Tercera jornada en la feria, para profundizar en lo que cada participante vino a buscar." },
+      { day: "Día 5", date: "Viernes 16", title: "Fuori Salone", text: "La ciudad convertida en exposición: showrooms, estudios e instalaciones, donde el diseño se muestra en su propio contexto." },
+      { day: "Día 6", date: "Sábado 17", title: "Fuera de Milán", text: "Una actividad en los alrededores de Milán y el cierre de la experiencia. Desde ahí, cada participante organiza su regreso o extiende su estadía." },
+    ],
+    note: "El detalle de cada jornada se envía con el programa completo.",
   },
+  pending: {
+    title: "Lo que falta confirmar.",
+    body: "Te enviamos el programa completo y el valor apenas estén confirmados. Sin formularios largos.",
+    items: ["Valor", "Cupos"],
+    status: "Por confirmar",
+    image: { image: "salone-bolsa-e" as ImageName, alt: "Participante sentado en la escalinata roja del Salone del Mobile, con la bolsa de Experience Design" },
+  },
+  galleryLabel: "Milan Design Week 2026",
+  galleryTitle: "Lo que recorrimos.",
+  gallery: [
+    { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
+    { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
+    { image: "fuori-showroom-lampara", alt: "Showroom del Fuori Salone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
+    { image: "salone-sillon-cuero", alt: "Sillón de cuero caramelo junto a un mueble de madera y una lámpara de escritorio, en un stand del Salone" },
+    { image: "venecia-gran-canal", alt: "Participantes en una lancha sobre el Gran Canal de Venecia" },
+    { image: "salone-lamparas-burbujas", alt: "Lámpara de esferas de vidrio sobre una mesa de madera, con plantas detrás, en el Salone del Mobile" },
+    { image: "milan-zapato-rojo", alt: "Participante junto a una escultura de un zapato rojo gigante bajo los arcos de la Galleria" },
+    { image: "verona-grupo-antolini", alt: "El grupo de Experience Design en el showroom de Antolini, en Verona, frente a una placa de mármol" },
+    { image: "salone-cocina-verde", alt: "Cocina de módulos verde oscuro con cubierta de madera en un stand del Salone del Mobile" },
+    { image: "milan-tranvia", alt: "Un tranvía histórico avanzando por una calle de Milán" },
+    { image: "salone-sofa-repisas", alt: "Sofá curvo claro frente a repisas de vidrio con objetos negros, en un stand del Salone" },
+    { image: "milan-grupo-eurocucina", alt: "Participante frente al muro amarillo de EuroCucina en el Salone del Mobile" },
+    { image: "venecia-salute", alt: "La basílica de Santa Maria della Salute vista desde el agua, con una góndola en primer plano" },
+    { image: "verona-antolini-veta", alt: "Participante recorriendo con la mano la veta de una placa de mármol en Antolini, Verona" },
+    { image: "milan-galleria-grupo", alt: "Participantes recorriendo la Galleria Vittorio Emanuele II de noche" },
+    { image: "salone-cubierta-rho-fiera", alt: "Christian Erdmann bajo la cubierta de vidrio de Rho Fiera, junto al cartel del Salone del Mobile" },
+    { image: "milan-grupo-lago-como", alt: "El grupo de Experience Design en un barco en el lago de Como" },
+    { image: "venecia-gran-canal-retrato", alt: "Participante con la bolsa de Experience Design frente al Gran Canal de Venecia" },
+  ] as { image: ImageName; alt: string }[],
   cta: "Quiero conocer la experiencia",
 };
 
@@ -274,29 +315,29 @@ export const neverLate = {
 };
 
 export const formation = {
-  title: "Lo que descubres también puede transformarse en conocimiento.",
-  body: "Formación conectada con el mundo real: materiales, marcas, casos y personas que hacen diseño todos los días.",
+  title: "Aprendizaje aplicado, no clases teóricas.",
+  body: "Profesionales de marketing, fotografía y marca comparten herramientas concretas para capitalizar cada experiencia y llevarla a la propia práctica.",
   formatsLabel: "Formatos que estamos preparando",
-  formats: ["Workshops", "Masterclasses", "Conversaciones", "Casos reales", "Sesiones de materiales", "Encuentros con marcas", "Ejercicios"],
+  formats: ["Cursos", "Webinars", "Herramientas prácticas", "Fotografía", "Marketing", "Marca"],
   modalities: [
     {
-      id: "presencial",
-      label: "Presencial",
-      text: "En sala, en estudios y frente al material. Donde se puede mirar y tocar.",
+      id: "antes",
+      label: "Antes",
+      text: "Aprender prepara la mirada: qué observar, cómo registrarlo y qué preguntas llevar a cada feria, showroom y estudio.",
     },
     {
-      id: "online",
-      label: "Online",
-      text: "Una modalidad, no otro mundo. El mismo enfoque para quienes no pueden viajar o quieren seguir aprendiendo después.",
+      id: "despues",
+      label: "Después",
+      text: "Volver con referencias propias y criterio para aplicarlas: herramientas online para llevar lo vivido a la propia práctica.",
     },
   ],
   status: "Programa en desarrollo",
   cta: "Avísame",
   image: {
-    image: "materiales",
-    alt: "Muestras de piedra, madera y metal sobre una mesa de trabajo",
+    image: "verona-marmol-verde",
+    alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona",
     material: "plaster",
-    brief: "Sesión de materiales.",
+    brief: "Materiales de cerca.",
   } as ImageSlot,
 };
 
@@ -331,14 +372,14 @@ export const founders = {
   people: [
     {
       name: "Danae Barla",
-      field: "Arquitectura, interiorismo y diseño.",
-      bio: null as string | null,
+      field: "Arquitecta interiorista · Studio Barla",
+      bio: "Desde el interiorismo, selecciona las experiencias, las referencias y los aprendizajes: ferias, showrooms, estudios y materiales que vale la pena conocer en su propio contexto." as string | null,
       image: { image: "danae", alt: "Retrato de Danae Barla", material: "terracotta", brief: "Retrato real de Danae, luz natural. 4:5." } as ImageSlot,
     },
     {
       name: "Christian Erdmann",
-      field: "Arquitectura, interiorismo y diseño. Parte del proyecto desde 2025.",
-      bio: null as string | null,
+      field: "Diseñador industrial · Mobiliario y curaduría de diseño",
+      bio: "Diseñador industrial especializado en mobiliario y curador de diseño. Abre puertas que no están a la vista y lee los códigos de las grandes casas del diseño. Parte del proyecto desde 2025." as string | null,
       image: { image: "christian", alt: "Retrato de Christian Erdmann", material: "walnut", brief: "Retrato real de Christian, luz natural. 4:5." } as ImageSlot,
     },
   ],
@@ -358,6 +399,20 @@ export const archive = {
   title: "Lo que ya recorrimos.",
   body: "Empezó como un experimento con pocas personas. Sigue igual de cerca.",
   entries: [
+    {
+      year: "2026",
+      place: "Milán",
+      tag: "Milan Design Week · abril de 2026",
+      text: "Salone del Mobile, Fuori Salone y showrooms de la ciudad, con Verona, entre los mármoles de Antolini, y Venecia.",
+      material: "travertine",
+    },
+    {
+      year: "2025",
+      place: "São Paulo",
+      tag: "CASACOR São Paulo · julio de 2025",
+      text: "Una casa recorrida ambiente por ambiente, con paradas en Bontempo, Todeschini y Eliane.",
+      material: "terracotta",
+    },
     {
       year: "2025",
       place: "Milán",
@@ -389,6 +444,10 @@ export const archive = {
 export const about = {
   title: "Nosotros",
   statement: "Abrir la mirada hacia nuevas posibilidades.",
+  positioning: { lead: "Más que viajar.", rest: "Vivir el diseño para", accent: "ampliar la mirada." },
+  positioningBody: "En un mundo de experiencias pasajeras, Experience Design apuesta por lo que permanece: no solo te llevamos a un destino, te sumergimos en una experiencia donde el diseño cobra vida.",
+  motto: "Vivirlo. Cuestionarlo. Hacerlo propio.",
+  promise: "No vienes solo a conocer el mundo del diseño. Vienes a descubrir qué puede despertar en ti.",
   image: {
     image: "fundadores-showroom",
     alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
@@ -397,42 +456,65 @@ export const about = {
   } as ImageSlot,
   who: {
     label: "Quiénes somos",
-    text: "Experience Design crea experiencias de diseño que conectan viajes, aprendizaje y personas con el mundo de la arquitectura, el interiorismo y el diseño.",
+    text: "Experience Design crea experiencias curadas para vivir el diseño desde dentro, en las capitales del diseño y en los escenarios donde nacen las ideas.",
+    body: "Ferias, showrooms, estudios y ciudades que tienen el diseño incorporado a su vida cotidiana. Su valor está en lo que ocurre en ellos: entender cómo se piensa una pieza, tocar los materiales, reconocer a los referentes y volver con una mirada propia. No somos una agencia de viajes: facilitamos experiencias, referencias y herramientas para que cada persona avance hacia lo que busca.",
     history: "Empezó como un experimento con pocas personas. Sigue igual de cerca.",
   },
-  /**
-   * BORRADOR para validar con Danae y Christian: misión, visión y valores están
-   * redactados sólo a partir de frases que ya usa la marca (hero, ejes, comunidad).
-   */
+  /** Textos oficiales del manual de marca (versión aprobada el 21 de octubre de 2026). */
   principles: [
-    { id: "mision", label: "Misión", text: "Crear experiencias de diseño, formación y conexiones para quienes quieren seguir descubriendo." },
-    { id: "vision", label: "Visión", text: "Que el diseño se viva en primera persona: mirado, tocado y conversado donde está ocurriendo." },
+    {
+      id: "proposito",
+      label: "Propósito",
+      text: "Abrir la mirada hacia nuevas posibilidades.",
+      body: "Salir de lo conocido cambia la forma en que vemos las cosas. Cada experiencia es un medio, no un fin.",
+    },
+    {
+      id: "mision",
+      label: "Misión",
+      text: "Facilitar y contribuir a la evolución de quienes buscan descubrir, aprender y crecer a través del diseño.",
+      body: "Con experiencias cuidadosamente curadas que permiten vivirlo desde dentro, conocer sus procesos de inspiración y llevar lo aprendido a la propia práctica, para ampliar la mirada y abrir nuevas formas de interpretar, crear y avanzar en el camino profesional.",
+    },
+    {
+      id: "vision",
+      label: "Visión",
+      text: "Consolidar y experimentar dentro.",
+      body: "Ser el referente de la curaduría y la vanguardia en la práctica profesional del diseño: experiencias que permiten vivirlo desde dentro, en las capitales del diseño, en sus procesos y en sus materiales.",
+    },
   ],
   valuesLabel: "Valores",
   values: [
-    { name: "Mirar", text: "Abrir la mirada hacia nuevas posibilidades." },
-    { name: "Tocar", text: "Si no lo tocas, no lo viste." },
-    { name: "Aprender", text: "Nunca es tarde para mirar distinto." },
-    { name: "Conectar", text: "Más que viajes, creamos relaciones." },
+    { name: "Ambición", text: "Aspirar a más: lo más y lo mejor del diseño." },
+    { name: "Superación", text: "Evolucionar y no conformarse. Cada experiencia es una inversión en el propio crecimiento." },
+    { name: "Curiosidad", text: "Explorar, cuestionar y descubrir." },
+    { name: "Sello propio", text: "Descubrir lo que distingue a cada persona y expresarlo con criterio y coherencia." },
+    { name: "Creatividad", text: "Imaginar nuevas posibilidades." },
+    { name: "Relaciones", text: "Construir redes y generar intercambios que aporten valor." },
   ],
+  mottoLabel: "Lema",
+  promiseLabel: "Promesa",
   philosophyLabel: "Filosofía",
-  foundersLabel: "Danae + Christian",
+  foundersLabel: "Quiénes están detrás",
 };
 
 /* ---------------------------------------------------------------------------
- * PROGRAMAS: tres programas independientes. Nunca mezclar con destinos.
+ * PROGRAMAS: Formación y Marca personal. Nunca mezclar con destinos.
+ * Estudiantes y profesionales no son programas: son el "para quién" de cada uno.
  * ------------------------------------------------------------------------- */
 
-export type ProgramId = "marca-personal" | "estudiantes" | "profesionales";
+export type ProgramId = "formacion" | "marca-personal";
 
 export type Program = {
   id: ProgramId;
   n: string;
+  /** Verbo del eje (Aprender, Expresar). */
+  verb: string;
   name: string;
   href: string;
   /** Idea central del programa. */
   lines: string[];
   intro: string;
+  /** Una o dos frases para la página Programas. */
+  short: string;
   keywords: string[];
   /** Tono del sitio mientras el programa está activo. */
   tone: "clay" | "sand" | "ink";
@@ -440,88 +522,91 @@ export type Program = {
   glow: string;
   material: MaterialName;
   image: ImageSlot;
-  /** Segunda imagen pequeña (sólo Profesionales: el material de cerca). */
+  /** Segunda imagen pequeña (el material de cerca). */
   detail?: ImageSlot;
+  /** Foto de la página Programas. */
+  railImage: { image: ImageName; alt: string };
+  audience: { students: string; professionals: string };
   interest: InterestId;
   cta: string;
-  mood: string;
 };
 
 export const programs = {
   title: "Programas",
-  lead: "Experiencias diseñadas para distintos momentos de tu camino.",
-  body: "Experience Design tiene distintas formas de participar, según quién eres y qué estás buscando.",
-  question: "¿Qué camino dentro de Experience Design es para mí?",
-  hint: "Tres puertas al mismo mundo",
+  lead: "Lo vivido, convertido en criterio propio.",
+  body: "Dos programas para antes y después de cada experiencia: aprender prepara la mirada; expresar la convierte en un sello propio.",
+  question: "¿Qué quieres llevar a tu práctica?",
+  hint: "Dos programas",
+  more: "Quiero saber más",
+  audienceLabel: "Para quién es",
+  audienceStudents: "Estudiantes",
+  audienceProfessionals: "Profesionales",
   items: [
     {
-      id: "marca-personal",
+      id: "formacion",
       n: "01",
+      verb: "Aprender",
+      name: "Formación",
+      href: routes.formacion,
+      lines: ["Lo que descubres", "también puede transformarse", "en conocimiento."],
+      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca, para capitalizar la experiencia y llevarla a la propia práctica.",
+      short: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
+      keywords: ["Cursos", "Webinars", "Herramientas", "Fotografía", "Marketing", "Marca"],
+      tone: "ink",
+      glow: "#C97B4A",
+      material: "travertine",
+      image: {
+        image: "fuori-charla-arcos",
+        alt: "Charla durante el Fuori Salone de Milán: el público sentado bajo una galería de arcos frente a una pantalla",
+        material: "travertine",
+        brief: "Charla o encuentro con profesionales.",
+      },
+      detail: {
+        image: "formacion-muestrario-cueros",
+        alt: "Muestrario de cueros de colores ordenados en una repisa de showroom",
+        material: "walnut",
+        brief: "Material de cerca.",
+      },
+      railImage: {
+        image: "verona-antolini-veta",
+        alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona",
+      },
+      audience: {
+        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados que quieren entender el oficio más allá del aula.",
+        professionals: "Profesionales de arquitectura, interiorismo y diseño que quieren seguir aprendiendo y sacar más de cada experiencia.",
+      },
+      interest: "formacion",
+      cta: "Conocer Formación",
+    },
+    {
+      id: "marca-personal",
+      n: "02",
+      verb: "Expresar",
       name: "Marca personal",
       href: routes.marcaPersonal,
       lines: ["Tienes una mirada.", "¿Qué hacemos con ella?"],
-      intro: "Reconocer tu identidad profesional y aprender a contarla. No se trata de seguidores: se trata de tu valor.",
+      intro: "Construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa. No se trata de seguidores: se trata de tu valor profesional.",
+      short: "Construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa.",
       keywords: ["Tu historia", "Tu mirada", "Tu posicionamiento", "Tu voz"],
       tone: "clay",
       glow: "#F1D6BF",
       material: "linen",
       image: {
-        image: "fundadores-showroom",
-        alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
+        image: "marca-retrato-backdrop",
+        alt: "Participante sonriendo frente al muro de prensa de un evento de diseño en Milán",
         material: "linen",
-        brief: "Retrato íntimo, luz natural, vertical. Reemplazar por la foto oficial de Marca personal cuando exista.",
+        brief: "Retrato de una participante, luz natural, vertical.",
+      },
+      railImage: {
+        image: "marca-showroom-retrato",
+        alt: "Participante sentada en un showroom de Milán, entre espejos redondos y butacas de cuero",
+      },
+      audience: {
+        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados que empiezan a definir su sello antes de salir al mundo profesional.",
+        professionals: "Profesionales de arquitectura, interiorismo y diseño que quieren reconocer su valor y comunicarlo con criterio y coherencia.",
       },
       interest: "marca",
       cta: "Conocer Marca personal",
-      mood: "Íntimo",
-    },
-    {
-      id: "estudiantes",
-      n: "02",
-      name: "Estudiantes",
-      href: routes.estudiantes,
-      lines: ["El mundo del diseño", "también se aprende", "fuera del aula."],
-      intro: "Para estudiantes de pregrado y posgrado de arquitectura, interiorismo, diseño y disciplinas creativas afines.",
-      keywords: ["Aprender", "Descubrir", "Conectar", "Imaginar tu camino"],
-      tone: "sand",
-      glow: "#C9765C",
-      material: "terrazzo",
-      image: {
-        image: "charla-showroom",
-        alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
-        material: "terrazzo",
-        brief: "Estudiantes en un recorrido o conversación fuera del aula.",
-      },
-      interest: "estudiantes",
-      cta: "Conocer el programa",
-      mood: "Exploración",
-    },
-    {
-      id: "profesionales",
-      n: "03",
-      name: "Profesionales",
-      href: routes.profesionales,
-      lines: ["Seguir aprendiendo", "también es parte", "de una carrera."],
-      intro: "Para quienes ya trabajan en arquitectura, interiorismo, diseño y en las industrias que los rodean.",
-      keywords: ["Referencias", "Industria", "Materiales", "Conexiones"],
-      tone: "ink",
-      glow: "#B7664F",
-      material: "walnut",
-      image: {
-        image: "showroom-piedra",
-        alt: "Showroom con mesa de piedra, sillas tapizadas y arcos",
-        material: "walnut",
-        brief: "Showroom o estudio, arquitectura y material.",
-      },
-      detail: {
-        image: "materiales",
-        alt: "Muestras de piedra, madera y metal sobre una mesa de trabajo",
-        material: "travertine",
-        brief: "Material de cerca.",
-      },
-      interest: "profesionales",
-      cta: "Conocer el programa",
-      mood: "Profundidad",
     },
   ] as Program[],
 };
@@ -529,6 +614,12 @@ export const programs = {
 export const programPending = {
   label: "Lo concreto",
   status: "Por confirmar",
+};
+
+export const formationPage = {
+  closeTitle: "Lo concreto, apenas esté confirmado.",
+  closeBody: "Te avisamos cuando abramos los primeros cursos y webinars. Sin formularios largos.",
+  pending: ["Cursos", "Fechas", "Valor"],
 };
 
 export const personalBrandPage = {
@@ -543,39 +634,11 @@ export const personalBrandPage = {
   pending: ["Formato", "Fechas", "Valor"],
 };
 
-export const studentsPage = {
-  audienceLabel: "Para quién",
-  levels: ["Pregrado", "Posgrado"],
-  disciplines: ["Arquitectura", "Interiorismo", "Diseño", "Disciplinas creativas afines"],
-  journeyLabel: "Un recorrido",
-  journey: [
-    { title: "Aprender", text: "Lo que no cabe en una clase: el oficio visto de cerca." },
-    { title: "Descubrir", text: "Lugares, estudios y materiales que hasta ahora eran una foto." },
-    { title: "Conectar", text: "Personas de la industria con las que seguir conversando." },
-    { title: "Imaginar tu camino", text: "Volver con otra idea de lo que puedes llegar a hacer." },
-  ],
-  gainsLabel: "Lo que se vive",
-  gains: ["Exposición profesional", "Inspiración", "Conexiones con la industria", "Cultura del diseño", "Referencias reales", "Aprendizaje", "Networking", "Nuevas perspectivas"],
-  closeTitle: "La propuesta para estudiantes está en definición.",
-  closeBody: "Déjanos tus datos y te contamos apenas tengamos lo concreto.",
-  pending: ["Formato", "Fechas", "Valor", "Cupos"],
-};
-
-export const professionalsPage = {
-  audienceLabel: "Para quién",
-  audience: ["Arquitectos", "Interioristas", "Diseñadores", "Profesionales creativos", "Fundadores de estudios", "Profesionales independientes"],
-  industriesLabel: "Y quienes trabajan en",
-  industries: ["Materiales", "Mobiliario", "Iluminación", "Arquitectura", "Interiorismo", "Decoración", "Industria del diseño"],
-  gainsLabel: "Lo que se lleva",
-  gains: ["Desarrollo profesional", "Nuevas referencias", "Conocimiento de la industria", "Cultura del diseño", "Conexiones", "Nuevas perspectivas", "Aprendizaje continuo", "Experiencias reales"],
-  closeTitle: "Lo concreto, apenas esté confirmado.",
-  closeBody: "Te enviamos formato, fechas y valor. Sin formularios largos.",
-  pending: ["Formato", "Fechas", "Valor", "Cupos"],
-};
-
 /* ---------------------------------------------------------------------------
  * DESTINOS: experiencias para vivir. No son programas.
  * ------------------------------------------------------------------------- */
+
+export type CollagePhoto = { image: ImageName; alt: string };
 
 export const destinations = {
   title: "Destinos",
@@ -583,6 +646,8 @@ export const destinations = {
   /** Sólo en Inicio: la sección Destinos (la página Destinos sigue usando `lead`). */
   homeLead: "Hay mundos que, cuando los vives, amplían el tuyo.",
   question: "¿Qué experiencia puedo vivir?",
+  more: "Quiero saber más",
+  doneLabel: "Experiencia realizada",
   items: [
     {
       id: "milan",
@@ -591,18 +656,29 @@ export const destinations = {
       event: "Milan Design Week",
       sub: "Salone del Mobile",
       href: routes.milan,
-      when: "2027 · Fechas por confirmar",
+      when: "12 al 17 de abril de 2027",
+      done: "Abril de 2026",
       text: "La semana en que una ciudad entera se vuelve exposición.",
-      image: { image: "milan-showroom", alt: "Showroom en Milán con pilares de piedra, sofás y una gran estantería iluminada", material: "terrazzo", brief: "Milán, Design Week." } as ImageSlot,
       cta: "Entrar a Milán",
       /** Inicio: la etiqueta del selector y su carrusel. */
       homeLabel: "Salone del Mobile",
+      collage: [
+        { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
+        { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
+        { image: "salone-escalinata-roja", alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Rho Fiera" },
+        { image: "fuori-showroom-lampara", alt: "Showroom del Fuori Salone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
+        { image: "verona-marmol-verde", alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona" },
+        { image: "milan-galleria-cupula", alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
+        { image: "salone-cielo-cintas", alt: "Instalación de cintas blancas suspendidas sobre un stand del Salone del Mobile" },
+        { image: "milan-grupo-suelo-rojo", alt: "Participantes sentados en un banco junto al suelo rojo de un pabellón del Salone" },
+        { image: "venecia-gondola", alt: "Participante en una góndola bajo un puente de Venecia" },
+      ] as CollagePhoto[],
       gallery: [
-        { image: "milan-salone-pabellon" as ImageName, alt: "Pabellón del Salone del Mobile.Milano, con el muro rojo de la feria y visitantes bajo la cubierta de acero" },
-        { image: "milan-linternas" as ImageName, alt: "Instalación de grandes lámparas de papel suspendidas que se reflejan en el suelo" },
-        { image: "milan-butaca" as ImageName, alt: "Butaca tapizada en tono caramelo junto a una lámpara de pie y una mesa auxiliar de piedra" },
-        { image: "milan-cortinas" as ImageName, alt: "Instalación de cortinas de hilos luminosos en círculo, con visitantes recorriéndola" },
-        { image: "milan-sofas" as ImageName, alt: "Sofás de bouclé, mesa de piedra y una lámpara escultórica en un stand de la feria" },
+        { image: "salone-cocina-bosque" as ImageName, alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
+        { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuori Salone: sofás bajos, pilares de piedra y una gran biblioteca iluminada al fondo" },
+        { image: "milan-duomo-grupo-noche" as ImageName, alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
+        { image: "salone-living" as ImageName, alt: "Estar de sofás curvos y mesas de piedra en un stand del Salone del Mobile" },
+        { image: "verona-marmol-verde" as ImageName, alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona" },
       ],
     },
     {
@@ -612,17 +688,27 @@ export const destinations = {
       event: "CASACOR São Paulo",
       sub: "Arquitectura, interiorismo y paisajismo",
       href: routes.saoPaulo,
-      when: "Año por confirmar",
+      when: "Próxima fecha por confirmar",
+      done: "Julio de 2025",
       text: "Una casa entera convertida en ambientes para recorrer.",
-      image: { alt: "", material: "terracotta", brief: "Foto real de CASACOR São Paulo (pendiente)." } as ImageSlot,
       cta: "Entrar a São Paulo",
       homeLabel: "CASACOR",
+      collage: [
+        { image: "casacor-arco-verde-mural", alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
+        { image: "casacor-lavamanos-terracota", alt: "Baño con lavamanos de madera terracota y dos espejos redondos iluminados" },
+        { image: "casacor-atrio-reflejo-agua", alt: "Atrio de varios niveles reflejado en un espejo de agua" },
+        { image: "casacor-biblioteca", alt: "Biblioteca de repisas de madera con objetos de cerámica y libros, junto a un sofá" },
+        { image: "casacor-celosia-arcos-madera", alt: "Celosía de madera con arcos que deja ver el jardín" },
+        { image: "casacor-grupo-espaco", alt: "El grupo de Experience Design frente a un muro con el letrero «espaço» en CASACOR" },
+        { image: "casacor-bontempo-espejo-agua", alt: "Letras de Casa Bontempo sobre un muro de hormigón, con jardín y espejo de agua" },
+        { image: "casacor-sala-naranja", alt: "Sala de luz naranja con una butaca acolchada y una obra circular en el muro" },
+      ] as CollagePhoto[],
       gallery: [
-        { image: "sp-casacor-acceso" as ImageName, alt: "Acceso a CASACOR São Paulo: el nombre sobre un muro de hormigón entre vegetación" },
-        { image: "sp-celosias" as ImageName, alt: "Estar abierto con celosías de cuentas colgantes, sofás claros y plantas" },
-        { image: "sp-patio-terracota" as ImageName, alt: "Patio de muros terracota con un óculo de luz, un árbol y un espejo de agua" },
-        { image: "sp-estar-nocturno" as ImageName, alt: "Estar de sofás curvos al anochecer, con árboles interiores y una pieza de arte en relieve" },
-        { image: "sp-comedor-jardin" as ImageName, alt: "Comedor de madera bajo una lámpara de fibra, abierto a un jardín tropical" },
+        { image: "casacor-arco-verde-mural" as ImageName, alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
+        { image: "casacor-terraza-jardin" as ImageName, alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },
+        { image: "casacor-lavamanos-terracota" as ImageName, alt: "Baño con lavamanos de madera terracota y dos espejos redondos iluminados" },
+        { image: "casacor-living-biblioteca" as ImageName, alt: "Living frente a una biblioteca iluminada, con una mesa de piedra cubierta de libros" },
+        { image: "casacor-atrio-reflejo-agua" as ImageName, alt: "Atrio de varios niveles reflejado en un espejo de agua" },
       ],
     },
   ],
@@ -631,19 +717,36 @@ export const destinations = {
 export const saoPaulo = {
   city: "São Paulo",
   event: "CASACOR São Paulo",
-  year: "Año por confirmar",
+  year: "Julio de 2025",
   statementA: "Una casa no se entiende en una foto.",
   statementB: "Se recorre.",
   intro: "En CASACOR, arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Cada uno es una forma distinta de resolver cómo vivimos.",
-  origin: "Aquí empezó todo: en 2023, la primera prueba de Experience Design fue en São Paulo, con tres participantes.",
-  /** Sin fotos reales todavía: cada ambiente usa una placa de material. Reemplazar por fotos de CASACOR. */
+  origin: "Aquí empezó todo: en 2023, la primera prueba de Experience Design fue en São Paulo, con tres participantes. En julio de 2025 volvimos a CASACOR.",
   rooms: [
-    { n: "01", title: "La casa", text: "Una muestra que se recorre de puerta en puerta, ambiente por ambiente.", material: "plaster" as MaterialName, brief: "Fachada o acceso de CASACOR São Paulo." },
-    { n: "02", title: "Los ambientes", text: "Cada espacio es una propuesta distinta. Recorrerlos es comparar miradas.", material: "terracotta" as MaterialName, brief: "Un ambiente completo, plano general." },
-    { n: "03", title: "Los materiales", text: "Lo que en catálogo es un nombre, aquí es luz, peso y temperatura.", material: "travertine" as MaterialName, brief: "Detalle de material en un ambiente." },
-    { n: "04", title: "La ciudad", text: "Una de las grandes capitales de la arquitectura moderna, a escala de calle.", material: "terrazzo" as MaterialName, brief: "São Paulo, arquitectura de la ciudad." },
-    { n: "05", title: "Las personas", text: "Quienes diseñan cada ambiente, y quienes lo recorren con nosotros.", material: "walnut" as MaterialName, brief: "Grupo recorriendo un ambiente." },
+    { n: "01", title: "La casa", text: "Una muestra que se recorre de puerta en puerta, ambiente por ambiente.", material: "plaster" as MaterialName, image: "casacor-atrio-desde-arriba" as ImageName, alt: "Atrio de CASACOR São Paulo visto desde arriba, con visitantes recorriendo el nivel inferior" },
+    { n: "02", title: "Los ambientes", text: "Cada espacio es una propuesta distinta. Recorrerlos es comparar miradas.", material: "terracotta" as MaterialName, image: "casacor-dormitorio-muro-curvo" as ImageName, alt: "Dormitorio con un muro curvo revestido en madera y un velador redondo" },
+    { n: "03", title: "Los materiales", text: "Lo que en catálogo es un nombre, aquí es luz, peso y temperatura.", material: "travertine" as MaterialName, image: "casacor-aplique-muro-marmolado" as ImageName, alt: "Aplique metálico sobre un muro de piedra con vetas verdes y ocres" },
+    { n: "04", title: "Las marcas", text: "Bontempo, Todeschini, Eliane: los procesos detrás de lo que se ve en cada ambiente.", material: "terrazzo" as MaterialName, image: "casacor-cocina-marmol-verde" as ImageName, alt: "Cocina con una cubierta de mármol verde texturado y muebles de madera" },
+    { n: "05", title: "Las personas", text: "Quienes diseñan cada ambiente, y quienes lo recorren con nosotros.", material: "walnut" as MaterialName, image: "casacor-grupo-almuerzo" as ImageName, alt: "El grupo de Experience Design almorzando durante la visita a CASACOR São Paulo" },
   ],
+  galleryLabel: "CASACOR São Paulo 2025",
+  galleryTitle: "Lo que recorrimos.",
+  gallery: [
+    { image: "casacor-bontempo-espejo-agua", alt: "Letras de Casa Bontempo sobre un muro de hormigón, con jardín y espejo de agua" },
+    { image: "casacor-ventana-arco", alt: "Baño de muros oscuros con una ventana en arco, plantas y piedras al pie del lavamanos" },
+    { image: "casacor-biblioteca", alt: "Biblioteca de repisas de madera con objetos de cerámica y libros, junto a un sofá" },
+    { image: "casacor-arbol-celosia", alt: "Un árbol interior frente a una celosía de cuadros iluminada" },
+    { image: "casacor-grupo-escalera", alt: "Participantes sentadas en una escalera de vidrio y madera en CASACOR" },
+    { image: "casacor-bar-cielo-estampado", alt: "Bar con cielo de papel estampado, repisas de vidrio y cubierta de piedra" },
+    { image: "casacor-tocador-ventana", alt: "Tocador con espejo enmarcado en madera frente a un ventanal al jardín" },
+    { image: "casacor-quiebravistas-plantas", alt: "Quiebravistas de lamas blancas sobre un jardín de plantas tropicales" },
+    { image: "casacor-grupo-atrio", alt: "Participantes sentadas en un sofá del atrio de CASACOR São Paulo" },
+    { image: "casacor-jardin-sillas-rojas", alt: "Jardín con un muro verde y dos sillas rojas sobre pasto y piedra" },
+    { image: "casacor-dormitorio-celosia", alt: "Dormitorio nocturno tras una celosía de lamas blancas, con un árbol en primer plano" },
+    { image: "casacor-terraza-jardin", alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },
+    { image: "casacor-grupo-cena", alt: "El grupo de Experience Design en una cena durante el viaje a São Paulo" },
+    { image: "casacor-living-biblioteca", alt: "Living frente a una biblioteca iluminada, con una mesa de piedra cubierta de libros" },
+  ] as CollagePhoto[],
   pending: {
     title: "Lo concreto, apenas esté confirmado.",
     body: "Te avisamos cuando definamos la próxima experiencia en São Paulo.",
@@ -658,9 +761,8 @@ export const saoPaulo = {
  * ------------------------------------------------------------------------- */
 
 export const interests = [
+  { id: "formacion", label: "Formación" },
   { id: "marca", label: "Marca personal" },
-  { id: "estudiantes", label: "Estudiantes" },
-  { id: "profesionales", label: "Profesionales" },
   { id: "milan", label: "Milán" },
   { id: "sao-paulo", label: "São Paulo" },
   { id: "colaboraciones", label: "Colaboraciones" },

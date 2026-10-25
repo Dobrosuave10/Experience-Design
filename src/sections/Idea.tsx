@@ -21,13 +21,13 @@ const ENTRANCES: Record<Sense, (em: HTMLElement) => gsap.core.Timeline> = {
     gsap
       .timeline()
       .fromTo(em, { opacity: 0, y: 36 }, { opacity: 1, y: 0, ease: "power2.out", duration: 1 }, 0)
-      .fromTo(em, { color: "#dcbfae" }, { color: "#a6533f", ease: "power1.inOut", duration: 0.8 }, 0.2),
+      .fromTo(em, { color: "#dcbfae" }, { color: "#9b4819", ease: "power1.inOut", duration: 0.8 }, 0.2),
   // Se toca · materia: una máscara la descubre de izquierda a derecha y el tono se asienta
   toca: (em) =>
     gsap
       .timeline()
       .fromTo(em, { clipPath: "inset(-12% 100% -12% 0%)" }, { clipPath: "inset(-12% -6% -12% 0%)", ease: "power2.out", duration: 1 }, 0)
-      .fromTo(em, { color: "#c98a72" }, { color: "#a6533f", ease: "power1.inOut", duration: 0.7 }, 0.3),
+      .fromTo(em, { color: "#c98a72" }, { color: "#9b4819", ease: "power1.inOut", duration: 0.7 }, 0.3),
   // Se reflexiona · claridad: sin desplazamiento; de una suavidad óptica a la nitidez completa
   reflexiona: (em) =>
     gsap.timeline().fromTo(

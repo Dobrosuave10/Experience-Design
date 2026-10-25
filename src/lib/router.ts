@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react";
+import { redirects } from "../content/site";
 
 /**
  * Router mínimo sobre la History API (sin dependencias).
@@ -7,15 +8,22 @@ import { useSyncExternalStore } from "react";
  * cambie la página detrás del telón y la descubra.
  */
 
-const normalize = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p) || "/";
+const trim = (p: string) => (p.length > 1 ? p.replace(/\/+$/, "") : p) || "/";
+/** Las rutas retiradas (ver `redirects`) resuelven a su reemplazo. */
+const normalize = (p: string) => redirects[trim(p)] ?? trim(p);
 
 let current = typeof window !== "undefined" ? normalize(window.location.pathname) : "/";
+// Si se entró por una ruta retirada, la barra de direcciones muestra la nueva
+if (typeof window !== "undefined" && current !== trim(window.location.pathname)) {
+  history.replaceState(null, "", current + window.location.search + window.location.hash);
+}
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((fn) => fn());
 
 if (typeof window !== "undefined") {
   window.addEventListener("popstate", () => {
     current = normalize(window.location.pathname);
+    if (current !== trim(window.location.pathname)) history.replaceState(null, "", current);
     emit();
   });
 }

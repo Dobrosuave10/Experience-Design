@@ -1,27 +1,63 @@
+/* Bodoni Moda (variable, con eje de tamaño óptico), servida desde /fonts para poder precargarla en index.html */
+@font-face {
+  font-family: "Bodoni Moda Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/fonts/bodoni-moda-latin-opsz-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: "Bodoni Moda Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/fonts/bodoni-moda-latin-ext-opsz-normal.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: "Bodoni Moda Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/fonts/bodoni-moda-latin-opsz-italic.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: "Bodoni Moda Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/fonts/bodoni-moda-latin-ext-opsz-italic.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
 @font-face {
   font-family: "Glacial Indifference";
   src: url("/fonts/glacial-indifference.woff2") format("woff2");
-  font-weight: 400;
+  /* Sólo existe el corte regular: el rango evita que el navegador fabrique negritas */
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  /* Paleta de marca */
-  --clay: #a6533f;
-  --clay-soft: #b7664f;
-  --sand: #efe7dc;
-  --paper: #f5f1ea;
-  --ink: #171513;
-  --umber: #2a2521;
-  --muted-light: #675c54; /* 5.4:1 sobre paper */
-  --muted-dark: #a89d92; /* 7:1 sobre ink */
+  /* Paleta del manual de marca: terracota, negro, marfil/editorial y arena */
+  --clay: #9b4819; /* terracota · 5.9:1 sobre paper */
+  --clay-soft: #c97b4a; /* la misma terracota, aclarada para texto sobre fondo oscuro (6:1 sobre ink) */
+  --sand: #e9dfd6; /* arena */
+  --paper: #fbf8f2; /* editorial */
+  --ivory: #fffdf8; /* marfil */
+  --black: #000000;
+  --ink: #0e0c0b; /* negro cálido para fondos oscuros */
+  --umber: #221e1b;
+  --muted-light: #675c54; /* 6.1:1 sobre paper */
+  --muted-dark: #a89d92; /* 7.3:1 sobre ink */
 
-  /* Tipografía: 1 serif + 1 sans */
-  --serif: "Cormorant Garamond", "Iowan Old Style", "Times New Roman", serif;
-  --sans: "Manrope Variable", "Manrope", "Helvetica Neue", system-ui, sans-serif;
-  /* Secundaria del manual, para las piezas nuevas que la usan */
-  --glacial: "Glacial Indifference", var(--sans);
+  /* Tipografía del manual: Bodoni Moda (títulos) + Glacial Indifference (textos) */
+  --serif: "Bodoni Moda Variable", "Bodoni Moda", "Didot", "Times New Roman", serif;
+  --sans: "Glacial Indifference", "Helvetica Neue", system-ui, sans-serif;
+  --glacial: var(--sans);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -43,29 +79,29 @@
   --fg: var(--paper);
   --muted: var(--muted-dark);
   --accent: var(--clay-soft);
-  --line: rgba(245, 241, 234, 0.16);
+  --line: rgba(251, 248, 242, 0.16);
 }
 
 html[data-tone="paper"] {
   --bg: var(--paper);
-  --fg: var(--ink);
+  --fg: var(--black);
   --muted: var(--muted-light);
   --accent: var(--clay);
-  --line: rgba(23, 21, 19, 0.14);
+  --line: rgba(14, 12, 11, 0.14);
 }
 html[data-tone="sand"] {
   --bg: var(--sand);
-  --fg: var(--ink);
+  --fg: var(--black);
   --muted: #62574f;
   --accent: var(--clay);
-  --line: rgba(23, 21, 19, 0.14);
+  --line: rgba(14, 12, 11, 0.14);
 }
 html[data-tone="clay"] {
-  --bg: #9e4f3c;
+  --bg: var(--clay);
   --fg: var(--paper);
-  --muted: rgba(245, 241, 234, 0.82);
+  --muted: rgba(251, 248, 242, 0.9);
   --accent: var(--paper);
-  --line: rgba(245, 241, 234, 0.3);
+  --line: rgba(251, 248, 242, 0.3);
 }
 /* Blanco cálido del manual (#FFFDF8) con negro absoluto */
 html[data-tone="warm"] {
@@ -80,5 +116,5 @@ html[data-tone="ink"] {
   --fg: var(--paper);
   --muted: var(--muted-dark);
   --accent: var(--clay-soft);
-  --line: rgba(245, 241, 234, 0.16);
+  --line: rgba(251, 248, 242, 0.16);
 }

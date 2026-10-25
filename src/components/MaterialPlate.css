@@ -5,7 +5,7 @@
   background-position: center;
 }
 /* Color base mientras se genera la textura (se genera antes de entrar en viewport) */
-.plate--terracotta { background-color: #a6533f; }
+.plate--terracotta { background-color: #9b4819; }
 .plate--travertine { background-color: #e0d3bf; }
 .plate--walnut { background-color: #3b2a20; }
 .plate--terrazzo { background-color: #e6dccd; }
@@ -20,7 +20,7 @@
   pointer-events: none;
   background:
     radial-gradient(120% 90% at var(--lx, 30%) var(--ly, 20%), rgba(255, 244, 228, 0.22), transparent 55%),
-    linear-gradient(180deg, rgba(23, 21, 19, 0) 55%, rgba(23, 21, 19, 0.22));
+    linear-gradient(180deg, rgba(14, 12, 11, 0) 55%, rgba(14, 12, 11, 0.22));
 }
 
 .figure {

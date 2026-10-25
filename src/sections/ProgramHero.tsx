@@ -11,8 +11,7 @@ import "./ProgramHero.css";
 
 /**
  * Apertura de cada programa. Misma estructura, otra atmósfera:
- * Marca personal en arco y cursiva, Estudiantes en mayúsculas y horizontal,
- * Profesionales en retícula y material.
+ * Marca personal en arco y cursiva; Formación en retícula y material.
  */
 export function ProgramHero({ program: p }: { program: Program }) {
   const ref = useRef<HTMLElement>(null);
@@ -23,7 +22,7 @@ export function ProgramHero({ program: p }: { program: Program }) {
       mm.add(MOTION_OK, () => {
         gsap.set([".ph__name-in", ".ph__line-row"], { yPercent: 110 });
         gsap.set(".ph__fade", { opacity: 0, y: 16 });
-        gsap.set(".ph__frame", { clipPath: p.id === "estudiantes" ? "inset(0 100% 0 0)" : p.id === "profesionales" ? "inset(50% 50% 50% 50%)" : "inset(100% 0 0 0)" });
+        gsap.set(".ph__frame", { clipPath: p.id === "formacion" ? "inset(50% 50% 50% 50%)" : "inset(100% 0 0 0)" });
         const off = onPageShown(() => {
           gsap
             .timeline({ delay: 0.15 })
@@ -57,12 +56,14 @@ export function ProgramHero({ program: p }: { program: Program }) {
         </nav>
 
         <div className="ph__frame-wrap">
-          <Figure slot={p.image} className="ph__frame" ratio={p.id === "estudiantes" ? "16 / 9" : p.id === "profesionales" ? "1 / 1" : "3 / 4"} sizes="(max-width: 899px) 90vw, 45vw" />
+          <Figure slot={p.image} className="ph__frame" ratio={p.id === "formacion" ? "1 / 1" : "3 / 4"} sizes="(max-width: 899px) 90vw, 45vw" />
           {p.detail && <Figure slot={p.detail} className="ph__detail ph__fade" ratio="4 / 5" sizes="220px" />}
         </div>
 
         <div className="ph__text">
-          <p className="label ph__n ph__fade">Programa {p.n}</p>
+          <p className="label ph__n ph__fade">
+            Programa {p.n} · {p.verb}
+          </p>
           <h1 id="ph-title" className="ph__name">
             <span className="ph__mask">
               <span className="ph__name-in">{p.name}</span>

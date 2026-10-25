@@ -12,7 +12,7 @@
   inset: 0;
   background:
     radial-gradient(42vmax 34vmax at 50% 52%, rgba(150, 82, 52, 0.2), rgba(150, 82, 52, 0) 70%),
-    #171513;
+    var(--ink);
 }
 .opening__canvas {
   position: absolute;
@@ -29,7 +29,6 @@
   display: grid;
   place-items: center;
 }
-.opening__static svg {
-  border-radius: 12%;
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
+.opening__static .logo {
+  color: var(--paper);
 }

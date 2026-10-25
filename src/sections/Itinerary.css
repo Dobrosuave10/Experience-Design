@@ -1,0 +1,87 @@
+.itin {
+  padding-block: clamp(110px, 18vh, 220px);
+}
+.itin__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+  row-gap: 40px;
+  align-items: start;
+}
+.itin__head {
+  grid-column: 1 / span 5;
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  display: grid;
+  gap: 18px;
+}
+.itin__label {
+  color: var(--accent);
+}
+.itin__title {
+  font-size: clamp(2.4rem, 4.4vw, 4.8rem);
+  line-height: 1;
+}
+.itin__body {
+  max-width: 40ch;
+}
+.itin__days {
+  grid-column: 7 / -1;
+  border-top: 1px solid var(--line);
+}
+.itin__day {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+  gap: 18px;
+  padding: 28px 0 26px;
+  border-bottom: 1px solid var(--line);
+}
+.itin__when {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.itin__n {
+  color: var(--muted);
+}
+.itin__date {
+  font-size: 1.4rem;
+  line-height: 1.15;
+  color: var(--accent);
+}
+.itin__what {
+  display: grid;
+  gap: 8px;
+}
+.itin__name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+.itin__text {
+  line-height: 1.6;
+}
+.itin__note {
+  grid-column: 7 / -1;
+}
+
+@media (max-width: 899px) {
+  .itin__head,
+  .itin__days,
+  .itin__note {
+    grid-column: 1 / -1;
+  }
+  .itin__head {
+    position: static;
+  }
+  .itin__day {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .itin__when {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+}

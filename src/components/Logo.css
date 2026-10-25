@@ -1,0 +1,27 @@
+.logo {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--logo-size);
+  height: var(--logo-size);
+}
+.logo__mark {
+  display: block;
+  /* proporción de la "E." oficial (441 × 484) */
+  height: 100%;
+  aspect-ratio: 441 / 484;
+  background: currentColor;
+  -webkit-mask: var(--logo-src) center / contain no-repeat;
+  mask: var(--logo-src) center / contain no-repeat;
+}
+/* Sello del manual: círculo terracota con la "E." negra al centro */
+.logo--circle {
+  border-radius: 50%;
+  background: var(--clay);
+  color: var(--black);
+}
+.logo--circle .logo__mark {
+  height: 48%;
+  /* la "E." se apoya un poco a la izquierda por el punto: se compensa para centrarla ópticamente */
+  transform: translateX(3%);
+}

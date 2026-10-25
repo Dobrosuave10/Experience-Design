@@ -74,7 +74,7 @@ ol {
 }
 
 :focus-visible {
-  outline: 1.5px solid var(--accent);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -109,13 +109,14 @@ ol {
 .serif {
   font-family: var(--serif);
   font-weight: 400;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.005em;
 }
 .display {
   font-family: var(--serif);
   font-weight: 400;
   line-height: 0.95;
-  letter-spacing: -0.025em;
+  /* Bodoni Moda tiene remates finos: el tracking negativo se mantiene corto para que no se toquen */
+  letter-spacing: -0.012em;
 }
 .display em,
 .serif em {

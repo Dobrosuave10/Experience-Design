@@ -58,8 +58,20 @@ export function sealShape() {
  * Materiales del sello: [cara, canto] para las ExtrudeGeometry (grupo 0 = caras, 1 = canto).
  * Bronce envejecido satinado: metal moderado, rugosidad media, reflejos contenidos.
  */
+/** La apertura y el Hero usan el mismo sello: sus mapas se calculan una sola vez. */
+const mapsCache = new Map<string, ReturnType<typeof makeSealMaps>>();
+function sealMaps(size: number, markSrc?: string) {
+  const key = `${size}|${markSrc ?? ""}`;
+  let p = mapsCache.get(key);
+  if (!p) {
+    p = makeSealMaps(size, markSrc);
+    mapsCache.set(key, p);
+  }
+  return p;
+}
+
 export async function createSealMaterials(renderer: THREE.WebGLRenderer, size = 1024, markSrc?: string) {
-  const maps = await makeSealMaps(size, markSrc);
+  const maps = await sealMaps(size, markSrc);
   const toPlate = (t: THREE.Texture) => {
     // UV de la forma (-half..half) → 0..1
     t.repeat.set(1 / (2 * SEAL.half), 1 / (2 * SEAL.half));

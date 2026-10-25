@@ -18,7 +18,7 @@
   height: 100%;
   transform-origin: center;
   background: linear-gradient(90deg, #cdbba3 0%, #efe7dc 38%, #e2d5c3 70%, #b9a58b 100%);
-  box-shadow: inset -1px 0 0 rgba(23, 21, 19, 0.12);
+  box-shadow: inset -1px 0 0 rgba(14, 12, 11, 0.12);
   backface-visibility: hidden;
 }
 @media (prefers-reduced-motion: reduce) {

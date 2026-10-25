@@ -1,9 +1,8 @@
 /* Inicio · Programas: eje vertical con tres bloques alternados.
-   Paleta del manual: negro, tierra (sólo acento), beige, gris claro y blanco cálido. */
+   Paleta del manual: negro, terracota (sólo acento), arena y marfil. */
 .spine {
   --ed-black: #000000;
   --ed-earth: #9b4819;
-  --ed-beige: #ebcfc4;
   --ed-grey: #e9dfd6;
   --ed-white: #fffdf8;
   --mid: clamp(96px, 11vw, 190px); /* calle central donde corre la línea */
@@ -152,27 +151,25 @@
   height: 100%;
   object-fit: cover;
 }
-.spine__block--viajes .spine__frame {
+.spine__block--experiencias .spine__frame {
   aspect-ratio: 5 / 4;
 }
-/* el nombre de la feria vive en la parte alta de la foto: el encuadre parte desde arriba */
-.spine__block--viajes .spine__frame img {
-  object-position: 50% 0%;
+.spine__block--experiencias .spine__frame img {
+  object-position: 50% 60%;
 }
-.spine__block--marca-personal .spine__frame {
+.spine__block--formacion .spine__frame {
   aspect-ratio: 4 / 5;
   width: 82%;
   margin-left: auto;
   /* la imagen sobrepasa levemente el bloque hacia afuera */
   margin-right: calc(var(--gutter) * -0.6);
 }
-/* Recorte al detalle (textil, collar, manos): identidad sin retrato corporativo */
-.spine__block--marca-personal .spine__frame img {
-  /* el cuaderno con el mapa de la marca y la mano que lo escribe */
-  object-position: 58% 70%;
+.spine__block--marca-personal .spine__frame {
+  aspect-ratio: 4 / 3;
 }
-.spine__block--formacion .spine__frame {
-  aspect-ratio: 16 / 10;
+/* la participante sentada, no el techo del showroom */
+.spine__block--marca-personal .spine__frame img {
+  object-position: 50% 68%;
 }
 
 /* pieza secundaria superpuesta */
@@ -180,17 +177,17 @@
   position: absolute;
   z-index: 2;
 }
-.spine__block--viajes .spine__inset-wrap {
+.spine__block--experiencias .spine__inset-wrap {
   right: -9%;
   bottom: -14%;
   width: 30%;
 }
-.spine__block--marca-personal .spine__inset-wrap {
+.spine__block--formacion .spine__inset-wrap {
   left: -4%;
   bottom: -12%;
   width: 56%;
 }
-.spine__block--formacion .spine__inset-wrap {
+.spine__block--marca-personal .spine__inset-wrap {
   left: -4%;
   bottom: -10%;
   width: 34%;
@@ -206,12 +203,12 @@
   height: 100%;
   object-fit: cover;
 }
-/* Marca personal: la presentación de taller, apaisada como la escena que muestra */
-.spine__block--marca-personal .spine__detail {
+/* Formación: el detalle apaisado */
+.spine__block--formacion .spine__detail {
   aspect-ratio: 3 / 2;
 }
-.spine__block--formacion .spine__detail {
-  aspect-ratio: 4 / 3;
+.spine__block--marca-personal .spine__detail {
+  aspect-ratio: 4 / 5;
 }
 
 /* ---------- Texto ---------- */
@@ -246,7 +243,7 @@
   max-width: 40ch;
 }
 
-/* Viajes: experiencias realizadas y la próxima, claramente separadas */
+/* Experiencias: destinos realizados y la próxima, claramente separadas */
 .spine__history {
   width: 100%;
   margin-top: 10px;
@@ -407,25 +404,25 @@
     right: auto;
   }
   /* alternancia: la imagen se recuesta a uno u otro lado */
-  .spine__block--viajes .spine__frame,
-  .spine__block--formacion .spine__frame {
+  .spine__block--experiencias .spine__frame,
+  .spine__block--marca-personal .spine__frame {
     width: 90%;
   }
-  .spine__block--marca-personal .spine__frame {
+  .spine__block--formacion .spine__frame {
     width: 84%;
     margin-right: calc(var(--gutter) * -1);
   }
-  .spine__block--viajes .spine__inset-wrap {
+  .spine__block--experiencias .spine__inset-wrap {
     right: 0;
     bottom: -12%;
     width: 34%;
   }
-  .spine__block--marca-personal .spine__inset-wrap {
+  .spine__block--formacion .spine__inset-wrap {
     left: 0;
     bottom: -10%;
     width: 62%;
   }
-  .spine__block--formacion .spine__inset-wrap {
+  .spine__block--marca-personal .spine__inset-wrap {
     left: auto;
     right: 0;
     bottom: -16%;

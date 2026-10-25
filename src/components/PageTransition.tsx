@@ -64,7 +64,7 @@ export function PageTransition() {
   return (
     <div ref={ref} className="pt" aria-hidden="true">
       <div className="pt__mark">
-        <Logo size={72} decorative />
+        <Logo size={72} decorative shape="circle" />
         <span className="label">Experience Design</span>
       </div>
     </div>

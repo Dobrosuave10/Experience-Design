@@ -10,7 +10,7 @@ export function Footer() {
     <footer className="footer section" data-tone="ink">
       <div className="wrap">
         <div className="footer__top">
-          <Logo size={88} />
+          <Logo size={88} shape="circle" />
           <p className="footer__statement display">{footer.statement}</p>
         </div>
         <nav aria-label="Mapa del sitio" className="footer__map">

@@ -1,9 +1,9 @@
 import { programs, routes } from "../content/site";
 import { PageHero } from "../components/PageHero";
 import { NextChapter } from "../components/NextChapter";
-import { ProgramDoors } from "../sections/ProgramDoors";
+import { ProgramsRail } from "../sections/ProgramsRail";
 
-/** Programas: tres puertas independientes al mismo mundo. */
+/** Programas: Formación y Marca personal, uno por pantalla sobre la línea. */
 export default function Programs() {
   return (
     <>
@@ -14,10 +14,10 @@ export default function Programs() {
         body={programs.body}
         crumbs={[{ label: "Experience Design", href: routes.inicio }, { label: programs.title }]}
         tone="ink"
-        glow="#B7664F"
+        glow="#C97B4A"
         aside={<p className="serif programs__question">{programs.question}</p>}
       />
-      <ProgramDoors />
+      <ProgramsRail />
       <NextChapter />
     </>
   );

@@ -29,6 +29,7 @@ export function AboutWho() {
           {about.who.label}
         </p>
         <RevealText as="p" className="about__text display" lines={[about.who.text]} stagger={0.02} />
+        <p className="about__body body-lg muted">{about.who.body}</p>
         <Figure slot={about.image} className="about__frame" ratio="848 / 1080" sizes="(max-width: 899px) 80vw, 34vw" />
         <p className="about__history serif">
           <em>{about.who.history}</em>
@@ -38,7 +39,32 @@ export function AboutWho() {
   );
 }
 
-/** Misión, visión y valores: dichos como un manifiesto, no como fichas. */
+/** Posicionamiento, lema y promesa: la marca dicha en tres frases. */
+export function Positioning() {
+  const { positioning: pos } = about;
+  return (
+    <section className="positioning section" data-tone="warm" aria-labelledby="positioning-title">
+      <div className="wrap positioning__grid">
+        <h2 id="positioning-title" className="positioning__title display">
+          <span className="positioning__lead">{pos.lead}</span> {pos.rest} <em>{pos.accent}</em>
+        </h2>
+        <p className="positioning__body body-lg muted">{about.positioningBody}</p>
+        <div className="positioning__pair">
+          <p className="positioning__item">
+            <span className="label positioning__label">{about.mottoLabel}</span>
+            <span className="positioning__motto serif">{about.motto}</span>
+          </p>
+          <blockquote className="positioning__item positioning__quote">
+            <span className="label positioning__label">{about.promiseLabel}</span>
+            <p className="serif">{about.promise}</p>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Propósito, misión, visión y valores: dichos como un manifiesto, no como fichas. */
 export function Principles() {
   return (
     <section className="principles section" data-tone="sand" aria-label="Misión, visión y valores">
@@ -48,6 +74,7 @@ export function Principles() {
             <article key={p.id} className="principles__item">
               <h2 className="label principles__label">{p.label}</h2>
               <RevealText as="p" className="principles__text display" lines={[p.text]} stagger={0.02} />
+              <p className="principles__body muted">{p.body}</p>
             </article>
           ))}
         </div>

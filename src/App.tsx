@@ -11,9 +11,8 @@ import { Footer } from "./sections/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Programs from "./pages/Programs";
+import FormationPage from "./pages/FormationPage";
 import PersonalBrandPage from "./pages/PersonalBrandPage";
-import StudentsPage from "./pages/StudentsPage";
-import ProfessionalsPage from "./pages/ProfessionalsPage";
 import Destinations from "./pages/Destinations";
 import MilanPage from "./pages/MilanPage";
 import SaoPauloPage from "./pages/SaoPauloPage";
@@ -26,9 +25,8 @@ const pages: Record<string, ComponentType> = {
   [routes.inicio]: Home,
   [routes.nosotros]: About,
   [routes.programas]: Programs,
+  [routes.formacion]: FormationPage,
   [routes.marcaPersonal]: PersonalBrandPage,
-  [routes.estudiantes]: StudentsPage,
-  [routes.profesionales]: ProfessionalsPage,
   [routes.destinos]: Destinations,
   [routes.milan]: MilanPage,
   [routes.saoPaulo]: SaoPauloPage,

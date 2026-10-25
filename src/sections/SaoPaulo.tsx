@@ -12,7 +12,7 @@ import "./SaoPaulo.css";
  * São Paulo, CASACOR. Su propia arquitectura: donde Milán es terrazzo, arcos y un
  * recorrido horizontal, São Paulo es celosía, mayúsculas de hormigón y una casa
  * que se recorre de ambiente en ambiente, en vertical.
- * Sin fotos reales todavía: cada ambiente usa una placa de material (ver `brief`).
+ * Cada ambiente, con una foto real de CASACOR São Paulo 2025.
  */
 export function SaoPaulo() {
   const ref = useRef<HTMLElement>(null);
@@ -76,7 +76,7 @@ export function SaoPaulo() {
             <span className="sp__room-n" aria-hidden="true">
               {r.n}
             </span>
-            <Figure slot={{ alt: "", material: r.material, brief: r.brief }} className="sp__room-frame" ratio="16 / 10" />
+            <Figure slot={{ image: r.image, alt: r.alt, material: r.material, brief: r.title }} className="sp__room-frame" ratio="16 / 10" sizes="(max-width: 767px) 92vw, 60vw" />
             <div className="sp__room-text">
               <h2 className="sp__room-title">{r.title}</h2>
               <p className="muted">{r.text}</p>

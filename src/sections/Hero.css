@@ -43,8 +43,7 @@
 }
 .hero__fallback-logo {
   position: relative;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-  border-radius: 12%;
+  color: var(--paper);
 }
 
 .hero__content {
@@ -107,7 +106,7 @@
     position: absolute;
     inset: -18vh 0 0;
     z-index: -1;
-    background: linear-gradient(180deg, rgba(23, 21, 19, 0) 0%, rgba(23, 21, 19, 0.55) 30%, rgba(23, 21, 19, 0.82) 70%);
+    background: linear-gradient(180deg, rgba(14, 12, 11, 0) 0%, rgba(14, 12, 11, 0.55) 30%, rgba(14, 12, 11, 0.82) 70%);
     pointer-events: none;
   }
   .hero {

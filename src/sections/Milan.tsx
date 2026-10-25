@@ -16,7 +16,7 @@ import "./Milan.css";
  * 1) Apertura: el terrazzo milanés se abre desde una ventana hasta ocupar todo,
  *    con "Milán" en blend difference encima.
  * 2) Seis capítulos en recorrido horizontal (escritorio) o lista editorial (móvil).
- * 3) Lo pendiente, dicho con honestidad, y el CTA principal.
+ * El itinerario, la galería y lo pendiente (MilanClose) van en secciones propias.
  */
 export function Milan() {
   const ref = useRef<HTMLElement>(null);
@@ -121,8 +121,14 @@ export function Milan() {
           </ol>
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* Lo pendiente + CTA */}
+/** Cierre de Milán: lo que falta confirmar (valor y cupos) y el CTA principal. */
+export function MilanClose() {
+  return (
+    <section className="milan section" data-tone="ink" aria-label={milan.pending.title}>
       <div className="wrap milan__close">
         <RevealText className="milan__pending-title display" lines={[milan.pending.title]} />
         <div className="milan__pending">

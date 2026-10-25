@@ -4,7 +4,7 @@
   z-index: var(--z-transition);
   display: grid;
   place-items: center;
-  background: #9e4f3c;
+  background: #9b4819;
   color: var(--paper);
   visibility: hidden;
   pointer-events: none;
@@ -15,7 +15,7 @@
   gap: 18px;
   opacity: 0;
 }
-.pt__mark svg {
+.pt__mark .logo {
   border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(245, 241, 234, 0.6);
+  box-shadow: 0 0 0 1px rgba(251, 248, 242, 0.6);
 }
