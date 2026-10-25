@@ -28,6 +28,10 @@ body {
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.6;
+  /* Bodoni Moda ajusta su tamaño óptico al tamaño del texto: en los títulos grandes llega al
+     máximo (96) y los trazos finos quedan de un píxel o desaparecen. Se fija en 24 para que
+     sigan visibles a cualquier tamaño. Glacial Indifference no tiene este eje y lo ignora. */
+  font-variation-settings: "opsz" 24;
   transition:
     background-color 0.9s var(--ease-out),
     color 0.9s var(--ease-out);
