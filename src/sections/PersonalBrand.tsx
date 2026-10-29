@@ -39,9 +39,6 @@ export function PersonalBrand() {
           <div className="pb__sticky">
             <RevealText id="pb-title" className="pb__title display" lines={[personalBrand.titleA, { text: personalBrand.titleB, em: true }]} />
             <p className="pb__body">{personalBrand.body}</p>
-            <p className="pb__note serif">
-              <em>{personalBrand.note}</em>
-            </p>
             <MagneticButton href="/contacto" onClick={() => goToContact("marca")}>
               {personalBrand.cta}
             </MagneticButton>

@@ -23,7 +23,6 @@ export function Archive() {
       <div className="wrap">
         <div className="archive__head">
           <RevealText id="archive-title" className="archive__title display" lines={[archive.title]} />
-          <p className="archive__body muted">{archive.body}</p>
         </div>
         <ul className="archive__list">
           {archive.entries.map((e, i) => (

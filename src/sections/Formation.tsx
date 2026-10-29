@@ -19,7 +19,6 @@ export function Formation({ interest, tone = "paper", showStatus = true }: { int
       <div className="wrap formation__grid">
         <div className="formation__main">
           <RevealText id="formation-title" className="formation__title display" lines={[formation.title]} stagger={0.035} />
-          <p className="formation__body body-lg muted">{formation.body}</p>
 
           <div className="formation__formats">
             <h3 className="label muted">{formation.formatsLabel}</h3>

@@ -145,7 +145,6 @@ export function Hero() {
             lines={[hero.titleA, { text: hero.titleB, em: true }]}
           />
           <div className="hero__foot">
-            <p className="hero__sub hero__fade">{hero.sub}</p>
             <div className="hero__fade">
               <MagneticButton href={routes.milan} onClick={() => navigate(routes.milan, { travel: milan.city })}>
                 {hero.cta}

@@ -46,7 +46,6 @@ export function Itinerary() {
             </li>
           ))}
         </ol>
-        <p className="itin__note label muted">{it.note}</p>
       </div>
     </section>
   );

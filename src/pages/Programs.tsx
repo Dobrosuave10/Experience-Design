@@ -11,7 +11,6 @@ export default function Programs() {
         id="programas"
         title={programs.title}
         lead={programs.lead}
-        body={programs.body}
         crumbs={[{ label: "Experience Design", href: routes.inicio }, { label: programs.title }]}
         tone="ink"
         glow="#C97B4A"

@@ -115,13 +115,13 @@ export const pageDescriptions: Record<string, string> = {
   [routes.programas]:
     "Dos programas para llevar lo vivido a la propia práctica: Formación, para aprender, y Marca personal, para expresar el sello propio. Para estudiantes y profesionales del diseño.",
   [routes.formacion]:
-    "Formación: cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca, para capitalizar la experiencia.",
+    "Formación: cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
   [routes.marcaPersonal]:
     "Marca personal: construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
   [routes.destinos]:
     "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias de 2025 y 2026.",
   [routes.milan]:
-    "Milán 2027, Salone del Mobile. Itinerario del 12 al 17 de abril de 2027: la feria, el Fuori Salone, showrooms, materiales y la ciudad, recorridos con la atención de quien diseña.",
+    "Milán 2027, Salone del Mobile. Itinerario del 12 al 17 de abril de 2027: la feria, el Fuori Salone, showrooms, materiales y la ciudad.",
   [routes.saoPaulo]:
     "São Paulo, CASACOR. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
   [routes.contacto]:
@@ -145,7 +145,6 @@ export const hero = {
   wordmark: { ink: "wordmark-ink", paper: "wordmark-paper" } as const,
   titleA: "Abrir la mirada",
   titleB: "hacia nuevas posibilidades.",
-  sub: "Experiencias curadas para llevar tu mirada más allá de lo conocido. Nuevas referencias, procesos de inspiración y un reencuentro con los fundamentos del diseño para descubrir otras perspectivas y transformar tu manera de crear.",
   cta: "Descubre Milán 2027",
 };
 
@@ -167,7 +166,7 @@ export const programsSpine = {
       n: "01",
       verb: "Descubrir",
       name: "Experiencias",
-      text: "Experiencias curadas en las capitales del diseño, conocidas en su propio contexto. Recorremos ferias, showrooms, estudios y espacios donde nacen las ideas, en contacto con sus materiales, procesos y protagonistas. Para volver con referencias propias y criterio para aplicarlas.",
+      text: "Experiencias curadas en las capitales del diseño, conocidas en su propio contexto.",
       href: routes.destinos as string | undefined,
       cta: "Milán 2027" as string | undefined,
       main: { image: "salone-cocina-bosque" as ImageName, alt: "Salone del Mobile 2026: visitantes en un stand de cocina rodeado por una pantalla envolvente con un bosque" },
@@ -180,7 +179,7 @@ export const programsSpine = {
       n: "02",
       verb: "Aprender",
       name: "Formación",
-      text: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca. Aprender prepara la mirada antes de viajar y ayuda a capitalizar lo vivido después: ideas que nacen de la experiencia y que puedes llevar a tu propia práctica.",
+      text: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
       href: routes.formacion as string | undefined,
       cta: "Conocer Formación" as string | undefined,
       main: { image: "verona-antolini-veta" as ImageName, alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona" },
@@ -191,7 +190,7 @@ export const programsSpine = {
       n: "03",
       verb: "Expresar",
       name: "Marca personal",
-      text: "Cada persona tiene una mirada, unos intereses y una forma propia de hacer las cosas. Acompañamos a construir la propia marca y a encontrar el sello que distingue a cada persona, estudio o empresa, para comunicarlo con criterio y coherencia. Expresar convierte lo vivido en criterio propio.",
+      text: "Acompañamos a construir la propia marca y a encontrar el sello que distingue a cada persona, estudio o empresa.",
       href: routes.marcaPersonal as string | undefined,
       cta: "Conocer Marca personal" as string | undefined,
       main: { image: "marca-vestidor-retrato" as ImageName, alt: "Participante sentada en un puf capitoné de un showroom de vestidores en Milán, con la bolsa de Experience Design" },
@@ -213,7 +212,7 @@ export const milan = {
     {
       n: "01",
       title: "La ciudad",
-      text: "Una ciudad que lleva generaciones pensando cómo vivimos. La recorremos con la atención de quien diseña.",
+      text: "Una ciudad que lleva generaciones pensando cómo vivimos.",
       material: "plaster" as MaterialName,
       image: "milan-galleria-cupula" as ImageName,
       alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico",
@@ -221,7 +220,7 @@ export const milan = {
     {
       n: "02",
       title: "El diseño",
-      text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición. Vamos a donde ocurre.",
+      text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición.",
       material: "terrazzo" as MaterialName,
       image: "salone-escalinata-roja" as ImageName,
       alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Rho Fiera",
@@ -229,7 +228,7 @@ export const milan = {
     {
       n: "03",
       title: "Los materiales",
-      text: "Superficies, revestimientos, texturas. Verlos en persona, con luz real, a la distancia de la mano.",
+      text: "Superficies, revestimientos, texturas.",
       material: "terracotta" as MaterialName,
       image: "verona-marmol-book-match" as ImageName,
       alt: "Placa de mármol en espejo, con vetas violáceas, en el showroom de Antolini en Verona",
@@ -237,7 +236,7 @@ export const milan = {
     {
       n: "04",
       title: "Los espacios",
-      text: "Patios, fachadas, showrooms, estudios. La arquitectura también se aprende caminando.",
+      text: "Patios, fachadas, showrooms, estudios.",
       material: "travertine" as MaterialName,
       image: "fuori-galeria-arcos" as ImageName,
       alt: "Galería de arcos blancos de un espacio del Fuori Salone, con lámparas suspendidas y piso de madera",
@@ -245,7 +244,7 @@ export const milan = {
     {
       n: "05",
       title: "Las personas",
-      text: "Detrás de cada showroom y cada estudio hay alguien que tomó decisiones. Queremos escucharlas.",
+      text: "Detrás de cada showroom y cada estudio hay alguien que tomó decisiones.",
       material: "walnut" as MaterialName,
       image: "milan-grupo-gessi" as ImageName,
       alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milan Design Week",
@@ -263,20 +262,19 @@ export const milan = {
   itinerary: {
     label: "Milán 2027",
     title: "Seis días, del 12 al 17 de abril.",
-    body: "La Milan Design Week y el Salone del Mobile.Milano (13 al 18 de abril de 2027), recorridos en grupo reducido y con una agenda exigente.",
+    body: "Salone del Mobile.Milano, del 13 al 18 de abril de 2027. Grupo reducido, agenda exigente.",
     days: [
-      { day: "Día 1", date: "Lunes 12", title: "Fuori Salone", text: "Llegada a Milán y primer encuentro en Milano Centrale. Recorremos la ciudad y sus showrooms para entender cómo se vive el diseño fuera de la feria." },
-      { day: "Día 2", date: "Martes 13", title: "Salone del Mobile", text: "Primera jornada completa en la feria, en Rho Fiera. Una selección previa de pabellones, marcas y piezas, para mirar con criterio y no solo recorrer." },
-      { day: "Día 3", date: "Miércoles 14", title: "Salone del Mobile", text: "Segunda jornada en la feria. Nos reunimos en Milano Centrale y volvemos a los pabellones: materiales, procesos y referentes en directo." },
+      { day: "Día 1", date: "Lunes 12", title: "Fuori Salone", text: "Llegada a Milán y primer encuentro en Milano Centrale." },
+      { day: "Día 2", date: "Martes 13", title: "Salone del Mobile", text: "Primera jornada completa en la feria, en Rho Fiera." },
+      { day: "Día 3", date: "Miércoles 14", title: "Salone del Mobile", text: "Segunda jornada en la feria." },
       { day: "Día 4", date: "Jueves 15", title: "Salone del Mobile", text: "Tercera jornada en la feria, para profundizar en lo que cada participante vino a buscar." },
-      { day: "Día 5", date: "Viernes 16", title: "Fuori Salone", text: "La ciudad convertida en exposición: showrooms, estudios e instalaciones, donde el diseño se muestra en su propio contexto." },
+      { day: "Día 5", date: "Viernes 16", title: "Fuori Salone", text: "La ciudad convertida en exposición: showrooms, estudios e instalaciones." },
       { day: "Día 6", date: "Sábado 17", title: "Fuera de Milán", text: "Una actividad en los alrededores de Milán y el cierre de la experiencia. Desde ahí, cada participante organiza su regreso o extiende su estadía." },
     ],
-    note: "El detalle de cada jornada se envía con el programa completo.",
   },
   pending: {
     title: "Lo que falta confirmar.",
-    body: "Te enviamos el programa completo y el valor apenas estén confirmados. Sin formularios largos.",
+    body: "Te enviamos el programa completo y el valor apenas estén confirmados.",
     items: ["Valor", "Cupos"],
     status: "Por confirmar",
   },
@@ -310,24 +308,23 @@ export const neverLate = {
   answer: "Nunca es tarde para mirar distinto.",
   body: "Para quienes trabajan en arquitectura, interiorismo y diseño. Para quienes recién empiezan. Y para quienes deciden empezar otra vez.",
   /** Sólo en Inicio (Profesionales sigue usando `body`). */
-  homeBody: "Para quienes saben que siempre pueden ir más allá. Para quienes buscan experiencias que los reten, nuevas perspectivas que los inspiren y oportunidades para reinventarse. Para quienes eligen seguir creciendo, explorar lo desconocido y descubrir todo lo que todavía es posible.",
+  homeBody: "Para quienes eligen seguir creciendo, explorar lo desconocido y descubrir todo lo que todavía es posible.",
 };
 
 export const formation = {
   title: "Aprendizaje aplicado, no clases teóricas.",
-  body: "Profesionales de marketing, fotografía y marca comparten herramientas concretas para capitalizar cada experiencia y llevarla a la propia práctica.",
   formatsLabel: "Formatos que estamos preparando",
   formats: ["Cursos", "Webinars", "Herramientas prácticas", "Fotografía", "Marketing", "Marca"],
   modalities: [
     {
       id: "antes",
       label: "Antes",
-      text: "Aprender prepara la mirada: qué observar, cómo registrarlo y qué preguntas llevar a cada feria, showroom y estudio.",
+      text: "Aprender prepara la mirada.",
     },
     {
       id: "despues",
       label: "Después",
-      text: "Volver con referencias propias y criterio para aplicarlas: herramientas online para llevar lo vivido a la propia práctica.",
+      text: "Volver con referencias propias y criterio para aplicarlas.",
     },
   ],
   status: "Programa en desarrollo",
@@ -343,8 +340,7 @@ export const formation = {
 export const personalBrand = {
   titleA: "Tienes una mirada.",
   titleB: "¿Qué hacemos con ella?",
-  body: "Te ayudamos a reconocer lo que sabes, lo que has vivido y lo que ves distinto. Y a contarlo con claridad.",
-  note: "No se trata de seguidores. Se trata de entender tu valor profesional.",
+  body: "Te ayudamos a reconocer lo que sabes, lo que has vivido y lo que ves distinto.",
   steps: [
     { title: "Tu historia", text: "Lo que has hecho y vivido, ordenado para que se entienda." },
     { title: "Tu mirada", text: "Lo que ves distinto. Ahí suele estar tu valor." },
@@ -378,7 +374,7 @@ export const founders = {
     {
       name: "Christian Erdmann",
       field: "Diseñador industrial · Mobiliario y curaduría de diseño",
-      bio: "Diseñador industrial especializado en mobiliario y curador de diseño. Abre puertas que no están a la vista y lee los códigos de las grandes casas del diseño. Parte del proyecto desde 2025." as string | null,
+      bio: "Abre puertas que no están a la vista y lee los códigos de las grandes casas del diseño." as string | null,
       image: { image: "christian", alt: "Retrato de Christian Erdmann", material: "walnut", brief: "Retrato real de Christian, luz natural. 4:5." } as ImageSlot,
     },
   ],
@@ -396,7 +392,6 @@ export type ArchiveEntry = {
 
 export const archive = {
   title: "Lo que ya recorrimos.",
-  body: "Empezó como un experimento con pocas personas. Sigue igual de cerca.",
   entries: [
     {
       year: "2026",
@@ -444,7 +439,6 @@ export const about = {
   title: "Nosotros",
   statement: "Abrir la mirada hacia nuevas posibilidades.",
   positioning: { lead: "Más que viajar.", rest: "Vivir el diseño para", accent: "ampliar la mirada." },
-  positioningBody: "En un mundo de experiencias pasajeras, Experience Design apuesta por lo que permanece: no solo te llevamos a un destino, te sumergimos en una experiencia donde el diseño cobra vida.",
   motto: "Vivirlo. Cuestionarlo. Hacerlo propio.",
   promise: "No vienes solo a conocer el mundo del diseño. Vienes a descubrir qué puede despertar en ti.",
   image: {
@@ -456,7 +450,6 @@ export const about = {
   who: {
     label: "Quiénes somos",
     text: "Experience Design crea experiencias curadas para vivir el diseño desde dentro, en las capitales del diseño y en los escenarios donde nacen las ideas.",
-    body: "Ferias, showrooms, estudios y ciudades que tienen el diseño incorporado a su vida cotidiana. Su valor está en lo que ocurre en ellos: entender cómo se piensa una pieza, tocar los materiales, reconocer a los referentes y volver con una mirada propia. No somos una agencia de viajes: facilitamos experiencias, referencias y herramientas para que cada persona avance hacia lo que busca.",
     history: "Empezó como un experimento con pocas personas. Sigue igual de cerca.",
   },
   /** Textos oficiales del manual de marca (versión aprobada el 21 de octubre de 2026). */
@@ -465,25 +458,25 @@ export const about = {
       id: "proposito",
       label: "Propósito",
       text: "Abrir la mirada hacia nuevas posibilidades.",
-      body: "Salir de lo conocido cambia la forma en que vemos las cosas. Cada experiencia es un medio, no un fin.",
+      body: "Salir de lo conocido cambia la forma en que vemos las cosas.",
     },
     {
       id: "mision",
       label: "Misión",
       text: "Facilitar y contribuir a la evolución de quienes buscan descubrir, aprender y crecer a través del diseño.",
-      body: "Con experiencias cuidadosamente curadas que permiten vivirlo desde dentro, conocer sus procesos de inspiración y llevar lo aprendido a la propia práctica, para ampliar la mirada y abrir nuevas formas de interpretar, crear y avanzar en el camino profesional.",
+      body: "Con experiencias cuidadosamente curadas que permiten vivirlo desde dentro.",
     },
     {
       id: "vision",
       label: "Visión",
       text: "Consolidar y experimentar dentro.",
-      body: "Ser el referente de la curaduría y la vanguardia en la práctica profesional del diseño: experiencias que permiten vivirlo desde dentro, en las capitales del diseño, en sus procesos y en sus materiales.",
+      body: "Ser el referente de la curaduría y la vanguardia en la práctica profesional del diseño.",
     },
   ],
   valuesLabel: "Valores",
   values: [
     { name: "Ambición", text: "Aspirar a más: lo más y lo mejor del diseño." },
-    { name: "Superación", text: "Evolucionar y no conformarse. Cada experiencia es una inversión en el propio crecimiento." },
+    { name: "Superación", text: "Evolucionar y no conformarse." },
     { name: "Curiosidad", text: "Explorar, cuestionar y descubrir." },
     { name: "Sello propio", text: "Descubrir lo que distingue a cada persona y expresarlo con criterio y coherencia." },
     { name: "Creatividad", text: "Imaginar nuevas posibilidades." },
@@ -533,7 +526,6 @@ export type Program = {
 export const programs = {
   title: "Programas",
   lead: "Lo vivido, convertido en criterio propio.",
-  body: "Dos programas para antes y después de cada experiencia: aprender prepara la mirada; expresar la convierte en un sello propio.",
   question: "¿Qué quieres llevar a tu práctica?",
   hint: "Dos programas",
   more: "Quiero saber más",
@@ -548,7 +540,7 @@ export const programs = {
       name: "Formación",
       href: routes.formacion,
       lines: ["Lo que descubres", "también puede transformarse", "en conocimiento."],
-      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca, para capitalizar la experiencia y llevarla a la propia práctica.",
+      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
       short: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
       keywords: ["Cursos", "Webinars", "Herramientas", "Fotografía", "Marketing", "Marca"],
       tone: "ink",
@@ -571,8 +563,8 @@ export const programs = {
         alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona",
       },
       audience: {
-        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados que quieren entender el oficio más allá del aula.",
-        professionals: "Profesionales de arquitectura, interiorismo y diseño que quieren seguir aprendiendo y sacar más de cada experiencia.",
+        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados.",
+        professionals: "Profesionales de arquitectura, interiorismo y diseño.",
       },
       interest: "formacion",
       cta: "Conocer Formación",
@@ -584,7 +576,7 @@ export const programs = {
       name: "Marca personal",
       href: routes.marcaPersonal,
       lines: ["Tienes una mirada.", "¿Qué hacemos con ella?"],
-      intro: "Construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa. No se trata de seguidores: se trata de tu valor profesional.",
+      intro: "Construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa.",
       short: "Construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa.",
       keywords: ["Tu historia", "Tu mirada", "Tu posicionamiento", "Tu voz"],
       tone: "clay",
@@ -601,8 +593,8 @@ export const programs = {
         alt: "Participante sentada en un showroom de Milán, entre espejos redondos y butacas de cuero",
       },
       audience: {
-        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados que empiezan a definir su sello antes de salir al mundo profesional.",
-        professionals: "Profesionales de arquitectura, interiorismo y diseño que quieren reconocer su valor y comunicarlo con criterio y coherencia.",
+        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados.",
+        professionals: "Profesionales de arquitectura, interiorismo y diseño.",
       },
       interest: "marca",
       cta: "Conocer Marca personal",
@@ -617,7 +609,7 @@ export const programPending = {
 
 export const formationPage = {
   closeTitle: "Lo concreto, apenas esté confirmado.",
-  closeBody: "Te avisamos cuando abramos los primeros cursos y webinars. Sin formularios largos.",
+  closeBody: "Te avisamos cuando abramos los primeros cursos y webinars.",
   pending: ["Cursos", "Fechas", "Valor"],
 };
 
@@ -629,7 +621,7 @@ export const personalBrandPage = {
   focusLabel: "En qué se enfoca",
   focus: ["Tu experiencia", "Tu trayectoria", "Tu perspectiva", "Tus fortalezas", "Tu posicionamiento", "Tu identidad profesional", "Tu voz", "Tu narrativa"],
   closeTitle: "Empecemos por tu historia.",
-  closeBody: "Cuéntanos dónde estás. Te respondemos con lo concreto cuando el programa esté confirmado.",
+  closeBody: "Te respondemos con lo concreto cuando el programa esté confirmado.",
   pending: ["Formato", "Fechas", "Valor"],
 };
 
@@ -719,8 +711,8 @@ export const saoPaulo = {
   year: "Julio de 2025",
   statementA: "Una casa no se entiende en una foto.",
   statementB: "Se recorre.",
-  intro: "En CASACOR, arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Cada uno es una forma distinta de resolver cómo vivimos.",
-  origin: "Aquí empezó todo: en 2023, la primera prueba de Experience Design fue en São Paulo, con tres participantes. En julio de 2025 volvimos a CASACOR.",
+  intro: "En CASACOR, arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes.",
+  origin: "Aquí empezó todo: en 2023, la primera prueba de Experience Design fue en São Paulo, con tres participantes.",
   rooms: [
     { n: "01", title: "La casa", text: "Una muestra que se recorre de puerta en puerta, ambiente por ambiente.", material: "plaster" as MaterialName, image: "casacor-atrio-desde-arriba" as ImageName, alt: "Atrio de CASACOR São Paulo visto desde arriba, con visitantes recorriendo el nivel inferior" },
     { n: "02", title: "Los ambientes", text: "Cada espacio es una propuesta distinta. Recorrerlos es comparar miradas.", material: "terracotta" as MaterialName, image: "casacor-dormitorio-muro-curvo" as ImageName, alt: "Dormitorio con un muro curvo revestido en madera y un velador redondo" },
