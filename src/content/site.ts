@@ -199,7 +199,7 @@ export const programsSpine = {
       text: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
       href: routes.formacion as string | undefined,
       cta: "Conocer Formación" as string | undefined,
-      main: { image: "verona-antolini-veta" as ImageName, alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona" },
+      main: { image: "fuori-kerakoll-muestrario" as ImageName, alt: "Fuorisalone de Milán: un anfitrión explica el muestrario de colores de Kerakoll al grupo de Experience Design" },
       detail: { image: "fuori-charla-arcos" as ImageName, alt: "Charla durante el Fuorisalone de Milán: el público sentado bajo una galería de arcos frente a una pantalla" },
     },
     {
@@ -231,24 +231,24 @@ export const milan = {
       title: "La ciudad",
       text: "Una ciudad que lleva generaciones pensando cómo vivimos.",
       material: "plaster" as MaterialName,
-      image: "milan-galleria-cupula" as ImageName,
-      alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico",
+      image: "milan-duomo-grupo-noche" as ImageName,
+      alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche",
     },
     {
       n: "02",
       title: "El diseño",
       text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición.",
       material: "terrazzo" as MaterialName,
-      image: "salone-escalinata-roja" as ImageName,
-      alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho",
+      image: "salone-cielo-cintas" as ImageName,
+      alt: "Instalación de cintas blancas suspendidas sobre un stand del Salone del Mobile 2026",
     },
     {
       n: "03",
       title: "Los materiales",
       text: "Superficies, revestimientos, texturas.",
       material: "terracotta" as MaterialName,
-      image: "verona-marmol-book-match" as ImageName,
-      alt: "Placa de mármol en espejo, con vetas violáceas, en el showroom de Antolini en Verona",
+      image: "salone-repisa-ceramica" as ImageName,
+      alt: "Salone del Mobile 2026: repisas iluminadas con piezas de cerámica y vidrio sobre una cubierta y un muro de piedra veteada",
     },
     {
       n: "04",
@@ -304,24 +304,24 @@ export const milan = {
   galleryLabel: "Milan Design Week 2026",
   galleryTitle: "Lo que recorrimos.",
   gallery: [
-    { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
+    { image: "milan-galleria-cupula", alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
     { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
     { image: "fuori-showroom-lampara", alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
     { image: "salone-sillon-cuero", alt: "Sillón de cuero caramelo junto a un mueble de madera y una lámpara de escritorio, en un stand del Salone" },
-    { image: "venecia-gran-canal", alt: "Participantes en una lancha sobre el Gran Canal de Venecia" },
+    { image: "salone-escalinata-roja", alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
     { image: "salone-lamparas-burbujas", alt: "Lámpara de esferas de vidrio sobre una mesa de madera, con plantas detrás, en el Salone del Mobile" },
     { image: "milan-zapato-rojo", alt: "Participante junto a una escultura de un zapato rojo gigante bajo los arcos de la Galleria" },
-    { image: "verona-grupo-antolini", alt: "El grupo de Experience Design en el showroom de Antolini, en Verona, frente a una placa de mármol" },
+    { image: "milan-terraza-atardecer", alt: "Los techos de Milán al atardecer, vistos desde una terraza" },
     { image: "salone-cocina-verde", alt: "Cocina de módulos verde oscuro con cubierta de madera en un stand del Salone del Mobile" },
     { image: "milan-tranvia", alt: "Un tranvía histórico avanzando por una calle de Milán" },
+    { image: "fuori-kerakoll-fachada", alt: "Participantes frente al espacio de Kerakoll en un palacio de Milán, durante el Fuorisalone" },
     { image: "salone-sofa-repisas", alt: "Sofá curvo claro frente a repisas de vidrio con objetos negros, en un stand del Salone" },
     { image: "milan-grupo-eurocucina", alt: "Participante frente al muro amarillo de EuroCucina en el Salone del Mobile" },
-    { image: "venecia-salute", alt: "La basílica de Santa Maria della Salute vista desde el agua, con una góndola en primer plano" },
-    { image: "verona-antolini-veta", alt: "Participante recorriendo con la mano la veta de una placa de mármol en Antolini, Verona" },
+    { image: "verona-grupo-antolini", alt: "El grupo de Experience Design en el showroom de Antolini, en Verona, frente a una placa de mármol" },
     { image: "milan-galleria-grupo", alt: "Participantes recorriendo la Galleria Vittorio Emanuele II de noche" },
     { image: "salone-cubierta-rho-fiera", alt: "Christian Erdmann bajo la cubierta de vidrio de Fiera Milano Rho, junto al cartel del Salone del Mobile" },
     { image: "milan-grupo-lago-como", alt: "El grupo de Experience Design en un barco en el lago de Como" },
-    { image: "venecia-gran-canal-retrato", alt: "Participante con la bolsa de Experience Design frente al Gran Canal de Venecia" },
+    { image: "venecia-salute", alt: "La basílica de Santa Maria della Salute en Venecia, vista desde el agua, con una góndola en primer plano" },
   ] as { image: ImageName; alt: string }[],
   cta: "Quiero ser parte",
 };
@@ -497,10 +497,10 @@ export const formation = {
   status: "Programa en desarrollo",
   cta: "Avísame",
   image: {
-    image: "verona-marmol-verde",
-    alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona",
+    image: "fuori-kerakoll-muestrario",
+    alt: "Fuorisalone de Milán: un anfitrión explica el muestrario de colores de Kerakoll al grupo de Experience Design",
     material: "plaster",
-    brief: "Materiales de cerca.",
+    brief: "Aprender frente al material.",
   } as ImageSlot,
 };
 
@@ -555,6 +555,9 @@ export type ArchiveEntry = {
   text: string;
   status?: "next" | "soon";
   material: MaterialName;
+  /** Foto real del viaje; sin ella se muestra la placa de material. */
+  image?: ImageName;
+  alt?: string;
 };
 
 export const archive = {
@@ -566,6 +569,8 @@ export const archive = {
       tag: "Milan Design Week",
       text: "Salone del Mobile, Fuorisalone y showrooms de la ciudad, con Verona, entre los mármoles de Antolini, y Venecia.",
       material: "travertine",
+      image: "milan-grupo-gessi",
+      alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milan Design Week 2026",
     },
     {
       year: "2025",
@@ -573,6 +578,8 @@ export const archive = {
       tag: "CASACOR São Paulo",
       text: "Una casa recorrida ambiente por ambiente, con paradas en Bontempo, Todeschini y Eliane.",
       material: "terracotta",
+      image: "casacor-grupo-almuerzo",
+      alt: "El grupo de Experience Design almorzando durante la visita a CASACOR São Paulo 2025",
     },
     {
       year: "2025",
@@ -727,8 +734,8 @@ export const programs = {
         brief: "Material de cerca.",
       },
       railImage: {
-        image: "verona-antolini-veta",
-        alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona",
+        image: "fuori-charla-retrato",
+        alt: "Charla durante el Fuorisalone de Milán: el público escucha sentado bajo una bóveda de arcos",
       },
       audience: {
         students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados.",
@@ -833,11 +840,11 @@ export const destinations = {
         { image: "venecia-gondola", alt: "Participante en una góndola bajo un puente de Venecia" },
       ] as CollagePhoto[],
       gallery: [
-        { image: "salone-cocina-bosque" as ImageName, alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
-        { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuorisalone: sofás bajos, pilares de piedra y una gran biblioteca iluminada al fondo" },
-        { image: "milan-duomo-grupo-noche" as ImageName, alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
-        { image: "salone-living" as ImageName, alt: "Estar de sofás curvos y mesas de piedra en un stand del Salone del Mobile" },
-        { image: "verona-marmol-verde" as ImageName, alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona" },
+        { image: "salone-escalinata-roja" as ImageName, alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
+        { image: "fuori-showroom-lampara" as ImageName, alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
+        { image: "milan-galleria-cupula" as ImageName, alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
+        { image: "salone-lamparas-burbujas" as ImageName, alt: "Lámpara de esferas de vidrio sobre una mesa de madera, con plantas detrás, en el Salone del Mobile" },
+        { image: "milan-grupo-eurocucina" as ImageName, alt: "Participante frente al muro amarillo de EuroCucina en el Salone del Mobile" },
       ],
     },
     {
@@ -863,7 +870,7 @@ export const destinations = {
         { image: "casacor-sala-naranja", alt: "Sala de luz naranja con una butaca acolchada y una obra circular en el muro" },
       ] as CollagePhoto[],
       gallery: [
-        { image: "casacor-arco-verde-mural" as ImageName, alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
+        { image: "casacor-celosia-arcos-madera" as ImageName, alt: "CASACOR São Paulo 2025: celosía de madera con arcos que deja ver el jardín" },
         { image: "casacor-terraza-jardin" as ImageName, alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },
         { image: "casacor-lavamanos-terracota" as ImageName, alt: "Baño con lavamanos de madera terracota y dos espejos redondos iluminados" },
         { image: "casacor-living-biblioteca" as ImageName, alt: "Living frente a una biblioteca iluminada, con una mesa de piedra cubierta de libros" },

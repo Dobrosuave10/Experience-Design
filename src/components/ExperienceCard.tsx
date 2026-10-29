@@ -2,6 +2,7 @@ import { useId } from "react";
 import { Plus } from "@phosphor-icons/react";
 import type { ArchiveEntry } from "../content/site";
 import { MaterialPlate } from "./MaterialPlate";
+import { Photo } from "./Photo";
 import "./ExperienceCard.css";
 
 type Props = {
@@ -27,7 +28,11 @@ export function ExperienceCard({ entry, open, onToggle }: Props) {
           <div className="xcard__content">
             <p className="xcard__text serif">{entry.text}</p>
             <div className="xcard__plate">
-              <MaterialPlate material={entry.material} />
+              {entry.image ? (
+                <Photo name={entry.image} alt={entry.alt ?? ""} sizes="(max-width: 767px) 92vw, 40vw" />
+              ) : (
+                <MaterialPlate material={entry.material} />
+              )}
             </div>
           </div>
         </div>

@@ -187,9 +187,27 @@ export const images = {
     "w": 2400,
     "h": 1350
   },
+  "fuori-charla-retrato": {
+    "src": "/img/fuori-charla-retrato-1350.webp",
+    "srcSet": "/img/fuori-charla-retrato-480.webp 480w, /img/fuori-charla-retrato-960.webp 960w, /img/fuori-charla-retrato-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "fuori-galeria-arcos": {
     "src": "/img/fuori-galeria-arcos-1350.webp",
     "srcSet": "/img/fuori-galeria-arcos-480.webp 480w, /img/fuori-galeria-arcos-960.webp 960w, /img/fuori-galeria-arcos-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "fuori-kerakoll-fachada": {
+    "src": "/img/fuori-kerakoll-fachada-1350.webp",
+    "srcSet": "/img/fuori-kerakoll-fachada-480.webp 480w, /img/fuori-kerakoll-fachada-960.webp 960w, /img/fuori-kerakoll-fachada-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "fuori-kerakoll-muestrario": {
+    "src": "/img/fuori-kerakoll-muestrario-1350.webp",
+    "srcSet": "/img/fuori-kerakoll-muestrario-480.webp 480w, /img/fuori-kerakoll-muestrario-960.webp 960w, /img/fuori-kerakoll-muestrario-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -265,6 +283,12 @@ export const images = {
     "w": 2400,
     "h": 1800
   },
+  "milan-terraza-atardecer": {
+    "src": "/img/milan-terraza-atardecer-1920.webp",
+    "srcSet": "/img/milan-terraza-atardecer-480.webp 480w, /img/milan-terraza-atardecer-960.webp 960w, /img/milan-terraza-atardecer-1600.webp 1600w, /img/milan-terraza-atardecer-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
+  },
   "milan-tranvia": {
     "src": "/img/milan-tranvia-1350.webp",
     "srcSet": "/img/milan-tranvia-480.webp 480w, /img/milan-tranvia-960.webp 960w, /img/milan-tranvia-1350.webp 1350w",
@@ -274,12 +298,6 @@ export const images = {
   "milan-zapato-rojo": {
     "src": "/img/milan-zapato-rojo-1350.webp",
     "srcSet": "/img/milan-zapato-rojo-480.webp 480w, /img/milan-zapato-rojo-960.webp 960w, /img/milan-zapato-rojo-1350.webp 1350w",
-    "w": 1350,
-    "h": 2400
-  },
-  "salone-bolsa-e": {
-    "src": "/img/salone-bolsa-e-1350.webp",
-    "srcSet": "/img/salone-bolsa-e-480.webp 480w, /img/salone-bolsa-e-960.webp 960w, /img/salone-bolsa-e-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -319,9 +337,9 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
-  "salone-living": {
-    "src": "/img/salone-living-1920.webp",
-    "srcSet": "/img/salone-living-480.webp 480w, /img/salone-living-960.webp 960w, /img/salone-living-1600.webp 1600w, /img/salone-living-1920.webp 1920w",
+  "salone-repisa-ceramica": {
+    "src": "/img/salone-repisa-ceramica-1920.webp",
+    "srcSet": "/img/salone-repisa-ceramica-480.webp 480w, /img/salone-repisa-ceramica-960.webp 960w, /img/salone-repisa-ceramica-1600.webp 1600w, /img/salone-repisa-ceramica-1920.webp 1920w",
     "w": 2400,
     "h": 1350
   },
@@ -343,18 +361,6 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
-  "venecia-gran-canal-retrato": {
-    "src": "/img/venecia-gran-canal-retrato-1800.webp",
-    "srcSet": "/img/venecia-gran-canal-retrato-480.webp 480w, /img/venecia-gran-canal-retrato-960.webp 960w, /img/venecia-gran-canal-retrato-1600.webp 1600w, /img/venecia-gran-canal-retrato-1800.webp 1800w",
-    "w": 1800,
-    "h": 2400
-  },
-  "venecia-gran-canal": {
-    "src": "/img/venecia-gran-canal-1920.webp",
-    "srcSet": "/img/venecia-gran-canal-480.webp 480w, /img/venecia-gran-canal-960.webp 960w, /img/venecia-gran-canal-1600.webp 1600w, /img/venecia-gran-canal-1920.webp 1920w",
-    "w": 2400,
-    "h": 1350
-  },
   "venecia-grupo-escalinata": {
     "src": "/img/venecia-grupo-escalinata-1920.webp",
     "srcSet": "/img/venecia-grupo-escalinata-480.webp 480w, /img/venecia-grupo-escalinata-960.webp 960w, /img/venecia-grupo-escalinata-1600.webp 1600w, /img/venecia-grupo-escalinata-1920.webp 1920w",
@@ -367,21 +373,9 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
-  "verona-antolini-veta": {
-    "src": "/img/verona-antolini-veta-1350.webp",
-    "srcSet": "/img/verona-antolini-veta-480.webp 480w, /img/verona-antolini-veta-960.webp 960w, /img/verona-antolini-veta-1350.webp 1350w",
-    "w": 1350,
-    "h": 2400
-  },
   "verona-grupo-antolini": {
     "src": "/img/verona-grupo-antolini-1350.webp",
     "srcSet": "/img/verona-grupo-antolini-480.webp 480w, /img/verona-grupo-antolini-960.webp 960w, /img/verona-grupo-antolini-1350.webp 1350w",
-    "w": 1350,
-    "h": 2400
-  },
-  "verona-marmol-book-match": {
-    "src": "/img/verona-marmol-book-match-1350.webp",
-    "srcSet": "/img/verona-marmol-book-match-480.webp 480w, /img/verona-marmol-book-match-960.webp 960w, /img/verona-marmol-book-match-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
