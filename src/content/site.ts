@@ -276,11 +276,11 @@ export const milan = {
   /** Lo concreto de Milán 2027 (ficha oficial). El detalle completo está en la landing. */
   facts: {
     title: "Lo concreto.",
-    body: "Escríbenos y te enviamos el detalle: qué incluye, formas de pago e inscripción.",
+    body: "Escríbenos y te enviamos el valor y los pasos para inscribirte.",
     items: [
       { label: "Fechas", value: "12 al 17 de abril de 2027" },
-      { label: "Early bird", value: "USD 2.549 hasta el 30 de noviembre" },
-      { label: "Precio normal", value: "USD 2.999 hasta el 15 de enero" },
+      { label: "Duración", value: "6 días" },
+      { label: "Valor", value: "Por confirmar" },
       { label: "Cupos", value: "Limitados" },
     ],
   },
@@ -309,26 +309,60 @@ export const milan = {
   cta: "Quiero ser parte",
 };
 
+/*
+ * Borrador de precios de Milán 2027 (ficha oficial), sin publicar por ahora.
+ * Para activarlo: descomentar, exportar y mostrarlo en la página de Milán.
+ */
+// const milanPricing = {
+//   label: "Inversión",
+//   title: "Tu lugar en Milán.",
+//   plans: [
+//     {
+//       id: "early",
+//       name: "Early bird",
+//       until: "Hasta el 30 de noviembre de 2026",
+//       price: "USD 2.549",
+//       badge: "15% de descuento",
+//       payment: "Pago del 100% hasta el 30 de noviembre de 2026.",
+//       benefits: [
+//         "Mentoría 1:1 con Danae y Christian: una sesión para conocer tu contexto y diseñar contigo una visión estratégica personalizada.",
+//         "Encuentro y mentoría grupal en Studio Barla, con Danae, Christian y el grupo, antes de viajar.",
+//       ],
+//       featured: true,
+//     },
+//     {
+//       id: "normal",
+//       name: "Precio normal",
+//       until: "Hasta el 15 de enero de 2027",
+//       price: "USD 2.999",
+//       badge: "Por persona",
+//       payment: "50% hasta el 15 de diciembre de 2026 y 50% hasta el 15 de enero de 2027.",
+//       benefits: ["Encuentro y mentoría grupal en Studio Barla, con Danae, Christian y el grupo, antes de viajar."],
+//       featured: false,
+//     },
+//   ],
+//   reserve: {
+//     name: "Reserva tu cupo",
+//     price: "USD 300",
+//     until: "Hasta el 30 de noviembre de 2026",
+//     steps: ["USD 300 no reembolsables aseguran tu lugar.", "50% del total hasta el 15 de diciembre de 2026.", "50% restante hasta el 15 de enero de 2027, cierre de cupos."],
+//   },
+//   seats: "Cupos limitados. El grupo se cierra cuando se completan.",
+//   paymentLabel: "Formas de pago",
+//   payments: [
+//     { name: "Transferencia bancaria", text: "Sin recargo." },
+//     { name: "Tarjeta de crédito vía Webpay", text: "Con un recargo del 4%." },
+//   ],
+//   refund: "No se reembolsan las actividades a las que no se asista.",
+// };
+
 /**
- * Milán 2027: los datos de la ficha de producto oficial (Milan_2027_Ficha_de_producto.pdf).
+ * Milán 2027: los datos de la ficha de producto oficial (Milan_2027_Ficha_de_producto.pdf),
+ * sin precios (ver `milanPricing`).
  * Las frases que el manual de marca evita («la experiencia más exclusiva», «acceso a lo mejor
  * del diseño mundial», «exclusivo» como adorno) se reemplazaron por sus equivalentes del manual.
  */
 export const milan2027 = {
-  title: "Milán 2027",
-  fair: "Salone del Mobile.Milano",
-  dates: "12 al 17 de abril de 2027",
-  datesShort: "12–17 abril 2027",
-  days: "6 días",
-  /** La experiencia */
-  experience: {
-    label: "La experiencia",
-    title: ["Vivir el diseño", "donde nace."],
-    body: "Experiencias curadas en las capitales del diseño. No somos una agencia de viajes: elegimos qué ver, explicamos por qué importa y te acompañamos para que lo lleves a tu propio contexto.",
-    whyLabel: "Por qué Milán",
-    why: "Los milaneses respiran diseño. Está en los showrooms, en las calles, en los materiales y en la manera de trabajar de las marcas y las empresas. Durante el Salone y el Fuorisalone, la ciudad entera abre sus puertas.",
-    promise: "No vienes solo a conocer el mundo del diseño. Vienes a descubrir qué puede despertar en ti.",
-  },
   audience: {
     label: "Para quiénes",
     title: "Para quienes estudian, crean y quieren ir más allá.",
@@ -342,22 +376,13 @@ export const milan2027 = {
     label: "Dónde ocurre",
     title: "Seis escenarios.",
     items: [
-      { name: "Salone del Mobile.Milano", text: "La feria, en Fiera Milano Rho. La recorremos con una selección previa de pabellones y stands.", image: "salone-escalinata-roja" as ImageName, alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
-      { name: "Fuorisalone", text: "Tortona, Brera Design District y cientos de eventos e instalaciones: la ciudad entera como vitrina del diseño.", image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuorisalone en Milán: pilares de piedra, sofás bajos y una gran biblioteca iluminada al fondo" },
-      { name: "La Rinascente", text: "En la Piazza del Duomo. Desde aquí recorremos la Galleria Vittorio Emanuele II, la Scala, Via Montenapoleone, Via della Spiga y Corso Venezia. Aquí comienza la semana.", image: "milan-galleria-cupula" as ImageName, alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
-      { name: "Istituto Marangoni", text: "Una de las escuelas de moda y diseño más reconocidas del mundo, nacida en Milán.", image: "fuori-charla-arcos" as ImageName, alt: "Charla durante el Fuorisalone de Milán: el público sentado bajo una galería de arcos frente a una pantalla" },
-      { name: "Lago di Como", text: "Villas históricas, jardines frente al agua y montañas que descienden hasta el lago. Llegamos en tren y lo recorremos en ferry.", image: "milan-grupo-lago-como" as ImageName, alt: "El grupo de Experience Design en un barco en el lago de Como" },
-      { name: "Milán, la ciudad", text: "Patios escondidos tras cada portón, cafés y una forma de vivir donde el diseño está en todo. A pie, en bici o en scooter: tú eliges.", image: "milan-tranvia" as ImageName, alt: "Un tranvía histórico avanzando por una calle de Milán" },
+      { name: "Salone del Mobile.Milano", text: "La feria, en Fiera Milano Rho. La recorremos con una selección previa de pabellones y stands." },
+      { name: "Fuorisalone", text: "Tortona, Brera Design District y cientos de eventos e instalaciones: la ciudad entera como vitrina del diseño." },
+      { name: "La Rinascente", text: "En la Piazza del Duomo. Desde aquí recorremos la Galleria Vittorio Emanuele II, la Scala, Via Montenapoleone, Via della Spiga y Corso Venezia. Aquí comienza la semana." },
+      { name: "Istituto Marangoni", text: "Una de las escuelas de moda y diseño más reconocidas del mundo, nacida en Milán." },
+      { name: "Lago di Como", text: "Villas históricas, jardines frente al agua y montañas que descienden hasta el lago. Llegamos en tren y lo recorremos en ferry." },
+      { name: "Milán, la ciudad", text: "Patios escondidos tras cada portón, cafés y una forma de vivir donde el diseño está en todo. A pie, en bici o en scooter: tú eliges." },
     ],
-  },
-  process: {
-    label: "Conoce el proceso",
-    title: "Lo que vas a ver y tocar.",
-    body: "Detrás de una silla, un textil o una cubierta de piedra hay referencias, decisiones y un fundamento. Materiales, terminaciones, proporción y luz, vistos y tocados donde se presentan.",
-    quote: "Si no lo tocas, no lo viste.",
-    claim: "Reencuéntrate con los fundamentos del diseño, con lo más y lo mejor.",
-    image: "verona-antolini-veta" as ImageName,
-    alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona",
   },
   includes: {
     label: "Qué incluye",
@@ -383,61 +408,6 @@ export const milan2027 = {
     excludes: ["Vuelos", "Alojamiento", "Alimentación", "Traslados entre el aeropuerto de Milán y la ciudad", "Entradas a visitas turísticas, como el Duomo", "Cualquier servicio que no figure en esta lista"],
     excludesNote: "Vuelos y alojamiento los organiza cada persona según su ciudad de origen. Si lo necesitas, te recomendamos una agencia de viajes.",
   },
-  pricing: {
-    label: "Inversión",
-    title: "Tu lugar en Milán.",
-    plans: [
-      {
-        id: "early",
-        name: "Early bird",
-        until: "Hasta el 30 de noviembre de 2026",
-        price: "USD 2.549",
-        badge: "15% de descuento",
-        payment: "Pago del 100% hasta el 30 de noviembre de 2026.",
-        benefits: [
-          "Mentoría 1:1 con Danae y Christian: una sesión para conocer tu contexto y diseñar contigo una visión estratégica personalizada.",
-          "Encuentro y mentoría grupal en Studio Barla, con Danae, Christian y el grupo, antes de viajar.",
-        ],
-        featured: true,
-      },
-      {
-        id: "normal",
-        name: "Precio normal",
-        until: "Hasta el 15 de enero de 2027",
-        price: "USD 2.999",
-        badge: "Por persona",
-        payment: "50% hasta el 15 de diciembre de 2026 y 50% hasta el 15 de enero de 2027.",
-        benefits: ["Encuentro y mentoría grupal en Studio Barla, con Danae, Christian y el grupo, antes de viajar."],
-        featured: false,
-      },
-    ],
-    reserve: {
-      name: "Reserva tu cupo",
-      price: "USD 300",
-      until: "Hasta el 30 de noviembre de 2026",
-      steps: ["USD 300 no reembolsables aseguran tu lugar.", "50% del total hasta el 15 de diciembre de 2026.", "50% restante hasta el 15 de enero de 2027, cierre de cupos."],
-    },
-    seats: "Cupos limitados. El grupo se cierra cuando se completan.",
-    paymentLabel: "Formas de pago",
-    payments: [
-      { name: "Transferencia bancaria", text: "Sin recargo." },
-      { name: "Tarjeta de crédito vía Webpay", text: "Con un recargo del 4%." },
-    ],
-    refund: "No se reembolsan las actividades a las que no se asista.",
-  },
-  people: {
-    label: "Las personas",
-    title: "Con quién vives la experiencia.",
-    body: "Las conversaciones al final del día, las ideas en una cena, el camino al lago: eso es lo que permanece. Vuelves con contactos y una red que sigue creciendo.",
-    before: "Antes de viajar, un encuentro para conocer a quienes viajan contigo. El viaje empieza antes de subir al avión.",
-    items: [
-      { name: "Personas con tu misma ambición", text: "Quieren crecer y viven esta semana como una inversión en su desarrollo." },
-      { name: "Relaciones que continúan", text: "Colegas de otras ciudades y países con quienes compartes la feria y los descubrimientos. El vínculo sigue al volver." },
-      { name: "La red de los curadores", text: "Danae Barla y Christian Erdmann abren puertas a empresas, marcas y personas del diseño que conocen de primera mano." },
-    ],
-    image: "milan-grupo-gessi" as ImageName,
-    alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milan Design Week",
-  },
   /** Testimonios textuales de la ficha oficial. */
   testimonials: {
     label: "Personas que ya dieron el primer paso",
@@ -449,17 +419,6 @@ export const milan2027 = {
   },
   fit: {
     label: "Antes de decidir",
-    title: "Una inversión en ti.",
-    body: "Milán 2027 es una inversión en tu mirada, en tus relaciones y en tu manera de crear.",
-    takeawaysLabel: "Lo que te llevas de vuelta",
-    takeaways: [
-      { name: "Referencias propias", text: "Piezas, materiales y espacios vistos en vivo, que pasan a ser tu archivo de inspiración." },
-      { name: "Criterio para aplicarlas", text: "Entender por qué funciona una decisión de diseño y cómo traducirla a tu contexto." },
-      { name: "Materiales y procesos", text: "Texturas, terminaciones y soluciones que solo se entienden cuando se tocan." },
-      { name: "Relaciones", text: "Colegas, curadores y marcas con quienes seguir conversando al volver." },
-      { name: "El registro de tu semana", text: "Lo vivido, ordenado en ideas y referencias para volver a ellas." },
-      { name: "Tu propio sello", text: "Una mirada más definida sobre lo que te distingue y cómo mostrarlo." },
-    ],
     question: "¿Es para ti?",
     lead: "Este viaje no es para ti si buscas museos, ir de compras o levantarte tarde.",
     yesLabel: "Es para ti si",
@@ -485,7 +444,7 @@ export const milan2027 = {
     items: [
       { name: "Conversemos", text: "Escríbenos por WhatsApp, Instagram o correo y resolvemos tus dudas." },
       { name: "Reserva o paga", text: "Reserva tu cupo o paga por anticipado: el primer paso para no perder tu lugar." },
-      { name: "Completa el pago", text: "Antes del 15 de enero de 2027. Los cupos son limitados." },
+      { name: "Completa el pago", text: "Los cupos son limitados." },
       { name: "Conoce al grupo", text: "Al equipo de Experience Design y a quienes viajarán contigo." },
       { name: "Haz tus maletas", text: "Milán te espera." },
     ],
