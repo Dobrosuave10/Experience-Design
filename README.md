@@ -22,7 +22,24 @@ npm run build
 
 Programas y destinos son cosas distintas: los programas responden "¿qué camino es para mí?", los destinos "¿qué experiencia puedo vivir?". No mezclarlos.
 
-El router es propio (`src/lib/router.ts`, History API) y cada cambio de página pasa por el telón terracota de `PageTransition`. En el hosting, todas las rutas deben servir `index.html` (en Vercel: `"rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]`).
+El router es propio (`src/lib/router.ts`, History API) y cada cambio de página pasa por el telón terracota de `PageTransition`.
+
+## Publicar en el hosting
+
+El sitio se publica reemplazando carpetas en el hosting de experience-design.cl (cPanel / Apache). El dominio no cambia.
+
+1. `npm run build`. Genera `dist/` con una carpeta e `index.html` por cada ruta (`scripts/static-routes.mjs`), así los enlaces directos funcionan aunque el servidor no tenga reglas.
+2. En el administrador de archivos (o por FTP), sube el **contenido** de `dist/` (no la carpeta) a `public_html`, reemplazando lo que había.
+3. Verifica que `.htaccess` quedó en `public_html` (es un archivo oculto; viene en `dist/`). Hace el respaldo a `index.html` y las redirecciones 301 de las URLs del sitio anterior:
+
+| URL anterior | Redirige a |
+|---|---|
+| `/milan-salone-del-mobile2026`, `/milan-salone-del-mobile` | `/destinos/milan` |
+| `/sao-paulo-casacor-2025` | `/destinos/sao-paulo` |
+| `/inicio` | `/` |
+| `/programas/estudiantes`, `/programas/profesionales` | `/programas` |
+
+En otro hosting estático (Netlify, Vercel, GitHub Pages) basta con subir `dist/`; las redirecciones se configuran en ese servicio.
 
 ## Dónde se edita
 

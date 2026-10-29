@@ -1,0 +1,50 @@
+# Experience Design · experience-design.cl
+# Subir junto con el resto del contenido de dist/ a public_html.
+
+Options -MultiViews
+DirectoryIndex index.html
+
+# /nosotros sirve /nosotros/index.html sin redirigir a /nosotros/
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # URLs del sitio anterior (Canva) → páginas nuevas
+  RewriteRule ^milan-salone-del-mobile2026/?$ /destinos/milan [R=301,L]
+  RewriteRule ^milan-salone-del-mobile/?$ /destinos/milan [R=301,L]
+  RewriteRule ^sao-paulo-casacor-2025/?$ /destinos/sao-paulo [R=301,L]
+  RewriteRule ^inicio/?$ / [R=301,L]
+  RewriteRule ^programas/estudiantes/?$ /programas [R=301,L]
+  RewriteRule ^programas/profesionales/?$ /programas [R=301,L]
+
+  # Cada ruta del sitio tiene su carpeta con index.html (la genera npm run build)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.+?)/?$ /$1/index.html [L]
+
+  # Archivos reales (JS, CSS, imágenes, fuentes) se sirven tal cual
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # Cualquier otra ruta: la app (muestra su página 404)
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript image/svg+xml application/json
+</IfModule>
