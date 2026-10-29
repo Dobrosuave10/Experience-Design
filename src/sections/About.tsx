@@ -29,6 +29,9 @@ export function AboutWho() {
           {about.who.label}
         </p>
         <RevealText as="p" className="about__text display" lines={[about.who.text]} stagger={0.02} />
+        <p className="about__history about__note serif">
+          <em>{about.who.notAgency}</em>
+        </p>
         <Figure slot={about.image} className="about__frame" ratio="848 / 1080" sizes="(max-width: 899px) 80vw, 34vw" />
         <p className="about__history serif">
           <em>{about.who.history}</em>

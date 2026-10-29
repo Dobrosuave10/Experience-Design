@@ -39,6 +39,10 @@
   border-top: 1px solid var(--line);
   color: var(--muted);
 }
+.about__note {
+  grid-row: 3;
+  align-self: start;
+}
 
 .principles {
   padding-block: clamp(120px, 20vh, 240px);

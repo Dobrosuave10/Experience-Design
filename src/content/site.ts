@@ -376,8 +376,8 @@ export const milan = {
 /**
  * Milán 2027: los datos de la ficha de producto oficial (Milan_2027_Ficha_de_producto.pdf),
  * sin precios (ver `milanPricing`).
- * Las frases que el manual de marca evita («la experiencia más exclusiva», «acceso a lo mejor
- * del diseño mundial», «exclusivo» como adorno) se reemplazaron por sus equivalentes del manual.
+ * Se mantiene la redacción de la ficha, salvo el titular «la experiencia más exclusiva del
+ * diseño», que no se usa: el manual pide transmitir la exclusividad «sin necesidad de anunciarla».
  */
 export const milan2027 = {
   audience: {
@@ -393,7 +393,7 @@ export const milan2027 = {
     label: "Dónde ocurre",
     title: "Seis escenarios.",
     items: [
-      { name: "Salone del Mobile.Milano", text: "La feria, en Fiera Milano Rho. La recorremos con una selección previa de pabellones y stands." },
+      { name: "Salone del Mobile.Milano", text: "La feria de diseño más importante del mundo, en Fiera Milano Rho. La recorremos con una selección previa de pabellones y stands." },
       { name: "Fuorisalone", text: "Tortona, Brera Design District y cientos de eventos e instalaciones: la ciudad entera como vitrina del diseño." },
       { name: "La Rinascente", text: "En la Piazza del Duomo. Desde aquí recorremos la Galleria Vittorio Emanuele II, la Scala, Via Montenapoleone, Via della Spiga y Corso Venezia. Aquí comienza la semana." },
       { name: "Istituto Marangoni", text: "Una de las escuelas de moda y diseño más reconocidas del mundo, nacida en Milán." },
@@ -410,9 +410,9 @@ export const milan2027 = {
       { name: "Acompañamiento de Danae y Christian", text: "Toda la semana, para descubrir qué ver y por qué importa." },
       { name: "Istituto Marangoni y encuentros con marcas", text: "Una visita académica e instancias de networking con marcas y empresas." },
       { name: "Lago di Como", text: "Tren y ferry incluidos, con Navigazione Laghi." },
-      { name: "Aperitivos de bienvenida y de cierre", text: "Bienvenida en La Rinascente y cierre en el Lago di Como." },
+      { name: "Aperitivos de bienvenida y de cierre", text: "Bienvenida en La Rinascente, con lo mejor de la gastronomía italiana, y cierre en el Lago di Como." },
       { name: "Transporte", text: "Transfer desde cualquier punto de Santiago al aeropuerto, ida y vuelta, y pase de 10 viajes en metro en Milán." },
-      { name: "Fotógrafo del grupo", text: "10 fotos y 2 videos cortos de tu experiencia, para tu marca personal y tus redes. Registros extra con costo adicional." },
+      { name: "Fotógrafo exclusivo del grupo", text: "Un profesional que te acompaña durante la semana. 10 fotos exclusivas y 2 videos cortos, para tu marca personal y tus redes. Registros extra con costo adicional." },
       { name: "eSIM Holafly", text: "Datos desde que llegas, durante todo el viaje." },
       { name: "Productos Experience Design", text: "Productos de diseño para acompañar tu viaje." },
       { name: "Encuentros del grupo", text: "Antes de viajar, para conocerse y llegar a Milán como grupo." },
@@ -535,13 +535,13 @@ export const founders = {
     {
       name: "Danae Barla",
       field: "Arquitecta interiorista · Studio Barla",
-      bio: "Desde el interiorismo, selecciona las experiencias, las referencias y los aprendizajes: ferias, showrooms, estudios y materiales que vale la pena conocer en su propio contexto." as string | null,
+      bio: "Arquitecta interiorista y fundadora de Studio Barla. Su pasión por el mobiliario, el arte y la fotografía, y su convicción de que los viajes alimentan la búsqueda de un diseño propio, dieron origen a la marca." as string | null,
       image: { image: "danae", alt: "Retrato de Danae Barla", material: "terracotta", brief: "Retrato real de Danae, luz natural. 4:5." } as ImageSlot,
     },
     {
       name: "Christian Erdmann",
       field: "Diseñador industrial · Mobiliario y curaduría de diseño",
-      bio: "Abre puertas que no están a la vista y lee los códigos de las grandes casas del diseño." as string | null,
+      bio: "Diseñador industrial especializado en mobiliario y curador de diseño. Abre puertas que no están a la vista, lee los códigos de las grandes casas del diseño y crea el espacio para que cada encuentro se sienta natural y genuino." as string | null,
       image: { image: "christian", alt: "Retrato de Christian Erdmann", material: "walnut", brief: "Retrato real de Christian, luz natural. 4:5." } as ImageSlot,
     },
   ],
@@ -618,6 +618,7 @@ export const about = {
     label: "Quiénes somos",
     text: "Experience Design crea experiencias curadas para vivir el diseño desde dentro, en las capitales del diseño y en los escenarios donde nacen las ideas.",
     history: "Empezó como un experimento con pocas personas. Sigue igual de cerca.",
+    notAgency: "No somos una agencia de viajes: creamos experiencias de diseño curadas.",
   },
   /** Textos oficiales del manual de marca (versión aprobada el 21 de octubre de 2026). */
   principles: [
@@ -625,7 +626,7 @@ export const about = {
       id: "proposito",
       label: "Propósito",
       text: "Abrir la mirada hacia nuevas posibilidades.",
-      body: "Salir de lo conocido cambia la forma en que vemos las cosas.",
+      body: "Creemos que salir de lo conocido puede cambiar la forma en que vemos las cosas.",
     },
     {
       id: "mision",
@@ -636,7 +637,7 @@ export const about = {
     {
       id: "vision",
       label: "Visión",
-      text: "Consolidar y experimentar dentro.",
+      text: "Consolidar y experimentar desde la cuna del diseño.",
       body: "Ser el referente de la curaduría y la vanguardia en la práctica profesional del diseño.",
     },
   ],
@@ -707,7 +708,7 @@ export const programs = {
       name: "Formación",
       href: routes.formacion,
       lines: ["Lo que descubres", "también puede transformarse", "en conocimiento."],
-      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
+      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca. Quien participa aprende a capitalizar lo que vive: qué observar, qué contenido generar, cómo registrar lo aprendido y convertirlo en reflexiones útiles para su trabajo.",
       short: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
       keywords: ["Cursos", "Webinars", "Herramientas", "Fotografía", "Marketing", "Marca"],
       tone: "ink",
@@ -760,8 +761,8 @@ export const programs = {
         alt: "Participante sentada en un showroom de Milán, entre espejos redondos y butacas de cuero",
       },
       audience: {
-        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados.",
-        professionals: "Profesionales de arquitectura, interiorismo y diseño.",
+        students: "Para quienes recién empiezan.",
+        professionals: "Para quienes ya tienen una trayectoria.",
       },
       interest: "marca",
       cta: "Conocer Marca personal",
