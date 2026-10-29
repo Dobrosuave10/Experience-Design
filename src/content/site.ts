@@ -708,7 +708,7 @@ export const programs = {
       name: "Formación",
       href: routes.formacion,
       lines: ["Lo que descubres", "también puede transformarse", "en conocimiento."],
-      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca. Quien participa aprende a capitalizar lo que vive: qué observar, qué contenido generar, cómo registrar lo aprendido y convertirlo en reflexiones útiles para su trabajo.",
+      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca. Quien participa aprende a capitalizar lo que vive: qué observar, qué contenido generar, cómo registrar lo aprendido y cómo convertirlo en reflexiones útiles para su trabajo.",
       short: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
       keywords: ["Cursos", "Webinars", "Herramientas", "Fotografía", "Marketing", "Marca"],
       tone: "ink",
