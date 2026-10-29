@@ -1,0 +1,56 @@
+.enroll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 60px;
+  max-width: 100%;
+  padding: 16px 32px;
+  border-radius: 999px;
+  background: var(--clay);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: center;
+  transition:
+    background-color 0.4s var(--ease-out),
+    scale 0.2s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.enroll:hover {
+  background: #833c14;
+}
+.enroll:active {
+  scale: 0.98;
+}
+.enroll:focus-visible {
+  outline: 3px solid var(--fg);
+  outline-offset: 4px;
+}
+.enroll__icon {
+  flex: none;
+  transition: transform 0.4s var(--ease-out);
+}
+.enroll:hover .enroll__icon {
+  transform: translate(3px, -3px);
+}
+/* Sobre fondo terracota, el botón se invierte para no perderse */
+[data-tone="clay"] .enroll {
+  background: var(--ivory);
+  color: var(--clay);
+}
+[data-tone="clay"] .enroll:hover {
+  background: var(--sand);
+}
+
+@media (max-width: 599px) {
+  .enroll {
+    display: flex;
+    width: 100%;
+    min-height: 60px;
+    padding-inline: 22px;
+  }
+}

@@ -1,24 +1,23 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { brand, contact, interests, type InterestId } from "../content/site";
-import { interestFromUrl, onInterest } from "../lib/events";
+import { brand, contact } from "../content/site";
 import { MagneticButton } from "./MagneticButton";
 import "./LeadForm.css";
 
 type Status = "idle" | "sending" | "sent" | "error" | "unconfigured";
-type Errors = Partial<Record<"name" | "email" | "interest", string>>;
+type Errors = Partial<Record<"name" | "email", string>>;
 
 const ENDPOINT = import.meta.env.VITE_LEAD_ENDPOINT as string | undefined;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-/** Cuatro campos, nada más: nombre, email, WhatsApp (opcional) e interés. */
+/**
+ * Tres campos para una consulta general: nombre, email y WhatsApp (opcional).
+ * La elección de interés está pausada: el foco de Contacto es la inscripción a Milán 2027.
+ */
 export function LeadForm() {
   const uid = useId();
-  const [interest, setInterest] = useState<InterestId | null>(() => interestFromUrl());
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
-
-  useEffect(() => onInterest(setInterest), []);
   useEffect(() => {
     if (status !== "idle") ScrollTrigger.refresh();
   }, [status]);
@@ -32,12 +31,11 @@ export function LeadForm() {
     const next: Errors = {};
     if (!name) next.name = "Escribe tu nombre.";
     if (!EMAIL_RE.test(email)) next.email = "Revisa el email.";
-    if (!interest) next.interest = "Elige al menos una opción.";
     setErrors(next);
     if (Object.keys(next).length) {
       // El foco va al primer campo con error (se busca por nombre: el marcado aria-invalid
       // todavía no está en el DOM en este momento)
-      const firstKey = (["name", "email", "interest"] as const).find((k) => next[k]);
+      const firstKey = (["name", "email"] as const).find((k) => next[k]);
       e.currentTarget.querySelector<HTMLElement>(`[name="${firstKey}"]`)?.focus();
       return;
     }
@@ -50,7 +48,7 @@ export function LeadForm() {
       const res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name, email, whatsapp, interest, source: brand.website }),
+        body: JSON.stringify({ name, email, whatsapp, interest: "otro", source: brand.website }),
       });
       setStatus(res.ok ? "sent" : "error");
     } catch {
@@ -114,23 +112,6 @@ export function LeadForm() {
         </label>
         <input id={`${uid}-wa`} name="whatsapp" type="tel" autoComplete="tel" inputMode="tel" />
       </div>
-
-      <fieldset className="lead__field lead__interests" aria-invalid={!!errors.interest} aria-describedby={errors.interest ? `${uid}-int-err` : undefined}>
-        <legend className="label">¿Qué te interesa?</legend>
-        <div className="lead__chips">
-          {interests.map((it) => (
-            <label key={it.id} className={`lead__chip ${interest === it.id ? "is-on" : ""}`}>
-              <input type="radio" name="interest" value={it.id} checked={interest === it.id} onChange={() => setInterest(it.id)} />
-              {it.label}
-            </label>
-          ))}
-        </div>
-        {errors.interest && (
-          <p id={`${uid}-int-err`} className="lead__error">
-            {errors.interest}
-          </p>
-        )}
-      </fieldset>
 
       <div className="lead__submit">
         <MagneticButton type="submit" disabled={status === "sending"}>

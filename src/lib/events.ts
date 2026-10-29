@@ -1,4 +1,4 @@
-import { interests, type InterestId } from "../content/site";
+import type { InterestId } from "../content/site";
 import { getPath, navigate } from "./router";
 import { scrollToTarget } from "./smoothScroll";
 
@@ -55,23 +55,14 @@ export function getSealTarget() {
   return sealTarget?.() ?? null;
 }
 
-/** Cualquier CTA puede llevar al formulario con un interés preseleccionado. */
-const INTEREST_EVENT = "ed:interest";
-export function goToContact(interest?: InterestId) {
+/**
+ * Cualquier CTA puede llevar a Contacto. El interés ya no viaja en la URL: Contacto se
+ * enfoca en la inscripción y los enlaces antiguos /contacto?interes=... simplemente lo ignoran.
+ */
+export function goToContact(_interest?: InterestId) {
   if (getPath() === "/contacto") {
-    if (interest) window.dispatchEvent(new CustomEvent<InterestId>(INTEREST_EVENT, { detail: interest }));
     scrollToTarget("#contacto");
     return;
   }
-  navigate(interest ? `/contacto?interes=${interest}` : "/contacto");
-}
-export function onInterest(fn: (id: InterestId) => void) {
-  const h = (e: Event) => fn((e as CustomEvent<InterestId>).detail);
-  window.addEventListener(INTEREST_EVENT, h);
-  return () => window.removeEventListener(INTEREST_EVENT, h);
-}
-/** Interés que llega en la URL (/contacto?interes=milan), si es válido. */
-export function interestFromUrl(): InterestId | null {
-  const id = new URLSearchParams(window.location.search).get("interes");
-  return interests.find((it) => it.id === id)?.id ?? null;
+  navigate("/contacto");
 }

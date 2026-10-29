@@ -10,14 +10,13 @@ type Props = {
   onToggle: () => void;
 };
 
-/** Fila del archivo de experiencias. Se expande para contar qué pasó (o qué viene). */
+/** Fila del archivo de experiencias. Se expande para contar qué pasó (o qué viene). Sin año a la vista: Destinos mira hacia 2027. */
 export function ExperienceCard({ entry, open, onToggle }: Props) {
   const id = useId();
   return (
     <li className={`xcard ${open ? "is-open" : ""} ${entry.status ? `xcard--${entry.status}` : ""}`}>
       <h3 className="xcard__heading">
         <button className="xcard__row" aria-expanded={open} aria-controls={id} onClick={onToggle}>
-          <span className="xcard__year label">{entry.year}</span>
           <span className="xcard__place display">{entry.place}</span>
           <span className="xcard__tag label">{entry.tag}</span>
           <Plus className="xcard__icon" size={20} weight="light" aria-hidden />

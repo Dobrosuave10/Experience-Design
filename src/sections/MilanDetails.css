@@ -178,3 +178,26 @@
     overflow-wrap: anywhere;
   }
 }
+
+/* Inscripción */
+.md__enroll {
+  justify-self: start;
+  min-height: 64px;
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  padding-inline: 40px;
+}
+.md--cta {
+  padding-block: 0 clamp(72px, 12vh, 128px);
+}
+.md__cta {
+  display: flex;
+  justify-content: center;
+}
+.md--cta-end {
+  padding-block: clamp(72px, 12vh, 128px);
+}
+@media (max-width: 599px) {
+  .md__enroll {
+    justify-self: stretch;
+  }
+}

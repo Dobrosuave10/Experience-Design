@@ -10,10 +10,10 @@ import "./Milan.css";
 
 /**
  * Destino 01: Milán, Milan Design Week / Salone del Mobile.
- * 1) Apertura: el terrazzo milanés se abre desde una ventana hasta ocupar todo,
- *    con "Milán" en blend difference encima.
- * 2) La idea y seis capítulos en vertical (los mismos componentes que São Paulo).
- * El itinerario, la galería y lo pendiente van en secciones propias.
+ * `Milan`: la apertura, breve. La foto se abre desde una ventana hasta ocupar todo,
+ * con "Milán" encima.
+ * `MilanIntro` y `MilanRooms`: la idea y los seis capítulos con foto (los mismos
+ * componentes que São Paulo). En la página van al final, junto a la galería.
  */
 export function Milan() {
   const ref = useRef<HTMLElement>(null);
@@ -67,10 +67,18 @@ export function Milan() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
 
-      <DestinationIntro statementA={milan.statementA} statementB={milan.statementB} tone="ink" />
+export function MilanIntro() {
+  return <DestinationIntro statementA={milan.statementA} statementB={milan.statementB} tone="ink" />;
+}
 
-      {/* Capítulos: la ciudad en vertical, como la casa de São Paulo */}
+/** Capítulos: la ciudad en vertical, como la casa de São Paulo. */
+export function MilanRooms() {
+  return (
+    <section className="milan" aria-label="Capítulos">
       <Rooms rooms={milan.chapters} tone="ink" label="Capítulos" />
     </section>
   );

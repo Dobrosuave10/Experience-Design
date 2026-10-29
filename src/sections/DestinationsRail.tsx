@@ -106,10 +106,6 @@ export function DestinationsRail() {
               <h2 id={`rail-${d.id}`} className="rail__name display rail__reveal">
                 {d.name}
               </h2>
-              <p className="rail__fact rail__reveal">
-                <span className="label muted">{destinations.doneLabel}</span>
-                <span className="rail__fact-value">{d.done}</span>
-              </p>
               <div className="rail__reveal">
                 <MagneticButton href={d.href} onClick={() => navigate(d.href, { travel: d.name })}>
                   {destinations.more}

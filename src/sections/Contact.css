@@ -1,60 +1,124 @@
 .contact {
-  padding-block: clamp(140px, 22vh, 260px) clamp(120px, 18vh, 200px);
+  padding-block: clamp(128px, 20vh, 220px) clamp(96px, 16vh, 180px);
 }
-.contact__grid {
+.contact__main {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: clamp(16px, 2vw, 32px);
-  row-gap: 64px;
+  justify-items: start;
+  max-width: calc(52rem + 2 * var(--gutter));
 }
-.contact__intro {
-  grid-column: 1 / span 5;
-  display: grid;
-  align-content: start;
-  gap: 28px;
+.contact__label {
+  color: var(--accent);
+  margin-bottom: 20px;
 }
 .contact__title {
-  font-size: clamp(2.8rem, 5.6vw, 6.2rem);
+  font-size: clamp(2.8rem, 7vw, 6.4rem);
   line-height: 0.98;
-  max-width: 12ch;
 }
 .contact__body {
-  max-width: 38ch;
-  font-size: 1.08rem;
+  margin-top: 28px;
+  max-width: 34ch;
+  font-size: clamp(1.25rem, 1.9vw, 1.5rem);
+  line-height: 1.45;
+}
+.contact__enroll {
+  margin-top: clamp(32px, 5vh, 48px);
+  min-height: 64px;
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  padding-inline: 40px;
+}
+
+/* Cómo sigue: tres pasos breves */
+.contact__steps {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 12px clamp(20px, 3vw, 44px);
+  margin-top: clamp(28px, 4vh, 40px);
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+.contact__step {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.contact__step-n {
+  color: var(--accent);
+  font-size: 1.3rem;
+}
+
+/* Canales directos */
+.contact__channels-wrap {
+  width: 100%;
+  margin-top: clamp(48px, 8vh, 80px);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.contact__channels-label {
+  color: var(--muted);
+  margin-bottom: 10px;
 }
 .contact__channels {
-  display: grid;
-  gap: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px clamp(20px, 3vw, 40px);
 }
 .contact__channel {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  min-height: 44px;
-  font-weight: 500;
+  min-height: 48px;
+  font-size: 1.12rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
 }
 .contact__channel:hover {
   color: var(--accent);
 }
+
+/* ¿Otra consulta? (plegada) */
+.contact__other {
+  width: 100%;
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.contact__other-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: left;
+}
+.contact__other-icon {
+  transition: transform 0.4s var(--ease-out);
+}
+.contact__other.is-open .contact__other-icon {
+  transform: rotate(45deg);
+}
+.contact__other-panel {
+  display: grid;
+  gap: 28px;
+  padding-bottom: 40px;
+}
 .contact__b2b {
   color: var(--muted);
-  font-size: 0.95rem;
-}
-.contact__b2b-link {
-  color: var(--fg);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  min-height: 44px;
-}
-.contact__form {
-  grid-column: 7 / span 6;
-  padding-top: 12px;
+  font-size: 1.05rem;
 }
 
-@media (max-width: 899px) {
-  .contact__intro,
-  .contact__form {
-    grid-column: 1 / -1;
+@media (max-width: 699px) {
+  .contact__steps {
+    grid-template-columns: 1fr;
   }
+  .contact__enroll {
+    padding-inline: 22px;
+  }
+  .contact__channels {
+    flex-direction: column;
+  }
+}
+.contact__title .accent {
+  color: var(--accent);
 }

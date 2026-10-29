@@ -43,6 +43,7 @@ En otro hosting estático (Netlify, Vercel, GitHub Pages) basta con subir `dist/
 
 ## Dónde se edita
 
+- **Link del formulario de inscripción (Google Form):** se pega en `src/content/site.ts`, en `inscripcion.googleFormUrl` (línea marcada «PEGAR AQUÍ»). Si se deja en `null`, los botones abren WhatsApp.
 - **Todo el texto, las rutas y los datos:** `src/content/site.ts`. Lo que aún no está definido (fechas, valor, programa, cupos, cursos, biografías) se muestra como "Por confirmar", "En desarrollo" o "Próximamente".
 - **Nuevo destino en el archivo:** agrega una entrada a `archive.entries`.
 - **Colores y tipografía:** `src/styles/tokens.css`.

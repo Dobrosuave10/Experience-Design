@@ -1,5 +1,6 @@
 import { EnvelopeSimple, InstagramLogo, WhatsappLogo } from "@phosphor-icons/react";
-import { brand, milan2027 } from "../content/site";
+import { brand, milan, milan2027 } from "../content/site";
+import { EnrollButton } from "../components/EnrollButton";
 import { RevealText } from "../components/RevealText";
 import "./MilanDetails.css";
 
@@ -122,6 +123,17 @@ export function MilanFit({ tone = "ink" }: { tone?: Tone }) {
   );
 }
 
+/** Un llamado a inscribirse, solo el botón: se repite tras los testimonios y al final. */
+export function MilanCta({ tone = "paper" }: { tone?: Tone }) {
+  return (
+    <div className="md md--cta" data-tone={tone}>
+      <div className="wrap md__cta">
+        <EnrollButton>{milan.cta}</EnrollButton>
+      </div>
+    </div>
+  );
+}
+
 export function MilanSteps({ tone = "paper" }: { tone?: Tone }) {
   const s = milan2027.steps;
   const wa = brand.whatsapp
@@ -134,6 +146,7 @@ export function MilanSteps({ tone = "paper" }: { tone?: Tone }) {
         <Items items={s.items} />
         <div className="md__close">
           <p className="md__closing serif">{s.closing}</p>
+          <EnrollButton className="md__enroll">{milan.cta}</EnrollButton>
           <ul className="md__channels">
             {wa && (
               <li>

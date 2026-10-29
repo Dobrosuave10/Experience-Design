@@ -34,6 +34,23 @@ export const brand = {
   },
 };
 
+/**
+ * Inscripción a Milán 2027 (formulario de Google).
+ * Si `googleFormUrl` queda en null, los botones abren WhatsApp con un mensaje listo.
+ */
+export const inscripcion = {
+  // PEGAR AQUÍ el link del Google Form (Enviar → ícono de enlace → copiar)
+  googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe0alwozIWI8wbkIG35Vwiufl9t2zmhpSEfDnw2sBhRTfd7FQ/viewform" as string | null,
+  label: "Completar formulario de inscripción",
+};
+
+/** Destino de todo botón de inscripción: el formulario o, si falta, WhatsApp. Siempre en pestaña nueva. */
+export function inscripcionHref(): string {
+  if (inscripcion.googleFormUrl) return inscripcion.googleFormUrl;
+  if (brand.whatsapp) return `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hola, quiero ser parte de Milán 2027")}`;
+  return brand.instagram.url;
+}
+
 export type ImageSlot = {
   /** Foto real (nombre en images.gen.ts). Si falta, se muestra una placa de material como sustituto. */
   image?: ImageName;
@@ -119,13 +136,13 @@ export const pageDescriptions: Record<string, string> = {
   [routes.marcaPersonal]:
     "Marca personal: construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
   [routes.destinos]:
-    "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias de 2025 y 2026.",
+    "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias que ya recorrimos.",
   [routes.milan]:
     "Milán 2027, Salone del Mobile.Milano. Seis días, del 12 al 17 de abril de 2027: el Salone, el Fuorisalone, el Istituto Marangoni y el Lago di Como.",
   [routes.saoPaulo]:
     "São Paulo, CASACOR. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
   [routes.contacto]:
-    "Cuéntanos qué te interesa. Te respondemos con lo concreto: qué es, qué incluye y cuánto cuesta.",
+    "Sé parte de Milán 2027, del 12 al 17 de abril. Completar el formulario es el primer paso. Te respondemos personalmente.",
 };
 
 /** Cada página termina invitando a la siguiente: un mismo libro, distintos capítulos. */
@@ -546,14 +563,14 @@ export const archive = {
     {
       year: "2026",
       place: "Milán",
-      tag: "Milan Design Week · abril de 2026",
+      tag: "Milan Design Week",
       text: "Salone del Mobile, Fuorisalone y showrooms de la ciudad, con Verona, entre los mármoles de Antolini, y Venecia.",
       material: "travertine",
     },
     {
       year: "2025",
       place: "São Paulo",
-      tag: "CASACOR São Paulo · julio de 2025",
+      tag: "CASACOR São Paulo",
       text: "Una casa recorrida ambiente por ambiente, con paradas en Bontempo, Todeschini y Eliane.",
       material: "terracotta",
     },
@@ -910,6 +927,17 @@ export const interests = [
   { id: "otro", label: "Otro" },
 ] as const;
 export type InterestId = (typeof interests)[number]["id"];
+
+/** Contacto: el foco es la inscripción a Milán 2027 por el formulario. */
+export const enroll = {
+  label: "Milán 2027 · 12 al 17 de abril",
+  title: ["Sé parte de", "Milán 2027."],
+  body: "Completar el formulario es el primer paso. Te respondemos personalmente.",
+  stepsLabel: "Cómo sigue",
+  steps: ["Completa el formulario", "Te contactamos", "Reserva tu cupo"],
+  channelsLabel: "También por",
+  otherLabel: "¿Otra consulta?",
+};
 
 export const contact = {
   title: "¿Conversamos?",

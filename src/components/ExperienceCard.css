@@ -10,15 +10,11 @@
 .xcard__row {
   width: 100%;
   display: grid;
-  grid-template-columns: 7ch 1fr auto 28px;
+  grid-template-columns: 1fr auto 28px;
   align-items: center;
   gap: clamp(12px, 2vw, 32px);
   padding-block: clamp(18px, 2.6vh, 28px);
   text-align: left;
-}
-.xcard__year {
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
 }
 .xcard__place {
   font-size: clamp(2.2rem, 5vw, 5.4rem);
@@ -85,13 +81,9 @@
   .xcard__row {
     grid-template-columns: 1fr 24px;
     grid-template-areas:
-      "year icon"
       "place icon"
       "tag icon";
     row-gap: 6px;
-  }
-  .xcard__year {
-    grid-area: year;
   }
   .xcard__place {
     grid-area: place;

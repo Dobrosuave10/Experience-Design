@@ -17,11 +17,13 @@ type Props = {
   interest: InterestId;
   /** Si está, el CTA lleva a esta página en vez del formulario de contacto. */
   href?: string;
+  /** El `href` es externo (formulario de inscripción): se abre en una pestaña nueva. */
+  external?: boolean;
   tone?: "ink" | "paper" | "sand" | "clay";
 };
 
 /** Lo concreto (o lo que aún no está definido, dicho con honestidad) y el CTA. */
-export function Pending({ title, body, items, status = "", cta, interest, href, tone = "paper" }: Props) {
+export function Pending({ title, body, items, status = "", cta, interest, href, external, tone = "paper" }: Props) {
   return (
     <section className="pending section" data-tone={tone} aria-label={title}>
       <div className="wrap pending__grid">
@@ -41,7 +43,11 @@ export function Pending({ title, body, items, status = "", cta, interest, href, 
         </dl>
         <div className="pending__cta">
           <p className="muted">{body}</p>
-          <MagneticButton href={href ?? "/contacto"} onClick={() => (href ? navigate(href) : goToContact(interest))}>
+          <MagneticButton
+            href={href ?? "/contacto"}
+            external={external}
+            onClick={external ? undefined : () => (href ? navigate(href) : goToContact(interest))}
+          >
             {cta}
           </MagneticButton>
         </div>
