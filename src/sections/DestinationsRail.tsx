@@ -111,7 +111,7 @@ export function DestinationsRail() {
                 <span className="rail__fact-value">{d.done}</span>
               </p>
               <div className="rail__reveal">
-                <MagneticButton href={d.href} onClick={() => navigate(d.href)}>
+                <MagneticButton href={d.href} onClick={() => navigate(d.href, { travel: d.name })}>
                   {destinations.more}
                   <span className="sr-only"> sobre {d.name}</span>
                 </MagneticButton>

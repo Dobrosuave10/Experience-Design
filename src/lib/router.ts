@@ -41,8 +41,11 @@ export function usePath() {
   );
 }
 
+/** Cómo se llega a la página: `travel` es el viaje a un destino (con su nombre). */
+export type NavOptions = { travel?: string };
+
 /** PageTransition registra aquí su telón. Recibe `swap`, que cambia la página. */
-type Transition = (swap: () => void) => void;
+type Transition = (swap: () => void, options: NavOptions) => void;
 let transition: Transition | null = null;
 export function setTransition(fn: Transition | null) {
   transition = fn;
@@ -55,7 +58,7 @@ export function onSamePage(fn: () => void) {
   return () => sameListeners.delete(fn);
 }
 
-export function navigate(href: string) {
+export function navigate(href: string, options: NavOptions = {}) {
   const url = new URL(href, window.location.origin);
   const path = normalize(url.pathname);
   const full = path + url.search;
@@ -69,7 +72,7 @@ export function navigate(href: string) {
     current = path;
     emit();
   };
-  if (transition) transition(swap);
+  if (transition) transition(swap, options);
   else swap();
 }
 

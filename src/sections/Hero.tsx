@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { hero, routes } from "../content/site";
+import { hero, milan, routes } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
 import { onPageShown, setSealTarget } from "../lib/events";
@@ -147,7 +147,7 @@ export function Hero() {
           <div className="hero__foot">
             <p className="hero__sub hero__fade">{hero.sub}</p>
             <div className="hero__fade">
-              <MagneticButton href={routes.milan} onClick={() => navigate(routes.milan)}>
+              <MagneticButton href={routes.milan} onClick={() => navigate(routes.milan, { travel: milan.city })}>
                 {hero.cta}
               </MagneticButton>
             </div>

@@ -19,3 +19,25 @@
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(251, 248, 242, 0.6);
 }
+
+/* Viaje a un destino: un panel que cruza de derecha a izquierda con el nombre del lugar */
+.pt-travel {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #9b4819;
+  color: var(--paper);
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: -40px 0 80px rgba(14, 12, 11, 0.25);
+}
+.pt-travel__name {
+  padding-left: var(--gutter);
+  font-size: clamp(4.5rem, 16vw, 16rem);
+  line-height: 0.9;
+  white-space: nowrap;
+  will-change: transform;
+}
