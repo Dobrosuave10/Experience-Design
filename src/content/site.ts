@@ -14,7 +14,7 @@ export const brand = {
   instagram: { handle: "@experience__design", url: "https://www.instagram.com/experience__design/" },
   website: "experience-design.cl",
   /** Correo verificado. null = no se muestra. */
-  email: null as string | null,
+  email: "info@experience-design.cl" as string | null,
   /** WhatsApp verificado en formato internacional (ej. "56912345678"). null = no se muestra. */
   whatsapp: "56991979117" as string | null,
   whatsappLabel: "+56 9 9197 9117",
@@ -121,7 +121,7 @@ export const pageDescriptions: Record<string, string> = {
   [routes.destinos]:
     "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias de 2025 y 2026.",
   [routes.milan]:
-    "Milán 2027, Salone del Mobile. Itinerario del 12 al 17 de abril de 2027: la feria, el Fuori Salone, showrooms, materiales y la ciudad.",
+    "Milán 2027, Salone del Mobile.Milano. Seis días, del 12 al 17 de abril de 2027: el Salone, el Fuorisalone, el Istituto Marangoni y el Lago di Como.",
   [routes.saoPaulo]:
     "São Paulo, CASACOR. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
   [routes.contacto]:
@@ -183,7 +183,7 @@ export const programsSpine = {
       href: routes.formacion as string | undefined,
       cta: "Conocer Formación" as string | undefined,
       main: { image: "verona-antolini-veta" as ImageName, alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona" },
-      detail: { image: "fuori-charla-arcos" as ImageName, alt: "Charla durante el Fuori Salone de Milán: el público sentado bajo una galería de arcos frente a una pantalla" },
+      detail: { image: "fuori-charla-arcos" as ImageName, alt: "Charla durante el Fuorisalone de Milán: el público sentado bajo una galería de arcos frente a una pantalla" },
     },
     {
       id: "marca-personal",
@@ -204,7 +204,7 @@ export const milan = {
   year: "2027",
   event: "Milan Design Week",
   fair: "Salone del Mobile",
-  openingImage: { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuori Salone en Milán: pilares de piedra, sofás bajos y una gran biblioteca iluminada al fondo" },
+  openingImage: { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuorisalone en Milán: pilares de piedra, sofás bajos y una gran biblioteca iluminada al fondo" },
   topics: ["Salone del Mobile", "Showrooms", "Estudios", "Materiales", "Cultura", "Conexiones"],
   statementA: "No venimos a mirar desde afuera.",
   statementB: "Venimos a entrar.",
@@ -223,7 +223,7 @@ export const milan = {
       text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición.",
       material: "terrazzo" as MaterialName,
       image: "salone-escalinata-roja" as ImageName,
-      alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Rho Fiera",
+      alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho",
     },
     {
       n: "03",
@@ -239,7 +239,7 @@ export const milan = {
       text: "Patios, fachadas, showrooms, estudios.",
       material: "travertine" as MaterialName,
       image: "fuori-galeria-arcos" as ImageName,
-      alt: "Galería de arcos blancos de un espacio del Fuori Salone, con lámparas suspendidas y piso de madera",
+      alt: "Galería de arcos blancos de un espacio del Fuorisalone, con lámparas suspendidas y piso de madera",
     },
     {
       n: "05",
@@ -258,32 +258,38 @@ export const milan = {
       alt: "Participantes sentados en una escalinata de piedra en Venecia, con la bolsa de Experience Design",
     },
   ],
-  /** Itinerario 2027, tomado del programa publicado en el sitio anterior. Sin horarios: se confirman con cada grupo. */
+  /** Itinerario 2027, de la ficha de producto oficial (Milan_2027_Ficha_de_producto.pdf). */
   itinerary: {
     label: "Milán 2027",
-    title: "Seis días, del 12 al 17 de abril.",
-    body: "Salone del Mobile.Milano, del 13 al 18 de abril de 2027. Grupo reducido, agenda exigente.",
+    title: "Una semana en Milán.",
+    body: "Seis días, de lunes a sábado, del 12 al 17 de abril de 2027. Lo más y lo mejor.",
     days: [
-      { day: "Día 1", date: "Lunes 12", title: "Fuori Salone", text: "Llegada a Milán y primer encuentro en Milano Centrale." },
-      { day: "Día 2", date: "Martes 13", title: "Salone del Mobile", text: "Primera jornada completa en la feria, en Rho Fiera." },
-      { day: "Día 3", date: "Miércoles 14", title: "Salone del Mobile", text: "Segunda jornada en la feria." },
-      { day: "Día 4", date: "Jueves 15", title: "Salone del Mobile", text: "Tercera jornada en la feria, para profundizar en lo que cada participante vino a buscar." },
-      { day: "Día 5", date: "Viernes 16", title: "Fuori Salone", text: "La ciudad convertida en exposición: showrooms, estudios e instalaciones." },
-      { day: "Día 6", date: "Sábado 17", title: "Fuera de Milán", text: "Una actividad en los alrededores de Milán y el cierre de la experiencia. Desde ahí, cada participante organiza su regreso o extiende su estadía." },
+      { day: "Día 1", date: "Lunes 12", title: "Bienvenida", text: "Encuentro en Milán, aperitivo de bienvenida en La Rinascente e inicio del Fuorisalone." },
+      { day: "Día 2", date: "Martes 13", title: "Salone del Mobile.Milano", text: "Jornada completa en la feria y evento por la noche." },
+      { day: "Día 3", date: "Miércoles 14", title: "Salone y Fuorisalone", text: "Charlas, networking y encuentros con marcas líderes del diseño." },
+      { day: "Día 4", date: "Jueves 15", title: "Fuorisalone", text: "Visita al Istituto Marangoni y evento nocturno." },
+      { day: "Día 5", date: "Viernes 16", title: "Brera y Tortona", text: "Fuorisalone: showrooms, instalaciones y distritos de diseño." },
+      { day: "Día 6", date: "Sábado 17", title: "Lago di Como", text: "Visita al lago y aperitivo de cierre." },
     ],
+    note: "El itinerario podrá ajustarse según la disponibilidad y los horarios de las empresas que nos reciban, para sumar nuevas visitas y encuentros.",
   },
-  pending: {
-    title: "Lo que falta confirmar.",
-    body: "Te enviamos el programa completo y el valor apenas estén confirmados.",
-    items: ["Valor", "Cupos"],
-    status: "Por confirmar",
+  /** Lo concreto de Milán 2027 (ficha oficial). El detalle completo está en la landing. */
+  facts: {
+    title: "Lo concreto.",
+    body: "Escríbenos y te enviamos el detalle: qué incluye, formas de pago e inscripción.",
+    items: [
+      { label: "Fechas", value: "12 al 17 de abril de 2027" },
+      { label: "Early bird", value: "USD 2.549 hasta el 30 de noviembre" },
+      { label: "Precio normal", value: "USD 2.999 hasta el 15 de enero" },
+      { label: "Cupos", value: "Limitados" },
+    ],
   },
   galleryLabel: "Milan Design Week 2026",
   galleryTitle: "Lo que recorrimos.",
   gallery: [
     { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
     { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
-    { image: "fuori-showroom-lampara", alt: "Showroom del Fuori Salone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
+    { image: "fuori-showroom-lampara", alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
     { image: "salone-sillon-cuero", alt: "Sillón de cuero caramelo junto a un mueble de madera y una lámpara de escritorio, en un stand del Salone" },
     { image: "venecia-gran-canal", alt: "Participantes en una lancha sobre el Gran Canal de Venecia" },
     { image: "salone-lamparas-burbujas", alt: "Lámpara de esferas de vidrio sobre una mesa de madera, con plantas detrás, en el Salone del Mobile" },
@@ -296,11 +302,196 @@ export const milan = {
     { image: "venecia-salute", alt: "La basílica de Santa Maria della Salute vista desde el agua, con una góndola en primer plano" },
     { image: "verona-antolini-veta", alt: "Participante recorriendo con la mano la veta de una placa de mármol en Antolini, Verona" },
     { image: "milan-galleria-grupo", alt: "Participantes recorriendo la Galleria Vittorio Emanuele II de noche" },
-    { image: "salone-cubierta-rho-fiera", alt: "Christian Erdmann bajo la cubierta de vidrio de Rho Fiera, junto al cartel del Salone del Mobile" },
+    { image: "salone-cubierta-rho-fiera", alt: "Christian Erdmann bajo la cubierta de vidrio de Fiera Milano Rho, junto al cartel del Salone del Mobile" },
     { image: "milan-grupo-lago-como", alt: "El grupo de Experience Design en un barco en el lago de Como" },
     { image: "venecia-gran-canal-retrato", alt: "Participante con la bolsa de Experience Design frente al Gran Canal de Venecia" },
   ] as { image: ImageName; alt: string }[],
-  cta: "Quiero conocer la experiencia",
+  cta: "Quiero ser parte",
+};
+
+/**
+ * Milán 2027: los datos de la ficha de producto oficial (Milan_2027_Ficha_de_producto.pdf).
+ * Las frases que el manual de marca evita («la experiencia más exclusiva», «acceso a lo mejor
+ * del diseño mundial», «exclusivo» como adorno) se reemplazaron por sus equivalentes del manual.
+ */
+export const milan2027 = {
+  title: "Milán 2027",
+  fair: "Salone del Mobile.Milano",
+  dates: "12 al 17 de abril de 2027",
+  datesShort: "12–17 abril 2027",
+  days: "6 días",
+  /** La experiencia */
+  experience: {
+    label: "La experiencia",
+    title: ["Vivir el diseño", "donde nace."],
+    body: "Experiencias curadas en las capitales del diseño. No somos una agencia de viajes: elegimos qué ver, explicamos por qué importa y te acompañamos para que lo lleves a tu propio contexto.",
+    whyLabel: "Por qué Milán",
+    why: "Los milaneses respiran diseño. Está en los showrooms, en las calles, en los materiales y en la manera de trabajar de las marcas y las empresas. Durante el Salone y el Fuorisalone, la ciudad entera abre sus puertas.",
+    promise: "No vienes solo a conocer el mundo del diseño. Vienes a descubrir qué puede despertar en ti.",
+  },
+  audience: {
+    label: "Para quiénes",
+    title: "Para quienes estudian, crean y quieren ir más allá.",
+    items: [
+      { name: "Mientras te formas", text: "Ver en vivo lo que en clases solo aparece en fotos: piezas, materiales y espacios, con guía y tiempo para preguntar." },
+      { name: "Mientras te consolidas", text: "Romper la rutina, contrastar tu mirada con la de otros profesionales y volver con nuevas referencias para tus proyectos." },
+      { name: "Cuando buscas tu sello", text: "Descubrir qué te mueve, qué te distingue y cómo contarlo. Lo vivido en Milán se transforma en criterio propio." },
+    ],
+  },
+  places: {
+    label: "Dónde ocurre",
+    title: "Seis escenarios.",
+    items: [
+      { name: "Salone del Mobile.Milano", text: "La feria, en Fiera Milano Rho. La recorremos con una selección previa de pabellones y stands.", image: "salone-escalinata-roja" as ImageName, alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
+      { name: "Fuorisalone", text: "Tortona, Brera Design District y cientos de eventos e instalaciones: la ciudad entera como vitrina del diseño.", image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuorisalone en Milán: pilares de piedra, sofás bajos y una gran biblioteca iluminada al fondo" },
+      { name: "La Rinascente", text: "En la Piazza del Duomo. Desde aquí recorremos la Galleria Vittorio Emanuele II, la Scala, Via Montenapoleone, Via della Spiga y Corso Venezia. Aquí comienza la semana.", image: "milan-galleria-cupula" as ImageName, alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
+      { name: "Istituto Marangoni", text: "Una de las escuelas de moda y diseño más reconocidas del mundo, nacida en Milán.", image: "fuori-charla-arcos" as ImageName, alt: "Charla durante el Fuorisalone de Milán: el público sentado bajo una galería de arcos frente a una pantalla" },
+      { name: "Lago di Como", text: "Villas históricas, jardines frente al agua y montañas que descienden hasta el lago. Llegamos en tren y lo recorremos en ferry.", image: "milan-grupo-lago-como" as ImageName, alt: "El grupo de Experience Design en un barco en el lago de Como" },
+      { name: "Milán, la ciudad", text: "Patios escondidos tras cada portón, cafés y una forma de vivir donde el diseño está en todo. A pie, en bici o en scooter: tú eliges.", image: "milan-tranvia" as ImageName, alt: "Un tranvía histórico avanzando por una calle de Milán" },
+    ],
+  },
+  process: {
+    label: "Conoce el proceso",
+    title: "Lo que vas a ver y tocar.",
+    body: "Detrás de una silla, un textil o una cubierta de piedra hay referencias, decisiones y un fundamento. Materiales, terminaciones, proporción y luz, vistos y tocados donde se presentan.",
+    quote: "Si no lo tocas, no lo viste.",
+    claim: "Reencuéntrate con los fundamentos del diseño, con lo más y lo mejor.",
+    image: "verona-antolini-veta" as ImageName,
+    alt: "Participante recorriendo con la mano la veta de una placa de mármol en el showroom de Antolini, en Verona",
+  },
+  includes: {
+    label: "Qué incluye",
+    title: "Todo lo que incluye.",
+    body: "El programa completo en Milán: acceso, curaduría, encuentros y momentos pensados al detalle.",
+    items: [
+      { name: "Salone del Mobile.Milano y Fuorisalone", text: "Entrada a la feria y recorridos por showrooms y distritos de diseño en Brera y Tortona." },
+      { name: "Acompañamiento de Danae y Christian", text: "Toda la semana, para descubrir qué ver y por qué importa." },
+      { name: "Istituto Marangoni y encuentros con marcas", text: "Una visita académica e instancias de networking con marcas y empresas." },
+      { name: "Lago di Como", text: "Tren y ferry incluidos, con Navigazione Laghi." },
+      { name: "Aperitivos de bienvenida y de cierre", text: "Bienvenida en La Rinascente y cierre en el Lago di Como." },
+      { name: "Transporte", text: "Transfer desde cualquier punto de Santiago al aeropuerto, ida y vuelta, y pase de 10 viajes en metro en Milán." },
+      { name: "Fotógrafo del grupo", text: "10 fotos y 2 videos cortos de tu experiencia, para tu marca personal y tus redes. Registros extra con costo adicional." },
+      { name: "eSIM Holafly", text: "Datos desde que llegas, durante todo el viaje." },
+      { name: "Productos Experience Design", text: "Productos de diseño para acompañar tu viaje." },
+      { name: "Encuentros del grupo", text: "Antes de viajar, para conocerse y llegar a Milán como grupo." },
+    ],
+    newLabel: "Nuevo en 2027",
+    newText: "Fotógrafo del grupo, transfer al aeropuerto en Santiago, encuentros antes de viajar, eSIM Holafly y productos Experience Design.",
+    requirementLabel: "Requisito",
+    requirement: "Contar con un seguro médico de viaje, por tu seguridad y la del grupo.",
+    excludesLabel: "No incluye",
+    excludes: ["Vuelos", "Alojamiento", "Alimentación", "Traslados entre el aeropuerto de Milán y la ciudad", "Entradas a visitas turísticas, como el Duomo", "Cualquier servicio que no figure en esta lista"],
+    excludesNote: "Vuelos y alojamiento los organiza cada persona según su ciudad de origen. Si lo necesitas, te recomendamos una agencia de viajes.",
+  },
+  pricing: {
+    label: "Inversión",
+    title: "Tu lugar en Milán.",
+    plans: [
+      {
+        id: "early",
+        name: "Early bird",
+        until: "Hasta el 30 de noviembre de 2026",
+        price: "USD 2.549",
+        badge: "15% de descuento",
+        payment: "Pago del 100% hasta el 30 de noviembre de 2026.",
+        benefits: [
+          "Mentoría 1:1 con Danae y Christian: una sesión para conocer tu contexto y diseñar contigo una visión estratégica personalizada.",
+          "Encuentro y mentoría grupal en Studio Barla, con Danae, Christian y el grupo, antes de viajar.",
+        ],
+        featured: true,
+      },
+      {
+        id: "normal",
+        name: "Precio normal",
+        until: "Hasta el 15 de enero de 2027",
+        price: "USD 2.999",
+        badge: "Por persona",
+        payment: "50% hasta el 15 de diciembre de 2026 y 50% hasta el 15 de enero de 2027.",
+        benefits: ["Encuentro y mentoría grupal en Studio Barla, con Danae, Christian y el grupo, antes de viajar."],
+        featured: false,
+      },
+    ],
+    reserve: {
+      name: "Reserva tu cupo",
+      price: "USD 300",
+      until: "Hasta el 30 de noviembre de 2026",
+      steps: ["USD 300 no reembolsables aseguran tu lugar.", "50% del total hasta el 15 de diciembre de 2026.", "50% restante hasta el 15 de enero de 2027, cierre de cupos."],
+    },
+    seats: "Cupos limitados. El grupo se cierra cuando se completan.",
+    paymentLabel: "Formas de pago",
+    payments: [
+      { name: "Transferencia bancaria", text: "Sin recargo." },
+      { name: "Tarjeta de crédito vía Webpay", text: "Con un recargo del 4%." },
+    ],
+    refund: "No se reembolsan las actividades a las que no se asista.",
+  },
+  people: {
+    label: "Las personas",
+    title: "Con quién vives la experiencia.",
+    body: "Las conversaciones al final del día, las ideas en una cena, el camino al lago: eso es lo que permanece. Vuelves con contactos y una red que sigue creciendo.",
+    before: "Antes de viajar, un encuentro para conocer a quienes viajan contigo. El viaje empieza antes de subir al avión.",
+    items: [
+      { name: "Personas con tu misma ambición", text: "Quieren crecer y viven esta semana como una inversión en su desarrollo." },
+      { name: "Relaciones que continúan", text: "Colegas de otras ciudades y países con quienes compartes la feria y los descubrimientos. El vínculo sigue al volver." },
+      { name: "La red de los curadores", text: "Danae Barla y Christian Erdmann abren puertas a empresas, marcas y personas del diseño que conocen de primera mano." },
+    ],
+    image: "milan-grupo-gessi" as ImageName,
+    alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milan Design Week",
+  },
+  /** Testimonios textuales de la ficha oficial. */
+  testimonials: {
+    label: "Personas que ya dieron el primer paso",
+    items: [
+      { quote: "Desde el primer contacto sentí que estaba tomando la mejor decisión para mi primer viaje soñado al Salón del Mueble de Milán 2026. Danae y Christian fueron unos anfitriones excepcionales.", name: "Gisèle Valentiè", role: "Diseñadora industrial · Diseño & Complemento" },
+      { quote: "Ir al Salone del Mobile fue un sueño hecho realidad. En medio de tanto por ver, la estructura y la curatoría que ellos propusieron se agradeció muchísimo.", name: "Lucía Bustos", role: "Arquitecta · Especificadora en Codelpa Chile" },
+      { quote: "Una experiencia que marcó profundamente mi manera de mirar el diseño. Pero si algo hizo especialmente valioso este viaje fueron las personas.", name: "Katherina Calderón", role: "Diseñadora de interiores · Trunkai Diseño" },
+    ],
+  },
+  fit: {
+    label: "Antes de decidir",
+    title: "Una inversión en ti.",
+    body: "Milán 2027 es una inversión en tu mirada, en tus relaciones y en tu manera de crear.",
+    takeawaysLabel: "Lo que te llevas de vuelta",
+    takeaways: [
+      { name: "Referencias propias", text: "Piezas, materiales y espacios vistos en vivo, que pasan a ser tu archivo de inspiración." },
+      { name: "Criterio para aplicarlas", text: "Entender por qué funciona una decisión de diseño y cómo traducirla a tu contexto." },
+      { name: "Materiales y procesos", text: "Texturas, terminaciones y soluciones que solo se entienden cuando se tocan." },
+      { name: "Relaciones", text: "Colegas, curadores y marcas con quienes seguir conversando al volver." },
+      { name: "El registro de tu semana", text: "Lo vivido, ordenado en ideas y referencias para volver a ellas." },
+      { name: "Tu propio sello", text: "Una mirada más definida sobre lo que te distingue y cómo mostrarlo." },
+    ],
+    question: "¿Es para ti?",
+    lead: "Este viaje no es para ti si buscas museos, ir de compras o levantarte tarde.",
+    yesLabel: "Es para ti si",
+    yes: [
+      "Quieres un cambio de visión en tu carrera de diseño.",
+      "Sabes que invertir en ti es tu mejor decisión.",
+      "Quieres experiencias que te reten y te expandan.",
+      "Necesitas romper la rutina e inspirarte.",
+      "Quieres compartir la experiencia con un grupo que se apoya.",
+    ],
+    noLabel: "No es para ti si",
+    no: [
+      "Piensas que es solo turismo y fotos.",
+      "No te gusta conectar con otras personas.",
+      "Prefieres los referentes online, sin vivirlos.",
+      "Crees que es solo para descansar y comprar.",
+      "No ves viajar e inspirarte como una inversión.",
+    ],
+  },
+  steps: {
+    label: "Siguiente paso",
+    title: "Cómo ser parte de Milán 2027.",
+    items: [
+      { name: "Conversemos", text: "Escríbenos por WhatsApp, Instagram o correo y resolvemos tus dudas." },
+      { name: "Reserva o paga", text: "Reserva tu cupo o paga por anticipado: el primer paso para no perder tu lugar." },
+      { name: "Completa el pago", text: "Antes del 15 de enero de 2027. Los cupos son limitados." },
+      { name: "Conoce al grupo", text: "Al equipo de Experience Design y a quienes viajarán contigo." },
+      { name: "Haz tus maletas", text: "Milán te espera." },
+    ],
+    closing: "No esperes a que te lo cuenten. Vive el diseño donde nace: sé parte de Milán 2027.",
+    motto: "Vivirlo. Cuestionarlo. Hacerlo propio.",
+  },
 };
 
 export const neverLate = {
@@ -397,7 +588,7 @@ export const archive = {
       year: "2026",
       place: "Milán",
       tag: "Milan Design Week · abril de 2026",
-      text: "Salone del Mobile, Fuori Salone y showrooms de la ciudad, con Verona, entre los mármoles de Antolini, y Venecia.",
+      text: "Salone del Mobile, Fuorisalone y showrooms de la ciudad, con Verona, entre los mármoles de Antolini, y Venecia.",
       material: "travertine",
     },
     {
@@ -548,7 +739,7 @@ export const programs = {
       material: "travertine",
       image: {
         image: "fuori-charla-arcos",
-        alt: "Charla durante el Fuori Salone de Milán: el público sentado bajo una galería de arcos frente a una pantalla",
+        alt: "Charla durante el Fuorisalone de Milán: el público sentado bajo una galería de arcos frente a una pantalla",
         material: "travertine",
         brief: "Charla o encuentro con profesionales.",
       },
@@ -656,8 +847,8 @@ export const destinations = {
       collage: [
         { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
         { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
-        { image: "salone-escalinata-roja", alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Rho Fiera" },
-        { image: "fuori-showroom-lampara", alt: "Showroom del Fuori Salone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
+        { image: "salone-escalinata-roja", alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
+        { image: "fuori-showroom-lampara", alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
         { image: "verona-marmol-verde", alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona" },
         { image: "milan-galleria-cupula", alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
         { image: "salone-cielo-cintas", alt: "Instalación de cintas blancas suspendidas sobre un stand del Salone del Mobile" },
@@ -666,7 +857,7 @@ export const destinations = {
       ] as CollagePhoto[],
       gallery: [
         { image: "salone-cocina-bosque" as ImageName, alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
-        { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuori Salone: sofás bajos, pilares de piedra y una gran biblioteca iluminada al fondo" },
+        { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuorisalone: sofás bajos, pilares de piedra y una gran biblioteca iluminada al fondo" },
         { image: "milan-duomo-grupo-noche" as ImageName, alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
         { image: "salone-living" as ImageName, alt: "Estar de sofás curvos y mesas de piedra en un stand del Salone del Mobile" },
         { image: "verona-marmol-verde" as ImageName, alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona" },

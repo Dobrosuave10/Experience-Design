@@ -1,0 +1,37 @@
+.quotes {
+  padding-block: clamp(80px, 14vh, 160px);
+}
+.quotes__label {
+  color: var(--accent);
+  margin-bottom: clamp(32px, 6vh, 56px);
+}
+.quotes__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 56px);
+}
+.quotes__item {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+  padding-left: 22px;
+  border-left: 2px solid var(--accent);
+}
+.quotes__quote {
+  margin: 0;
+  font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+  line-height: 1.35;
+}
+.quotes__who {
+  display: grid;
+  gap: 4px;
+  font-size: 1.05rem;
+}
+.quotes__name {
+  font-weight: 600;
+}
+@media (max-width: 899px) {
+  .quotes__list {
+    grid-template-columns: 1fr;
+  }
+}

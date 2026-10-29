@@ -58,7 +58,6 @@ Luego asígnala por nombre en `src/content/site.ts` (campo `image`). Donde todav
 | Qué | Dónde |
 |---|---|
 | Sello circular oficial (SVG) | `public/brand/logo.svg` + `brand.logoAsset` en `site.ts`. Hoy se usa una reconstrucción del sello terracota con "E.". |
-| Email / WhatsApp verificados | `brand.email`, `brand.whatsapp` |
 | Endpoint del formulario | `VITE_LEAD_ENDPOINT` en `.env.local` (ver `.env.example`) |
 | Imagen para compartir (og:image 1200x630) | `index.html` |
 | Biografías | `founders.people[].bio` |

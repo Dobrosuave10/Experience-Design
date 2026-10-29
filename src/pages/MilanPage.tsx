@@ -4,6 +4,7 @@ import { Pending } from "../components/Pending";
 import { Milan } from "../sections/Milan";
 import { Itinerary } from "../sections/Itinerary";
 import { Gallery } from "../sections/Gallery";
+import { Testimonials } from "../components/Testimonials";
 
 /** Destino 01: Milán, Milan Design Week / Salone del Mobile. Misma estructura que São Paulo. */
 export default function MilanPage() {
@@ -12,7 +13,8 @@ export default function MilanPage() {
       <Milan />
       <Itinerary />
       <Gallery id="milan-galeria" label={milan.galleryLabel} title={milan.galleryTitle} photos={milan.gallery} tone="paper" />
-      <Pending title={milan.pending.title} body={milan.pending.body} items={milan.pending.items} status={milan.pending.status} cta={milan.cta} interest="milan" tone="clay" />
+      <Testimonials tone="warm" />
+      <Pending title={milan.facts.title} body={milan.facts.body} items={milan.facts.items} cta={milan.cta} interest="milan" tone="clay" />
       <NextChapter tone="ink" />
     </>
   );
