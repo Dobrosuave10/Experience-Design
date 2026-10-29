@@ -137,6 +137,41 @@ export function Navigation() {
     header.current?.classList.remove("is-hidden", "is-solid");
   }, [path]);
 
+  // Desplegables de escritorio: se abren con :hover / :focus-within, así que al elegir
+  // una entrada (o al cambiar de página, o con Escape) se sueltan el foco y el hover.
+  // `is-quiet` los mantiene cerrados hasta que el cursor salga de la lista o se use Tab.
+  const links = useRef<HTMLElement>(null);
+  const quiet = () => {
+    const el = links.current;
+    if (!el) return;
+    // Sólo hace falta si el cursor sigue encima; si no, basta con soltar el foco
+    if (el.matches(":hover")) el.classList.add("is-quiet");
+    if (el.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
+  };
+  useEffect(() => {
+    quiet();
+  }, [path]);
+  useEffect(() => {
+    const el = links.current!;
+    const wake = () => el.classList.remove("is-quiet");
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && el.contains(document.activeElement)) quiet();
+      else if (e.key === "Tab") wake();
+    };
+    // Clic fuera: también cierra (el foco puede quedar en el enlace)
+    const onDown = (e: PointerEvent) => {
+      if (!el.contains(e.target as Node)) quiet();
+    };
+    el.addEventListener("pointerleave", wake);
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onDown);
+    return () => {
+      el.removeEventListener("pointerleave", wake);
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onDown);
+    };
+  }, []);
+
   // Menú móvil: bloqueo de scroll, Escape, foco y trampa de foco
   const mounted = useRef(false);
   useEffect(() => {
@@ -196,7 +231,7 @@ export function Navigation() {
             </span>
           </Link>
 
-          <nav className="nav__links" aria-label="Principal">
+          <nav ref={links} className="nav__links" aria-label="Principal" onClick={(e) => (e.target as HTMLElement).closest("a") && quiet()}>
             {nav.map((n) => (
               <div key={n.href} className={`nav__item ${n.children ? "has-sub" : ""}`}>
                 <Link to={n.href} className="nav__link" {...current(n.href)}>

@@ -135,6 +135,16 @@
   transform: none;
   transition-delay: 0s;
 }
+/* Recién elegida una entrada: cerrado aunque el cursor o el foco sigan encima */
+.nav__links.is-quiet .nav__item.has-sub .nav__sub {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.2s var(--ease-out),
+    transform 0.3s var(--ease-out),
+    visibility 0s linear 0.2s;
+}
 .nav__sub-list {
   min-width: 260px;
   padding: 10px 22px;
