@@ -279,7 +279,6 @@ export const milan = {
     body: "Te enviamos el programa completo y el valor apenas estén confirmados. Sin formularios largos.",
     items: ["Valor", "Cupos"],
     status: "Por confirmar",
-    image: { image: "salone-bolsa-e" as ImageName, alt: "Participante sentado en la escalinata roja del Salone del Mobile, con la bolsa de Experience Design" },
   },
   galleryLabel: "Milan Design Week 2026",
   galleryTitle: "Lo que recorrimos.",

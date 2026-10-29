@@ -3,35 +3,26 @@ import { gsap } from "gsap";
 import { saoPaulo } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK } from "../lib/env";
-import { Figure } from "../components/MaterialPlate";
 import { Louvers } from "../components/Louvers";
-import { RevealText } from "../components/RevealText";
+import { DestinationIntro, Rooms } from "../components/Rooms";
 import "./SaoPaulo.css";
 
 /**
- * São Paulo, CASACOR. Su propia arquitectura: donde Milán es terrazzo, arcos y un
- * recorrido horizontal, São Paulo es celosía, mayúsculas de hormigón y una casa
- * que se recorre de ambiente en ambiente, en vertical.
+ * São Paulo, CASACOR. Su propia apertura (celosía y mayúsculas de hormigón) y,
+ * como Milán, una casa que se recorre de ambiente en ambiente, en vertical.
  * Cada ambiente, con una foto real de CASACOR São Paulo 2025.
  */
 export function SaoPaulo() {
   const ref = useRef<HTMLElement>(null);
 
   useGsap(
-    (mm, el) => {
+    (mm) => {
       mm.add(MOTION_OK, () => {
         gsap
           .timeline({ scrollTrigger: { trigger: ".sp__open", start: "top top", end: "bottom bottom", scrub: 0.8 } })
           .fromTo(".sp__open .louver", { rotateY: 40 }, { rotateY: 76, ease: "power2.inOut", stagger: { each: 0.025, from: "start" } })
           .fromTo(".sp__city", { yPercent: 8 }, { yPercent: 0, ease: "power2.out", duration: 0.6 }, 0.2)
           .fromTo(".sp__open-meta", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.7);
-
-        gsap.utils.toArray<HTMLElement>(".sp__room", el).forEach((r) => {
-          gsap
-            .timeline({ scrollTrigger: { trigger: r, start: "top 85%", end: "top 30%", scrub: 0.8 } })
-            .fromTo(r.querySelector(".sp__room-frame"), { clipPath: "inset(0% 42% 0% 42%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.out" })
-            .fromTo(r.querySelector(".sp__room-n"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, ease: "power2.out" }, 0.2);
-        });
       });
     },
     ref,
@@ -56,34 +47,15 @@ export function SaoPaulo() {
         </div>
       </div>
 
-      {/* Idea */}
-      <div className="sp__intro" data-tone="sand">
-        <div className="wrap sp__intro-grid">
-          <RevealText className="sp__statement display" lines={[saoPaulo.statementA, { text: saoPaulo.statementB, em: true, className: "accent" }]} />
-          <div className="sp__intro-text">
-            <p className="body-lg">{saoPaulo.intro}</p>
-            <p className="sp__origin serif">
-              <em>{saoPaulo.origin}</em>
-            </p>
-          </div>
-        </div>
-      </div>
+      <DestinationIntro statementA={saoPaulo.statementA} statementB={saoPaulo.statementB} tone="sand">
+        <p className="body-lg">{saoPaulo.intro}</p>
+        <p className="dest-origin serif">
+          <em>{saoPaulo.origin}</em>
+        </p>
+      </DestinationIntro>
 
       {/* Ambientes: la casa en vertical */}
-      <ol className="sp__rooms" data-tone="sand" aria-label="Ambientes">
-        {saoPaulo.rooms.map((r, i) => (
-          <li key={r.n} className={`sp__room ${i % 2 ? "sp__room--right" : ""}`}>
-            <span className="sp__room-n" aria-hidden="true">
-              {r.n}
-            </span>
-            <Figure slot={{ image: r.image, alt: r.alt, material: r.material, brief: r.title }} className="sp__room-frame" ratio="16 / 10" sizes="(max-width: 767px) 92vw, 60vw" />
-            <div className="sp__room-text">
-              <h2 className="sp__room-title">{r.title}</h2>
-              <p className="muted">{r.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <Rooms rooms={saoPaulo.rooms} tone="sand" label="Ambientes" />
     </section>
   );
 }
