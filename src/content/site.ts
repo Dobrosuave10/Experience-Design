@@ -167,7 +167,7 @@ export const hero = {
 
 export const idea = {
   lead: "El diseño no solo se observa.",
-  verbs: ["Se vive.", "Se toca.", "Se reflexiona.", "Se admira."],
+  verbs: ["Se vive.", "Se experimenta."],
   closing: "Hay cosas que una pantalla puede mostrarte, pero no puede hacerte sentir.",
   /** Cierre de la secuencia en Inicio, en dos tiempos. */
   beyond: { lead: "Más allá de la pantalla,", rest: "el diseño se convierte en", accent: "experiencia." },
@@ -290,17 +290,6 @@ export const milan = {
     ],
     note: "El itinerario podrá ajustarse según la disponibilidad y los horarios de las empresas que nos reciban, para sumar nuevas visitas y encuentros.",
   },
-  /** Lo concreto de Milán 2027 (ficha oficial). El detalle completo está en la landing. */
-  facts: {
-    title: "Lo concreto.",
-    body: "Escríbenos y te enviamos el valor y los pasos para inscribirte.",
-    items: [
-      { label: "Fechas", value: "12 al 17 de abril de 2027" },
-      { label: "Duración", value: "6 días" },
-      { label: "Valor", value: "Por confirmar" },
-      { label: "Cupos", value: "Limitados" },
-    ],
-  },
   galleryLabel: "Milan Design Week 2026",
   galleryTitle: "Lo que recorrimos.",
   gallery: [
@@ -395,10 +384,10 @@ export const milan2027 = {
     items: [
       { name: "Salone del Mobile.Milano", text: "La feria de diseño más importante del mundo, en Fiera Milano Rho. La recorremos con una selección previa de pabellones y stands." },
       { name: "Fuorisalone", text: "Tortona, Brera Design District y cientos de eventos e instalaciones: la ciudad entera como vitrina del diseño." },
-      { name: "La Rinascente", text: "En la Piazza del Duomo. Desde aquí recorremos la Galleria Vittorio Emanuele II, la Scala, Via Montenapoleone, Via della Spiga y Corso Venezia. Aquí comienza la semana." },
+      { name: "La Rinascente", text: "El epicentro de la moda y el lujo, en la Piazza del Duomo. Desde aquí recorremos la Galleria Vittorio Emanuele II, el Teatro alla Scala, Via Montenapoleone, Via della Spiga y Corso Venezia." },
       { name: "Istituto Marangoni", text: "Una de las escuelas de moda y diseño más reconocidas del mundo, nacida en Milán." },
-      { name: "Lago di Como", text: "Villas históricas, jardines frente al agua y montañas que descienden hasta el lago. Llegamos en tren y lo recorremos en ferry." },
-      { name: "Milán, la ciudad", text: "Patios escondidos tras cada portón, cafés y una forma de vivir donde el diseño está en todo. A pie, en bici o en scooter: tú eliges." },
+      { name: "Lago di Como", text: "Villas históricas de las familias más antiguas de Italia, jardines frente al agua y montañas que descienden hasta el lago. Llegamos en tren y lo recorremos en ferry para cerrar la semana." },
+      { name: "Milán, la ciudad", text: "Siglos de historia, patios escondidos tras cada portón, cafés y una forma de vivir donde el diseño está en todo. Se descubre a pie, en bici o en scooter: tú eliges." },
     ],
   },
   includes: {
@@ -913,12 +902,6 @@ export const saoPaulo = {
     { image: "casacor-grupo-cena", alt: "El grupo de Experience Design en una cena durante el viaje a São Paulo" },
     { image: "casacor-living-biblioteca", alt: "Living frente a una biblioteca iluminada, con una mesa de piedra cubierta de libros" },
   ] as CollagePhoto[],
-  pending: {
-    title: "Lo concreto, apenas esté confirmado.",
-    body: "Te avisamos cuando definamos la próxima experiencia en São Paulo.",
-    items: ["Año", "Fechas", "Programa", "Valor"],
-    status: "Por confirmar",
-  },
   cta: "Quiero saber de São Paulo",
 };
 
@@ -957,7 +940,7 @@ export const contact = {
 
 export const invite = {
   title: "¿Nos vemos en el camino?",
-  body: "Cuatro datos y te escribimos. Nada más.",
+  body: "Completar el formulario es el primer paso. Te respondemos personalmente.",
   cta: "Conversemos",
 };
 

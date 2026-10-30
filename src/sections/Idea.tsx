@@ -6,8 +6,8 @@ import { MOTION_OK } from "../lib/env";
 import { RevealText } from "../components/RevealText";
 import "./Idea.css";
 
-/** Los cuatro verbos de Inicio, cada uno con su carácter: vivir, tocar, reflexionar, admirar. */
-const SENSES = ["vive", "toca", "reflexiona", "admira"] as const;
+/** Los dos verbos de Inicio (manual de marca), cada uno con su carácter: vivir, experimentar. */
+const SENSES = ["vive", "experimenta"] as const;
 type Sense = (typeof SENSES)[number];
 
 /**
@@ -22,21 +22,8 @@ const ENTRANCES: Record<Sense, (em: HTMLElement) => gsap.core.Timeline> = {
       .timeline()
       .fromTo(em, { opacity: 0, y: 36 }, { opacity: 1, y: 0, ease: "power2.out", duration: 1 }, 0)
       .fromTo(em, { color: "#dcbfae" }, { color: "#9b4819", ease: "power1.inOut", duration: 0.8 }, 0.2),
-  // Se toca · materia: una máscara la descubre de izquierda a derecha y el tono se asienta
-  toca: (em) =>
-    gsap
-      .timeline()
-      .fromTo(em, { clipPath: "inset(-12% 100% -12% 0%)" }, { clipPath: "inset(-12% -6% -12% 0%)", ease: "power2.out", duration: 1 }, 0)
-      .fromTo(em, { color: "#c98a72" }, { color: "#9b4819", ease: "power1.inOut", duration: 0.7 }, 0.3),
-  // Se reflexiona · claridad: sin desplazamiento; de una suavidad óptica a la nitidez completa
-  reflexiona: (em) =>
-    gsap.timeline().fromTo(
-      em,
-      { opacity: 0.18, filter: "blur(7px)" },
-      { opacity: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 },
-    ),
-  // Se admira · apertura: el espacio se abre desde el centro, más ancho y más lento
-  admira: (em) =>
+  // Se experimenta · apertura: el espacio se abre desde el centro, más ancho y más lento
+  experimenta: (em) =>
     gsap
       .timeline()
       .fromTo(
@@ -50,7 +37,7 @@ const ENTRANCES: Record<Sense, (em: HTMLElement) => gsap.core.Timeline> = {
 /**
  * Mirar. Una frase que se escribe, los verbos que la completan y un cierre.
  * En Inicio (`sequence`): "El diseño no solo se observa." se escribe letra a letra; después
- * aparecen Se vive, Se toca, Se reflexiona y Se admira, cada uno con su carácter, y cierra
+ * aparecen Se vive y Se experimenta, cada uno con su carácter, y cierra
  * "Más allá de la pantalla, el diseño se convierte en experiencia."
  * Todo está en el flujo normal de la página y cada pieza sigue su propia posición en
  * pantalla (scrub directo): el scroll nunca espera a una animación, un scroll rápido

@@ -88,9 +88,9 @@
   margin-bottom: 22px;
 }
 
-/* ---------- Inicio: la frase se escribe, los cuatro verbos se acumulan y cierra ---------- */
-/* Composición asimétrica sobre la retícula de 12 columnas: los verbos se alternan
-   derecha / izquierda / centro-derecha y "Se admira." se abre al centro, con más aire. */
+/* ---------- Inicio: la frase se escribe, los dos verbos se acumulan y cierra ---------- */
+/* Composición asimétrica sobre la retícula de 12 columnas: "Se vive." a la derecha
+   y "Se experimenta." se abre al centro, con más aire. */
 .idea--sequence .idea__inner {
   padding-bottom: clamp(40px, 8vh, 96px);
 }
@@ -106,13 +106,7 @@
 .idea__phrase--vive {
   grid-column: 7 / -1;
 }
-.idea__phrase--toca {
-  grid-column: 2 / span 7;
-}
-.idea__phrase--reflexiona {
-  grid-column: 5 / -1;
-}
-.idea__phrase--admira {
+.idea__phrase--experimenta {
   grid-column: 1 / -1;
   justify-self: center;
   margin-top: clamp(16px, 6vh, 72px);
@@ -164,24 +158,18 @@
     margin-top: clamp(48px, 10vh, 96px);
   }
   .idea__phrase--vive,
-  .idea__phrase--toca,
-  .idea__phrase--reflexiona,
-  .idea__phrase--admira {
+  .idea__phrase--experimenta {
     grid-column: 1;
   }
-  .idea__phrase--vive,
-  .idea__phrase--reflexiona {
+  .idea__phrase--vive {
     justify-self: start;
   }
-  .idea__phrase--toca,
-  .idea__phrase--admira {
+  .idea__phrase--experimenta {
     justify-self: end;
-  }
-  .idea__phrase--admira {
     margin-top: clamp(8px, 3vh, 32px);
   }
   .idea--sequence .idea__verb {
-    font-size: clamp(2.8rem, 13vw, 4.6rem);
+    font-size: clamp(2.6rem, 11.5vw, 4.6rem);
   }
   .idea__beyond {
     grid-column: 1 / -1;

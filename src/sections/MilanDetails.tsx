@@ -124,11 +124,12 @@ export function MilanFit({ tone = "ink" }: { tone?: Tone }) {
 }
 
 /** Un llamado a inscribirse, solo el botón: se repite tras los testimonios y al final. */
-export function MilanCta({ tone = "paper" }: { tone?: Tone }) {
+/** CTA final. São Paulo lo reutiliza con su propio texto y link (WhatsApp). */
+export function MilanCta({ tone = "paper", label = milan.cta, href }: { tone?: Tone; label?: string; href?: string }) {
   return (
     <div className="md md--cta" data-tone={tone}>
       <div className="wrap md__cta">
-        <EnrollButton>{milan.cta}</EnrollButton>
+        <EnrollButton href={href}>{label}</EnrollButton>
       </div>
     </div>
   );
