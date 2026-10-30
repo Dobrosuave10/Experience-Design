@@ -1,6 +1,5 @@
-import { personalBrandPage as page, programPending, programs } from "../content/site";
+import { personalBrandPage as page, programs } from "../content/site";
 import { NextChapter } from "../components/NextChapter";
-import { Pending } from "../components/Pending";
 import { ProgramHero } from "../sections/ProgramHero";
 import { NeverLate } from "../sections/NeverLate";
 import { WordList } from "../sections/WordList";
@@ -18,7 +17,6 @@ export default function PersonalBrandPage() {
       <WordList id="mp-focus" variant="index" tone="paper" groups={[{ label: page.focusLabel, items: page.focus }]} />
       <PersonalBrand />
       <Audience program={program} tone="paper" />
-      <Pending title={page.closeTitle} body={page.closeBody} items={page.pending} status={programPending.status} cta={program.cta.replace("Conocer", "Quiero conocer")} interest={program.interest} tone="sand" />
       <NextChapter tone="sand" />
     </>
   );

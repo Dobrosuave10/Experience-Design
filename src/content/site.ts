@@ -766,17 +766,6 @@ export const programs = {
   ] as Program[],
 };
 
-export const programPending = {
-  label: "Lo concreto",
-  status: "Por confirmar",
-};
-
-export const formationPage = {
-  closeTitle: "Lo concreto, apenas esté confirmado.",
-  closeBody: "Te avisamos cuando abramos los primeros cursos y webinars.",
-  pending: ["Cursos", "Fechas", "Valor"],
-};
-
 export const personalBrandPage = {
   notLabel: "Lo que no es",
   not: ["Crecer en redes sociales.", "Ser influencer.", "Hacerte famoso en internet."],
@@ -784,9 +773,6 @@ export const personalBrandPage = {
   notBody: "Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
   focusLabel: "En qué se enfoca",
   focus: ["Tu experiencia", "Tu trayectoria", "Tu perspectiva", "Tus fortalezas", "Tu posicionamiento", "Tu identidad profesional", "Tu voz", "Tu narrativa"],
-  closeTitle: "Empecemos por tu historia.",
-  closeBody: "Te respondemos con lo concreto cuando el programa esté confirmado.",
-  pending: ["Formato", "Fechas", "Valor"],
 };
 
 /* ---------------------------------------------------------------------------
