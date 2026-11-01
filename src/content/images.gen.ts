@@ -343,6 +343,12 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "salone-pasillo-carteles": {
+    "src": "/img/salone-pasillo-carteles-1548.webp",
+    "srcSet": "/img/salone-pasillo-carteles-480.webp 480w, /img/salone-pasillo-carteles-960.webp 960w, /img/salone-pasillo-carteles-1548.webp 1548w",
+    "w": 1548,
+    "h": 1032
+  },
   "salone-repisa-ceramica": {
     "src": "/img/salone-repisa-ceramica-1920.webp",
     "srcSet": "/img/salone-repisa-ceramica-480.webp 480w, /img/salone-repisa-ceramica-960.webp 960w, /img/salone-repisa-ceramica-1600.webp 1600w, /img/salone-repisa-ceramica-1920.webp 1920w",

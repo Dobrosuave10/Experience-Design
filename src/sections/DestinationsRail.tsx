@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { destinations } from "../content/site";
 import { DESKTOP, MOTION_OK } from "../lib/env";
 import { navigate } from "../lib/router";
 import { MagneticButton } from "../components/MagneticButton";
 import { Photo } from "../components/Photo";
 import { Rail, RailItem } from "../components/Rail";
+import { InViewVideo } from "../components/InViewVideo";
+import { CompassRose, FlagMark, TravelMap, type MapPoint, type TravelMapHandle } from "../components/TravelMap";
+import "./DestinationsMap.css";
 
 /**
  * Posición de cada foto del collage (x, y, ancho, alto en % del área; `d` = desfase de entrada).
@@ -36,9 +40,20 @@ const LAYOUTS: Record<string, Slot[]> = {
   ],
 };
 
+/** Recorrido punteado de cada collage (en % del área): pasa por los huecos entre las fotos. */
+const ROUTES: Record<string, MapPoint[]> = {
+  milan: [[-6, 96], [12, 88], [23.5, 62], [30, 34], [46, 25], [63, 24.5], [78, 30], [83, 44], [78, 66], [90, 84], [104, 92]],
+  "sao-paulo": [[-6, 94], [16, 88], [26, 58], [37, 76], [51, 50], [74, 46], [86, 66], [98, 82], [106, 90]],
+};
+/** Giro de cada polaroid, entre -4° y 4°: fijo, para que el collage no cambie entre visitas. */
+const TILT = [-3, 2.5, -1.5, 3.5, -2.5, 1.5, -3.5, 2, -1];
+const FLAG: Record<string, "it" | "br"> = { milan: "it", "sao-paulo": "br" };
+
 /**
  * Destinos: Milán y São Paulo, uno por pantalla. La sección se queda fija mientras
- * el collage de fotos reales de cada viaje se arma con el scroll; en móvil, dos columnas.
+ * el collage de polaroids (fotos y videos reales de cada viaje) se arma con el scroll y una
+ * ruta punteada, con su avión, se dibuja entre ellas como en un mapa de viaje.
+ * En móvil, dos columnas de polaroids.
  */
 export function DestinationsRail() {
   // Las fotos del collage se piden recién cuando la línea se acerca a la pantalla:
@@ -52,6 +67,9 @@ export function DestinationsRail() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
+  const maps = useRef<Record<string, TravelMapHandle | null>>({});
+  // Sin movimiento (o en móvil, donde no hay ruta) el mapa queda completo
+  const [reduced] = useState(() => typeof window !== "undefined" && !window.matchMedia(`${MOTION_OK} and ${DESKTOP}`).matches);
 
   return (
     <>
@@ -74,7 +92,20 @@ export function DestinationsRail() {
         // Escritorio: el collage se arma mientras la pantalla queda fija
         mm.add(`${MOTION_OK} and ${DESKTOP}`, () => {
           gsap.utils.toArray<HTMLElement>(".rail__item", el).forEach((item) => {
+            const id = item.dataset.dest ?? "";
+            const compass = item.querySelector<HTMLElement>(".dmap__compass");
             const tl = gsap.timeline({ scrollTrigger: { trigger: item, start: "top 75%", end: "bottom bottom", scrub: 0.6 } });
+            // La ruta y el avión avanzan con la lectura; la rosa de los vientos gira apenas
+            ScrollTrigger.create({
+              trigger: item,
+              start: "top 60%",
+              end: "bottom bottom",
+              scrub: true,
+              onUpdate: (self) => {
+                maps.current[id]?.setProgress(self.progress);
+                if (compass) compass.style.transform = `rotate(${self.progress * 50 - 10}deg)`;
+              },
+            });
             item.querySelectorAll<HTMLElement>(".collage__photo").forEach((ph, i) => {
               const d = Number(ph.dataset.d ?? 0);
               tl.fromTo(
@@ -82,7 +113,7 @@ export function DestinationsRail() {
                 { opacity: 0, y: i % 2 ? 90 : 160, x: i % 3 === 0 ? -30 : i % 3 === 1 ? 24 : 0, scale: 0.9 },
                 { opacity: 1, y: 0, x: 0, scale: 1, ease: "power2.out", duration: 0.32 },
                 d,
-              ).fromTo(ph.querySelector(".collage__img"), { scale: 1.18 }, { scale: 1, ease: "power2.out", duration: 0.4 }, d);
+              );
             });
           });
         });
@@ -96,12 +127,13 @@ export function DestinationsRail() {
       }}
     >
       {destinations.items.map((d) => (
-        <RailItem key={d.id} className="rail__item--dest" labelledBy={`rail-${d.id}`}>
+        <RailItem key={d.id} className="rail__item--dest" labelledBy={`rail-${d.id}`} data={{ dest: d.id }}>
           <div className="rail__inner rail__dest">
             <div className="rail__text">
               <p className="rail__index label rail__reveal">
                 <span className="rail__n">{d.n}</span>
                 <span className="rail__eyebrow">{d.homeLabel}</span>
+                <FlagMark country={FLAG[d.id]} />
               </p>
               <h2 id={`rail-${d.id}`} className="rail__name display rail__reveal">
                 {d.name}
@@ -113,19 +145,34 @@ export function DestinationsRail() {
                 </MagneticButton>
               </div>
             </div>
-            <ul className="collage" aria-label={`Fotos de ${d.event}`}>
-              {d.collage.map((ph, i) => {
-                const s = LAYOUTS[d.id][i];
-                const style = { "--x": s.x, "--y": s.y, "--w": s.w, "--h": s.h } as CSSProperties;
-                return (
-                  <li key={ph.image} className="collage__photo" style={style} data-d={s.d}>
-                    <span className="collage__img">
-                      {near && <Photo name={ph.image} alt={ph.alt} sizes={`(max-width: 767px) ${i % 3 === 0 ? 88 : 44}vw, ${Math.round(s.w * 0.6)}vw`} />}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="collage-wrap dmap">
+              <TravelMap ref={(h) => void (maps.current[d.id] = h)} points={ROUTES[d.id]} drawn={reduced} />
+              {d.id === "milan" && (
+                <span className="dmap__compass">
+                  <CompassRose />
+                </span>
+              )}
+              <ul className="collage" aria-label={`Fotos y videos de ${d.event}`}>
+                {d.collage.map((ph, i) => {
+                  const s = LAYOUTS[d.id][i];
+                  const style = { "--x": s.x, "--y": s.y, "--w": s.w, "--h": s.h, "--r": `${TILT[i % TILT.length]}deg` } as CSSProperties;
+                  return (
+                    <li key={ph.image ?? ph.video?.src} className={`collage__photo polaroid ${ph.video ? "polaroid--video" : ""}`} style={style} data-d={s.d}>
+                      <figure className="polaroid__frame">
+                        <span className="collage__img polaroid__img">
+                          {ph.video ? (
+                            <InViewVideo src={ph.video.src} poster={ph.video.poster} label={ph.alt} />
+                          ) : (
+                            near && ph.image && <Photo name={ph.image} alt={ph.alt} sizes={`(max-width: 767px) ${i % 3 === 0 ? 88 : 44}vw, ${Math.round(s.w * 0.6)}vw`} />
+                          )}
+                        </span>
+                        {ph.caption && <figcaption className="polaroid__caption">{ph.caption}</figcaption>}
+                      </figure>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </RailItem>
       ))}

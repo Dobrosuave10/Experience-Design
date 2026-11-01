@@ -1,0 +1,144 @@
+/* ---------- Destinos: mapa de viaje y polaroids ---------- */
+.collage-wrap {
+  grid-column: 5 / -1;
+  position: relative;
+  height: min(100%, 80vh);
+}
+.collage-wrap .collage {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  z-index: 1;
+}
+
+/* Polaroid: marco marfil, margen inferior más ancho, giro leve y sombra suave */
+.collage__photo.polaroid {
+  overflow: visible;
+  background: none;
+  box-shadow: none;
+}
+.polaroid__frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: clamp(6px, 0.6vw, 10px) clamp(6px, 0.6vw, 10px) 0;
+  background: #f8f4ec;
+  transform: rotate(var(--r, 0deg));
+  box-shadow:
+    0 1px 2px rgba(40, 24, 14, 0.12),
+    0 18px 34px -20px rgba(40, 24, 14, 0.45);
+  transition:
+    transform 0.8s var(--ease-out),
+    box-shadow 0.8s var(--ease-out);
+}
+.polaroid__img {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--sand);
+}
+.polaroid__img img,
+.polaroid__img video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* margen inferior de polaroid; el pie, si lo hay, vive ahí */
+.polaroid__frame::after {
+  content: "";
+  flex: none;
+  height: clamp(18px, 2vw, 30px);
+}
+.polaroid__caption {
+  position: absolute;
+  left: clamp(8px, 0.8vw, 12px);
+  right: clamp(8px, 0.8vw, 12px);
+  bottom: clamp(3px, 0.5vw, 8px);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(0.66rem, 0.75vw, 0.86rem);
+  line-height: 1.2;
+  color: #5b4a3f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.polaroid__frame {
+  position: relative;
+}
+@media (hover: hover) {
+  .polaroid:hover {
+    z-index: 3;
+  }
+  .polaroid:hover .polaroid__frame {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow:
+      0 2px 4px rgba(40, 24, 14, 0.12),
+      0 26px 44px -22px rgba(40, 24, 14, 0.5);
+  }
+}
+
+/* Rosa de los vientos: en el rincón libre del collage de Milán */
+.dmap__compass {
+  position: absolute;
+  left: 2%;
+  bottom: 0;
+  z-index: 0;
+  opacity: 0.85;
+  transform-origin: 50% 50%;
+}
+.dmap__compass .compass {
+  display: block;
+}
+
+.rail__index .flag {
+  margin-left: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid__frame {
+    transition: none;
+  }
+}
+
+/* ---------- Móvil: dos columnas de polaroids, sin ruta ---------- */
+@media (max-width: 767px) {
+  .collage-wrap {
+    grid-column: 1;
+    height: auto;
+  }
+  .collage-wrap .collage {
+    position: relative;
+    inset: auto;
+    gap: 18px 14px;
+    grid-auto-flow: row dense;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .collage__photo.polaroid {
+    min-width: 0;
+  }
+  .collage-wrap .tmap,
+  .dmap__compass {
+    display: none;
+  }
+  .polaroid__frame {
+    transform: rotate(calc(var(--r, 0deg) * 0.6));
+  }
+  .collage__photo.polaroid {
+    aspect-ratio: 4 / 5.4;
+  }
+  .collage__photo.polaroid:nth-child(3n + 1),
+  .collage__photo.polaroid:last-child:nth-child(3n + 2) {
+    aspect-ratio: 16 / 11.5;
+  }
+  .collage__photo.polaroid--video {
+    aspect-ratio: 9 / 15;
+  }
+  .collage__photo.polaroid--video:nth-child(3n + 1) {
+    grid-column: auto;
+  }
+}

@@ -803,6 +803,14 @@ export const personalBrandPage = {
  * ------------------------------------------------------------------------- */
 
 export type CollagePhoto = { image: ImageName; alt: string };
+/** Pieza del collage de Destinos (polaroid): una foto o un video corto sin audio. */
+export type CollageItem = {
+  image?: ImageName;
+  video?: { src: string; poster: string };
+  alt: string;
+  /** Pie manuscrito con el nombre del lugar (opcional). */
+  caption?: string;
+};
 
 export const destinations = {
   title: "Destinos",
@@ -827,16 +835,16 @@ export const destinations = {
       /** Inicio: la etiqueta del selector y su carrusel. */
       homeLabel: "Salone del Mobile",
       collage: [
-        { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque" },
-        { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche" },
-        { image: "salone-escalinata-roja", alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
-        { image: "fuori-showroom-lampara", alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
-        { image: "verona-marmol-verde", alt: "Placas de mármol verde y de tonos tierra exhibidas en Antolini, Verona" },
-        { image: "milan-galleria-cupula", alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
-        { image: "salone-cielo-cintas", alt: "Instalación de cintas blancas suspendidas sobre un stand del Salone del Mobile" },
-        { image: "milan-grupo-suelo-rojo", alt: "Participantes sentados en un banco junto al suelo rojo de un pabellón del Salone" },
-        { image: "venecia-gondola", alt: "Participante en una góndola bajo un puente de Venecia" },
-      ] as CollagePhoto[],
+        { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque", caption: "Salone del Mobile" },
+        { image: "salone-pasillo-carteles", alt: "Visitantes recorriendo el pasillo central de Fiera Milano Rho bajo los carteles rojos del Salone del Mobile", caption: "Fiera Milano Rho" },
+        { video: { src: "/video/milan-salone-letras.mp4", poster: "/video/milan-salone-letras.jpg" }, alt: "Video: las letras rojas del Salone sobre un adoquinado, frente a los árboles, en Milán", caption: "Milán" },
+        { video: { src: "/video/milan-kerakoll-colores.mp4", poster: "/video/milan-kerakoll-colores.jpg" }, alt: "Video: el muro de colores de Kerakoll durante el Fuorisalone", caption: "Fuorisalone" },
+        { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche", caption: "Duomo di Milano" },
+        { video: { src: "/video/milan-fuori-muro.mp4", poster: "/video/milan-fuori-muro.jpg" }, alt: "Video: repisas con cerámicas, muestras de textiles y objetos de diseño en un showroom de Milán" },
+        { image: "fuori-showroom-lampara", alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida", caption: "Fuorisalone" },
+        { image: "milan-galleria-cupula", alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico", caption: "Galleria Vittorio Emanuele II" },
+        { image: "venecia-gondola", alt: "Participante en una góndola bajo un puente de Venecia", caption: "Venecia" },
+      ] as CollageItem[],
       gallery: [
         { image: "salone-escalinata-roja" as ImageName, alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
         { image: "fuori-showroom-lampara" as ImageName, alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
@@ -858,15 +866,15 @@ export const destinations = {
       cta: "Entrar a São Paulo",
       homeLabel: "CASACOR",
       collage: [
-        { image: "casacor-arco-verde-mural", alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
+        { image: "casacor-arco-verde-mural", alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales", caption: "CASACOR" },
         { image: "casacor-lavamanos-terracota", alt: "Baño con lavamanos de madera terracota y dos espejos redondos iluminados" },
         { image: "casacor-atrio-reflejo-agua", alt: "Atrio de varios niveles reflejado en un espejo de agua" },
         { image: "casacor-biblioteca", alt: "Biblioteca de repisas de madera con objetos de cerámica y libros, junto a un sofá" },
         { image: "casacor-celosia-arcos-madera", alt: "Celosía de madera con arcos que deja ver el jardín" },
-        { image: "casacor-grupo-espaco", alt: "El grupo de Experience Design frente a un muro con el letrero «espaço» en CASACOR" },
-        { image: "casacor-bontempo-espejo-agua", alt: "Letras de Casa Bontempo sobre un muro de hormigón, con jardín y espejo de agua" },
+        { image: "casacor-grupo-espaco", alt: "El grupo de Experience Design frente a un muro con el letrero «espaço» en CASACOR", caption: "São Paulo" },
+        { image: "casacor-bontempo-espejo-agua", alt: "Letras de Casa Bontempo sobre un muro de hormigón, con jardín y espejo de agua", caption: "Casa Bontempo" },
         { image: "casacor-sala-naranja", alt: "Sala de luz naranja con una butaca acolchada y una obra circular en el muro" },
-      ] as CollagePhoto[],
+      ] as CollageItem[],
       gallery: [
         { image: "casacor-celosia-arcos-madera" as ImageName, alt: "CASACOR São Paulo 2025: celosía de madera con arcos que deja ver el jardín" },
         { image: "casacor-terraza-jardin" as ImageName, alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },

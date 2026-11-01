@@ -49,9 +49,10 @@ export function Rail({ label, tone, className = "", children, setup }: Props) {
 }
 
 /** Un elemento de la línea: ocupa la pantalla y lleva su nodo. */
-export function RailItem({ className = "", children, labelledBy }: { className?: string; children: ReactNode; labelledBy: string }) {
+export function RailItem({ className = "", children, labelledBy, data }: { className?: string; children: ReactNode; labelledBy: string; data?: Record<string, string> }) {
+  const attrs = Object.fromEntries(Object.entries(data ?? {}).map(([k, v]) => [`data-${k}`, v]));
   return (
-    <li className={`rail__item ${className}`}>
+    <li className={`rail__item ${className}`} {...attrs}>
       <article className="rail__pane" aria-labelledby={labelledBy}>
         <span className="rail__node" aria-hidden="true" />
         {children}
