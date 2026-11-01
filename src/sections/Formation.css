@@ -50,10 +50,37 @@
   overflow: hidden;
   background: var(--umber);
 }
+.formation__img {
+  position: relative;
+}
 .formation__img img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition:
+    opacity 1.1s var(--ease-out),
+    transform 1.6s var(--ease-out);
+}
+/* Antes ↔ Después: fundido cruzado, con un leve acercamiento de la foto que entra */
+.formation__photo--after {
+  opacity: 0;
+  transform: scale(1.04);
+  object-position: 50% 40%;
+}
+.formation__img.is-after .formation__photo--after {
+  opacity: 1;
+  transform: none;
+}
+.formation__img.is-after .formation__photo--before {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .formation__img img {
+    transition: opacity 0.01s;
+    transform: none;
+  }
 }
 .formation__tabs {
   display: flex;

@@ -34,8 +34,12 @@ export function Formation({ interest, tone = "paper", showStatus = true }: { int
         </div>
 
         <aside className="formation__side" aria-label="Modalidades">
-          <figure className="formation__img">
-            {formation.image.image && <Photo name={formation.image.image} alt={formation.image.alt} sizes="(max-width: 899px) 90vw, 30vw" />}
+          {/* Antes / Después también cambian la foto: fundido cruzado entre ambas */}
+          <figure className={`formation__img ${mode === "despues" ? "is-after" : ""}`}>
+            {formation.image.image && (
+              <Photo name={formation.image.image} alt={mode === "despues" ? "" : formation.image.alt} sizes="(max-width: 899px) 90vw, 30vw" className="formation__photo formation__photo--before" />
+            )}
+            <Photo name={formation.afterImage.image} alt={mode === "despues" ? formation.afterImage.alt : ""} sizes="(max-width: 899px) 90vw, 30vw" className="formation__photo formation__photo--after" />
           </figure>
           <div className="formation__modes">
             <div className="formation__tabs" role="tablist" aria-label="Modalidad">

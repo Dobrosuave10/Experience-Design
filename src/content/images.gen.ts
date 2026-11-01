@@ -169,6 +169,12 @@ export const images = {
     "w": 780,
     "h": 1170
   },
+  "formacion-despues-retrato": {
+    "src": "/img/formacion-despues-retrato-1350.webp",
+    "srcSet": "/img/formacion-despues-retrato-480.webp 480w, /img/formacion-despues-retrato-960.webp 960w, /img/formacion-despues-retrato-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "formacion-muestrario-cueros": {
     "src": "/img/formacion-muestrario-cueros-960.webp",
     "srcSet": "/img/formacion-muestrario-cueros-480.webp 480w, /img/formacion-muestrario-cueros-960.webp 960w",

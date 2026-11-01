@@ -494,6 +494,11 @@ export const formation = {
     material: "plaster",
     brief: "Aprender frente al material.",
   } as ImageSlot,
+  /** Foto de "Después": el resultado, con criterio propio en un espacio de diseño. */
+  afterImage: {
+    image: "formacion-despues-retrato" as ImageName,
+    alt: "Retrato en un showroom de Gessi durante el Fuorisalone de Milán, junto a un lavamanos de piedra y espejos redondos iluminados",
+  },
 };
 
 export const personalBrand = {
@@ -526,8 +531,8 @@ export const founders = {
   people: [
     {
       name: "Danae Barla",
-      field: "Arquitecta interiorista · Studio Barla",
-      bio: "Arquitecta interiorista y fundadora de Studio Barla. Su pasión por el mobiliario, el arte y la fotografía, y su convicción de que los viajes alimentan la búsqueda de un diseño propio, dieron origen a la marca." as string | null,
+      field: "Arquitecta interiorista · Studio Barla Interiorismo",
+      bio: "Arquitecta interiorista y fundadora de Studio Barla Interiorismo. Su pasión por el mobiliario, el arte y la fotografía, y su convicción de que los viajes alimentan la búsqueda de un diseño propio, dieron origen a la marca." as string | null,
       image: { image: "danae", alt: "Retrato de Danae Barla", material: "terracotta", brief: "Retrato real de Danae, luz natural. 4:5." } as ImageSlot,
     },
     {
@@ -662,6 +667,8 @@ export const about = {
 
 export type ProgramId = "formacion" | "marca-personal";
 
+export type AudienceItem = { name: string; detail?: string; text: string };
+
 export type Program = {
   id: ProgramId;
   n: string;
@@ -685,7 +692,8 @@ export type Program = {
   detail?: ImageSlot;
   /** Foto de la página Programas. */
   railImage: { image: ImageName; alt: string };
-  audience: { students: string; professionals: string };
+  /** Para quién es: profesionales primero, Estudiantes siempre al final. */
+  audience: AudienceItem[];
   interest: InterestId;
   cta: string;
 };
@@ -693,12 +701,10 @@ export type Program = {
 export const programs = {
   title: "Programas",
   lead: "Lo vivido, convertido en criterio propio.",
-  question: "¿Qué quieres llevar a tu práctica?",
+  question: "¿Qué quieres llevar a tu estudio?",
   hint: "Dos programas",
   more: "Quiero saber más",
   audienceLabel: "Para quién es",
-  audienceStudents: "Estudiantes",
-  audienceProfessionals: "Profesionales",
   items: [
     {
       id: "formacion",
@@ -729,10 +735,14 @@ export const programs = {
         image: "fuori-charla-retrato",
         alt: "Charla durante el Fuorisalone de Milán: el público escucha sentado bajo una bóveda de arcos",
       },
-      audience: {
-        students: "Estudiantes de pregrado en sus últimos años, de posgrado y recién titulados.",
-        professionals: "Profesionales de arquitectura, interiorismo y diseño.",
-      },
+      audience: [
+        { name: "Arquitectos", text: "Fotografía, identidad y estrategia comercial para mostrar tus proyectos." },
+        { name: "Diseñadores", text: "Marketing, fotografía e identidad, aplicados a tu propio trabajo." },
+        { name: "Tu empresa", text: "Herramientas específicas de marketing y estrategia comercial para tu equipo." },
+        { name: "Corredores de propiedades", text: "Fotografía y estrategia comercial para presentar cada propiedad con criterio." },
+        { name: "Construcción", text: "Identidad y estrategia comercial para comunicar lo que construyes." },
+        { name: "Estudiantes", text: "Últimos años de pregrado, posgrado y recién titulados: herramientas para llegar al mundo profesional." },
+      ],
       interest: "formacion",
       cta: "Conocer Formación",
     },
@@ -759,10 +769,20 @@ export const programs = {
         image: "marca-showroom-retrato",
         alt: "Participante sentada en un showroom de Milán, entre espejos redondos y butacas de cuero",
       },
-      audience: {
-        students: "Para quienes recién empiezan.",
-        professionals: "Para quienes ya tienen una trayectoria.",
-      },
+      audience: [
+        { name: "Arquitectos", text: "Tu trayectoria y tu mirada, ordenadas en una marca que se reconoce." },
+        { name: "Diseñadores", text: "El sello que distingue tu trabajo, contado con coherencia." },
+        { name: "Interioristas", text: "Tu forma de pensar los espacios, convertida en posicionamiento." },
+        { name: "Corredores de propiedades", text: "Una voz profesional propia, coherente en cada lugar donde apareces." },
+        { name: "Ingenieros", text: "Lo que sabes y lo que has hecho, contado para que se entienda." },
+        { name: "Iluminadores", text: "Lo que ves distinto, convertido en tu valor profesional." },
+        { name: "Inversionistas", text: "Tu posicionamiento: dónde te ubicas, con quién trabajas y por qué." },
+        { name: "Empresarios", text: "La identidad de tu empresa y tu voz como quien la lidera." },
+        { name: "Emprendedores", text: "Tu marca desde el inicio, con historia, mirada y voz propias." },
+        { name: "Maestros y dueños de taller", text: "Tu oficio y tu trayectoria, contados con el mismo cuidado con que trabajas." },
+        { name: "Tu negocio", detail: "Empresa de talleres, tienda de decoración", text: "El sello de tu negocio: qué lo distingue y cómo contarlo." },
+        { name: "Estudiantes", text: "Para quienes recién empiezan: descubrir su sello desde los primeros proyectos." },
+      ],
       interest: "marca",
       cta: "Conocer Marca personal",
     },

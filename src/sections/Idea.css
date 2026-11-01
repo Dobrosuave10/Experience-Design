@@ -28,14 +28,18 @@
   max-width: 14ch;
 }
 .idea__verbs {
-  grid-column: 6 / span 7;
+  grid-column: 4 / -1;
   display: grid;
+  /* el tamaño sale del ancho de la columna: cada verbo cabe siempre en una sola línea */
+  container-type: inline-size;
 }
 .idea__verb {
-  font-size: clamp(3.2rem, 8.6vw, 10rem);
+  /* "Se experimenta." mide ~7.1em + su sangría de 0.6em: 12.4cqi lo deja en ~96% del ancho */
+  font-size: min(10rem, 12.4cqi);
   line-height: 1.02;
   padding-bottom: 0.06em;
   color: var(--accent);
+  white-space: nowrap;
 }
 .idea__verb:nth-child(2) {
   padding-left: 0.6em;
@@ -67,7 +71,7 @@
     grid-column: 1 / -1;
   }
   .idea__verb {
-    font-size: clamp(3rem, 15vw, 5rem);
+    font-size: min(5rem, 12.4cqi);
   }
   .idea__verb:nth-child(n) {
     padding-left: 0;
@@ -102,6 +106,10 @@
 }
 .idea__verbs--sequence .idea__verb:nth-child(n) {
   padding-left: 0;
+}
+/* Inicio conserva su escala propia (la composición abierta de la secuencia) */
+.idea__verbs--sequence .idea__verb {
+  font-size: clamp(3.2rem, 8.6vw, 10rem);
 }
 .idea__phrase--vive {
   grid-column: 7 / -1;
