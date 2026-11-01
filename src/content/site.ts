@@ -132,9 +132,9 @@ export const pageDescriptions: Record<string, string> = {
   [routes.programas]:
     "Dos programas para llevar lo vivido a la propia práctica: Formación, para aprender, y Marca personal, para expresar el sello propio. Para estudiantes y profesionales del diseño.",
   [routes.formacion]:
-    "Formación: cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
+    "Formación: herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial.",
   [routes.marcaPersonal]:
-    "Marca personal: construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
+    "Marca personal: construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
   [routes.destinos]:
     "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias que ya recorrimos.",
   [routes.milan]:
@@ -183,20 +183,23 @@ export const programsSpine = {
       n: "01",
       verb: "Descubrir",
       name: "Experiencias",
-      text: "Experiencias curadas en las capitales del diseño, conocidas en su propio contexto.",
+      text: "Viajes curados a las mejores ferias y eventos exclusivos en las capitales del diseño mundial.",
       href: routes.destinos as string | undefined,
       cta: "Milán 2027" as string | undefined,
+      /** El CTA de Experiencias lleva al formulario de inscripción. */
+      enroll: true,
       main: { image: "salone-cocina-bosque" as ImageName, alt: "Salone del Mobile 2026: visitantes en un stand de cocina rodeado por una pantalla envolvente con un bosque" },
       detail: { image: "casacor-arco-verde-mural" as ImageName, alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
-      destinations: ["São Paulo", "Milán"],
-      next: { label: "Próxima experiencia", place: "Milán 2027", note: "Abril de 2027" },
+      destinations: ["São Paulo", "Milán", "Colonia", "Buenos Aires"],
+      /** Sin fecha cuando no la tenemos: no se inventa. */
+      next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril" }, { place: "CASACOR São Paulo" }] as { place: string; note?: string }[] },
     },
     {
       id: "formacion",
       n: "02",
       verb: "Aprender",
       name: "Formación",
-      text: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
+      text: "Herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial.",
       href: routes.formacion as string | undefined,
       cta: "Conocer Formación" as string | undefined,
       main: { image: "fuori-kerakoll-muestrario" as ImageName, alt: "Fuorisalone de Milán: un anfitrión explica el muestrario de colores de Kerakoll al grupo de Experience Design" },
@@ -207,7 +210,7 @@ export const programsSpine = {
       n: "03",
       verb: "Expresar",
       name: "Marca personal",
-      text: "Acompañamos a construir la propia marca y a encontrar el sello que distingue a cada persona, estudio o empresa.",
+      text: "Construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa.",
       href: routes.marcaPersonal as string | undefined,
       cta: "Conocer Marca personal" as string | undefined,
       main: { image: "marca-vestidor-retrato" as ImageName, alt: "Participante sentada en un puf capitoné de un showroom de vestidores en Milán, con la bolsa de Experience Design" },
@@ -508,8 +511,8 @@ export const personalBrand = {
 
 export const community = {
   title: "Más que viajes, creamos relaciones.",
-  disciplines: ["Arquitectura", "Interiorismo", "Diseño", "Marcas", "Materiales", "Iluminación", "Mobiliario", "Industrias creativas"],
-  body: "El viaje dura unos días. Las conversaciones que empiezan ahí duran bastante más.",
+  disciplines: ["Arquitectura", "Interiorismo", "Diseño", "Marcas", "Materiales", "Iluminación", "Mobiliario", "Industrias creativas", "Artes", "Lujo"],
+  body: "Las conversaciones empiezan y el aprendizaje dura para siempre.",
   image: {
     image: "charla-showroom",
     alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
@@ -704,8 +707,8 @@ export const programs = {
       name: "Formación",
       href: routes.formacion,
       lines: ["Lo que descubres", "también puede transformarse", "en conocimiento."],
-      intro: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca. Quien participa aprende a capitalizar lo que vive: qué observar, qué contenido generar, cómo registrar lo aprendido y cómo convertirlo en reflexiones útiles para su trabajo.",
-      short: "Cursos, webinars y herramientas prácticas online con profesionales de marketing, fotografía y marca.",
+      intro: "Herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial. Quien participa aprende a capitalizar lo que vive: qué observar, qué contenido generar, cómo registrar lo aprendido y cómo convertirlo en reflexiones útiles para su trabajo.",
+      short: "Herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial.",
       keywords: ["Cursos", "Webinars", "Herramientas", "Fotografía", "Marketing", "Marca"],
       tone: "ink",
       glow: "#C97B4A",
@@ -740,8 +743,8 @@ export const programs = {
       name: "Marca personal",
       href: routes.marcaPersonal,
       lines: ["Tienes una mirada.", "¿Qué hacemos con ella?"],
-      intro: "Construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa.",
-      short: "Construir la propia marca y encontrar el sello que distingue a cada persona, estudio o empresa.",
+      intro: "Construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa.",
+      short: "Construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa.",
       keywords: ["Tu historia", "Tu mirada", "Tu posicionamiento", "Tu voz"],
       tone: "clay",
       glow: "#F1D6BF",
@@ -925,9 +928,9 @@ export const contact = {
 };
 
 export const invite = {
-  title: "¿Nos vemos en el camino?",
-  body: "Completar el formulario es el primer paso. Te respondemos personalmente.",
-  cta: "Conversemos",
+  title: "¿Viajamos juntos?",
+  body: "Ya nos encontraste. Ahora inscríbete para recibir todo el itinerario.",
+  cta: "Inscríbete",
 };
 
 export const nextChapter = {

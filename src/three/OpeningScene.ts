@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { gsap } from "gsap";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { SEAL, createSealMaterials, plateGeometry, roundedRect, sealShape } from "./seal";
+import { SEAL, circleCellShape, createSealMaterials, plateGeometry, sealShape } from "./seal";
 import type { SealTarget } from "../lib/events";
 
 /** Debe coincidir con el fondo de la apertura (Loader.css): los fragmentos salen de esta penumbra. */
@@ -71,8 +71,8 @@ export class OpeningScene {
     const { face, edge } = await createSealMaterials(this.renderer, this.opts.mobile ? 512 : 1024, "/img/logo-e-mark.png");
     if (this.disposed) return;
 
-    // Fragmentos: la placa cortada en una retícula irregular. Las esquinas exteriores
-    // conservan el redondeo; los bordes interiores se retraen para dejar la junta.
+    // Fragmentos: el cuño cortado en una retícula irregular. El borde exterior
+    // conserva el círculo; los bordes interiores se retraen para dejar la junta.
     const h = SEAL.half - SEAL.bevel;
     const X = CUTS_X.map((t) => -h + t * 2 * h);
     const Y = CUTS_Y.map((t) => -h + t * 2 * h);
@@ -81,10 +81,13 @@ export class OpeningScene {
         const left = i === 0, right = i === X.length - 2, bottom = j === 0, top = j === Y.length - 2;
         const x0 = X[i] + (left ? 0 : TILE_BEVEL), x1 = X[i + 1] - (right ? 0 : TILE_BEVEL);
         const y0 = Y[j] + (bottom ? 0 : TILE_BEVEL), y1 = Y[j + 1] - (top ? 0 : TILE_BEVEL);
-        const shape = roundedRect(x0, y0, x1, y1, SEAL.radius, { bl: left && bottom, br: right && bottom, tr: right && top, tl: left && top });
+        const shape = circleCellShape(x0, y0, x1, y1);
+        if (!shape) continue;
         const geo = plateGeometry(shape, TILE_BEVEL);
         // cada pieza gira sobre su propio centro (las UV quedan en coordenadas de la placa)
-        const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+        geo.computeBoundingBox();
+        const bb = geo.boundingBox!;
+        const cx = (bb.min.x + bb.max.x) / 2, cy = (bb.min.y + bb.max.y) / 2;
         geo.translate(-cx, -cy, 0);
         const mesh = new THREE.Mesh(geo, [face, edge]);
         mesh.position.set(cx, cy, 0);

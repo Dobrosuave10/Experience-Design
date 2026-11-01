@@ -126,7 +126,7 @@ export function Loader() {
       <canvas ref={canvas} className="opening__canvas" aria-hidden="true" />
       {staticSeal && (
         <div className="opening__static" aria-hidden="true">
-          <Logo shape="square" size="min(36vw, 200px)" decorative />
+          <Logo shape="seal" size="min(36vw, 200px)" decorative />
         </div>
       )}
     </div>

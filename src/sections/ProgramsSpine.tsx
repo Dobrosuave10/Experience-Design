@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "@phosphor-icons/react";
-import { programsSpine } from "../content/site";
+import { inscripcionHref, programsSpine } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK } from "../lib/env";
 import { Link } from "../components/Link";
@@ -101,11 +101,20 @@ function Block({ item }: { item: Item }) {
         </h3>
         <p className="spine__desc spine__reveal">{item.text}</p>
         <Extra item={item} />
-        {item.href && item.cta && (
-          <Link to={item.href} className="spine__cta spine__reveal">
+        {item.href && item.cta && item.enroll ? (
+          <a href={inscripcionHref()} target="_blank" rel="noopener noreferrer" className="spine__cta spine__reveal">
             <span>{item.cta}</span>
             <ArrowRight size={16} aria-hidden />
-          </Link>
+            <span className="sr-only"> (formulario de inscripción, se abre en una pestaña nueva)</span>
+          </a>
+        ) : (
+          item.href &&
+          item.cta && (
+            <Link to={item.href} className="spine__cta spine__reveal">
+              <span>{item.cta}</span>
+              <ArrowRight size={16} aria-hidden />
+            </Link>
+          )
         )}
       </div>
     </article>
@@ -123,23 +132,29 @@ function Inset({ item }: { item: Item }) {
 
 function Extra({ item }: { item: Item }) {
   if (item.destinations && item.next) {
-    // Viajes: los dos destinos y la próxima experiencia
+    // Viajes: los destinos recorridos y las próximas experiencias
     return (
       <div className="spine__history spine__reveal">
         <ul className="spine__past spine__places">
           {item.destinations.map((d) => (
             <li key={d}>
-              <span className="spine__place serif">{d}</span>
+              <span className="spine__place spine__city serif" tabIndex={0}>
+                {d}
+              </span>
             </li>
           ))}
         </ul>
-        <p className="spine__next">
-          <span className="label">{item.next.label}</span>
-          <span className="spine__next-line">
-            <span className="spine__place serif">{item.next.place}</span>
-            <span className="spine__note">{item.next.note}</span>
-          </span>
-        </p>
+        <div className="spine__next">
+          <p className="label">{item.next.label}</p>
+          <ul className="spine__next-list">
+            {item.next.items.map((n) => (
+              <li key={n.place} className="spine__next-line">
+                <span className="spine__place serif">{n.place}</span>
+                {n.note && <span className="spine__note">{n.note}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

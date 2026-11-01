@@ -120,7 +120,7 @@ export function Hero() {
           ) : (
             <div className="hero__fallback">
               <span className="hero__fallback-arch" />
-              <Logo size="min(34vw, 260px)" decorative shape="square" className="hero__fallback-logo" />
+              <Logo size="min(34vw, 260px)" decorative shape="seal" className="hero__fallback-logo" />
             </div>
           )}
         </div>

@@ -8,7 +8,6 @@ import { onReady } from "../lib/events";
 import { isActive, navigate, usePath } from "../lib/router";
 import { lockScroll } from "../lib/smoothScroll";
 import { Link } from "./Link";
-import { Logo } from "./Logo";
 import { MagneticButton } from "./MagneticButton";
 import "./Navigation.css";
 
@@ -223,7 +222,6 @@ export function Navigation() {
       <header ref={header} className={`nav ${path === routes.inicio ? "nav--hero" : ""}`}>
         <div className="nav__bar">
           <Link to={routes.inicio} className="nav__brand" aria-label={`${brand.name}, inicio`}>
-            <Logo size={34} decorative shape="square" />
             {/* El wordmark del Hero, en versión horizontal: EXPERIENCE (serif) + Design (script) */}
             <span className="nav__name" aria-hidden="true">
               <span className="nav__wm nav__wm--experience" />
@@ -284,7 +282,10 @@ export function Navigation() {
         hidden={!open}
       >
         <div className="menu__top">
-          <Logo size={34} shape="square" />
+          <span className="nav__name" role="img" aria-label={brand.name}>
+            <span className="nav__wm nav__wm--experience" />
+            <span className="nav__wm nav__wm--design" />
+          </span>
           <button className="menu__close" onClick={() => setOpen(false)} aria-label="Cerrar menú">
             <X size={22} weight="light" />
           </button>

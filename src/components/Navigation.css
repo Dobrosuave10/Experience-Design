@@ -74,8 +74,8 @@
 .nav__name {
   display: inline-flex;
   align-items: flex-end;
-  gap: 7px;
-  height: 22px;
+  gap: 8px;
+  height: 26px;
   color: currentColor;
 }
 .nav__links {
@@ -203,15 +203,16 @@
 }
 .nav__wm--experience {
   --wm: url("/img/nav-wordmark-experience.png");
-  width: 79px; /* 820 × 133 */
-  height: 12.8px;
+  /* sin la "E." al lado, el wordmark lleva la marca solo: algo más grande */
+  width: 96px; /* 820 × 133 */
+  height: 15.6px;
   margin-bottom: 3px;
 }
 .nav__wm--design {
   --wm: url("/img/nav-wordmark-design.png");
-  width: 42px; /* 439 × 225 */
-  height: 21.5px;
-  margin-bottom: -5px;
+  width: 51px; /* 439 × 225 */
+  height: 26.1px;
+  margin-bottom: -6px;
 }
 
 /* ---------- Navegación: silenciosa ---------- */
@@ -297,12 +298,12 @@ html[data-tone="warm"] .nav__cta .mbtn--line .mbtn__label {
     align-items: center;
   }
   .nav__wm--experience {
-    width: 68px;
-    height: 11px;
+    width: 84px;
+    height: 13.6px;
   }
   .nav__wm--design {
-    width: 36px;
-    height: 18.5px;
+    width: 45px;
+    height: 23px;
   }
 }
 

@@ -2,12 +2,13 @@ import * as THREE from "three";
 import { makeSealMaps } from "./logoTexture";
 
 /**
- * El sello de Experience Design como objeto: una placa cuadrada de esquinas suaves,
- * fina, de bronce/terracota satinado con la "E." grabada. Una sola especificación
- * para la apertura (que lo arma con fragmentos) y para el Hero (donde queda instalado).
+ * El sello de Experience Design como objeto: un cuño circular, fino, de bronce/terracota
+ * satinado, con la "E." grabada al centro, un doble anillo de cordón y el lema en
+ * microtexto alrededor. Una sola especificación para la apertura (que lo arma con
+ * fragmentos) y para el Hero (donde queda instalado).
  */
 export const SEAL = {
-  /** Medio lado de la placa (unidades de escena). */
+  /** Radio del cuño (unidades de escena). */
   half: 0.78,
   radius: 0.15,
   /** Cuerpo fino y chaflán preciso: presencia sin volumen de moneda. */
@@ -49,9 +50,46 @@ export function plateGeometry(shape: THREE.Shape, bevel = SEAL.bevel, depth = SE
   return g;
 }
 
+/** Segmentos del contorno: el canto se lee como un círculo limpio incluso de cerca. */
+const CIRCLE_SEGMENTS = 128;
+
+function circlePoints(r: number) {
+  return Array.from({ length: CIRCLE_SEGMENTS }, (_, i) => {
+    const a = (i / CIRCLE_SEGMENTS) * Math.PI * 2;
+    return new THREE.Vector2(Math.cos(a) * r, Math.sin(a) * r);
+  });
+}
+
 export function sealShape() {
-  const h = SEAL.half - SEAL.bevel;
-  return roundedRect(-h, -h, h, h, SEAL.radius);
+  return new THREE.Shape(circlePoints(SEAL.half - SEAL.bevel));
+}
+
+/**
+ * Fragmento del cuño: la celda (x0,y0)-(x1,y1) recortada por el círculo
+ * (Sutherland–Hodgman: ambos son convexos). null si la celda queda fuera.
+ */
+export function circleCellShape(x0: number, y0: number, x1: number, y1: number) {
+  const r = SEAL.half - SEAL.bevel;
+  let poly = [new THREE.Vector2(x0, y0), new THREE.Vector2(x1, y0), new THREE.Vector2(x1, y1), new THREE.Vector2(x0, y1)];
+  const clip = circlePoints(r);
+  for (let i = 0; i < clip.length && poly.length; i++) {
+    const a = clip[i], b = clip[(i + 1) % clip.length];
+    const inside = (p: THREE.Vector2) => (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x) >= 0;
+    const cross = (p: THREE.Vector2, q: THREE.Vector2) => {
+      const d1 = new THREE.Vector2(q.x - p.x, q.y - p.y), d2 = new THREE.Vector2(b.x - a.x, b.y - a.y);
+      const t = ((a.x - p.x) * d2.y - (a.y - p.y) * d2.x) / (d1.x * d2.y - d1.y * d2.x);
+      return new THREE.Vector2(p.x + d1.x * t, p.y + d1.y * t);
+    };
+    const out: THREE.Vector2[] = [];
+    poly.forEach((p, j) => {
+      const q = poly[(j + 1) % poly.length];
+      const pin = inside(p), qin = inside(q);
+      if (pin) out.push(p);
+      if (pin !== qin) out.push(cross(p, q));
+    });
+    poly = out;
+  }
+  return poly.length >= 3 ? new THREE.Shape(poly) : null;
 }
 
 /**

@@ -87,8 +87,69 @@ export async function makeLogoCanvases() {
   return { color, relief };
 }
 
+/** Lema que rodea la "E." del cuño, en microtexto. */
+const SEAL_RING_TEXT = "EXPERIENCE DESIGN · VIVIRLO · CUESTIONARLO · HACERLO PROPIO · ";
+/** Escala de la "E." dentro del cuño: deja aire para los anillos y el microtexto. */
+const MARK_SCALE = 0.7;
+
 /**
- * Sello cuadrado de bronce: mapas para la cara de la placa.
+ * Anillos del cuño, en fracciones del lado: filete exterior, cordón (trazos
+ * oblicuos entre dos filetes), banda de microtexto y filete interior.
+ */
+function drawSealRings(ctx: CanvasRenderingContext2D, size: number, fill: string, blur: number) {
+  const c = size / 2;
+  ctx.save();
+  if (blur) ctx.filter = `blur(${blur}px)`;
+  ctx.strokeStyle = fill;
+  ctx.fillStyle = fill;
+  const ring = (r: number, w: number) => {
+    ctx.lineWidth = w * size;
+    ctx.beginPath();
+    ctx.arc(c, c, r * size, 0, Math.PI * 2);
+    ctx.stroke();
+  };
+  ring(0.468, 0.006);
+  ring(0.426, 0.0035);
+  // cordón: trazos oblicuos, como el canto de una moneda acuñada
+  const n = 120;
+  ctx.lineWidth = 0.0042 * size;
+  ctx.lineCap = "round";
+  for (let i = 0; i < n; i++) {
+    const a0 = (i / n) * Math.PI * 2;
+    const a1 = a0 + (Math.PI * 2) / n * 0.9;
+    ctx.beginPath();
+    ctx.moveTo(c + Math.cos(a0) * 0.433 * size, c + Math.sin(a0) * 0.433 * size);
+    ctx.lineTo(c + Math.cos(a1) * 0.457 * size, c + Math.sin(a1) * 0.457 * size);
+    ctx.stroke();
+  }
+  ring(0.334, 0.0035);
+  // microtexto: cada letra sobre la circunferencia, leyendo en sentido horario desde arriba
+  const fontPx = size * 0.036;
+  ctx.font = `500 ${fontPx}px "Bodoni Moda Variable", "Times New Roman", serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  const r = 0.38 * size;
+  const chars = Array.from(SEAL_RING_TEXT);
+  const widths = chars.map((ch) => ctx.measureText(ch).width);
+  const total = widths.reduce((a, w) => a + w, 0);
+  // reparte el espacio sobrante como tracking, para que el lema cierre la vuelta exacta
+  const track = (Math.PI * 2 * r - total) / chars.length;
+  let a = -Math.PI / 2;
+  chars.forEach((ch, i) => {
+    const step = (widths[i] + track) / r;
+    a += step / 2;
+    ctx.save();
+    ctx.translate(c + Math.cos(a) * r, c + Math.sin(a) * r);
+    ctx.rotate(a + Math.PI / 2);
+    ctx.fillText(ch, 0, 0);
+    ctx.restore();
+    a += step / 2;
+  });
+  ctx.restore();
+}
+
+/**
+ * Cuño de bronce: mapas para la cara de la placa.
  *  - color: bronce/terracota con una pátina amplia y tenue (sin moteado ni grano visible).
  *  - normal: "E." grabada con poca profundidad y bisel ancho, desde un mapa de alturas.
  *  - rough: satinado parejo; el fondo del grabado, apenas más mate.
@@ -106,7 +167,7 @@ export async function makeSealMaps(size = 1024, markSrc?: string) {
   } catch {
     /* serif de respaldo */
   }
-  const font = `500 ${size * 0.6}px "Bodoni Moda Variable", "Times New Roman", serif`;
+  const font = `500 ${size * 0.6 * MARK_SCALE}px "Bodoni Moda Variable", "Times New Roman", serif`;
   h.font = font;
   h.textAlign = "center";
   h.textBaseline = "alphabetic";
@@ -133,13 +194,15 @@ export async function makeSealMaps(size = 1024, markSrc?: string) {
       tc.fillStyle = fill;
       tc.fillRect(0, 0, size, size);
       tc.globalCompositeOperation = "destination-in";
-      tc.drawImage(mark, 0, 0, size, size);
+      const ms = size * MARK_SCALE, mo = (size - ms) / 2;
+      tc.drawImage(mark, mo, mo, ms, ms);
       ctx.drawImage(t, 0, 0);
     } else {
       ctx.fillStyle = fill;
       ctx.fillText("E.", gx, gy);
     }
     ctx.filter = "none";
+    drawSealRings(ctx, size, fill, blur);
   };
 
   // Altura: superficie blanca, grabado gris con bisel por desenfoque

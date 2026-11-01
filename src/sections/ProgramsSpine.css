@@ -303,8 +303,28 @@
   border-top: 1px solid var(--ed-earth);
   border-bottom: 0;
 }
+.spine__next-list {
+  display: grid;
+}
+.spine__next-list .spine__next-line + .spine__next-line {
+  border-top-color: rgba(0, 0, 0, 0.14);
+}
 .spine__next .spine__place {
   color: var(--ed-earth);
+}
+/* Ciudades recorridas: pasan a terracota al acercarse, sin saltos */
+.spine__city {
+  display: inline-block;
+  cursor: default;
+  transition: color 0.6s var(--ease-out);
+}
+.spine__city:hover,
+.spine__city:focus-visible {
+  color: var(--ed-earth);
+}
+.spine__city:focus-visible {
+  outline: 1px solid var(--ed-earth);
+  outline-offset: 4px;
 }
 
 .spine__formats {
