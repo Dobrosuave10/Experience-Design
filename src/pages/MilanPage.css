@@ -1,0 +1,172 @@
+/*
+ * Milán: página compacta. Títulos a todo el ancho (una o dos líneas), menos aire
+ * vertical y retículas de 2–3 columnas. Sólo afecta a esta página: São Paulo
+ * comparte los mismos componentes.
+ */
+
+/* Ritmo vertical más corto */
+.milan-page .md {
+  padding-block: clamp(56px, 8vh, 104px);
+}
+.milan-page .md--cta {
+  padding-block: 0 clamp(48px, 7vh, 88px);
+}
+.milan-page .dest-intro {
+  padding-block: clamp(72px, 11vh, 140px) clamp(48px, 7vh, 88px);
+}
+.milan-page .itin,
+.milan-page .gallery,
+.milan-page .quotes {
+  padding-block: clamp(56px, 8vh, 104px);
+}
+
+/* Títulos a todo el ancho, en una o dos líneas */
+.milan-page .md__head {
+  max-width: none;
+  margin-bottom: clamp(24px, 4vh, 44px);
+}
+.milan-page .md__title,
+.milan-page .itin__title,
+.milan-page .gallery__title {
+  font-size: clamp(2.1rem, 3.8vw, 4rem);
+  line-height: 1.02;
+  max-width: none;
+  text-wrap: balance;
+}
+.milan-page .md__lead {
+  margin-bottom: clamp(24px, 4vh, 40px);
+}
+
+/* Itinerario: encabezado arriba y los seis días en tres columnas */
+.milan-page .itin__head {
+  grid-column: 1 / -1;
+  position: static;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  column-gap: clamp(24px, 4vw, 64px);
+}
+.milan-page .itin__head .itin__label {
+  grid-column: 1 / -1;
+}
+.milan-page .itin__body {
+  justify-self: start;
+}
+.milan-page .itin__days {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(24px, 3vw, 48px);
+  border-top: 0;
+}
+.milan-page .itin__day {
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 22px 0 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 0;
+}
+.milan-page .itin__when {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+.milan-page .itin__note {
+  grid-column: 1 / -1;
+  max-width: 70ch;
+}
+
+/* Capítulos: tres por fila, número, foto y texto apilados */
+.milan-page .rooms {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(40px, 6vh, 72px) clamp(20px, 2.4vw, 40px);
+  padding-bottom: clamp(64px, 10vh, 120px);
+}
+.milan-page .room,
+.milan-page .room--right {
+  grid-template-columns: 1fr;
+  row-gap: 14px;
+  align-items: start;
+}
+.milan-page .room__n,
+.milan-page .room__frame,
+.milan-page .room__text,
+.milan-page .room--right .room__n,
+.milan-page .room--right .room__frame,
+.milan-page .room--right .room__text {
+  grid-column: 1;
+  grid-row: auto;
+  justify-self: start;
+}
+.milan-page .room .room__frame,
+.milan-page .room--right .room__frame {
+  justify-self: stretch;
+  width: 100%;
+}
+.milan-page .room__n {
+  font-size: clamp(2.4rem, 3.6vw, 3.8rem);
+}
+.milan-page .room__title {
+  font-size: clamp(1.5rem, 1.9vw, 2rem);
+}
+
+/* Galería: cinco columnas en escritorio ancho, menos alto total */
+@media (min-width: 1200px) {
+  .milan-page .gallery__grid {
+    columns: 5;
+  }
+}
+
+/* Cierre: menos separación antes del botón final */
+.milan-page .md__close {
+  margin-top: clamp(32px, 5vh, 56px);
+}
+
+/* Viñetas de las cajas (Nuevo en 2027, Requisito, No incluye) */
+.md__bullets {
+  display: grid;
+  gap: 8px;
+}
+.md__bullets li {
+  position: relative;
+  padding-left: 18px;
+}
+.md__bullets li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.md__box--accent .md__bullets li::before {
+  background: var(--paper);
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .milan-page .md__items--3,
+  .milan-page .rooms,
+  .milan-page .itin__days {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 899px) {
+  .milan-page .itin__head {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+  }
+  .milan-page .itin__days,
+  .milan-page .rooms {
+    grid-template-columns: 1fr;
+  }
+  .milan-page .md__items--3 {
+    gap: 22px;
+  }
+}
+/* El botón fijo no tapa el final de la página en móvil */
+@media (max-width: 599px) {
+  .milan-page {
+    padding-bottom: 8px;
+  }
+}

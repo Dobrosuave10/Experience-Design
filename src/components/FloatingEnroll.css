@@ -1,0 +1,87 @@
+/* Botón fijo al formulario: píldora terracota, abajo a la derecha */
+.fenroll {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: calc(var(--z-nav, 50) - 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--clay, #b7664f);
+  color: var(--paper, #f5f1ea);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow:
+    0 2px 6px rgba(40, 24, 14, 0.18),
+    0 16px 34px -14px rgba(120, 52, 24, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.6s var(--ease-out),
+    visibility 0s linear 0.6s,
+    background-color 0.4s var(--ease-out);
+}
+.fenroll.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+  /* un solo latido, suave, al aparecer */
+  animation: fenroll-pulse 1.8s var(--ease-out) 0.5s 1;
+}
+.fenroll svg {
+  transition: transform 0.5s var(--ease-out);
+}
+.fenroll:hover,
+.fenroll:focus-visible {
+  background: var(--ed-earth, #964c23);
+}
+.fenroll:hover svg,
+.fenroll:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+.fenroll:focus-visible {
+  outline: 2px solid var(--paper, #f5f1ea);
+  outline-offset: 3px;
+}
+@keyframes fenroll-pulse {
+  0% {
+    box-shadow:
+      0 2px 6px rgba(40, 24, 14, 0.18),
+      0 16px 34px -14px rgba(120, 52, 24, 0.55),
+      0 0 0 0 rgba(183, 102, 79, 0.55);
+  }
+  100% {
+    box-shadow:
+      0 2px 6px rgba(40, 24, 14, 0.18),
+      0 16px 34px -14px rgba(120, 52, 24, 0.55),
+      0 0 0 18px rgba(183, 102, 79, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fenroll,
+  .fenroll.is-visible {
+    animation: none;
+    transform: none;
+  }
+}
+/* Móvil: centrado abajo, ancho cómodo para el pulgar, respetando la zona segura */
+@media (max-width: 599px) {
+  .fenroll {
+    left: 50%;
+    right: auto;
+    bottom: max(16px, calc(env(safe-area-inset-bottom) + 10px));
+    transform: translate(-50%, 16px);
+    white-space: nowrap;
+  }
+  .fenroll.is-visible {
+    transform: translate(-50%, 0);
+  }
+}

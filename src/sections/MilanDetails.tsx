@@ -68,28 +68,29 @@ export function MilanIncludes({ tone = "warm" }: { tone?: Tone }) {
       <div className="wrap">
         <Head id="md-includes" label={inc.label} title={inc.title} />
         <p className="md__lead">{inc.body}</p>
-        <Items items={inc.items} cols={2} />
+        <Items items={inc.items} cols={3} />
         <div className="md__boxes">
-          <div className="md__box md__box--accent">
-            <p className="label">{inc.newLabel}</p>
-            <p>{inc.newText}</p>
-          </div>
-          <div className="md__box">
-            <p className="label">{inc.requirementLabel}</p>
-            <p>{inc.requirement}</p>
-          </div>
-          <div className="md__box">
-            <p className="label">{inc.excludesLabel}</p>
-            <ul className="md__plain">
-              {inc.excludes.map((x) => (
-                <li key={x}>{x}</li>
-              ))}
-            </ul>
-            <p className="muted md__small">{inc.excludesNote}</p>
-          </div>
+          <Box label={inc.newLabel} items={inc.newItems} accent />
+          <Box label={inc.requirementLabel} items={inc.requirements} />
+          <Box label={inc.excludesLabel} items={inc.excludes} note={inc.excludesNote} />
         </div>
       </div>
     </section>
+  );
+}
+
+/** Caja con viñetas: Nuevo en 2027, Requisito y No incluye. */
+function Box({ label, items, note, accent = false }: { label: string; items: string[]; note?: string; accent?: boolean }) {
+  return (
+    <div className={`md__box ${accent ? "md__box--accent" : ""}`}>
+      <p className="label">{label}</p>
+      <ul className="md__bullets">
+        {items.map((x) => (
+          <li key={x}>{x}</li>
+        ))}
+      </ul>
+      {note && <p className="muted md__small">{note}</p>}
+    </div>
   );
 }
 
@@ -147,7 +148,7 @@ export function MilanSteps({ tone = "paper" }: { tone?: Tone }) {
         <Items items={s.items} />
         <div className="md__close">
           <p className="md__closing serif">{s.closing}</p>
-          <EnrollButton className="md__enroll">{milan.cta}</EnrollButton>
+          <EnrollButton className="md__enroll md__enroll--final">{milan.cta}</EnrollButton>
           <ul className="md__channels">
             {wa && (
               <li>

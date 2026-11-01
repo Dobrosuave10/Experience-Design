@@ -316,6 +316,8 @@ export const milan = {
     { image: "venecia-salute", alt: "La basílica de Santa Maria della Salute en Venecia, vista desde el agua, con una góndola en primer plano" },
   ] as { image: ImageName; alt: string }[],
   cta: "Quiero ser parte",
+  /** Botón fijo de la página de Milán. */
+  floatingCta: "Llena el formulario",
 };
 
 /*
@@ -410,12 +412,12 @@ export const milan2027 = {
       { name: "Encuentros del grupo", text: "Antes de viajar, para conocerse y llegar a Milán como grupo." },
     ],
     newLabel: "Nuevo en 2027",
-    newText: "Fotógrafo del grupo, transfer al aeropuerto en Santiago, encuentros antes de viajar, eSIM Holafly y productos Experience Design.",
+    newItems: ["Fotógrafo del grupo", "Transfer al aeropuerto en Santiago", "Encuentros antes de viajar", "eSIM Holafly", "Productos Experience Design"],
     requirementLabel: "Requisito",
-    requirement: "Contar con un seguro médico de viaje, por tu seguridad y la del grupo.",
+    requirements: ["Contar con un seguro médico de viaje, por tu seguridad y la del grupo.", "Alojarse cerca de Porta Venezia, para moverse junto al grupo."],
     excludesLabel: "No incluye",
-    excludes: ["Vuelos", "Alojamiento", "Alimentación", "Traslados entre el aeropuerto de Milán y la ciudad", "Entradas a visitas turísticas, como el Duomo", "Cualquier servicio que no figure en esta lista"],
-    excludesNote: "Vuelos y alojamiento los organiza cada persona según su ciudad de origen. Si lo necesitas, te recomendamos una agencia de viajes.",
+    excludes: ["Ticket de viaje", "Alojamiento", "Alimentación", "Traslados entre el aeropuerto de Milán y la ciudad", "Entradas a visitas turísticas", "Cualquier servicio que no figure en esta lista"],
+    excludesNote: "El ticket de viaje y el alojamiento los organiza cada persona según su ciudad de origen. Si lo necesitas, te recomendamos una agencia de viajes.",
   },
   /** Testimonios textuales de la ficha oficial. */
   testimonials: {
