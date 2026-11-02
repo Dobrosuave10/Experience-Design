@@ -158,10 +158,10 @@ export const images = {
     "h": 665
   },
   "christian": {
-    "src": "/img/christian-706.webp",
-    "srcSet": "/img/christian-480.webp 480w, /img/christian-706.webp 706w",
-    "w": 706,
-    "h": 878
+    "src": "/img/christian-780.webp",
+    "srcSet": "/img/christian-480.webp 480w, /img/christian-780.webp 780w",
+    "w": 780,
+    "h": 1170
   },
   "danae": {
     "src": "/img/danae-780.webp",
