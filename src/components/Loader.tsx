@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
+import { isLite, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
 import { getSealTarget, markReady } from "../lib/events";
 import { lockScroll } from "../lib/smoothScroll";
 import { Logo } from "./Logo";
@@ -16,13 +16,17 @@ const SCENE_TIMEOUT = 2200;
  * rasante recorre la placa y el sello viaja hasta su lugar en el Hero mientras la
  * penumbra se disuelve. Es el mismo objeto (src/three/seal.ts) que queda en el Hero.
  * Con movimiento reducido o sin WebGL: el sello quieto y un fundido breve.
+ * En teléfonos y táctiles: el sello fijo desde el primer cuadro, que entra suave y se funde
+ * (~1,3 s). Ahí three.js no se descarga.
  * Clic o tecla: acelera. Capa aislada: sólo bloquea el scroll y avisa (markReady).
  */
 export function Loader() {
   const ref = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const [gone, setGone] = useState(false);
-  const [staticSeal, setStaticSeal] = useState(false);
+  // En teléfonos el sello está desde el primer cuadro: nunca una pantalla vacía
+  const [lite] = useState(() => isLite() && !prefersReducedMotion());
+  const [staticSeal, setStaticSeal] = useState(lite);
 
   useEffect(() => {
     const el = ref.current!;
@@ -60,6 +64,25 @@ export function Loader() {
     if (prefersReducedMotion() || !webglAvailable() || !canvas.current) {
       playStatic(true);
       return () => window.clearTimeout(cap);
+    }
+
+    // Teléfonos: el sello entra (CSS, 0,6 s) y la capa se funde; los clics vuelven al terminar
+    if (lite) {
+      let fadeTween: gsap.core.Tween | null = null;
+      const fade = () => {
+        if (fadeTween) return;
+        fadeTween = gsap.to(el, { opacity: 0, duration: 0.6, ease: "power2.inOut", onStart: release, onComplete: finish });
+      };
+      const t0 = performance.now();
+      cap = window.setTimeout(fade, 900);
+      document.fonts.ready.then(() => {
+        window.clearTimeout(cap);
+        cap = window.setTimeout(fade, Math.max(0, 700 - (performance.now() - t0)));
+      });
+      return () => {
+        window.clearTimeout(cap);
+        fadeTween?.kill();
+      };
     }
 
     let scene: OpeningScene | null = null;
@@ -125,7 +148,7 @@ export function Loader() {
       <div className="opening__bg" aria-hidden="true" />
       <canvas ref={canvas} className="opening__canvas" aria-hidden="true" />
       {staticSeal && (
-        <div className="opening__static" aria-hidden="true">
+        <div className={`opening__static ${lite ? "opening__static--enter" : ""}`} aria-hidden="true">
           <Logo shape="seal" size="min(36vw, 200px)" decorative />
         </div>
       )}

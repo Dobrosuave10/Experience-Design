@@ -32,3 +32,14 @@
 .opening__static .logo {
   color: var(--paper);
 }
+
+/* Teléfonos: el sello fijo entra suave (escala y opacidad) */
+.opening__static--enter .logo {
+  animation: opening-seal-in 0.6s var(--ease-out) both;
+}
+@keyframes opening-seal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
