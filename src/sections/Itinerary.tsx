@@ -7,7 +7,7 @@ import { RevealText } from "../components/RevealText";
 import "./Itinerary.css";
 
 /** Milán 2027, día por día. El encabezado queda fijo mientras pasan los días. */
-export function Itinerary() {
+export function Itinerary({ tone = "warm" }: { tone?: string }) {
   const ref = useRef<HTMLElement>(null);
   const it = milan.itinerary;
 
@@ -23,7 +23,7 @@ export function Itinerary() {
   );
 
   return (
-    <section ref={ref} id="itinerario" className="itin section" data-tone="warm" aria-labelledby="itin-title">
+    <section ref={ref} id="itinerario" className="itin section" data-tone={tone} aria-labelledby="itin-title">
       <div className="wrap itin__grid">
         <header className="itin__head">
           <p className="label itin__label">{it.label}</p>

@@ -146,7 +146,7 @@ export function Hero() {
           />
           <div className="hero__foot">
             <div className="hero__fade">
-              <MagneticButton href={routes.milan} onClick={() => navigate(routes.milan, { travel: milan.city })}>
+              <MagneticButton href={routes.milan} onClick={() => navigate(routes.milan, { travel: milan.name })}>
                 {hero.cta}
               </MagneticButton>
             </div>

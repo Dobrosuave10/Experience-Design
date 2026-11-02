@@ -47,7 +47,7 @@ export const inscripcion = {
 /** Destino de todo botón de inscripción: el formulario o, si falta, WhatsApp. Siempre en pestaña nueva. */
 export function inscripcionHref(): string {
   if (inscripcion.googleFormUrl) return inscripcion.googleFormUrl;
-  if (brand.whatsapp) return `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hola, quiero ser parte de Milán 2027")}`;
+  if (brand.whatsapp) return `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hola, quiero ser parte de Milano Design Week 2027")}`;
   return brand.instagram.url;
 }
 
@@ -97,7 +97,7 @@ export const nav: NavItem[] = [
     label: "Destinos",
     href: routes.destinos,
     children: [
-      { label: "Milán", note: "Salone del Mobile", href: routes.milan },
+      { label: "Milano Design Week", note: "Salone del Mobile", href: routes.milan },
       { label: "São Paulo", note: "CASACOR", href: routes.saoPaulo },
     ],
   },
@@ -112,7 +112,7 @@ export const pageTitles: Record<string, string> = {
   [routes.formacion]: "Formación · Programas · Experience Design",
   [routes.marcaPersonal]: "Marca personal · Programas · Experience Design",
   [routes.destinos]: "Destinos · Experience Design",
-  [routes.milan]: "Milán, Salone del Mobile · Destinos · Experience Design",
+  [routes.milan]: "Milano Design Week, Salone del Mobile · Destinos · Experience Design",
   [routes.saoPaulo]: "São Paulo, CASACOR · Destinos · Experience Design",
   [routes.contacto]: "Contacto · Experience Design",
 };
@@ -138,11 +138,11 @@ export const pageDescriptions: Record<string, string> = {
   [routes.destinos]:
     "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias que ya recorrimos.",
   [routes.milan]:
-    "Milán 2027, Salone del Mobile.Milano. Seis días, del 12 al 17 de abril de 2027: el Salone, el Fuorisalone, el Istituto Marangoni y el Lago di Como.",
+    "Milano Design Week 2027, Salone del Mobile.Milano. Seis días, del 12 al 17 de abril de 2027: el Salone, el Fuorisalone, el Istituto Marangoni y el Lago di Como.",
   [routes.saoPaulo]:
     "São Paulo, CASACOR. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
   [routes.contacto]:
-    "Sé parte de Milán 2027, del 12 al 17 de abril. Completar el formulario es el primer paso. Te respondemos personalmente.",
+    "Sé parte de Milano Design Week 2027, del 12 al 17 de abril. Completar el formulario es el primer paso. Te respondemos personalmente.",
 };
 
 /** Cada página termina invitando a la siguiente: un mismo libro, distintos capítulos. */
@@ -153,7 +153,7 @@ export const chapterOrder: { href: string; label: string }[] = [
   { href: routes.formacion, label: "Formación" },
   { href: routes.marcaPersonal, label: "Marca personal" },
   { href: routes.destinos, label: "Destinos" },
-  { href: routes.milan, label: "Milán" },
+  { href: routes.milan, label: "Milano Design Week" },
   { href: routes.saoPaulo, label: "São Paulo" },
   { href: routes.contacto, label: "Contacto" },
 ];
@@ -162,7 +162,7 @@ export const hero = {
   wordmark: { ink: "wordmark-ink", paper: "wordmark-paper" } as const,
   titleA: "Abrir la mirada",
   titleB: "hacia nuevas posibilidades.",
-  cta: "Descubre Milán 2027",
+  cta: "Descubre Milano Design Week",
 };
 
 export const idea = {
@@ -185,12 +185,12 @@ export const programsSpine = {
       name: "Experiencias",
       text: "Viajes curados a las mejores ferias y eventos exclusivos en las capitales del diseño mundial.",
       href: routes.destinos as string | undefined,
-      cta: "Milán 2027" as string | undefined,
+      cta: "Milano Design Week 2027" as string | undefined,
       /** El CTA de Experiencias lleva al formulario de inscripción. */
       enroll: true,
       main: { image: "salone-cocina-bosque" as ImageName, alt: "Salone del Mobile 2026: visitantes en un stand de cocina rodeado por una pantalla envolvente con un bosque" },
       detail: { image: "casacor-arco-verde-mural" as ImageName, alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
-      destinations: ["São Paulo", "Milán", "Colonia", "Buenos Aires"],
+      destinations: ["São Paulo", "Milano Design Week", "Colonia", "Buenos Aires"],
       /** Sin fecha cuando no la tenemos: no se inventa. */
       next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril" }, { place: "CASACOR São Paulo" }] as { place: string; note?: string }[] },
     },
@@ -221,6 +221,8 @@ export const programsSpine = {
 
 export const milan = {
   city: "Milán",
+  /** Nombre de la experiencia en el resto del sitio (el hero de la página sigue con `city`). */
+  name: "Milano Design Week",
   year: "2027",
   event: "Milan Design Week",
   fair: "Salone del Mobile",
@@ -280,7 +282,7 @@ export const milan = {
   ],
   /** Itinerario 2027, de la ficha de producto oficial (Milan_2027_Ficha_de_producto.pdf). */
   itinerary: {
-    label: "Milán 2027",
+    label: "Milano Design Week 2027",
     title: "Una semana en Milán.",
     body: "Seis días, de lunes a sábado, del 12 al 17 de abril de 2027. Lo más y lo mejor.",
     days: [
@@ -319,6 +321,23 @@ export const milan = {
   /** Botón fijo de la página de Milán. */
   floatingCta: "Llena el formulario",
 };
+
+/**
+ * Los seis capítulos de la página de Milano Design Week, con su índice fijo.
+ * `short`: el nombre en el índice; `title`: el del encabezado del capítulo.
+ */
+export const milanChapters = {
+  label: "Capítulos de Milano Design Week",
+  items: [
+    { id: "la-experiencia", n: "01", short: "La experiencia", title: "La experiencia", sub: "Vivir el diseño donde nace.", tone: "paper" },
+    { id: "el-programa", n: "02", short: "El programa", title: "El programa", sub: "El itinerario día por día y los seis escenarios.", tone: "sand" },
+    { id: "que-incluye", n: "03", short: "Qué incluye", title: "Qué incluye", sub: "Lo que cubre el programa, lo nuevo, el requisito y lo que no incluye.", tone: "paper" },
+    { id: "como-se-vivio", n: "04", short: "Cómo se vivió", title: "Cómo se vivió en 2026", sub: "La edición 2026, en capítulos y fotos reales.", tone: "ink" },
+    { id: "testimonios", n: "05", short: "Testimonios", title: "Testimonios", sub: "En sus propias palabras.", tone: "sand" },
+    { id: "inscribete", n: "06", short: "Inscríbete", title: "Inscríbete", sub: "Cinco pasos para ser parte.", tone: "paper" },
+  ] as const,
+};
+export type MilanChapterId = (typeof milanChapters.items)[number]["id"];
 
 /*
  * Borrador de precios de Milán 2027 (ficha oficial), sin publicar por ahora.
@@ -451,7 +470,7 @@ export const milan2027 = {
   },
   steps: {
     label: "Siguiente paso",
-    title: "Cómo ser parte de Milán 2027.",
+    title: "Cómo ser parte de Milano Design Week 2027.",
     items: [
       { name: "Conversemos", text: "Escríbenos por WhatsApp, Instagram o correo y resolvemos tus dudas." },
       { name: "Reserva o paga", text: "Reserva tu cupo o paga por anticipado: el primer paso para no perder tu lugar." },
@@ -459,7 +478,7 @@ export const milan2027 = {
       { name: "Conoce al grupo", text: "Al equipo de Experience Design y a quienes viajarán contigo." },
       { name: "Haz tus maletas", text: "Milán te espera." },
     ],
-    closing: "No esperes a que te lo cuenten. Vive el diseño donde nace: sé parte de Milán 2027.",
+    closing: "No esperes a que te lo cuenten. Vive el diseño donde nace: sé parte de Milano Design Week 2027.",
     motto: "Vivirlo. Cuestionarlo. Hacerlo propio.",
   },
 };
@@ -826,14 +845,14 @@ export const destinations = {
     {
       id: "milan",
       n: "01",
-      name: "Milán",
+      name: "Milano Design Week",
       event: "Milan Design Week",
       sub: "Salone del Mobile",
       href: routes.milan,
       when: "12 al 17 de abril de 2027",
       done: "Abril de 2026",
       text: "La semana en que una ciudad entera se vuelve exposición.",
-      cta: "Entrar a Milán",
+      cta: "Entrar a Milano Design Week",
       /** Inicio: la etiqueta del selector y su carrusel. */
       homeLabel: "Salone del Mobile",
       collage: [
@@ -931,7 +950,7 @@ export const saoPaulo = {
 export const interests = [
   { id: "formacion", label: "Formación" },
   { id: "marca", label: "Marca personal" },
-  { id: "milan", label: "Milán" },
+  { id: "milan", label: "Milano Design Week" },
   { id: "sao-paulo", label: "São Paulo" },
   { id: "colaboraciones", label: "Colaboraciones" },
   { id: "otro", label: "Otro" },
@@ -940,8 +959,8 @@ export type InterestId = (typeof interests)[number]["id"];
 
 /** Contacto: el foco es la inscripción a Milán 2027 por el formulario. */
 export const enroll = {
-  label: "Milán 2027 · 12 al 17 de abril",
-  title: ["Sé parte de", "Milán 2027."],
+  label: "Milano Design Week 2027 · 12 al 17 de abril",
+  title: ["Sé parte de", "Milano Design Week 2027."],
   body: "Completar el formulario es el primer paso. Te respondemos personalmente.",
   stepsLabel: "Cómo sigue",
   steps: ["Completa el formulario", "Te contactamos", "Reserva tu cupo"],

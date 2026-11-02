@@ -71,15 +71,15 @@ export function Milan() {
   );
 }
 
-export function MilanIntro() {
-  return <DestinationIntro statementA={milan.statementA} statementB={milan.statementB} tone="ink" />;
+export function MilanIntro({ tone = "ink" }: { tone?: string }) {
+  return <DestinationIntro statementA={milan.statementA} statementB={milan.statementB} tone={tone} />;
 }
 
 /** Capítulos: la ciudad en vertical, como la casa de São Paulo. */
-export function MilanRooms() {
+export function MilanRooms({ tone = "ink" }: { tone?: string }) {
   return (
     <section className="milan" aria-label="Capítulos">
-      <Rooms rooms={milan.chapters} tone="ink" label="Capítulos" />
+      <Rooms rooms={milan.chapters} tone={tone} label="Capítulos" />
     </section>
   );
 }

@@ -1,0 +1,87 @@
+/* Índice de capítulos: barra delgada, fija bajo la navegación (o arriba si la navegación se oculta) */
+.chidx {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: calc(var(--z-nav, 50) - 2);
+  background: var(--bg);
+  border-block: 1px solid var(--line);
+  transition:
+    top 0.5s var(--ease-out),
+    background-color 0.9s var(--ease-out);
+}
+html:has(.nav.is-hidden) .chidx {
+  top: 0;
+}
+.chidx__inner {
+  display: flex;
+}
+.chidx__list {
+  display: flex;
+  gap: clamp(18px, 2.4vw, 40px);
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.chidx__list::-webkit-scrollbar {
+  display: none;
+}
+.chidx__list li {
+  flex: none;
+}
+.chidx__link {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: 48px;
+  padding-block: 15px;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color 0.4s var(--ease-out);
+}
+.chidx__n {
+  color: var(--accent);
+}
+.chidx__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+.chidx__link:hover,
+.chidx__link:focus-visible,
+.chidx__link.is-active {
+  color: var(--fg);
+}
+.chidx__link.is-active::after {
+  transform: scaleX(1);
+}
+.chidx__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+/* En escritorio ancho los seis caben repartidos en la barra */
+@media (min-width: 1200px) {
+  .chidx__list {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 599px) {
+  .chidx__link {
+    min-height: 44px;
+    padding-block: 14px;
+    font-size: 0.68rem;
+  }
+}

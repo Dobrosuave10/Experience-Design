@@ -23,10 +23,12 @@ export function initSmoothScroll() {
   };
 }
 
-export function scrollToTarget(target: string | HTMLElement) {
+/** `offset`: px que deja libres arriba (barra de navegación, índice fijo). */
+export function scrollToTarget(target: string | HTMLElement, offset = 0) {
   const el = typeof target === "string" ? document.querySelector<HTMLElement>(target) : target;
   if (!el) return;
-  if (lenis) lenis.scrollTo(el, { duration: 1.6 });
+  if (lenis) lenis.scrollTo(el, { duration: 1.6, offset: -offset });
+  else if (offset) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: prefersReducedMotion() ? "auto" : "smooth" });
   else el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
   // Mover el foco para teclado y lectores de pantalla
   el.setAttribute("tabindex", "-1");

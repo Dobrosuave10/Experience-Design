@@ -139,7 +139,7 @@ export function MilanCta({ tone = "paper", label = milan.cta, href }: { tone?: T
 export function MilanSteps({ tone = "paper" }: { tone?: Tone }) {
   const s = milan2027.steps;
   const wa = brand.whatsapp
-    ? `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hola, equipo de Experience Design. Quiero ser parte de Milán 2027.")}`
+    ? `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hola, equipo de Experience Design. Quiero ser parte de Milano Design Week 2027.")}`
     : null;
   return (
     <section className="md section" data-tone={tone} aria-labelledby="md-steps">
@@ -166,7 +166,7 @@ export function MilanSteps({ tone = "paper" }: { tone?: Tone }) {
             </li>
             {brand.email && (
               <li>
-                <a className="md__channel" href={`mailto:${brand.email}?subject=${encodeURIComponent("Milán 2027")}`}>
+                <a className="md__channel" href={`mailto:${brand.email}?subject=${encodeURIComponent("Milano Design Week 2027")}`}>
                   <EnvelopeSimple size={22} weight="light" aria-hidden />
                   {brand.email}
                 </a>

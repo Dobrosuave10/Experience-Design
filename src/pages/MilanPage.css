@@ -170,3 +170,41 @@
     padding-bottom: 8px;
   }
 }
+
+/* ---------- Capítulos ---------- */
+/* Cada capítulo abre igual: número grande, título en una línea y una frase */
+.chap {
+  position: relative;
+  color: var(--fg);
+}
+.chap__head {
+  display: grid;
+  gap: clamp(8px, 1.4vh, 14px);
+  padding-top: clamp(64px, 10vh, 120px);
+  padding-bottom: clamp(20px, 3vh, 32px);
+  border-bottom: 1px solid var(--line);
+  /* El enlace del índice deja el encabezado a la vista bajo la barra */
+  scroll-margin-top: calc(var(--nav-h) + 56px);
+}
+.chap__n {
+  font-size: clamp(3rem, 6.4vw, 6.2rem);
+  line-height: 0.9;
+  color: var(--accent);
+}
+.chap__title {
+  font-size: clamp(1.8rem, 7vw, 5.4rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+.chap__sub {
+  font-size: clamp(1.05rem, 0.4vw + 0.98rem, 1.3rem);
+  line-height: 1.45;
+  color: var(--muted);
+}
+/* La primera sección de cada capítulo arranca cerca del encabezado */
+.milan-page .chap__head + * {
+  padding-top: clamp(32px, 5vh, 56px);
+}
+.milan-page .chap__head + .dest-intro {
+  padding-bottom: 0;
+}
