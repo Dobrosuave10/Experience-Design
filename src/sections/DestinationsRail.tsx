@@ -60,12 +60,24 @@ export function DestinationsRail() {
   // así no compiten con la carga inicial de la página.
   const probe = useRef<HTMLSpanElement>(null);
   const [near, setNear] = useState(false);
+  // Se mira la posición en cada scroll (no un IntersectionObserver): la sonda no tiene alto y
+  // un scroll rápido la saltaba en un solo cuadro sin "cruzarla" (pasaba al volver con Atrás).
   useEffect(() => {
     const el = probe.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "0px" });
-    io.observe(el);
-    return () => io.disconnect();
+    const check = () => {
+      if (el.getBoundingClientRect().top > window.innerHeight) return;
+      setNear(true);
+      off();
+    };
+    const off = () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    check();
+    return off;
   }, []);
   const maps = useRef<Record<string, TravelMapHandle | null>>({});
   // Sin movimiento (o en móvil, donde no hay ruta) el mapa queda completo
