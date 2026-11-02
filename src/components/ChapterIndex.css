@@ -61,9 +61,12 @@ html:has(.nav.is-hidden) .chidx {
   transition: transform 0.5s var(--ease-out);
 }
 .chidx__link:hover,
-.chidx__link:focus-visible,
-.chidx__link.is-active {
+.chidx__link:focus-visible {
   color: var(--fg);
+}
+/* Capítulo activo: terracota y subrayado */
+.chidx__link.is-active {
+  color: var(--accent);
 }
 .chidx__link.is-active::after {
   transform: scaleX(1);

@@ -9,15 +9,21 @@ import { Gallery } from "../sections/Gallery";
 import { MilanAudience, MilanCta, MilanFit, MilanIncludes, MilanPlaces, MilanSteps } from "../sections/MilanDetails";
 import "./MilanPage.css";
 
-/** Encabezado común de cada capítulo: número grande, título en una línea y una frase. */
+/** Encabezado común de cada capítulo: número grande con "Capítulo 02 de 06", título en una línea y una frase. */
 function Chapter({ id, children }: { id: MilanChapterId; children: React.ReactNode }) {
   const c = milanChapters.items.find((x) => x.id === id)!;
+  const total = String(milanChapters.items.length).padStart(2, "0");
   return (
     <section id={id} className="chap" data-tone={c.tone} aria-labelledby={`${id}-title`}>
       <header className="chap__head wrap">
-        <span className="chap__n serif" aria-hidden="true">
-          <em>{c.n}</em>
-        </span>
+        <p className="chap__mark">
+          <span className="chap__n serif" aria-hidden="true">
+            <em>{c.n}</em>
+          </span>
+          <span className="chap__count">
+            Capítulo {c.n} de {total}
+          </span>
+        </p>
         <h2 id={`${id}-title`} className="chap__title display">
           <span className="sr-only">{c.n} </span>
           {c.title}
@@ -32,9 +38,10 @@ function Chapter({ id, children }: { id: MilanChapterId; children: React.ReactNo
 /**
  * Destino 01: Milano Design Week 2027. El hero y luego seis capítulos con un índice
  * fijo: la experiencia, el programa, qué incluye, cómo se vivió en 2026, testimonios
- * e inscripción. Cada capítulo cambia de fondo (marfil, arena, oscuro) para que se
- * vea dónde empieza y dónde termina. Página compacta (MilanPage.css) y un botón fijo
- * al formulario después del hero.
+ * e inscripción. Cada capítulo es una banda con su propio fondo (marfil, arena, oscuro)
+ * para que se vea dónde empieza y dónde termina; dentro, los bloques son subtítulos
+ * más chicos con una línea arriba (MilanPage.css). Un botón fijo lleva al formulario
+ * después del hero.
  */
 export default function MilanPage() {
   const tone = (id: MilanChapterId) => milanChapters.items.find((x) => x.id === id)!.tone;
