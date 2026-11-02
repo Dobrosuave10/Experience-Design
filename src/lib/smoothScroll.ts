@@ -1,15 +1,15 @@
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { prefersReducedMotion } from "./env";
+import { isLite, prefersReducedMotion } from "./env";
 
 gsap.registerPlugin(ScrollTrigger);
 
 let lenis: Lenis | null = null;
 
-/** Lenis sólo con rueda/trackpad; en touch queda el scroll nativo. Sin Lenis con reduced motion. */
+/** Lenis sólo con rueda/trackpad; en teléfonos y pantallas táctiles, scroll nativo. Sin Lenis con reduced motion. */
 export function initSmoothScroll() {
-  if (prefersReducedMotion()) return () => {};
+  if (prefersReducedMotion() || isLite()) return () => {};
   lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
   lenis.on("scroll", ScrollTrigger.update);
   if (import.meta.env.DEV) Object.assign(window, { __lenis: lenis, __ST: ScrollTrigger });

@@ -1,7 +1,7 @@
 import { useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK } from "../lib/env";
+import { MOTION_OK, isLite } from "../lib/env";
 import { onPageShown } from "../lib/events";
 import { AtmosphereCanvas } from "./AtmosphereCanvas";
 import { Link } from "./Link";
@@ -37,11 +37,14 @@ export function PageHero({ id, title, lead, body, crumbs, tone = "ink", glow, as
         const off = onPageShown(() =>
           gsap.to(".phero__fade", { opacity: 1, y: 0, duration: 1.3, ease: "expo.out", stagger: 0.1, delay: 0.45 }),
         );
-        gsap.to(".phero__title", {
-          yPercent: -18,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
-        });
+        // Parallax del título: no en teléfonos
+        if (!isLite()) {
+          gsap.to(".phero__title", {
+            yPercent: -18,
+            ease: "none",
+            scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
+          });
+        }
         return () => off();
       });
     },

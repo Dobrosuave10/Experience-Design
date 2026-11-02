@@ -145,3 +145,21 @@
     right: calc(14vw + (min(34vw, 260px) - min(44vw, 340px)) / 2);
   }
 }
+
+/* Teléfonos y táctiles (sin WebGL por rendimiento): la misma composición de la escena,
+   arco arriba, bajo la navegación, y el sello pequeño a su derecha, lejos del wordmark */
+@media (max-width: 767px), (pointer: coarse) and (max-width: 1023px) {
+  .hero__fallback {
+    place-items: start center;
+    padding-top: calc(var(--nav-h) + 3vh);
+  }
+  .hero__fallback-arch {
+    top: calc(var(--nav-h) + 3vh);
+    width: min(34vw, 260px);
+  }
+  .hero__fallback-logo {
+    --logo-size: min(15vw, 110px) !important;
+    justify-self: end;
+    margin: 4vh 10vw 0 0;
+  }
+}

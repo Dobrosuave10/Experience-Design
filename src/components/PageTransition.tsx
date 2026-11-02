@@ -197,7 +197,7 @@ function DestinationCovers() {
       <div className="pt-dest milan" data-dest={routes.milan} data-tone="ink" hidden>
         <div className="milan__open-sticky">
           <div className="milan__window">
-            <Photo name={milan.openingImage.image} alt="" sizes="(max-aspect-ratio: 1/1) 182vh, 100vw" />
+            <Photo name={milan.openingImage.image} alt="" sizes="(max-width: 767px) and (min-resolution: 2.5dppx) 120vw, (max-width: 767px) 160vw, (max-aspect-ratio: 1/1) 182vh, 100vw" />
             <div className="milan__shade" />
           </div>
           <div className="milan__crumbs wrap label">

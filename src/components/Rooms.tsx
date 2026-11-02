@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import type { ImageSlot } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK } from "../lib/env";
+import { MOTION_OK, isLite } from "../lib/env";
 import { Figure } from "./MaterialPlate";
 import { RevealText } from "./RevealText";
 import "./Rooms.css";
@@ -40,6 +40,7 @@ export function Rooms({ rooms, tone, label }: { rooms: Room[]; tone: string; lab
     (mm, el) => {
       mm.add(MOTION_OK, () => {
         gsap.utils.toArray<HTMLElement>(".room", el).forEach((r) => {
+          if (isLite()) return void gsap.from(r.querySelector(".room__frame"), { opacity: 0, y: 40, duration: 1.1, ease: "power2.out", scrollTrigger: { trigger: r, start: "top 85%", once: true } });
           gsap
             .timeline({ scrollTrigger: { trigger: r, start: "top 85%", end: "top 30%", scrub: 0.8 } })
             .fromTo(r.querySelector(".room__frame"), { clipPath: "inset(0% 42% 0% 42%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.out" })

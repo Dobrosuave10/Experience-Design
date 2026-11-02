@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { founders } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { DESKTOP, MOTION_OK } from "../lib/env";
+import { DESKTOP, MOTION_OK, isLite } from "../lib/env";
 import { Photo } from "../components/Photo";
 import { RevealText } from "../components/RevealText";
 import "./Founders.css";
@@ -19,6 +19,7 @@ export function Founders({ label }: { label?: string }) {
     (mm) => {
       mm.add(MOTION_OK, () => {
         gsap.utils.toArray<HTMLElement>(".founder__frame").forEach((f) => {
+          if (isLite()) return void gsap.from(f, { opacity: 0, y: 40, duration: 1.1, ease: "power2.out", scrollTrigger: { trigger: f, start: "top 85%", once: true } });
           gsap
             .timeline({ scrollTrigger: { trigger: f, start: "top 85%", end: "top 35%", scrub: 0.8 } })
             .fromTo(f, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.out" })

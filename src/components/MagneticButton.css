@@ -12,6 +12,12 @@
   will-change: transform;
   -webkit-tap-highlight-color: transparent;
 }
+/* Sin imán en pantallas táctiles: no hace falta su capa */
+@media (max-width: 767px), (pointer: coarse) {
+  .mbtn {
+    will-change: auto;
+  }
+}
 .mbtn__inner {
   display: inline-flex;
   align-items: center;

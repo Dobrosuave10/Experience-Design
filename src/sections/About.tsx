@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { about } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK } from "../lib/env";
+import { MOTION_OK, isLite } from "../lib/env";
 import { Figure } from "../components/MaterialPlate";
 import { RevealText } from "../components/RevealText";
 import "./About.css";
@@ -13,6 +13,8 @@ export function AboutWho() {
   useGsap(
     (mm) => {
       mm.add(MOTION_OK, () => {
+        // En teléfonos, un fundido: el recorte con scrub repinta la foto en cada cuadro
+        if (isLite()) return void gsap.from(".about__frame", { opacity: 0, y: 40, duration: 1.1, ease: "power2.out", scrollTrigger: { trigger: ".about__frame", start: "top 85%", once: true } });
         gsap
           .timeline({ scrollTrigger: { trigger: ".about__frame", start: "top 85%", end: "top 30%", scrub: 0.8 } })
           .fromTo(".about__frame", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 0 0)" }, { clipPath: "inset(0% 0% 0% 0% round 999px 999px 0 0)", ease: "power2.out" })

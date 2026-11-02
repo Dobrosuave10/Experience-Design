@@ -39,7 +39,7 @@ export function Milan() {
       <div className="milan__open" data-tone="ink">
         <div className="milan__open-sticky">
           <div className="milan__window">
-            <Photo name={milan.openingImage.image} alt={milan.openingImage.alt} sizes="(max-aspect-ratio: 1/1) 182vh, 100vw" />
+            <Photo name={milan.openingImage.image} alt={milan.openingImage.alt} sizes="(max-width: 767px) and (min-resolution: 2.5dppx) 120vw, (max-width: 767px) 160vw, (max-aspect-ratio: 1/1) 182vh, 100vw" />
             <div className="milan__shade" aria-hidden="true" />
           </div>
           <nav className="milan__crumbs wrap label" aria-label="Estás en">

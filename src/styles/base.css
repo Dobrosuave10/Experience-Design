@@ -183,6 +183,15 @@ html[data-tone="ink"] .grain {
   mix-blend-mode: overlay;
   opacity: 0.12;
 }
+/* Capa fija con mezcla: cara para la GPU de un teléfono. Tampoco una capa por palabra. */
+@media (max-width: 767px), (pointer: coarse) {
+  .grain {
+    display: none;
+  }
+  .rv-word {
+    will-change: auto;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,

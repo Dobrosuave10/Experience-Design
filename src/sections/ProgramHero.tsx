@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { programs, routes, type Program } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK } from "../lib/env";
+import { MOTION_OK, isLite } from "../lib/env";
 import { onPageShown } from "../lib/events";
 import { AtmosphereCanvas } from "../components/AtmosphereCanvas";
 import { Figure } from "../components/MaterialPlate";
@@ -33,11 +33,14 @@ export function ProgramHero({ program: p }: { program: Program }) {
             .to(".ph__line-row", { yPercent: 0, duration: 1.2, ease: "expo.out", stagger: 0.08 }, 0.6)
             .to(".ph__fade", { opacity: 1, y: 0, duration: 1.1, ease: "expo.out", stagger: 0.08 }, 0.9);
         });
-        gsap.to(".ph__frame-wrap", {
-          yPercent: -8,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
-        });
+        // Parallax de la foto: no en teléfonos
+        if (!isLite()) {
+          gsap.to(".ph__frame-wrap", {
+            yPercent: -8,
+            ease: "none",
+            scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
+          });
+        }
         return () => off();
       });
     },

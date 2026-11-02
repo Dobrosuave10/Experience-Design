@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { community } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK } from "../lib/env";
+import { MOTION_OK, isLite } from "../lib/env";
 import { Photo } from "../components/Photo";
 import { RevealText } from "../components/RevealText";
 import "./Community.css";
@@ -19,6 +19,8 @@ export function Community() {
   useGsap(
     (mm) => {
       mm.add(MOTION_OK, () => {
+        // En teléfonos, un fundido y sin parallax: el recorte con scrub repinta la foto en cada cuadro
+        if (isLite()) return void gsap.from(".community__frame", { opacity: 0, y: 40, duration: 1.1, ease: "power2.out", scrollTrigger: { trigger: ".community__scene", start: "top 85%", once: true } });
         gsap
           .timeline({ scrollTrigger: { trigger: ".community__scene", start: "top 85%", end: "center 55%", scrub: 0.8 } })
           .fromTo(".community__frame", { clipPath: "inset(38% 18% 38% 18%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.out" })

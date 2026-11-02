@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Atmosphere } from "../three/Atmosphere";
-import { prefersReducedMotion, webglAvailable } from "../lib/env";
+import { isLite, prefersReducedMotion, webglAvailable } from "../lib/env";
 import "./AtmosphereCanvas.css";
 
 type Props = { color: string; className?: string };
 
 /**
  * Capa de luz WebGL detrás del contenido. Sigue al puntero (mouse) y cambia de color
- * con `color`. Sólo dibuja mientras está en pantalla. Sin WebGL queda un degradado estático.
+ * con `color`. Sólo dibuja mientras está en pantalla. Sin WebGL (o en teléfonos y táctiles) queda un degradado estático.
  */
 export function AtmosphereCanvas({ color, className = "" }: Props) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const atmo = useRef<Atmosphere | null>(null);
-  const [gl] = useState(() => webglAvailable());
+  const [gl] = useState(() => !isLite() && webglAvailable());
 
   useEffect(() => {
     const el = canvas.current;

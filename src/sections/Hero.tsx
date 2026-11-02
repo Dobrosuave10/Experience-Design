@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { hero, routes } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
+import { MOTION_OK, isLite, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
 import { onPageShown, setSealTarget } from "../lib/events";
 import { navigate } from "../lib/router";
 import { RevealText } from "../components/RevealText";
@@ -23,7 +23,8 @@ export function Hero() {
   const section = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<HeroScene | null>(null);
-  const [gl] = useState(() => webglAvailable());
+  // En teléfonos y táctiles, la composición estática: three.js ni se descarga
+  const [gl] = useState(() => !isLite() && webglAvailable());
   const [sceneReady, setSceneReady] = useState(false);
 
   // Carga diferida de Three.js

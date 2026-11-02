@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "@phosphor-icons/react";
 import { inscripcionHref, programsSpine } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK } from "../lib/env";
+import { MOTION_OK, isLite } from "../lib/env";
 import { Link } from "../components/Link";
 import { Photo } from "../components/Photo";
 import { RevealText } from "../components/RevealText";
@@ -41,7 +41,8 @@ export function ProgramsSpine() {
           // Nodo de la línea: se enciende mientras el bloque ocupa el centro
           ScrollTrigger.create({ trigger: b, start: "top 55%", end: "bottom 45%", toggleClass: { targets: b, className: "is-current" } });
 
-          // Parallax muy leve: la imagen principal y el detalle a velocidades distintas
+          // Parallax muy leve: la imagen principal y el detalle a velocidades distintas (no en teléfonos)
+          if (isLite()) return;
           gsap.fromTo(b.querySelector(".spine__frame img"), { yPercent: -4 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: b, start: "top bottom", end: "bottom top", scrub: true } });
           gsap.fromTo(b.querySelector(".spine__inset-wrap"), { y: 30 }, { y: -30, ease: "none", scrollTrigger: { trigger: b, start: "top bottom", end: "bottom top", scrub: true } });
         });
