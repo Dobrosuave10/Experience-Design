@@ -68,8 +68,6 @@
   background: var(--bg);
   font-size: clamp(1.15rem, 1.5vw, 1.6rem);
   line-height: 1.3;
-  /* en mayúsculas, con aire: se lee como una inscripción */
-  text-transform: uppercase;
   letter-spacing: 0.08em;
   position: relative;
   transition: background-color 0.9s var(--ease-out);
