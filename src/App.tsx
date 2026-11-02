@@ -44,7 +44,10 @@ function useToneController(path: string) {
     // Tono inicial: la primera sección de la página
     const first = document.querySelector<HTMLElement>("main [data-tone]");
     if (first) root.dataset.tone = first.dataset.tone;
-    const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-tone]")).map((el) =>
+    // Solo secciones reales: fuera quedan el propio <html> y las portadas del telón de viaje
+    // (.pt-dest), que no ocupan lugar en la página y dejaban un tono ajeno al llegar.
+    const sections = document.querySelectorAll<HTMLElement>("body [data-tone]:not(.pt-dest)");
+    const triggers = Array.from(sections).map((el) =>
       ScrollTrigger.create({
         trigger: el,
         start: "top 50%",
