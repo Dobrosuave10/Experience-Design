@@ -16,3 +16,23 @@ export function webglAvailable(): boolean {
 /** Motion queries para gsap.matchMedia */
 export const MOTION_OK = "(prefers-reduced-motion: no-preference)";
 export const DESKTOP = "(min-width: 768px)";
+
+/**
+ * Se resuelve con el primer pintado con contenido (first-contentful-paint; a los 800 ms
+ * si el navegador no lo informa). Para pedir three.js sin competir con lo que se ve primero.
+ */
+export const afterFirstPaint = () =>
+  new Promise<void>((resolve) => {
+    const t = window.setTimeout(resolve, 800);
+    try {
+      const po = new PerformanceObserver((list) => {
+        if (!list.getEntries().some((e) => e.name === "first-contentful-paint")) return;
+        po.disconnect();
+        window.clearTimeout(t);
+        resolve();
+      });
+      po.observe({ type: "paint", buffered: true });
+    } catch {
+      // sin PerformanceObserver: queda el tope
+    }
+  });

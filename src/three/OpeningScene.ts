@@ -11,6 +11,8 @@ const CUTS_X = [0, 0.27, 0.58, 0.8, 1];
 const CUTS_Y = [0, 0.34, 0.71, 1];
 /** Chaflán de cada fragmento: deja una junta fina hasta que la placa se cierra. */
 const TILE_BEVEL = 0.007;
+/** La coreografía se compuso en tiempos largos; se reproduce más rápida, con el mismo dibujo. */
+const SPEED = 1.7;
 
 type Tile = { mesh: THREE.Mesh; home: THREE.Vector3 };
 
@@ -31,6 +33,7 @@ export class OpeningScene {
   private sweep!: THREE.PointLight;
   private raf = 0;
   private running = false;
+  private timelines: gsap.core.Timeline[] = [];
   private disposed = false;
   private size = { w: 1, h: 1 };
   /** Distancia de cámara: la placa terminada mide `platePx` en pantalla. */
@@ -149,7 +152,8 @@ export class OpeningScene {
     this.running = true;
     this.raf = requestAnimationFrame(this.loop);
     const rand = gsap.utils.random;
-    const tl = gsap.timeline({ onComplete: done });
+    const tl = gsap.timeline({ onComplete: done }).timeScale(SPEED);
+    this.timelines = [tl];
 
     // 1–3 · Los fragmentos salen de la penumbra (lejos, girados) y se encajan, de afuera hacia adentro
     this.tiles.forEach(({ mesh, home }, i) => {
@@ -187,7 +191,7 @@ export class OpeningScene {
     tl.to(this.sweep, { intensity: 0, duration: 0.3, ease: "power1.in" }, "closed+=0.6");
 
     // 6 · Pausa breve y viaje hasta el sello del Hero (o fundido si no hay destino)
-    tl.addLabel("handoff", "closed+=1.05");
+    tl.addLabel("handoff", "closed+=0.95");
     tl.call(() => {
       release();
       const t = target();
@@ -195,13 +199,15 @@ export class OpeningScene {
       const fade = t ? 0.45 : 0.6;
       if (t) {
         const s = t.size / (2 * SEAL.half) * k;
-        gsap
+        const travel = gsap
           .timeline()
+          .timeScale(Math.max(SPEED, tl.timeScale()))
           .to(this.seal.position, { x: (t.x - this.size.w / 2) * k, y: -(t.y - this.size.h / 2) * k, duration: 1.05, ease: "expo.inOut" }, 0)
           .to(this.seal.scale, { x: s, y: s, z: s, duration: 1.05, ease: "expo.inOut" }, 0)
           .to(this.seal.rotation, { y: t.rotY, duration: 1.05, ease: "expo.inOut" }, 0)
           .call(() => onHandoff(fade), [], 0.8)
           .call(done, [], 0.8 + 0.6 + fade);
+        this.timelines.push(travel);
         tl.eventCallback("onComplete", null);
       } else {
         onHandoff(fade);
@@ -209,6 +215,11 @@ export class OpeningScene {
     }, [], "handoff");
     tl.to({}, { duration: 0.6 }, "handoff");
     return tl;
+  }
+
+  /** Clic o tecla: la apertura no hace esperar a nadie. */
+  hurry() {
+    this.timelines.forEach((t) => t.timeScale(SPEED * 2));
   }
 
   stop() {
