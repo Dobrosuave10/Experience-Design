@@ -20,24 +20,28 @@
   box-shadow: 0 0 0 1px rgba(251, 248, 242, 0.6);
 }
 
-/* Viaje a un destino: un panel que cruza de derecha a izquierda con el nombre del lugar */
+/* Viaje a un destino: la portada del destino cruza de derecha a izquierda.
+   Va bajo la navegación, que es la misma antes y después del viaje. */
 .pt-travel {
   position: fixed;
   inset: 0;
-  z-index: var(--z-transition);
-  display: flex;
-  align-items: center;
+  z-index: calc(var(--z-nav) - 1);
   overflow: hidden;
-  background: #9b4819;
-  color: var(--paper);
   visibility: hidden;
   pointer-events: none;
   box-shadow: -40px 0 80px rgba(14, 12, 11, 0.25);
 }
-.pt-travel__name {
-  padding-left: var(--gutter);
-  font-size: clamp(4.5rem, 16vw, 16rem);
-  line-height: 0.9;
-  white-space: nowrap;
+.pt-dest {
+  position: absolute;
+  inset: 0;
   will-change: transform;
+}
+.pt-dest[hidden] {
+  display: none;
+}
+.pt-dest.milan {
+  background: var(--ink);
+}
+.pt-dest.sp {
+  background: var(--clay);
 }

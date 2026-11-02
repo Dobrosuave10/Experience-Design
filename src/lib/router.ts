@@ -41,7 +41,7 @@ export function usePath() {
   );
 }
 
-/** Cómo se llega a la página: `travel` es el viaje a un destino (con su nombre). */
+/** Cómo se llega a la página: `travel` es el viaje a un destino (su ruta). */
 export type NavOptions = { travel?: string };
 
 /** PageTransition registra aquí su telón. Recibe `swap`, que cambia la página. */

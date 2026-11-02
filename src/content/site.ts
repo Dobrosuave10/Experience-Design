@@ -97,7 +97,7 @@ export const nav: NavItem[] = [
     label: "Destinos",
     href: routes.destinos,
     children: [
-      { label: "Milano Design Week", note: "Salone del Mobile", href: routes.milan },
+      { label: "Milán", note: "Salone del Mobile", href: routes.milan },
       { label: "São Paulo", note: "CASACOR", href: routes.saoPaulo },
     ],
   },
