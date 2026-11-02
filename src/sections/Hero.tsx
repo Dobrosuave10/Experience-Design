@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { hero, routes } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
-import { MOTION_OK, afterFirstPaint, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
+import { MOTION_OK, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
 import { onPageShown, setSealTarget } from "../lib/events";
 import { navigate } from "../lib/router";
 import { RevealText } from "../components/RevealText";
@@ -32,7 +32,7 @@ export function Hero() {
     let scene: HeroScene | null = null;
     let cancelled = false;
     const reduced = prefersReducedMotion();
-    afterFirstPaint().then(() => import("../three/HeroScene")).then(async ({ HeroScene }) => {
+    import("../three/HeroScene").then(async ({ HeroScene }) => {
       if (cancelled || !canvas.current) return;
       scene = new HeroScene(canvas.current, { mobile: isSmallScreen(), reduced });
       sceneRef.current = scene;

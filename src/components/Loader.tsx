@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { afterFirstPaint, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
+import { isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
 import { getSealTarget, markReady } from "../lib/events";
 import { lockScroll } from "../lib/smoothScroll";
 import { Logo } from "./Logo";
@@ -8,59 +8,21 @@ import type { OpeningScene } from "../three/OpeningScene";
 import "./Loader.css";
 
 /** Si la escena no está lista en este tiempo, la apertura usa el sello estático. */
-const SCENE_TIMEOUT = 1200;
-/** La apertura completa se ve una vez por sesión del navegador; después, el sello breve. */
-const SEEN_KEY = "ed:opening-seen";
-
-function seenThisSession() {
-  try {
-    if (sessionStorage.getItem(SEEN_KEY)) return true;
-    sessionStorage.setItem(SEEN_KEY, "1");
-  } catch {
-    // sin almacenamiento: se trata como primera visita
-  }
-  return false;
-}
-
-/** Teléfonos, ahorro de datos, red lenta o poca memoria: el sello estático, sin three.js. */
-function prefersLite() {
-  const nav = navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string }; deviceMemory?: number };
-  const c = nav.connection;
-  if (c?.saveData || /^(slow-2g|2g|3g)$/.test(c?.effectiveType ?? "")) return true;
-  if (nav.deviceMemory !== undefined && nav.deviceMemory <= 4) return true;
-  return isSmallScreen();
-}
-
-/**
- * Se decide al cargar el módulo (antes del primer render) para pedir el chunk de la escena
- * (y three.js, que también usa el Hero) lo antes posible: justo después del primer cuadro.
- */
-const mode: "full" | "quick" | "static" =
-  typeof window === "undefined"
-    ? "static"
-    : prefersReducedMotion() || seenThisSession()
-      ? "quick"
-      : prefersLite() || !webglAvailable()
-        ? "static"
-        : "full";
-const sceneModule = mode === "full" ? afterFirstPaint().then(() => import("../three/OpeningScene")) : null;
+const SCENE_TIMEOUT = 2200;
 
 /**
  * Apertura (sólo al abrir o recargar el sitio). En la penumbra, fragmentos de bronce
  * y terracota se encajan y forman el sello cuadrado; las juntas se cierran, una luz
  * rasante recorre la placa y el sello viaja hasta su lugar en el Hero mientras la
  * penumbra se disuelve. Es el mismo objeto (src/three/seal.ts) que queda en el Hero.
- * Con movimiento reducido o sin WebGL: el sello quieto y un fundido breve. Igual en
- * teléfonos y conexiones lentas (fundido normal) y en las visitas siguientes de la sesión
- * (fundido breve).
+ * Con movimiento reducido o sin WebGL: el sello quieto y un fundido breve.
  * Clic o tecla: acelera. Capa aislada: sólo bloquea el scroll y avisa (markReady).
  */
 export function Loader() {
   const ref = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const [gone, setGone] = useState(false);
-  // sin escena, el sello se pinta desde el primer render (es lo primero que se ve)
-  const [staticSeal, setStaticSeal] = useState(!sceneModule);
+  const [staticSeal, setStaticSeal] = useState(false);
 
   useEffect(() => {
     const el = ref.current!;
@@ -71,8 +33,6 @@ export function Loader() {
     const release = () => {
       if (released) return;
       released = true;
-      // el Hero ya se puede usar aunque la capa siga terminando su fundido
-      el.style.pointerEvents = "none";
       lockScroll(false);
       markReady();
     };
@@ -90,15 +50,15 @@ export function Loader() {
       setStaticSeal(true);
       const fade = () =>
         gsap.to(el, { opacity: 0, duration: quick ? 0.35 : 0.7, ease: "power2.inOut", delay: quick ? 0.15 : 0.5, onStart: release, onComplete: finish });
-      cap = window.setTimeout(fade, quick ? 300 : 900);
+      cap = window.setTimeout(fade, 900);
       document.fonts.ready.then(() => {
         window.clearTimeout(cap);
         fade();
       });
     };
 
-    if (!sceneModule || !canvas.current) {
-      playStatic(mode !== "static");
+    if (prefersReducedMotion() || !webglAvailable() || !canvas.current) {
+      playStatic(true);
       return () => window.clearTimeout(cap);
     }
 
@@ -113,7 +73,7 @@ export function Loader() {
     };
     const guard = window.setTimeout(fallback, SCENE_TIMEOUT);
 
-    sceneModule
+    import("../three/OpeningScene")
       .then(async ({ OpeningScene }) => {
         if (cancelled || !canvas.current) return;
         scene = new OpeningScene(canvas.current, { mobile: isSmallScreen() });
@@ -130,8 +90,8 @@ export function Loader() {
           release,
           // la penumbra se disuelve y descubre el Hero; al final se va el sello de la apertura
           onHandoff: (fadeOut) => {
-            gsap.to(el.querySelector(".opening__bg"), { opacity: 0, duration: 0.5, ease: "power2.inOut" });
-            gsap.to(canvas.current, { opacity: 0, duration: fadeOut, ease: "power1.inOut", delay: 0.35 });
+            gsap.to(el.querySelector(".opening__bg"), { opacity: 0, duration: 0.65, ease: "power2.inOut" });
+            gsap.to(canvas.current, { opacity: 0, duration: fadeOut, ease: "power1.inOut", delay: 0.55 });
           },
           done: () => gsap.delayedCall(0.1, finish),
         });
@@ -141,7 +101,7 @@ export function Loader() {
     const onResize = () => scene?.resize();
     window.addEventListener("resize", onResize);
     // Clic o tecla: no hace esperar a nadie
-    const hurry = () => scene?.hurry();
+    const hurry = () => tl?.timeScale(3);
     window.addEventListener("pointerdown", hurry);
     window.addEventListener("keydown", hurry);
 
