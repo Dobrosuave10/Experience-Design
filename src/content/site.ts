@@ -1078,6 +1078,16 @@ export const invite = {
   cta: "Inscríbete",
 };
 
+/** Inicio: el podcast, bajo la invitación. El clip es un fragmento sin audio; el episodio está en YouTube. */
+export const podcast = {
+  label: "Podcast",
+  title: "Escucha cómo se vivió Milán, en nuestro podcast.",
+  video: { src: "/video/podcast-milan.mp4", poster: "/video/podcast-milan.jpg" },
+  alt: "Video: Danae y Christian conversan en una mesa al aire libre en Milán, durante la grabación del podcast",
+  cta: "Ver en YouTube",
+  url: "https://www.youtube.com/@ExperiencedesignChile",
+};
+
 export const nextChapter = {
   label: "Siguiente capítulo",
 };
