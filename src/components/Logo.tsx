@@ -10,7 +10,7 @@ type Props = {
   /**
    * "mark": la "E." oficial, en el color del texto (navegación, menú, Hero).
    * "circle": la "E." negra sobre el círculo terracota del manual (footer, telón).
-   * "seal": el cuño del Hero (círculo terracota, doble anillo, "E." marfil), sin WebGL.
+   * "seal": el sello del Hero (placa cuadrada terracota, doble marco, "E." marfil), sin WebGL.
    * "square" se mantiene como alias de "mark".
    */
   shape?: "mark" | "circle" | "seal" | "square";

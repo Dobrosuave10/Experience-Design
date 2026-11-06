@@ -87,14 +87,26 @@ export async function makeLogoCanvases() {
   return { color, relief };
 }
 
-/** Lema que rodea la "E." del cuño, en microtexto. */
-const SEAL_RING_TEXT = "EXPERIENCE DESIGN · VIVIRLO · CUESTIONARLO · HACERLO PROPIO · ";
-/** Escala de la "E." dentro del cuño: deja aire para los anillos y el microtexto. */
+/** Lema del sello en microtexto, un tramo por lado, leyendo en sentido horario desde arriba. */
+const SEAL_SIDES = ["EXPERIENCE DESIGN", "VIVIRLO", "CUESTIONARLO", "HACERLO PROPIO"];
+/** Escala de la "E." dentro del sello: deja aire para los marcos y el microtexto. */
 const MARK_SCALE = 0.7;
 
+/** Cuadrado centrado de medio lado `d` y esquinas de radio `r` (fracciones del lado del canvas). */
+function squarePath(ctx: CanvasRenderingContext2D, size: number, d: number, r: number) {
+  const c = size / 2, x0 = c - d * size, x1 = c + d * size, k = r * size;
+  ctx.beginPath();
+  ctx.moveTo(x0 + k, x0);
+  ctx.arcTo(x1, x0, x1, x1, k);
+  ctx.arcTo(x1, x1, x0, x1, k);
+  ctx.arcTo(x0, x1, x0, x0, k);
+  ctx.arcTo(x0, x0, x1, x0, k);
+  ctx.closePath();
+}
+
 /**
- * Anillos del cuño, en fracciones del lado: filete exterior, cordón (trazos
- * oblicuos entre dos filetes), banda de microtexto y filete interior.
+ * Marcos del sello, en fracciones del lado: filete exterior, cordón (trazos oblicuos
+ * entre dos filetes), banda de microtexto y filete interior. Todos cuadrados, como la placa.
  */
 function drawSealRings(ctx: CanvasRenderingContext2D, size: number, fill: string, blur: number) {
   const c = size / 2;
@@ -102,54 +114,63 @@ function drawSealRings(ctx: CanvasRenderingContext2D, size: number, fill: string
   if (blur) ctx.filter = `blur(${blur}px)`;
   ctx.strokeStyle = fill;
   ctx.fillStyle = fill;
-  const ring = (r: number, w: number) => {
+  const frame = (d: number, w: number, r: number) => {
     ctx.lineWidth = w * size;
-    ctx.beginPath();
-    ctx.arc(c, c, r * size, 0, Math.PI * 2);
+    squarePath(ctx, size, d, r);
     ctx.stroke();
   };
-  ring(0.468, 0.006);
-  ring(0.426, 0.0035);
-  // cordón: trazos oblicuos, como el canto de una moneda acuñada
-  const n = 120;
+  frame(0.468, 0.006, 0.03);
+  frame(0.426, 0.0035, 0.022);
+  // cordón: trazos oblicuos a lo largo de cada lado, como el canto de una pieza acuñada
   ctx.lineWidth = 0.0042 * size;
   ctx.lineCap = "round";
-  for (let i = 0; i < n; i++) {
-    const a0 = (i / n) * Math.PI * 2;
-    const a1 = a0 + (Math.PI * 2) / n * 0.9;
-    ctx.beginPath();
-    ctx.moveTo(c + Math.cos(a0) * 0.433 * size, c + Math.sin(a0) * 0.433 * size);
-    ctx.lineTo(c + Math.cos(a1) * 0.457 * size, c + Math.sin(a1) * 0.457 * size);
-    ctx.stroke();
+  const perSide = 34, span = 0.41, slant = 0.009;
+  for (let side = 0; side < 4; side++) {
+    const rot = (side * Math.PI) / 2;
+    const cos = Math.cos(rot), sin = Math.sin(rot);
+    // lado de arriba en coordenadas locales (x a lo largo, y hacia afuera = negativo) y luego girado
+    const pt = (x: number, y: number) => [c + (x * cos - y * sin) * size, c + (x * sin + y * cos) * size];
+    for (let i = 0; i < perSide; i++) {
+      const x = -span + ((i + 0.5) / perSide) * 2 * span;
+      const [ax, ay] = pt(x, -0.433), [bx, by] = pt(x + slant, -0.457);
+      ctx.beginPath();
+      ctx.moveTo(ax, ay);
+      ctx.lineTo(bx, by);
+      ctx.stroke();
+    }
   }
-  ring(0.334, 0.0035);
-  // microtexto: cada letra sobre la circunferencia, leyendo en sentido horario desde arriba
+  frame(0.334, 0.0035, 0.016);
+  // microtexto: un tramo del lema centrado en cada lado, con las letras mirando hacia afuera
   const fontPx = size * 0.036;
   ctx.font = `500 ${fontPx}px "Bodoni Moda Variable", "Times New Roman", serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  const r = 0.38 * size;
-  const chars = Array.from(SEAL_RING_TEXT);
-  const widths = chars.map((ch) => ctx.measureText(ch).width);
-  const total = widths.reduce((a, w) => a + w, 0);
-  // reparte el espacio sobrante como tracking, para que el lema cierre la vuelta exacta
-  const track = (Math.PI * 2 * r - total) / chars.length;
-  let a = -Math.PI / 2;
-  chars.forEach((ch, i) => {
-    const step = (widths[i] + track) / r;
-    a += step / 2;
+  const band = 0.38 * size, track = fontPx * 0.32;
+  SEAL_SIDES.forEach((text, side) => {
     ctx.save();
-    ctx.translate(c + Math.cos(a) * r, c + Math.sin(a) * r);
-    ctx.rotate(a + Math.PI / 2);
-    ctx.fillText(ch, 0, 0);
+    ctx.translate(c, c);
+    ctx.rotate((side * Math.PI) / 2);
+    const chars = Array.from(text);
+    const widths = chars.map((ch) => ctx.measureText(ch).width);
+    const total = widths.reduce((a, w) => a + w, 0) + track * (chars.length - 1);
+    let x = -total / 2;
+    chars.forEach((ch, i) => {
+      ctx.fillText(ch, x + widths[i] / 2, -band);
+      x += widths[i] + track;
+    });
     ctx.restore();
-    a += step / 2;
   });
+  // un punto en cada esquina de la banda, donde se encuentran los tramos
+  for (const [sx, sy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+    ctx.beginPath();
+    ctx.arc(c + sx * band, c + sy * band, fontPx * 0.13, 0, Math.PI * 2);
+    ctx.fill();
+  }
   ctx.restore();
 }
 
 /**
- * Cuño de bronce: mapas para la cara de la placa.
+ * Sello de bronce: mapas para la cara de la placa.
  *  - color: bronce/terracota con una pátina amplia y tenue (sin moteado ni grano visible).
  *  - normal: "E." grabada con poca profundidad y bisel ancho, desde un mapa de alturas.
  *  - rough: satinado parejo; el fondo del grabado, apenas más mate.
