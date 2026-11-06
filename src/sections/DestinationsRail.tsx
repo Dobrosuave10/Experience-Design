@@ -17,16 +17,21 @@ import "./DestinationsMap.css";
  */
 type Slot = { x: number; y: number; w: number; h: number; d: number };
 const LAYOUTS: Record<string, Slot[]> = {
+  // Trece piezas verticales (fotos y videos), en tres filas desfasadas; abajo a la izquierda, la rosa de los vientos
   milan: [
-    { x: 0, y: 2, w: 44, h: 30, d: 0 },
-    { x: 47, y: 0, w: 30, h: 22, d: 0.18 },
-    { x: 80, y: 4, w: 20, h: 38, d: 0.08 },
-    { x: 0, y: 36, w: 22, h: 42, d: 0.34 },
-    { x: 25, y: 29, w: 36, h: 28, d: 0.24 },
-    { x: 64, y: 27, w: 18, h: 36, d: 0.46 },
-    { x: 24, y: 61, w: 32, h: 25, d: 0.56 },
-    { x: 59, y: 67, w: 29, h: 22, d: 0.66 },
-    { x: 85, y: 47, w: 15, h: 29, d: 0.6 },
+    { x: 0, y: 1, w: 16, h: 31, d: 0 },
+    { x: 20, y: 4, w: 16, h: 31, d: 0.08 },
+    { x: 40, y: 0, w: 16, h: 31, d: 0.14 },
+    { x: 60, y: 5, w: 16, h: 31, d: 0.2 },
+    { x: 80, y: 1, w: 16, h: 31, d: 0.26 },
+    { x: 9, y: 36, w: 16, h: 31, d: 0.32 },
+    { x: 30, y: 39, w: 16, h: 31, d: 0.38 },
+    { x: 51, y: 35, w: 16, h: 31, d: 0.44 },
+    { x: 72, y: 39, w: 16, h: 31, d: 0.5 },
+    { x: 21, y: 72, w: 16, h: 28, d: 0.56 },
+    { x: 41, y: 70, w: 16, h: 28, d: 0.62 },
+    { x: 62, y: 73, w: 16, h: 27, d: 0.68 },
+    { x: 83, y: 69, w: 16, h: 29, d: 0.74 },
   ],
   "sao-paulo": [
     { x: 0, y: 4, w: 24, h: 44, d: 0 },
@@ -42,7 +47,7 @@ const LAYOUTS: Record<string, Slot[]> = {
 
 /** Recorrido punteado de cada collage (en % del área): pasa por los huecos entre las fotos. */
 const ROUTES: Record<string, MapPoint[]> = {
-  milan: [[-6, 96], [12, 88], [23.5, 62], [30, 34], [46, 25], [63, 24.5], [78, 30], [83, 44], [78, 66], [90, 84], [104, 92]],
+  milan: [[-6, 96], [10, 90], [18, 68], [27.5, 52], [38, 34], [48.5, 50], [58, 34], [69.5, 54], [78, 34], [90, 52], [104, 60]],
   "sao-paulo": [[-6, 94], [16, 88], [26, 58], [37, 76], [51, 50], [74, 46], [86, 66], [98, 82], [106, 90]],
 };
 /** Giro de cada polaroid, entre -4° y 4°: fijo, para que el collage no cambie entre visitas. */
@@ -164,7 +169,7 @@ export function DestinationsRail() {
                   <CompassRose />
                 </span>
               )}
-              <ul className="collage" aria-label={`Fotos y videos de ${d.event}`}>
+              <ul className={`collage ${d.id === "milan" ? "collage--tall" : ""}`} aria-label={`Fotos y videos de ${d.event}`}>
                 {d.collage.map((ph, i) => {
                   const s = LAYOUTS[d.id][i];
                   const style = { "--x": s.x, "--y": s.y, "--w": s.w, "--h": s.h, "--r": `${TILT[i % TILT.length]}deg` } as CSSProperties;

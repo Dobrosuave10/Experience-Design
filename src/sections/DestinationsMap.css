@@ -135,6 +135,11 @@
   .collage__photo.polaroid:last-child:nth-child(3n + 2) {
     aspect-ratio: 16 / 11.5;
   }
+  /* Milán: todas las piezas son verticales; ninguna se recorta a horizontal */
+  .collage--tall .collage__photo.polaroid:nth-child(n) {
+    aspect-ratio: 4 / 5.4;
+    grid-column: auto;
+  }
   .collage__photo.polaroid--video {
     aspect-ratio: 9 / 15;
   }

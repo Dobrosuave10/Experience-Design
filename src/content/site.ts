@@ -185,7 +185,7 @@ export const programsSpine = {
   label: "Los tres ejes de Experience Design: Experiencias, Formación y Marca personal",
   /** Triángulo de los ejes: una foto por eje. */
   triangle: {
-    experiencias: { image: "milan-grupo-gessi" as ImageName, align: "xMidYMax" },
+    experiencias: { image: "fuori-kerakoll-fachada" as ImageName, align: "xMidYMax" },
     formacion: { image: "fuori-kerakoll-grupo-bolsa" as ImageName },
     "marca-personal": { image: "verona-antolini-bolsa" as ImageName },
   } as Record<string, { image: ImageName; align?: string }>,
@@ -202,8 +202,8 @@ export const programsSpine = {
       cta: "Milano Design Week 2027" as string | undefined,
       /** El CTA de Experiencias lleva al formulario de inscripción. */
       enroll: true,
-      main: { image: "salone-cocina-bosque" as ImageName, alt: "Salone del Mobile 2026: visitantes en un stand de cocina rodeado por una pantalla envolvente con un bosque" },
-      detail: { image: "casacor-arco-verde-mural" as ImageName, alt: "Casacor São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
+      main: { image: "milan-grupo-lago-como" as ImageName, alt: "El grupo de Experience Design en un barco en el lago de Como" },
+      detail: { image: "casacor-estanteria-libros" as ImageName, alt: "Casacor São Paulo: estantería de madera iluminada, con libros y objetos" },
       destinations: ["São Paulo", "Milano Design Week", "Colonia", "Buenos Aires"],
       /** Sin fecha cuando no la tenemos: no se inventa. */
       next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril 2027" }, { place: "Casacor São Paulo", note: "Julio 2027" }] as { place: string; note?: string }[] },
@@ -218,8 +218,8 @@ export const programsSpine = {
       text: "Herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial.",
       href: routes.formacion as string | undefined,
       cta: "Conocer Formación" as string | undefined,
-      main: { image: "fuori-kerakoll-muestrario" as ImageName, alt: "Fuorisalone de Milán: un anfitrión explica el muestrario de colores de Kerakoll al grupo de Experience Design" },
-      detail: { image: "fuori-charla-arcos" as ImageName, alt: "Charla durante el Fuorisalone de Milán: el público sentado bajo una galería de arcos frente a una pantalla" },
+      main: { image: "fuori-kerakoll-explicacion" as ImageName, alt: "Fuorisalone de Milán: el grupo, con la bolsa negra de Experience Design, escucha frente al muestrario de colores de Kerakoll" },
+      detail: { image: "fuori-kerakoll-grupo" as ImageName, alt: "Participantes con la bolsa de Experience Design frente al muro de colores de Kerakoll" },
     },
     {
       id: "marca-personal",
@@ -232,7 +232,7 @@ export const programsSpine = {
       href: routes.marcaPersonal as string | undefined,
       cta: "Conocer Marca personal" as string | undefined,
       main: { image: "marca-vestidor-retrato" as ImageName, alt: "Participante sentada en un puf capitoné de un showroom de vestidores en Milán, con la bolsa de Experience Design" },
-      detail: { image: "marca-retrato-backdrop" as ImageName, alt: "Participante sonriendo frente al muro de prensa de un evento de diseño en Milán" },
+      detail: { image: "verona-antolini-pasillo" as ImageName, alt: "Participante con la bolsa de Experience Design recorre la galería de piedras de Antolini, en Verona" },
     },
   ],
 };
@@ -325,14 +325,16 @@ export const milan = {
     { image: "milan-terraza-atardecer", alt: "Los techos de Milán al atardecer, vistos desde una terraza" },
     { image: "salone-cocina-verde", alt: "Cocina de módulos verde oscuro con cubierta de madera en un stand del Salone del Mobile" },
     { image: "milan-tranvia", alt: "Un tranvía histórico avanzando por una calle de Milán" },
-    { image: "fuori-kerakoll-fachada", alt: "Participantes frente al espacio de Kerakoll en un palacio de Milán, durante el Fuorisalone" },
     { image: "salone-sofa-repisas", alt: "Sofá curvo claro frente a repisas de vidrio con objetos negros, en un stand del Salone" },
-    { image: "milan-grupo-eurocucina", alt: "Participante frente al muro amarillo de EuroCucina en el Salone del Mobile" },
     { image: "verona-grupo-antolini", alt: "El grupo de Experience Design en el showroom de Antolini, en Verona, frente a una placa de mármol" },
     { image: "milan-galleria-grupo", alt: "Participantes recorriendo la Galleria Vittorio Emanuele II de noche" },
     { image: "salone-cubierta-rho-fiera", alt: "Christian Erdmann bajo la cubierta de vidrio de Fiera Milano Rho, junto al cartel del Salone del Mobile" },
-    { image: "milan-grupo-lago-como", alt: "El grupo de Experience Design en un barco en el lago de Como" },
     { image: "venecia-salute", alt: "La basílica de Santa Maria della Salute en Venecia, vista desde el agua, con una góndola en primer plano" },
+    { image: "salone-silla-escultura", alt: "Silla blanca de líneas curvas bajo un cuadro con dibujos de su forma, en el Salone del Mobile" },
+    { image: "fuori-showroom-sala", alt: "Sala de un showroom del Fuorisalone con sofás bajos, una biblioteca al fondo y lámparas de papel" },
+    { image: "venecia-pareja-canal", alt: "Dos participantes con pañuelos y gafas de sol a bordo de un taxi acuático en el Gran Canal de Venecia" },
+    { image: "venecia-calle-danae", alt: "Danae Barla, con la bolsa de Experience Design, en una calle angosta de Venecia" },
+    { image: "venecia-gondola", alt: "Participante en una góndola bajo un puente de Venecia" },
   ] as { image: ImageName; alt: string }[],
   cta: "Quiero ser parte",
   /** Botón fijo de la página de Milán. */
@@ -514,7 +516,7 @@ export const experiencesPage = {
       id: "ver-tocar",
       label: "Lo que vas a ver y tocar",
       paragraphs: [
-        "Detrás de una silla, un textil o una cubierta de piedra hay referencias, decisiones y un fundamento. La curaduría pone el foco ahí: cómo y por qué se diseñó cada pieza.",
+        "Detrás de una silla, un textil o una cubierta de piedra hay referencias, decisiones y un fundamento. La curaduría pone el foco ahí: cómo y por qué se diseñó cada pieza, más allá de la última novedad.",
         "Materiales, terminaciones, proporción y luz, vistos y tocados en el lugar donde se presentan.",
       ],
       accent: "Si no lo tocas, no lo viste.",
@@ -524,7 +526,9 @@ export const experiencesPage = {
     {
       id: "con-quien",
       label: "Con quién vives la experiencia",
-      paragraphs: ["Un viaje se recuerda por lo que se ve, pero sobre todo por con quién se vive."],
+      paragraphs: [
+        "Un viaje se recuerda por lo que se ve, pero sobre todo por con quién se vive. Las conversaciones al final del día, las ideas que surgen en una cena, el camino al lago, las personas que conoces en cada encuentro: eso es lo que permanece.",
+      ],
       accent: "Vuelves con contactos, complicidades y una red que sigue creciendo mucho después del viaje.",
       image: "venecia-selfie-canal" as ImageName,
       alt: "Tres participantes sonríen en una selfie a bordo de un taxi acuático en el Gran Canal de Venecia",
@@ -598,8 +602,8 @@ export const community = {
   disciplines: ["Arquitectura", "Interiorismo", "Diseño", "Marcas", "Materiales", "Iluminación", "Mobiliario", "Industrias creativas", "Artes", "Lujo"],
   body: "Las conversaciones empiezan y el aprendizaje dura para siempre.",
   image: {
-    image: "charla-showroom",
-    alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
+    image: "fuori-showroom-conversacion",
+    alt: "Participantes conversando en los sofás de un showroom del Fuorisalone, en Milán",
     material: "travertine",
     brief: "Grupo conversando en un showroom (foto real).",
   } as ImageSlot,
@@ -857,6 +861,58 @@ export const personalBrandPage = {
  * DESTINOS: experiencias para vivir. No son programas.
  * ------------------------------------------------------------------------- */
 
+/** Foto o video corto (sin audio) de una tira de MediaStrip. `ratio` sólo para videos; `wide` = horizontal a todo el ancho. */
+export type MediaItem = { image?: ImageName; video?: { src: string; poster: string }; alt: string; ratio?: string; wide?: boolean };
+
+/** Fotos y videos seleccionados por Danae para cada página (FOTOS, hojas 2 a 7). */
+export const media = {
+  nosotros: {
+    label: "Danae y Christian, en el viaje",
+    items: [
+    { image: "christian-showroom-cocina", alt: "Christian Erdmann en un showroom de cocinas del Fuorisalone, junto a una isla con una obra de arte" },
+    { video: { src: "/video/danae-antolini-marmol.mp4", poster: "/video/danae-antolini-marmol.jpg" }, alt: "Video: Danae Barla recorre con la mano las vetas de una placa de mármol en Antolini, Verona" },
+    { image: "fundadores-espejo-showroom", alt: "Danae y Christian fotografiados en un espejo iluminado de un showroom, con la bolsa de Experience Design" },
+    { video: { src: "/video/christian-fuori-bolsa.mp4", poster: "/video/christian-fuori-bolsa.jpg" }, alt: "Video: el grupo camina por una calle arbolada del Fuorisalone, con la bolsa de Experience Design" },
+    { image: "danae-lavamanos-espejo", alt: "Danae Barla prueba la grifería de un lavamanos de piedra frente a un espejo redondo" },
+    { video: { src: "/video/danae-fuori-biblioteca.mp4", poster: "/video/danae-fuori-biblioteca.jpg" }, alt: "Video: una biblioteca de madera en un showroom del Fuorisalone", ratio: "16 / 9" },
+    { image: "fundadores-galleria-selfie", alt: "Selfie de Danae y Christian bajo la cúpula de la Galleria Vittorio Emanuele II, el último día" },
+    { video: { src: "/video/fundadores-salone.mp4", poster: "/video/fundadores-salone.jpg" }, alt: "Video: bajo la cubierta de Fiera Milano Rho, durante el Salone del Mobile" },
+    { image: "danae-escalinata-salone", alt: "Danae sentada en la escalinata roja del Salone del Mobile, con la bolsa de Experience Design" },
+    { video: { src: "/video/christian-salone.mp4", poster: "/video/christian-salone.jpg" }, alt: "Video: participantes recorren un stand del Salone del Mobile" },
+    { image: "danae-espejo-showroom", alt: "Danae se fotografía en un espejo de un showroom del Fuorisalone" },
+    { video: { src: "/video/danae-showroom-deco.mp4", poster: "/video/danae-showroom-deco.jpg" }, alt: "Video: un showroom luminoso con una mesa baja, flores y repisas de objetos" },
+  ] as MediaItem[],
+  },
+  formacion: {
+    label: "Aprender en el lugar: Fuorisalone e Istituto Marangoni",
+    items: [
+    { video: { src: "/video/formacion-charla-fuori.mp4", poster: "/video/formacion-charla-fuori.jpg" }, alt: "Video: el grupo escucha una charla bajo una galería de arcos durante el Fuorisalone" },
+    { video: { src: "/video/formacion-marangoni-placa.mp4", poster: "/video/formacion-marangoni-placa.jpg" }, alt: "Video: la placa del Istituto Marangoni en la fachada de su sede de Milán" },
+    { video: { src: "/video/formacion-marangoni-entrada.mp4", poster: "/video/formacion-marangoni-entrada.jpg" }, alt: "Video: la entrada del Istituto Marangoni, en una calle de Milán" },
+    { video: { src: "/video/formacion-muestras.mp4", poster: "/video/formacion-muestras.jpg" }, alt: "Video: muestras de color de un muestrario, ordenadas en una repisa" },
+  ] as MediaItem[],
+  },
+  marcaPersonal: {
+    label: "Marca personal, en el viaje",
+    items: [
+    { video: { src: "/video/marca-christian-explica.mp4", poster: "/video/marca-christian-explica.jpg" }, alt: "Video: Christian explica al grupo una pieza en un showroom del Fuorisalone" },
+    { image: "christian-venecia-bolsa", alt: "Christian Erdmann con la bolsa de Experience Design en un embarcadero de Venecia" },
+    { video: { src: "/video/marca-bolsa-antolini.mp4", poster: "/video/marca-bolsa-antolini.jpg" }, alt: "Video: Christian Erdmann en el showroom de Antolini, en Verona, frente a una placa de piedra verde" },
+  ] as MediaItem[],
+  },
+  milan: {
+    label: "Milano Design Week 2026, en video",
+    items: [
+    { video: { src: "/video/salone-video-mesa.mp4", poster: "/video/salone-video-mesa.jpg" }, alt: "Video: un living de sofás claros en un stand del Salone del Mobile", ratio: "16 / 9" },
+    { video: { src: "/video/fuori-video-gessi-pieza.mp4", poster: "/video/fuori-video-gessi-pieza.jpg" }, alt: "Video: una pieza de grifería sobre un bloque de mármol en el espacio de Gessi" },
+    { video: { src: "/video/salone-video-bancos.mp4", poster: "/video/salone-video-bancos.jpg" }, alt: "Video: lámparas de vidrio suspendidas sobre un comedor, en un stand del Salone del Mobile" },
+    { video: { src: "/video/fuori-video-flor.mp4", poster: "/video/fuori-video-flor.jpg" }, alt: "Video: una gran ilustración de una flor en blanco y negro durante el Fuorisalone" },
+    { video: { src: "/video/fuori-video-gessi-sala.mp4", poster: "/video/fuori-video-gessi-sala.jpg" }, alt: "Video: el grupo recorre un showroom amplio del Fuorisalone" },
+    { video: { src: "/video/fuori-video-cuero.mp4", poster: "/video/fuori-video-cuero.jpg" }, alt: "Video: muestras de cuero con costuras, tocadas de cerca en un showroom" },
+  ] as MediaItem[],
+  },
+};
+
 export type CollagePhoto = { image: ImageName; alt: string };
 /** Pieza del collage de Destinos (polaroid): una foto o un video corto sin audio. */
 export type CollageItem = {
@@ -893,22 +949,26 @@ export const destinations = {
       /** Inicio: la etiqueta del selector y su carrusel. */
       homeLabel: "Milano Design Week",
       collage: [
-        { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque", caption: "Milano Design Week" },
-        { image: "salone-pasillo-carteles", alt: "Visitantes recorriendo el pasillo central de Fiera Milano Rho bajo los carteles rojos del Salone del Mobile", caption: "Fiera Milano Rho" },
-        { video: { src: "/video/milan-salone-letras.mp4", poster: "/video/milan-salone-letras.jpg" }, alt: "Video: las letras rojas del Salone sobre un adoquinado, frente a los árboles, en Milán", caption: "Milán" },
-        { video: { src: "/video/milan-kerakoll-colores.mp4", poster: "/video/milan-kerakoll-colores.jpg" }, alt: "Video: el muro de colores de Kerakoll durante el Fuorisalone", caption: "Fuorisalone" },
-        { image: "milan-duomo-grupo-noche", alt: "El grupo de Experience Design frente al Duomo de Milán iluminado, de noche", caption: "Duomo di Milano" },
-        { video: { src: "/video/milan-fuori-muro.mp4", poster: "/video/milan-fuori-muro.jpg" }, alt: "Video: repisas con cerámicas, muestras de textiles y objetos de diseño en un showroom de Milán" },
-        { image: "fuori-showroom-lampara", alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida", caption: "Fuorisalone" },
-        { image: "milan-galleria-cupula", alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico", caption: "Galleria Vittorio Emanuele II" },
-        { image: "venecia-gondola", alt: "Participante en una góndola bajo un puente de Venecia", caption: "Venecia" },
+        { image: "fuori-selfie-grupo", alt: "Selfie de Danae, Christian y el grupo en una calle de Milán durante el Fuorisalone" },
+        { video: { src: "/video/pol-fuori-espejo.mp4", poster: "/video/pol-fuori-espejo.jpg" }, alt: "Video: tres participantes se fotografían en un espejo de un showroom del Fuorisalone" },
+        { image: "aeropuerto-bolsa-maleta", alt: "La bolsa de Experience Design sobre una maleta, frente a las pantallas de salidas del aeropuerto" },
+        { video: { src: "/video/pol-fuori-selfie.mp4", poster: "/video/pol-fuori-selfie.jpg" }, alt: "Video: Danae y Christian en una selfie en una calle de Milán" },
+        { image: "milan-grupo-eurocucina", alt: "El grupo de Experience Design frente al telón de EuroCucina en el Salone del Mobile" },
+        { video: { src: "/video/pol-venecia-bolsa.mp4", poster: "/video/pol-venecia-bolsa.jpg" }, alt: "Video: la bolsa de Experience Design en alto, sobre el Gran Canal de Venecia" },
+        { image: "milan-galleria-noche-fundadores", alt: "Danae y Christian de noche, con la Galleria Vittorio Emanuele II iluminada detrás" },
+        { video: { src: "/video/pol-fuori-microcar.mp4", poster: "/video/pol-fuori-microcar.jpg" }, alt: "Video: un pequeño auto verde agua con la puerta frontal abierta, en una calle de Milán" },
+        { image: "lago-como-grupo-glicinas", alt: "Tres participantes con bolsas de Experience Design bajo una pérgola de glicinas, junto al lago de Como" },
+        { video: { src: "/video/pol-lago-como-banderas.mp4", poster: "/video/pol-lago-como-banderas.jpg" }, alt: "Video: Christian junto al lago de Como, bajo banderas de Italia" },
+        { video: { src: "/video/pol-fuori-escultura.mp4", poster: "/video/pol-fuori-escultura.jpg" }, alt: "Video: una escultura de tela plisada en el patio de un palacio, durante el Fuorisalone" },
+        { video: { src: "/video/pol-lago-como-bolsa.mp4", poster: "/video/pol-lago-como-bolsa.jpg" }, alt: "Video: de cerca, la «E.» bordada en la bolsa negra de Experience Design" },
+        { image: "milan-scala-cafe-mesa", alt: "Mesa del café de La Scala: una flor, cubiertos dorados y la carta, el último día en Milán" },
       ] as CollageItem[],
       gallery: [
-        { image: "salone-escalinata-roja" as ImageName, alt: "Escalinata roja de acceso a los pabellones del Salone del Mobile, bajo la cubierta de vidrio de Fiera Milano Rho" },
-        { image: "fuori-showroom-lampara" as ImageName, alt: "Showroom del Fuorisalone con techo de vigas, sofás bajos y una lámpara cálida suspendida" },
-        { image: "milan-galleria-cupula" as ImageName, alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
-        { image: "salone-lamparas-burbujas" as ImageName, alt: "Lámpara de esferas de vidrio sobre una mesa de madera, con plantas detrás, en el Salone del Mobile" },
-        { image: "milan-grupo-eurocucina" as ImageName, alt: "Participante frente al muro amarillo de EuroCucina en el Salone del Mobile" },
+        { image: "milan-showroom-letrero" as ImageName, alt: "Una participante frente a un letrero luminoso de Milán en un showroom, entre lámparas de vidrio ámbar" },
+        { image: "salone-cocina-isla" as ImageName, alt: "Salone del Mobile: una cocina con isla de piedra y campana suspendida, con visitantes recorriendo el stand" },
+        { image: "milan-galleria-arco-noche" as ImageName, alt: "La entrada de la Galleria Vittorio Emanuele II iluminada, de noche" },
+        { image: "salone-living-curvo" as ImageName, alt: "Salone del Mobile: un living de sofás curvos y una mesa de mármol frente a un espejo redondo" },
+        { image: "salone-sillas-tejido" as ImageName, alt: "Sillas de tejido gris oscuro alrededor de una mesa de madera, vistas desde arriba" },
       ],
     },
     {
@@ -940,7 +1000,6 @@ export const destinations = {
         { image: "casacor-marmol-verde-sofa" as ImageName, alt: "Casacor São Paulo: muro de mármol verde veteado, con una cubierta de piedra y un sofá curvo" },
         { image: "casacor-mesas-vitrina" as ImageName, alt: "Casacor São Paulo: mesas bajas negras frente a una vitrina con vasijas, abierta al jardín" },
         { image: "casacor-vitrina-blanca" as ImageName, alt: "Casacor São Paulo: vitrina blanca de vidrio con vajilla, junto a una isla de madera clara" },
-        { image: "casacor-terraza-jardin" as ImageName, alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },
       ],
     },
   ],
@@ -964,9 +1023,7 @@ export const saoPaulo = {
   galleryLabel: "Casacor São Paulo 2025",
   galleryTitle: "Lo que recorrimos.",
   gallery: [
-    { image: "casacor-bontempo-espejo-agua", alt: "Letras de Casa Bontempo sobre un muro de hormigón, con jardín y espejo de agua" },
     { image: "casacor-ventana-arco", alt: "Baño de muros oscuros con una ventana en arco, plantas y piedras al pie del lavamanos" },
-    { image: "casacor-biblioteca", alt: "Biblioteca de repisas de madera con objetos de cerámica y libros, junto a un sofá" },
     { image: "casacor-arbol-celosia", alt: "Un árbol interior frente a una celosía de cuadros iluminada" },
     { image: "casacor-grupo-escalera", alt: "Participantes sentadas en una escalera de vidrio y madera en Casacor" },
     { image: "casacor-bar-cielo-estampado", alt: "Bar con cielo de papel estampado, repisas de vidrio y cubierta de piedra" },

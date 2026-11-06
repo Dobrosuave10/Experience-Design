@@ -13,9 +13,10 @@
   font-size: clamp(2.4rem, 5vw, 5.4rem);
   line-height: 1;
 }
-/* Columnas de alturas libres: cada foto en su proporción */
+/* Columnas de alturas libres: cada foto en su proporción. Tres columnas: las horizontales
+   se ven grandes, sin recorte */
 .gallery__grid {
-  columns: 4;
+  columns: 3;
   column-gap: clamp(10px, 1.4vw, 22px);
 }
 .gallery__item {
@@ -27,11 +28,6 @@
 .gallery__item img {
   width: 100%;
   height: auto;
-}
-@media (max-width: 1199px) {
-  .gallery__grid {
-    columns: 3;
-  }
 }
 @media (max-width: 767px) {
   .gallery__grid {

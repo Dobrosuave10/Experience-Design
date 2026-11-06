@@ -47,7 +47,7 @@ export function Gallery({ id, label, title, photos, tone = "paper" }: Props) {
         <ul className="gallery__grid">
           {photos.map((p) => (
             <li key={p.image} className="gallery__item">
-              <Photo name={p.image} alt={p.alt} sizes="(max-width: 767px) 46vw, (max-width: 1199px) 31vw, 24vw" />
+              <Photo name={p.image} alt={p.alt} sizes="(max-width: 767px) 46vw, 31vw" />
             </li>
           ))}
         </ul>

@@ -1,4 +1,4 @@
-import { milan, milanChapters, type MilanChapterId } from "../content/site";
+import { media, milan, milanChapters, type MilanChapterId } from "../content/site";
 import { NextChapter } from "../components/NextChapter";
 import { Testimonials } from "../components/Testimonials";
 import { FloatingEnroll } from "../components/FloatingEnroll";
@@ -6,6 +6,7 @@ import { ChapterIndex } from "../components/ChapterIndex";
 import { Milan, MilanIntro, MilanRooms } from "../sections/Milan";
 import { Itinerary } from "../sections/Itinerary";
 import { Gallery } from "../sections/Gallery";
+import { MediaStrip } from "../sections/MediaStrip";
 import { MilanAudience, MilanCta, MilanFit, MilanIncludes, MilanPlaces, MilanSteps } from "../sections/MilanDetails";
 import "./MilanPage.css";
 
@@ -66,6 +67,7 @@ export default function MilanPage() {
         <Chapter id="como-se-vivio">
           <MilanRooms tone={tone("como-se-vivio")} />
           <Gallery id="milan-galeria" label={milan.galleryLabel} title={milan.galleryTitle} photos={milan.gallery} tone={tone("como-se-vivio")} />
+          <MediaStrip id="milan-videos" label={media.milan.label} items={media.milan.items} tone={tone("como-se-vivio")} />
         </Chapter>
         <Chapter id="testimonios">
           <Testimonials tone={tone("testimonios")} />

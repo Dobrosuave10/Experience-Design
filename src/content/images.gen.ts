@@ -1,6 +1,12 @@
 // Generado por scripts/optimize-images.mjs. No editar a mano.
 export type ImageAsset = { src: string; srcSet: string; w: number; h: number };
 export const images = {
+  "aeropuerto-bolsa-maleta": {
+    "src": "/img/aeropuerto-bolsa-maleta-1350.webp",
+    "srcSet": "/img/aeropuerto-bolsa-maleta-480.webp 480w, /img/aeropuerto-bolsa-maleta-960.webp 960w, /img/aeropuerto-bolsa-maleta-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "casacor-aplique-muro-marmolado": {
     "src": "/img/casacor-aplique-muro-marmolado-1350.webp",
     "srcSet": "/img/casacor-aplique-muro-marmolado-480.webp 480w, /img/casacor-aplique-muro-marmolado-960.webp 960w, /img/casacor-aplique-muro-marmolado-1350.webp 1350w",
@@ -76,6 +82,12 @@ export const images = {
   "casacor-dormitorio-muro-curvo": {
     "src": "/img/casacor-dormitorio-muro-curvo-1350.webp",
     "srcSet": "/img/casacor-dormitorio-muro-curvo-480.webp 480w, /img/casacor-dormitorio-muro-curvo-960.webp 960w, /img/casacor-dormitorio-muro-curvo-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "casacor-estanteria-libros": {
+    "src": "/img/casacor-estanteria-libros-1350.webp",
+    "srcSet": "/img/casacor-estanteria-libros-480.webp 480w, /img/casacor-estanteria-libros-960.webp 960w, /img/casacor-estanteria-libros-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -181,11 +193,41 @@ export const images = {
     "w": 1366,
     "h": 665
   },
+  "christian-showroom-cocina": {
+    "src": "/img/christian-showroom-cocina-1920.webp",
+    "srcSet": "/img/christian-showroom-cocina-480.webp 480w, /img/christian-showroom-cocina-960.webp 960w, /img/christian-showroom-cocina-1600.webp 1600w, /img/christian-showroom-cocina-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
+  },
+  "christian-venecia-bolsa": {
+    "src": "/img/christian-venecia-bolsa-960.webp",
+    "srcSet": "/img/christian-venecia-bolsa-480.webp 480w, /img/christian-venecia-bolsa-960.webp 960w",
+    "w": 960,
+    "h": 1280
+  },
   "christian": {
     "src": "/img/christian-780.webp",
     "srcSet": "/img/christian-480.webp 480w, /img/christian-780.webp 780w",
     "w": 780,
     "h": 1170
+  },
+  "danae-escalinata-salone": {
+    "src": "/img/danae-escalinata-salone-1350.webp",
+    "srcSet": "/img/danae-escalinata-salone-480.webp 480w, /img/danae-escalinata-salone-960.webp 960w, /img/danae-escalinata-salone-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "danae-espejo-showroom": {
+    "src": "/img/danae-espejo-showroom-1350.webp",
+    "srcSet": "/img/danae-espejo-showroom-480.webp 480w, /img/danae-espejo-showroom-960.webp 960w, /img/danae-espejo-showroom-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "danae-lavamanos-espejo": {
+    "src": "/img/danae-lavamanos-espejo-1800.webp",
+    "srcSet": "/img/danae-lavamanos-espejo-480.webp 480w, /img/danae-lavamanos-espejo-960.webp 960w, /img/danae-lavamanos-espejo-1600.webp 1600w, /img/danae-lavamanos-espejo-1800.webp 1800w",
+    "w": 1800,
+    "h": 2400
   },
   "danae": {
     "src": "/img/danae-780.webp",
@@ -204,6 +246,18 @@ export const images = {
     "srcSet": "/img/formacion-muestrario-cueros-480.webp 480w, /img/formacion-muestrario-cueros-960.webp 960w",
     "w": 960,
     "h": 1280
+  },
+  "fundadores-espejo-showroom": {
+    "src": "/img/fundadores-espejo-showroom-1350.webp",
+    "srcSet": "/img/fundadores-espejo-showroom-480.webp 480w, /img/fundadores-espejo-showroom-960.webp 960w, /img/fundadores-espejo-showroom-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "fundadores-galleria-selfie": {
+    "src": "/img/fundadores-galleria-selfie-1350.webp",
+    "srcSet": "/img/fundadores-galleria-selfie-480.webp 480w, /img/fundadores-galleria-selfie-960.webp 960w, /img/fundadores-galleria-selfie-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
   },
   "fundadores-showroom": {
     "src": "/img/fundadores-showroom-848.webp",
@@ -229,6 +283,12 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "fuori-kerakoll-explicacion": {
+    "src": "/img/fuori-kerakoll-explicacion-1350.webp",
+    "srcSet": "/img/fuori-kerakoll-explicacion-480.webp 480w, /img/fuori-kerakoll-explicacion-960.webp 960w, /img/fuori-kerakoll-explicacion-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "fuori-kerakoll-fachada": {
     "src": "/img/fuori-kerakoll-fachada-1350.webp",
     "srcSet": "/img/fuori-kerakoll-fachada-480.webp 480w, /img/fuori-kerakoll-fachada-960.webp 960w, /img/fuori-kerakoll-fachada-1350.webp 1350w",
@@ -241,9 +301,21 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "fuori-kerakoll-grupo": {
+    "src": "/img/fuori-kerakoll-grupo-1350.webp",
+    "srcSet": "/img/fuori-kerakoll-grupo-480.webp 480w, /img/fuori-kerakoll-grupo-960.webp 960w, /img/fuori-kerakoll-grupo-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "fuori-kerakoll-muestrario": {
     "src": "/img/fuori-kerakoll-muestrario-1350.webp",
     "srcSet": "/img/fuori-kerakoll-muestrario-480.webp 480w, /img/fuori-kerakoll-muestrario-960.webp 960w, /img/fuori-kerakoll-muestrario-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "fuori-selfie-grupo": {
+    "src": "/img/fuori-selfie-grupo-1350.webp",
+    "srcSet": "/img/fuori-selfie-grupo-480.webp 480w, /img/fuori-selfie-grupo-960.webp 960w, /img/fuori-selfie-grupo-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -253,9 +325,27 @@ export const images = {
     "w": 2400,
     "h": 1350
   },
+  "fuori-showroom-conversacion": {
+    "src": "/img/fuori-showroom-conversacion-1350.webp",
+    "srcSet": "/img/fuori-showroom-conversacion-480.webp 480w, /img/fuori-showroom-conversacion-960.webp 960w, /img/fuori-showroom-conversacion-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "fuori-showroom-lampara": {
     "src": "/img/fuori-showroom-lampara-1350.webp",
     "srcSet": "/img/fuori-showroom-lampara-480.webp 480w, /img/fuori-showroom-lampara-960.webp 960w, /img/fuori-showroom-lampara-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "fuori-showroom-sala": {
+    "src": "/img/fuori-showroom-sala-1920.webp",
+    "srcSet": "/img/fuori-showroom-sala-480.webp 480w, /img/fuori-showroom-sala-960.webp 960w, /img/fuori-showroom-sala-1600.webp 1600w, /img/fuori-showroom-sala-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
+  },
+  "lago-como-grupo-glicinas": {
+    "src": "/img/lago-como-grupo-glicinas-1350.webp",
+    "srcSet": "/img/lago-como-grupo-glicinas-480.webp 480w, /img/lago-como-grupo-glicinas-960.webp 960w, /img/lago-como-grupo-glicinas-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -289,6 +379,12 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "milan-galleria-arco-noche": {
+    "src": "/img/milan-galleria-arco-noche-1350.webp",
+    "srcSet": "/img/milan-galleria-arco-noche-480.webp 480w, /img/milan-galleria-arco-noche-960.webp 960w, /img/milan-galleria-arco-noche-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "milan-galleria-cupula": {
     "src": "/img/milan-galleria-cupula-1350.webp",
     "srcSet": "/img/milan-galleria-cupula-480.webp 480w, /img/milan-galleria-cupula-960.webp 960w, /img/milan-galleria-cupula-1350.webp 1350w",
@@ -298,6 +394,12 @@ export const images = {
   "milan-galleria-grupo": {
     "src": "/img/milan-galleria-grupo-1350.webp",
     "srcSet": "/img/milan-galleria-grupo-480.webp 480w, /img/milan-galleria-grupo-960.webp 960w, /img/milan-galleria-grupo-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "milan-galleria-noche-fundadores": {
+    "src": "/img/milan-galleria-noche-fundadores-1350.webp",
+    "srcSet": "/img/milan-galleria-noche-fundadores-480.webp 480w, /img/milan-galleria-noche-fundadores-960.webp 960w, /img/milan-galleria-noche-fundadores-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -324,6 +426,18 @@ export const images = {
     "srcSet": "/img/milan-grupo-suelo-rojo-480.webp 480w, /img/milan-grupo-suelo-rojo-960.webp 960w, /img/milan-grupo-suelo-rojo-1600.webp 1600w, /img/milan-grupo-suelo-rojo-1920.webp 1920w",
     "w": 2400,
     "h": 1800
+  },
+  "milan-scala-cafe-mesa": {
+    "src": "/img/milan-scala-cafe-mesa-1350.webp",
+    "srcSet": "/img/milan-scala-cafe-mesa-480.webp 480w, /img/milan-scala-cafe-mesa-960.webp 960w, /img/milan-scala-cafe-mesa-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "milan-showroom-letrero": {
+    "src": "/img/milan-showroom-letrero-1350.webp",
+    "srcSet": "/img/milan-showroom-letrero-480.webp 480w, /img/milan-showroom-letrero-960.webp 960w, /img/milan-showroom-letrero-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
   },
   "milan-terraza-atardecer": {
     "src": "/img/milan-terraza-atardecer-1920.webp",
@@ -352,6 +466,12 @@ export const images = {
   "salone-cocina-bosque": {
     "src": "/img/salone-cocina-bosque-1920.webp",
     "srcSet": "/img/salone-cocina-bosque-480.webp 480w, /img/salone-cocina-bosque-960.webp 960w, /img/salone-cocina-bosque-1600.webp 1600w, /img/salone-cocina-bosque-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
+  },
+  "salone-cocina-isla": {
+    "src": "/img/salone-cocina-isla-1920.webp",
+    "srcSet": "/img/salone-cocina-isla-480.webp 480w, /img/salone-cocina-isla-960.webp 960w, /img/salone-cocina-isla-1600.webp 1600w, /img/salone-cocina-isla-1920.webp 1920w",
     "w": 2400,
     "h": 1350
   },
@@ -385,6 +505,12 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "salone-living-curvo": {
+    "src": "/img/salone-living-curvo-1920.webp",
+    "srcSet": "/img/salone-living-curvo-480.webp 480w, /img/salone-living-curvo-960.webp 960w, /img/salone-living-curvo-1600.webp 1600w, /img/salone-living-curvo-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
+  },
   "salone-pasillo-carteles": {
     "src": "/img/salone-pasillo-carteles-1548.webp",
     "srcSet": "/img/salone-pasillo-carteles-480.webp 480w, /img/salone-pasillo-carteles-960.webp 960w, /img/salone-pasillo-carteles-1548.webp 1548w",
@@ -397,6 +523,18 @@ export const images = {
     "w": 2400,
     "h": 1350
   },
+  "salone-silla-escultura": {
+    "src": "/img/salone-silla-escultura-1350.webp",
+    "srcSet": "/img/salone-silla-escultura-480.webp 480w, /img/salone-silla-escultura-960.webp 960w, /img/salone-silla-escultura-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "salone-sillas-tejido": {
+    "src": "/img/salone-sillas-tejido-1350.webp",
+    "srcSet": "/img/salone-sillas-tejido-480.webp 480w, /img/salone-sillas-tejido-960.webp 960w, /img/salone-sillas-tejido-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "salone-sillon-cuero": {
     "src": "/img/salone-sillon-cuero-1920.webp",
     "srcSet": "/img/salone-sillon-cuero-480.webp 480w, /img/salone-sillon-cuero-960.webp 960w, /img/salone-sillon-cuero-1600.webp 1600w, /img/salone-sillon-cuero-1920.webp 1920w",
@@ -408,6 +546,12 @@ export const images = {
     "srcSet": "/img/salone-sofa-repisas-480.webp 480w, /img/salone-sofa-repisas-960.webp 960w, /img/salone-sofa-repisas-1600.webp 1600w, /img/salone-sofa-repisas-1920.webp 1920w",
     "w": 2400,
     "h": 1350
+  },
+  "venecia-calle-danae": {
+    "src": "/img/venecia-calle-danae-1350.webp",
+    "srcSet": "/img/venecia-calle-danae-480.webp 480w, /img/venecia-calle-danae-960.webp 960w, /img/venecia-calle-danae-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
   },
   "venecia-gondola": {
     "src": "/img/venecia-gondola-1350.webp",
@@ -424,6 +568,12 @@ export const images = {
   "venecia-grupo-mirador": {
     "src": "/img/venecia-grupo-mirador-1350.webp",
     "srcSet": "/img/venecia-grupo-mirador-480.webp 480w, /img/venecia-grupo-mirador-960.webp 960w, /img/venecia-grupo-mirador-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "venecia-pareja-canal": {
+    "src": "/img/venecia-pareja-canal-1350.webp",
+    "srcSet": "/img/venecia-pareja-canal-480.webp 480w, /img/venecia-pareja-canal-960.webp 960w, /img/venecia-pareja-canal-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -444,6 +594,12 @@ export const images = {
     "srcSet": "/img/verona-antolini-bolsa-480.webp 480w, /img/verona-antolini-bolsa-960.webp 960w, /img/verona-antolini-bolsa-1350.webp 1350w",
     "w": 1350,
     "h": 2400
+  },
+  "verona-antolini-pasillo": {
+    "src": "/img/verona-antolini-pasillo-1920.webp",
+    "srcSet": "/img/verona-antolini-pasillo-480.webp 480w, /img/verona-antolini-pasillo-960.webp 960w, /img/verona-antolini-pasillo-1600.webp 1600w, /img/verona-antolini-pasillo-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
   },
   "verona-grupo-antolini": {
     "src": "/img/verona-grupo-antolini-1350.webp",
