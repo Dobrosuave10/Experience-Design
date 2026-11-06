@@ -7,7 +7,7 @@ import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK, isLite } from "../lib/env";
 import { Link } from "../components/Link";
 import { Photo } from "../components/Photo";
-import { RevealText } from "../components/RevealText";
+import { AxesTriangle } from "../components/AxesTriangle";
 import "./ProgramsSpine.css";
 
 type Item = (typeof programsSpine.items)[number];
@@ -55,8 +55,10 @@ export function ProgramsSpine() {
     <section ref={ref} id="programas-inicio" className="spine section" data-tone="warm" aria-labelledby="spine-title">
       <div className="wrap">
         <header className="spine__head">
-          <p className="label spine__kicker">{programsSpine.kicker}</p>
-          <RevealText id="spine-title" className="spine__title display" lines={programsSpine.title} />
+          <h2 id="spine-title" className="sr-only">
+            {programsSpine.label}
+          </h2>
+          <AxesTriangle />
         </header>
 
         <div className="spine__body">

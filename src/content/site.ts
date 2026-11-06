@@ -176,13 +176,22 @@ export const idea = {
 /** Inicio · los tres ejes sobre una línea vertical: Descubrir, Aprender, Expresar. */
 export const programsSpine = {
   kicker: "Experience Design",
-  title: ["Tres ejes.", "Una misma experiencia."],
+  /** Nombre accesible de la sección (el triángulo reemplaza al titular visible). */
+  label: "Los tres ejes de Experience Design: Experiencias, Formación y Marca personal",
+  /** Triángulo de los ejes: una foto por eje. */
+  triangle: {
+    experiencias: { image: "milan-grupo-gessi" as ImageName, align: "xMidYMax" },
+    formacion: { image: "fuori-kerakoll-grupo-bolsa" as ImageName },
+    "marca-personal": { image: "verona-antolini-bolsa" as ImageName },
+  } as Record<string, { image: ImageName; align?: string }>,
   items: [
     {
       id: "experiencias",
       n: "01",
       verb: "Descubrir",
       name: "Experiencias",
+      /** Página del eje (triángulo de Inicio). */
+      axisHref: routes.destinos as string,
       text: "Viajes curados a las mejores ferias y eventos exclusivos en las capitales del diseño mundial.",
       href: routes.destinos as string | undefined,
       cta: "Milano Design Week 2027" as string | undefined,
@@ -199,6 +208,8 @@ export const programsSpine = {
       n: "02",
       verb: "Aprender",
       name: "Formación",
+      /** Página del eje (triángulo de Inicio). */
+      axisHref: routes.formacion as string,
       text: "Herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial.",
       href: routes.formacion as string | undefined,
       cta: "Conocer Formación" as string | undefined,
@@ -210,6 +221,8 @@ export const programsSpine = {
       n: "03",
       verb: "Expresar",
       name: "Marca personal",
+      /** Página del eje (triángulo de Inicio). */
+      axisHref: routes.marcaPersonal as string,
       text: "Construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa.",
       href: routes.marcaPersonal as string | undefined,
       cta: "Conocer Marca personal" as string | undefined,
@@ -856,11 +869,11 @@ export const destinations = {
         { image: "casacor-sala-naranja", alt: "Sala de luz naranja con una butaca acolchada y una obra circular en el muro" },
       ] as CollageItem[],
       gallery: [
-        { image: "casacor-celosia-arcos-madera" as ImageName, alt: "Casacor São Paulo 2025: celosía de madera con arcos que deja ver el jardín" },
+        { image: "casacor-comedor-madera" as ImageName, alt: "Casacor São Paulo: comedor con una larga mesa de madera bajo un cielo de paneles y ventanales" },
+        { image: "casacor-marmol-verde-sofa" as ImageName, alt: "Casacor São Paulo: muro de mármol verde veteado, con una cubierta de piedra y un sofá curvo" },
+        { image: "casacor-mesas-vitrina" as ImageName, alt: "Casacor São Paulo: mesas bajas negras frente a una vitrina con vasijas, abierta al jardín" },
+        { image: "casacor-vitrina-blanca" as ImageName, alt: "Casacor São Paulo: vitrina blanca de vidrio con vajilla, junto a una isla de madera clara" },
         { image: "casacor-terraza-jardin" as ImageName, alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },
-        { image: "casacor-lavamanos-terracota" as ImageName, alt: "Baño con lavamanos de madera terracota y dos espejos redondos iluminados" },
-        { image: "casacor-living-biblioteca" as ImageName, alt: "Living frente a una biblioteca iluminada, con una mesa de piedra cubierta de libros" },
-        { image: "casacor-atrio-reflejo-agua" as ImageName, alt: "Atrio de varios niveles reflejado en un espejo de agua" },
       ],
     },
   ],

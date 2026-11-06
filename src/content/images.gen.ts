@@ -61,6 +61,12 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "casacor-comedor-madera": {
+    "src": "/img/casacor-comedor-madera-1350.webp",
+    "srcSet": "/img/casacor-comedor-madera-480.webp 480w, /img/casacor-comedor-madera-960.webp 960w, /img/casacor-comedor-madera-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "casacor-dormitorio-celosia": {
     "src": "/img/casacor-dormitorio-celosia-1800.webp",
     "srcSet": "/img/casacor-dormitorio-celosia-480.webp 480w, /img/casacor-dormitorio-celosia-960.webp 960w, /img/casacor-dormitorio-celosia-1600.webp 1600w, /img/casacor-dormitorio-celosia-1800.webp 1800w",
@@ -121,6 +127,18 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "casacor-marmol-verde-sofa": {
+    "src": "/img/casacor-marmol-verde-sofa-1350.webp",
+    "srcSet": "/img/casacor-marmol-verde-sofa-480.webp 480w, /img/casacor-marmol-verde-sofa-960.webp 960w, /img/casacor-marmol-verde-sofa-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "casacor-mesas-vitrina": {
+    "src": "/img/casacor-mesas-vitrina-1350.webp",
+    "srcSet": "/img/casacor-mesas-vitrina-480.webp 480w, /img/casacor-mesas-vitrina-960.webp 960w, /img/casacor-mesas-vitrina-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "casacor-quiebravistas-plantas": {
     "src": "/img/casacor-quiebravistas-plantas-1350.webp",
     "srcSet": "/img/casacor-quiebravistas-plantas-480.webp 480w, /img/casacor-quiebravistas-plantas-960.webp 960w, /img/casacor-quiebravistas-plantas-1350.webp 1350w",
@@ -148,6 +166,12 @@ export const images = {
   "casacor-ventana-arco": {
     "src": "/img/casacor-ventana-arco-1350.webp",
     "srcSet": "/img/casacor-ventana-arco-480.webp 480w, /img/casacor-ventana-arco-960.webp 960w, /img/casacor-ventana-arco-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "casacor-vitrina-blanca": {
+    "src": "/img/casacor-vitrina-blanca-1350.webp",
+    "srcSet": "/img/casacor-vitrina-blanca-480.webp 480w, /img/casacor-vitrina-blanca-960.webp 960w, /img/casacor-vitrina-blanca-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -208,6 +232,12 @@ export const images = {
   "fuori-kerakoll-fachada": {
     "src": "/img/fuori-kerakoll-fachada-1350.webp",
     "srcSet": "/img/fuori-kerakoll-fachada-480.webp 480w, /img/fuori-kerakoll-fachada-960.webp 960w, /img/fuori-kerakoll-fachada-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "fuori-kerakoll-grupo-bolsa": {
+    "src": "/img/fuori-kerakoll-grupo-bolsa-1350.webp",
+    "srcSet": "/img/fuori-kerakoll-grupo-bolsa-480.webp 480w, /img/fuori-kerakoll-grupo-bolsa-960.webp 960w, /img/fuori-kerakoll-grupo-bolsa-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -382,6 +412,12 @@ export const images = {
   "venecia-salute": {
     "src": "/img/venecia-salute-1350.webp",
     "srcSet": "/img/venecia-salute-480.webp 480w, /img/venecia-salute-960.webp 960w, /img/venecia-salute-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "verona-antolini-bolsa": {
+    "src": "/img/verona-antolini-bolsa-1350.webp",
+    "srcSet": "/img/verona-antolini-bolsa-480.webp 480w, /img/verona-antolini-bolsa-960.webp 960w, /img/verona-antolini-bolsa-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },

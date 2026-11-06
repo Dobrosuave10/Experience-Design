@@ -1,0 +1,86 @@
+/* Triángulo de los ejes (Inicio) */
+.tri {
+  display: block;
+  width: min(100%, 760px);
+  height: auto;
+  margin-inline: auto;
+  overflow: visible;
+}
+.tri__seg {
+  cursor: pointer;
+  outline: none;
+}
+.tri__seg image {
+  transition: transform 1.2s var(--ease-out);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.tri__shade {
+  fill: #0e0c0b;
+  opacity: 0.42;
+  transition: opacity 0.6s var(--ease-out);
+}
+.tri__seg:hover .tri__shade,
+.tri__seg:focus-visible .tri__shade {
+  opacity: 0.26;
+}
+.tri__seg:hover image,
+.tri__seg:focus-visible image {
+  transform: scale(1.04);
+}
+.tri__label {
+  pointer-events: none;
+}
+.tri__verb {
+  font-family: var(--glacial);
+  font-size: 15px;
+  letter-spacing: 0.32em;
+  fill: var(--paper);
+}
+.tri__name {
+  font-family: var(--serif);
+  font-size: 40px;
+  fill: var(--paper);
+}
+.tri__rule {
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+.tri__lines line {
+  stroke: var(--paper);
+  stroke-width: 2;
+  opacity: 0.9;
+}
+.tri__outline {
+  fill: none;
+  stroke: var(--ed-earth, var(--clay));
+  stroke-width: 2;
+}
+.tri__disc {
+  fill: var(--ed-earth, var(--clay));
+}
+.tri__ring {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+.tri__seg:focus-visible .tri__shade {
+  stroke: var(--paper);
+  stroke-width: 4;
+}
+
+/* En el teléfono el triángulo ocupa el ancho: textos un poco más grandes para que se lean */
+@media (max-width: 767px) {
+  .tri__verb {
+    font-size: 22px;
+    letter-spacing: 0.22em;
+  }
+  .tri__name {
+    font-size: 46px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tri__seg image {
+    transition: none;
+  }
+}
