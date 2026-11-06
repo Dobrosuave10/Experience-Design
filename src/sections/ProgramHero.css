@@ -120,7 +120,32 @@
   letter-spacing: -0.02em;
 }
 
-/* 01 Formación */
+/* 01 Experiencias: texto a la izquierda; foto del grupo a la derecha, con la segunda encima */
+.ph--experiencias .ph__text {
+  grid-column: 1 / span 6;
+  grid-row: 2;
+}
+.ph--experiencias .ph__frame-wrap {
+  grid-column: 8 / span 4;
+  grid-row: 2;
+}
+.ph--experiencias .ph__frame {
+  max-height: 66vh;
+}
+.ph--experiencias .ph__detail {
+  position: absolute;
+  left: -30%;
+  bottom: -8%;
+  width: 40%;
+  border: 8px solid var(--bg);
+}
+.ph--experiencias .ph__name {
+  font-family: var(--serif);
+  font-size: clamp(3.6rem, 7vw, 8.4rem);
+  letter-spacing: -0.01em;
+}
+
+/* 02 Formación */
 .ph--formacion .ph__frame-wrap {
   grid-column: 1 / span 5;
   grid-row: 2;
@@ -164,8 +189,18 @@
     width: 72%;
     justify-self: end;
   }
-  .ph--formacion .ph__frame-wrap {
+  .ph--formacion .ph__frame-wrap,
+  .ph--experiencias .ph__frame-wrap {
     width: 76%;
+  }
+  .ph--experiencias .ph__frame-wrap {
+    justify-self: end;
+  }
+  .ph--experiencias .ph__detail {
+    left: -22%;
+  }
+  .ph--experiencias .ph__name {
+    font-size: clamp(3rem, 14vw, 5.4rem);
   }
   .ph--formacion .ph__detail {
     right: -26%;

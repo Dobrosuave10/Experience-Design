@@ -3,7 +3,7 @@ import { PageHero } from "../components/PageHero";
 import { NextChapter } from "../components/NextChapter";
 import { ProgramsRail } from "../sections/ProgramsRail";
 
-/** Programas: Formación y Marca personal, uno por pantalla sobre la línea. */
+/** Programas: Experiencias, Formación y Marca personal, uno por pantalla sobre la línea. */
 export default function Programs() {
   return (
     <>

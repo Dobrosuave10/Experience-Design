@@ -11,6 +11,7 @@ import { Footer } from "./sections/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Programs from "./pages/Programs";
+import ExperiencesPage from "./pages/ExperiencesPage";
 import FormationPage from "./pages/FormationPage";
 import PersonalBrandPage from "./pages/PersonalBrandPage";
 import Destinations from "./pages/Destinations";
@@ -25,6 +26,7 @@ const pages: Record<string, ComponentType> = {
   [routes.inicio]: Home,
   [routes.nosotros]: About,
   [routes.programas]: Programs,
+  [routes.experiencias]: ExperiencesPage,
   [routes.formacion]: FormationPage,
   [routes.marcaPersonal]: PersonalBrandPage,
   [routes.destinos]: Destinations,

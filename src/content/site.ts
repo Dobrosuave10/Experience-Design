@@ -65,6 +65,7 @@ export const routes = {
   inicio: "/",
   nosotros: "/nosotros",
   programas: "/programas",
+  experiencias: "/programas/experiencias",
   formacion: "/programas/formacion",
   marcaPersonal: "/programas/marca-personal",
   destinos: "/destinos",
@@ -89,6 +90,7 @@ export const nav: NavItem[] = [
     label: "Programas",
     href: routes.programas,
     children: [
+      { label: "Experiencias", note: "Descubrir", href: routes.experiencias },
       { label: "Formación", note: "Aprender", href: routes.formacion },
       { label: "Marca personal", note: "Expresar", href: routes.marcaPersonal },
     ],
@@ -109,6 +111,7 @@ export const pageTitles: Record<string, string> = {
   [routes.inicio]: "Experience Design · Abrir la mirada hacia nuevas posibilidades",
   [routes.nosotros]: "Nosotros · Experience Design",
   [routes.programas]: "Programas · Experience Design",
+  [routes.experiencias]: "Experiencias · Programas · Experience Design",
   [routes.formacion]: "Formación · Programas · Experience Design",
   [routes.marcaPersonal]: "Marca personal · Programas · Experience Design",
   [routes.destinos]: "Destinos · Experience Design",
@@ -130,7 +133,9 @@ export const pageDescriptions: Record<string, string> = {
   [routes.nosotros]:
     "Experience Design crea experiencias curadas para vivir el diseño desde dentro. Propósito, misión, visión y valores, y quiénes están detrás: Danae Barla y Christian Erdmann.",
   [routes.programas]:
-    "Dos programas para llevar lo vivido a la propia práctica: Formación, para aprender, y Marca personal, para expresar el sello propio. Para estudiantes y profesionales del diseño.",
+    "Tres ejes: Experiencias, para descubrir el diseño en su contexto; Formación, para aprender a capitalizar lo vivido; y Marca personal, para expresarlo con un sello propio.",
+  [routes.experiencias]:
+    "Experience Design crea experiencias curadas en las capitales del diseño: ferias, showrooms, empresas y ciudades donde el diseño forma parte de la vida cotidiana.",
   [routes.formacion]:
     "Formación: herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial.",
   [routes.marcaPersonal]:
@@ -191,7 +196,7 @@ export const programsSpine = {
       verb: "Descubrir",
       name: "Experiencias",
       /** Página del eje (triángulo de Inicio). */
-      axisHref: routes.destinos as string,
+      axisHref: routes.experiencias as string,
       text: "Viajes curados a las mejores ferias y eventos exclusivos en las capitales del diseño mundial.",
       href: routes.destinos as string | undefined,
       cta: "Milano Design Week 2027" as string | undefined,
@@ -495,6 +500,47 @@ export const milan2027 = {
   },
 };
 
+/**
+ * PROGRAMAS · Experiencias. Textos de la ficha oficial y de la definición de marca;
+ * sin precios. Las fotos son del grupo en Milán y Venecia.
+ */
+export const experiencesPage = {
+  axes: {
+    label: "Tres ejes",
+    text: "Descubrir el diseño en su contexto, aprender a capitalizar lo vivido y expresarlo con un sello propio.",
+  },
+  blocks: [
+    {
+      id: "ver-tocar",
+      label: "Lo que vas a ver y tocar",
+      paragraphs: [
+        "Detrás de una silla, un textil o una cubierta de piedra hay referencias, decisiones y un fundamento. La curaduría pone el foco ahí: cómo y por qué se diseñó cada pieza.",
+        "Materiales, terminaciones, proporción y luz, vistos y tocados en el lugar donde se presentan.",
+      ],
+      accent: "Si no lo tocas, no lo viste.",
+      image: "salone-grupo-letras-mobile" as ImageName,
+      alt: "El grupo de Experience Design junto a las grandes letras rojas «Mobile» a la entrada del Salone, bajo los árboles",
+    },
+    {
+      id: "con-quien",
+      label: "Con quién vives la experiencia",
+      paragraphs: ["Un viaje se recuerda por lo que se ve, pero sobre todo por con quién se vive."],
+      accent: "Vuelves con contactos, complicidades y una red que sigue creciendo mucho después del viaje.",
+      image: "venecia-selfie-canal" as ImageName,
+      alt: "Tres participantes sonríen en una selfie a bordo de un taxi acuático en el Gran Canal de Venecia",
+    },
+  ],
+  cta: {
+    label: "Próximas experiencias",
+    title: "¿Qué experiencia puedo vivir?",
+    items: [
+      { place: "Milano Design Week", note: "Abril 2027", href: routes.milan },
+      { place: "Casacor São Paulo", note: "Julio 2027", href: routes.saoPaulo },
+    ],
+    button: "Ver destinos",
+  },
+};
+
 export const neverLate = {
   doubts: ["Ya es tarde para estudiar.", "Debí hacerlo antes.", "No sé si este mundo es para mí."],
   answer: "Nunca es tarde para mirar distinto.",
@@ -578,18 +624,6 @@ export const founders = {
   bioPending: "Biografía en preparación.",
 };
 
-export type ArchiveEntry = {
-  year: string;
-  place: string;
-  tag: string;
-  text: string;
-  status?: "next" | "soon";
-  material: MaterialName;
-  /** Foto real del viaje; sin ella se muestra la placa de material. */
-  image?: ImageName;
-  alt?: string;
-};
-
 /* ---------------------------------------------------------------------------
  * NOSOTROS
  * ------------------------------------------------------------------------- */
@@ -653,14 +687,14 @@ export const about = {
  * Estudiantes y profesionales no son programas: son el "para quién" de cada uno.
  * ------------------------------------------------------------------------- */
 
-export type ProgramId = "formacion" | "marca-personal";
+export type ProgramId = "experiencias" | "formacion" | "marca-personal";
 
 export type AudienceItem = { name: string; detail?: string; text: string };
 
 export type Program = {
   id: ProgramId;
   n: string;
-  /** Verbo del eje (Aprender, Expresar). */
+  /** Verbo del eje (Descubrir, Aprender, Expresar). */
   verb: string;
   name: string;
   href: string;
@@ -671,7 +705,7 @@ export type Program = {
   short: string;
   keywords: string[];
   /** Tono del sitio mientras el programa está activo. */
-  tone: "clay" | "sand" | "ink";
+  tone: "clay" | "sand" | "ink" | "warm";
   /** Color de la luz WebGL sobre ese tono. */
   glow: string;
   material: MaterialName;
@@ -680,7 +714,7 @@ export type Program = {
   detail?: ImageSlot;
   /** Foto de la página Programas. */
   railImage: { image: ImageName; alt: string };
-  /** Para quién es: profesionales primero, Estudiantes siempre al final. */
+  /** Para quién es: profesionales primero, Estudiantes siempre al final (Experiencias no lo lleva). */
   audience: AudienceItem[];
   interest: InterestId;
   cta: string;
@@ -690,13 +724,46 @@ export const programs = {
   title: "Programas",
   lead: "Lo vivido, convertido en criterio propio.",
   question: "¿Qué quieres llevar a tu estudio?",
-  hint: "Dos programas",
+  hint: "Tres programas",
   more: "Quiero saber más",
   audienceLabel: "Para quién es",
   items: [
     {
-      id: "formacion",
+      id: "experiencias",
       n: "01",
+      verb: "Descubrir",
+      name: "Experiencias",
+      href: routes.experiencias,
+      lines: ["Más que viajar.", "Vivir el diseño", "para ampliar la mirada."],
+      intro: "Experience Design crea experiencias curadas en las capitales del diseño: ferias, showrooms, empresas y ciudades donde el diseño forma parte de la vida cotidiana. No somos una agencia de viajes: te damos acceso a lo mejor del diseño mundial, elegimos qué ver, explicamos por qué importa y te acompañamos para que lo lleves a tu propio contexto.",
+      short: "Viajes curados a las mejores ferias y eventos exclusivos en las capitales del diseño mundial.",
+      keywords: ["Ferias", "Showrooms", "Empresas", "Ciudades"],
+      tone: "warm",
+      glow: "#C97B4A",
+      material: "travertine",
+      image: {
+        image: "milan-duomo-grupo-vertical",
+        alt: "El grupo de Experience Design frente a la fachada iluminada del Duomo de Milán, de noche",
+        material: "travertine",
+        brief: "Grupo en Milán.",
+      },
+      detail: {
+        image: "venecia-grupo-mirador",
+        alt: "El grupo de Experience Design en un mirador de madera sobre el Gran Canal de Venecia, con bolsas de la marca",
+        material: "walnut",
+        brief: "Grupo en Venecia.",
+      },
+      railImage: {
+        image: "milan-grupo-suelo-rojo",
+        alt: "El grupo de Experience Design sentado sobre un piso rojo durante la Milano Design Week",
+      },
+      audience: [],
+      interest: "milan",
+      cta: "Conocer Experiencias",
+    },
+    {
+      id: "formacion",
+      n: "02",
       verb: "Aprender",
       name: "Formación",
       href: routes.formacion,
@@ -736,7 +803,7 @@ export const programs = {
     },
     {
       id: "marca-personal",
-      n: "02",
+      n: "03",
       verb: "Expresar",
       name: "Marca personal",
       href: routes.marcaPersonal,

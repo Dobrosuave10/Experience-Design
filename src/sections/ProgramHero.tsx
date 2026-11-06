@@ -11,7 +11,7 @@ import "./ProgramHero.css";
 
 /**
  * Apertura de cada programa. Misma estructura, otra atmósfera:
- * Marca personal en arco y cursiva; Formación en retícula y material.
+ * Experiencias con el grupo; Marca personal en arco y cursiva; Formación en retícula y material.
  */
 export function ProgramHero({ program: p }: { program: Program }) {
   const ref = useRef<HTMLElement>(null);

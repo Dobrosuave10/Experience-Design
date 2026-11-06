@@ -6,9 +6,9 @@ import { WordList } from "../sections/WordList";
 import { PersonalBrand } from "../sections/PersonalBrand";
 import { Audience } from "../sections/Audience";
 
-const program = programs.items[1];
+const program = programs.items.find((p) => p.id === "marca-personal")!;
 
-/** Programa 02: Marca personal. Íntimo, retrato, cursiva, terracota. */
+/** Programa 03: Marca personal. Íntimo, retrato, cursiva, terracota. */
 export default function PersonalBrandPage() {
   return (
     <>

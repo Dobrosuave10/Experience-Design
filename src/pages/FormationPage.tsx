@@ -4,9 +4,9 @@ import { ProgramHero } from "../sections/ProgramHero";
 import { Formation } from "../sections/Formation";
 import { Audience } from "../sections/Audience";
 
-const program = programs.items[0];
+const program = programs.items.find((p) => p.id === "formacion")!;
 
-/** Programa 01: Formación. Retícula y material: aprender prepara la mirada. */
+/** Programa 02: Formación. Retícula y material: aprender prepara la mirada. */
 export default function FormationPage() {
   return (
     <>

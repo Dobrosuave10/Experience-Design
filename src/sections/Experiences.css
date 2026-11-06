@@ -1,0 +1,117 @@
+.xp {
+  padding-top: clamp(80px, 14vh, 160px);
+}
+.xp__label {
+  color: var(--accent);
+  letter-spacing: 0.26em;
+}
+.xp__axes {
+  display: grid;
+  gap: 16px;
+  max-width: 46rem;
+  margin: 0 auto clamp(80px, 14vh, 160px);
+  text-align: center;
+}
+.xp__axes-text {
+  font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+  line-height: 1.2;
+}
+
+/* Bloque editorial: foto horizontal grande, sin recorte (proporción natural) y texto al lado */
+.xp__block {
+  display: grid;
+  grid-template-columns: 7fr 4fr;
+  gap: clamp(28px, 4vw, 72px);
+  align-items: center;
+  margin-bottom: clamp(90px, 16vh, 180px);
+}
+.xp__block--flip {
+  grid-template-columns: 4fr 7fr;
+}
+.xp__block--flip .xp__photo {
+  order: 2;
+}
+.xp__photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.xp__text {
+  display: grid;
+  gap: 18px;
+  max-width: 34rem;
+}
+.xp__p {
+  font-size: clamp(1.02rem, 0.3vw + 0.98rem, 1.15rem);
+  line-height: 1.65;
+  color: var(--muted);
+}
+.xp__accent {
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+/* Cierre: hacia Destinos */
+.xp__cta {
+  background: var(--ink);
+  color: var(--paper);
+  padding-block: clamp(90px, 16vh, 180px);
+}
+.xp__cta .xp__label {
+  color: var(--clay-soft);
+}
+.xp__cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: end;
+}
+.xp__cta-title {
+  margin-top: 14px;
+  font-size: clamp(2.6rem, 5vw, 5.4rem);
+  line-height: 1;
+}
+.xp__next {
+  display: grid;
+}
+.xp__next-line {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: baseline;
+  gap: 18px;
+  padding-block: 18px;
+  border-top: 1px solid rgba(251, 248, 242, 0.25);
+  transition: color 0.4s var(--ease-out);
+}
+.xp__next li:last-child .xp__next-line {
+  border-bottom: 1px solid rgba(251, 248, 242, 0.25);
+}
+.xp__next-line:hover {
+  color: var(--clay-soft);
+}
+.xp__next-place {
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+}
+.xp__next-note {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: rgba(251, 248, 242, 0.7);
+}
+.xp__cta-btn {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 899px) {
+  .xp__block,
+  .xp__block--flip {
+    grid-template-columns: 1fr;
+  }
+  .xp__block--flip .xp__photo {
+    order: 0;
+  }
+  .xp__cta-grid {
+    grid-template-columns: 1fr;
+  }
+}

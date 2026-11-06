@@ -283,6 +283,12 @@ export const images = {
     "w": 2400,
     "h": 1350
   },
+  "milan-duomo-grupo-vertical": {
+    "src": "/img/milan-duomo-grupo-vertical-1350.webp",
+    "srcSet": "/img/milan-duomo-grupo-vertical-480.webp 480w, /img/milan-duomo-grupo-vertical-960.webp 960w, /img/milan-duomo-grupo-vertical-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "milan-galleria-cupula": {
     "src": "/img/milan-galleria-cupula-1350.webp",
     "srcSet": "/img/milan-galleria-cupula-480.webp 480w, /img/milan-galleria-cupula-960.webp 960w, /img/milan-galleria-cupula-1350.webp 1350w",
@@ -367,6 +373,12 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "salone-grupo-letras-mobile": {
+    "src": "/img/salone-grupo-letras-mobile-1920.webp",
+    "srcSet": "/img/salone-grupo-letras-mobile-480.webp 480w, /img/salone-grupo-letras-mobile-960.webp 960w, /img/salone-grupo-letras-mobile-1600.webp 1600w, /img/salone-grupo-letras-mobile-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
+  },
   "salone-lamparas-burbujas": {
     "src": "/img/salone-lamparas-burbujas-1350.webp",
     "srcSet": "/img/salone-lamparas-burbujas-480.webp 480w, /img/salone-lamparas-burbujas-960.webp 960w, /img/salone-lamparas-burbujas-1350.webp 1350w",
@@ -409,11 +421,23 @@ export const images = {
     "w": 2400,
     "h": 1350
   },
+  "venecia-grupo-mirador": {
+    "src": "/img/venecia-grupo-mirador-1350.webp",
+    "srcSet": "/img/venecia-grupo-mirador-480.webp 480w, /img/venecia-grupo-mirador-960.webp 960w, /img/venecia-grupo-mirador-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "venecia-salute": {
     "src": "/img/venecia-salute-1350.webp",
     "srcSet": "/img/venecia-salute-480.webp 480w, /img/venecia-salute-960.webp 960w, /img/venecia-salute-1350.webp 1350w",
     "w": 1350,
     "h": 2400
+  },
+  "venecia-selfie-canal": {
+    "src": "/img/venecia-selfie-canal-1920.webp",
+    "srcSet": "/img/venecia-selfie-canal-480.webp 480w, /img/venecia-selfie-canal-960.webp 960w, /img/venecia-selfie-canal-1600.webp 1600w, /img/venecia-selfie-canal-1920.webp 1920w",
+    "w": 2400,
+    "h": 1350
   },
   "verona-antolini-bolsa": {
     "src": "/img/verona-antolini-bolsa-1350.webp",
