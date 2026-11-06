@@ -192,7 +192,7 @@ export const programsSpine = {
       detail: { image: "casacor-arco-verde-mural" as ImageName, alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
       destinations: ["São Paulo", "Milano Design Week", "Colonia", "Buenos Aires"],
       /** Sin fecha cuando no la tenemos: no se inventa. */
-      next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril" }, { place: "CASACOR São Paulo" }] as { place: string; note?: string }[] },
+      next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril 2027" }, { place: "CASACOR São Paulo", note: "Julio 2027" }] as { place: string; note?: string }[] },
     },
     {
       id: "formacion",
@@ -758,7 +758,7 @@ export const programs = {
       },
       audience: [
         { name: "Arquitectos", text: "Fotografía, identidad y estrategia comercial para mostrar tus proyectos." },
-        { name: "Diseñadores", text: "Marketing, fotografía e identidad, aplicados a tu propio trabajo." },
+        { name: "Diseñadores de muebles", text: "Fotografía, identidad y estrategia para presentar tus piezas a marcas, editores y la industria." },
         { name: "Tu empresa", text: "Herramientas específicas de marketing y estrategia comercial para tu equipo." },
         { name: "Corredores de propiedades", text: "Fotografía y estrategia comercial para presentar cada propiedad con criterio." },
         { name: "Construcción", text: "Identidad y estrategia comercial para comunicar lo que construyes." },
@@ -792,7 +792,7 @@ export const programs = {
       },
       audience: [
         { name: "Arquitectos", text: "Tu trayectoria y tu mirada, ordenadas en una marca que se reconoce." },
-        { name: "Diseñadores", text: "El sello que distingue tu trabajo, contado con coherencia." },
+        { name: "Diseñadores de muebles", text: "Tus muebles y objetos, con una firma que marcas y editores reconocen." },
         { name: "Interioristas", text: "Tu forma de pensar los espacios, convertida en posicionamiento." },
         { name: "Corredores de propiedades", text: "Una voz profesional propia, coherente en cada lugar donde apareces." },
         { name: "Ingenieros", text: "Lo que sabes y lo que has hecho, contado para que se entienda." },

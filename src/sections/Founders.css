@@ -82,6 +82,10 @@
 }
 .founder__field {
   margin-top: 14px;
+  max-width: none;
+}
+.founder__field-part {
+  white-space: nowrap;
 }
 .founder__bio {
   font-size: 0.88rem;

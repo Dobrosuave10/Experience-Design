@@ -312,6 +312,12 @@
 .spine__next .spine__place {
   color: var(--ed-earth);
 }
+/* Próximas experiencias: nombre a la izquierda, fecha alineada a la derecha (también en móvil) */
+.spine__next .spine__note {
+  grid-column: auto;
+  text-align: right;
+  white-space: nowrap;
+}
 /* Ciudades recorridas: pasan a terracota al acercarse, sin saltos */
 .spine__city {
   display: inline-block;

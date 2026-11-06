@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { gsap } from "gsap";
 import { founders } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
@@ -52,7 +52,15 @@ export function Founders({ label }: { label?: string }) {
               </figure>
               <div className="founder__text">
                 <RevealText as="h3" className="founder__name display" lines={p.name.split(" ")} stagger={0.08} />
-                <p className="founder__field">{p.field}</p>
+                {/* Cada parte va entera ("Studio Barla Interiorismo" es un solo nombre): sólo se corta en el "·" */}
+                <p className="founder__field">
+                  {p.field.split(" · ").map((part, i) => (
+                    <Fragment key={part}>
+                      {i > 0 && " · "}
+                      <span className="founder__field-part">{part}</span>
+                    </Fragment>
+                  ))}
+                </p>
                 <p className="founder__bio muted">{p.bio ?? founders.bioPending}</p>
               </div>
             </article>
