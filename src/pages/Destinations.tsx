@@ -2,7 +2,6 @@ import { destinations, routes } from "../content/site";
 import { PageHero } from "../components/PageHero";
 import { NextChapter } from "../components/NextChapter";
 import { DestinationsRail } from "../sections/DestinationsRail";
-import { Archive } from "../sections/Archive";
 
 /** Destinos: experiencias para vivir (no son programas). Milán y São Paulo, cada uno con su collage. */
 export default function Destinations() {
@@ -18,7 +17,6 @@ export default function Destinations() {
         aside={<p className="serif programs__question">{destinations.question}</p>}
       />
       <DestinationsRail />
-      <Archive />
       <NextChapter />
     </>
   );

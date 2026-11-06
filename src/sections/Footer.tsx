@@ -1,10 +1,10 @@
 import { InstagramLogo } from "@phosphor-icons/react";
-import { brand, footer, nav, navContact } from "../content/site";
+import { brand, credit, footer, nav, navContact } from "../content/site";
 import { Link } from "../components/Link";
 import { Logo } from "../components/Logo";
 import "./Footer.css";
 
-/** Pie: la misma jerarquía del sitio, completa (cinco entradas y sus subpáginas). */
+/** Pie: la misma jerarquía del sitio (cinco entradas y sus subpáginas), con los canales bajo Contacto. */
 export function Footer() {
   return (
     <footer className="footer section" data-tone="ink">
@@ -25,25 +25,47 @@ export function Footer() {
                     <li key={c.href}>
                       <Link to={c.href}>
                         {c.label}
-                        {c.note && <span className="footer__note"> · {c.note}</span>}
+                        {c.note && <span className="footer__note">&nbsp;· {c.note}</span>}
                       </Link>
                     </li>
                   ))}
+                </ul>
+              )}
+              {/* Contacto: los canales van bajo su propio título */}
+              {n === navContact && (
+                <ul className="footer__contact">
+                  {brand.whatsapp && brand.whatsappLabel && (
+                    <li>
+                      <a className="footer__phone serif" href={`tel:+${brand.whatsapp}`}>
+                        {brand.whatsappLabel}
+                      </a>
+                    </li>
+                  )}
+                  {brand.email && (
+                    <li>
+                      <a href={`mailto:${brand.email}`}>{brand.email}</a>
+                    </li>
+                  )}
+                  <li>
+                    <a href={brand.instagram.url} target="_blank" rel="noopener noreferrer">
+                      <InstagramLogo size={18} weight="light" aria-hidden />
+                      {brand.instagram.handle}
+                    </a>
+                  </li>
                 </ul>
               )}
             </div>
           ))}
         </nav>
         <div className="footer__bottom">
-          <div className="footer__contact">
-            <a href={brand.instagram.url} target="_blank" rel="noopener noreferrer">
-              <InstagramLogo size={18} weight="light" aria-hidden />
-              {brand.instagram.handle}
-            </a>
-            {brand.email && <a href={`mailto:${brand.email}`}>{brand.email}</a>}
-          </div>
           <p className="footer__legal">
             © {new Date().getFullYear()} {brand.name}. {brand.website}
+          </p>
+          <p className="footer__credit">
+            Diseño y desarrollo web por{" "}
+            <a href={credit.url} target="_blank" rel="noopener noreferrer">
+              {credit.name}
+            </a>
           </p>
         </div>
       </div>

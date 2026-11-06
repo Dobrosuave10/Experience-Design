@@ -144,12 +144,12 @@ export function DestinationsRail() {
             <div className="rail__text">
               <p className="rail__index label rail__reveal">
                 <span className="rail__n">{d.n}</span>
-                <span className="rail__eyebrow">{d.homeLabel}</span>
                 <FlagMark country={FLAG[d.id]} />
               </p>
               <h2 id={`rail-${d.id}`} className="rail__name display rail__reveal">
-                {d.name}
+                {d.city}
               </h2>
+              <p className="rail__sub serif rail__reveal">{d.railSub}</p>
               <div className="rail__reveal">
                 <MagneticButton href={d.href} onClick={() => navigate(d.href, { travel: d.href })}>
                   {destinations.more}

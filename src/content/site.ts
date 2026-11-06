@@ -97,8 +97,8 @@ export const nav: NavItem[] = [
     label: "Destinos",
     href: routes.destinos,
     children: [
-      { label: "Milán", note: "Salone del Mobile", href: routes.milan },
-      { label: "São Paulo", note: "CASACOR", href: routes.saoPaulo },
+      { label: "Milán", note: "Milano Design Week", href: routes.milan },
+      { label: "São Paulo", note: "Casacor", href: routes.saoPaulo },
     ],
   },
 ];
@@ -112,8 +112,8 @@ export const pageTitles: Record<string, string> = {
   [routes.formacion]: "Formación · Programas · Experience Design",
   [routes.marcaPersonal]: "Marca personal · Programas · Experience Design",
   [routes.destinos]: "Destinos · Experience Design",
-  [routes.milan]: "Milano Design Week, Salone del Mobile · Destinos · Experience Design",
-  [routes.saoPaulo]: "São Paulo, CASACOR · Destinos · Experience Design",
+  [routes.milan]: "Milán, Milano Design Week · Destinos · Experience Design",
+  [routes.saoPaulo]: "São Paulo, Casacor · Destinos · Experience Design",
   [routes.contacto]: "Contacto · Experience Design",
 };
 /** Título de rutas que no existen (página 404). */
@@ -136,11 +136,11 @@ export const pageDescriptions: Record<string, string> = {
   [routes.marcaPersonal]:
     "Marca personal: construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa. Partimos de lo que ya tienes: lo que has hecho, lo que sabes y lo que ves distinto.",
   [routes.destinos]:
-    "Experiencias en las capitales del diseño: Milán, durante el Salone del Mobile, y São Paulo, en CASACOR. Fotos reales de las experiencias que ya recorrimos.",
+    "Experiencias en las capitales del diseño: Milán, durante la Milano Design Week, y São Paulo, en Casacor. Fotos reales de las experiencias que ya recorrimos.",
   [routes.milan]:
     "Milano Design Week 2027, Salone del Mobile.Milano. Seis días, del 12 al 17 de abril de 2027: el Salone, el Fuorisalone, el Istituto Marangoni y el Lago di Como.",
   [routes.saoPaulo]:
-    "São Paulo, CASACOR. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
+    "São Paulo, Casacor. Arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes. Una casa no se entiende en una foto. Se recorre.",
   [routes.contacto]:
     "Sé parte de Milano Design Week 2027, del 12 al 17 de abril. Completar el formulario es el primer paso. Te respondemos personalmente.",
 };
@@ -189,10 +189,10 @@ export const programsSpine = {
       /** El CTA de Experiencias lleva al formulario de inscripción. */
       enroll: true,
       main: { image: "salone-cocina-bosque" as ImageName, alt: "Salone del Mobile 2026: visitantes en un stand de cocina rodeado por una pantalla envolvente con un bosque" },
-      detail: { image: "casacor-arco-verde-mural" as ImageName, alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
+      detail: { image: "casacor-arco-verde-mural" as ImageName, alt: "Casacor São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales" },
       destinations: ["São Paulo", "Milano Design Week", "Colonia", "Buenos Aires"],
       /** Sin fecha cuando no la tenemos: no se inventa. */
-      next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril 2027" }, { place: "CASACOR São Paulo", note: "Julio 2027" }] as { place: string; note?: string }[] },
+      next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril 2027" }, { place: "Casacor São Paulo", note: "Julio 2027" }] as { place: string; note?: string }[] },
     },
     {
       id: "formacion",
@@ -224,10 +224,9 @@ export const milan = {
   /** Nombre de la experiencia en el resto del sitio (el hero de la página sigue con `city`). */
   name: "Milano Design Week",
   year: "2027",
-  event: "Milan Design Week",
-  fair: "Salone del Mobile",
+  event: "Milano Design Week",
   openingImage: { image: "fuori-showroom-biblioteca" as ImageName, alt: "Showroom del Fuorisalone en Milán: pilares de piedra, sofás bajos y una gran biblioteca iluminada al fondo" },
-  topics: ["Salone del Mobile", "Showrooms", "Estudios", "Materiales", "Cultura", "Conexiones"],
+  topics: ["Showrooms", "Estudios", "Materiales", "Cultura", "Conexiones"],
   statementA: "No venimos a mirar desde afuera.",
   statementB: "Venimos a entrar.",
   chapters: [
@@ -242,7 +241,7 @@ export const milan = {
     {
       n: "02",
       title: "El diseño",
-      text: "Durante el Salone del Mobile la ciudad entera se vuelve exposición.",
+      text: "Durante la Milano Design Week la ciudad entera se vuelve exposición.",
       material: "terrazzo" as MaterialName,
       image: "salone-cielo-cintas" as ImageName,
       alt: "Instalación de cintas blancas suspendidas sobre un stand del Salone del Mobile 2026",
@@ -295,7 +294,7 @@ export const milan = {
     ],
     note: "El itinerario podrá ajustarse según la disponibilidad y los horarios de las empresas que nos reciban, para sumar nuevas visitas y encuentros.",
   },
-  galleryLabel: "Milan Design Week 2026",
+  galleryLabel: "Milano Design Week 2026",
   galleryTitle: "Lo que recorrimos.",
   gallery: [
     { image: "milan-galleria-cupula", alt: "La Galleria Vittorio Emanuele II de noche, con su cúpula de vidrio y el piso de mosaico" },
@@ -578,51 +577,6 @@ export type ArchiveEntry = {
   alt?: string;
 };
 
-export const archive = {
-  title: "Lo que ya recorrimos.",
-  entries: [
-    {
-      year: "2026",
-      place: "Milán",
-      tag: "Milan Design Week",
-      text: "Salone del Mobile, Fuorisalone y showrooms de la ciudad, con Verona, entre los mármoles de Antolini, y Venecia.",
-      material: "travertine",
-      image: "milan-grupo-gessi",
-      alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milan Design Week 2026",
-    },
-    {
-      year: "2025",
-      place: "São Paulo",
-      tag: "CASACOR São Paulo",
-      text: "Una casa recorrida ambiente por ambiente, con paradas en Bontempo, Todeschini y Eliane.",
-      material: "terracotta",
-      image: "casacor-grupo-almuerzo",
-      alt: "El grupo de Experience Design almorzando durante la visita a CASACOR São Paulo 2025",
-    },
-    {
-      year: "2025",
-      place: "Milán",
-      tag: "Primera experiencia abierta",
-      text: "Christian Erdmann se suma al proyecto. Los seis lugares se llenaron a través de contactos y recomendaciones.",
-      material: "plaster",
-    },
-    {
-      year: "2024",
-      place: "Milán",
-      tag: "Piloto",
-      text: "Un segundo grupo pequeño. El concepto toma forma junto a empresas de revestimientos, materiales y decoración.",
-      material: "travertine",
-    },
-    {
-      year: "2023",
-      place: "São Paulo",
-      tag: "Piloto",
-      text: "La primera prueba, con tres participantes.",
-      material: "terracotta",
-    },
-  ] as ArchiveEntry[],
-};
-
 /* ---------------------------------------------------------------------------
  * NOSOTROS
  * ------------------------------------------------------------------------- */
@@ -846,17 +800,20 @@ export const destinations = {
       id: "milan",
       n: "01",
       name: "Milano Design Week",
-      event: "Milan Design Week",
-      sub: "Salone del Mobile",
+      event: "Milano Design Week",
+      sub: "Milano Design Week",
       href: routes.milan,
+      /** Página Destinos: la ciudad como título y el evento debajo. */
+      city: "Milán",
+      railSub: "Milano Design Week",
       when: "12 al 17 de abril de 2027",
       done: "Abril de 2026",
       text: "La semana en que una ciudad entera se vuelve exposición.",
       cta: "Entrar a Milano Design Week",
       /** Inicio: la etiqueta del selector y su carrusel. */
-      homeLabel: "Salone del Mobile",
+      homeLabel: "Milano Design Week",
       collage: [
-        { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque", caption: "Salone del Mobile" },
+        { image: "salone-cocina-bosque", alt: "Stand del Salone del Mobile 2026: una cocina de madera rodeada por una pantalla envolvente con un bosque", caption: "Milano Design Week" },
         { image: "salone-pasillo-carteles", alt: "Visitantes recorriendo el pasillo central de Fiera Milano Rho bajo los carteles rojos del Salone del Mobile", caption: "Fiera Milano Rho" },
         { video: { src: "/video/milan-salone-letras.mp4", poster: "/video/milan-salone-letras.jpg" }, alt: "Video: las letras rojas del Salone sobre un adoquinado, frente a los árboles, en Milán", caption: "Milán" },
         { video: { src: "/video/milan-kerakoll-colores.mp4", poster: "/video/milan-kerakoll-colores.jpg" }, alt: "Video: el muro de colores de Kerakoll durante el Fuorisalone", caption: "Fuorisalone" },
@@ -878,26 +835,28 @@ export const destinations = {
       id: "sao-paulo",
       n: "02",
       name: "São Paulo",
-      event: "CASACOR São Paulo",
+      event: "Casacor São Paulo",
       sub: "Arquitectura, interiorismo y paisajismo",
       href: routes.saoPaulo,
+      city: "São Paulo",
+      railSub: "Casacor",
       when: "Próxima fecha por confirmar",
       done: "Julio de 2025",
       text: "Una casa entera convertida en ambientes para recorrer.",
       cta: "Entrar a São Paulo",
-      homeLabel: "CASACOR",
+      homeLabel: "Casacor",
       collage: [
-        { image: "casacor-arco-verde-mural", alt: "CASACOR São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales", caption: "CASACOR" },
+        { image: "casacor-arco-verde-mural", alt: "Casacor São Paulo 2025: un arco de madera oscura en un muro verde enmarca un mural de hojas tropicales", caption: "Casacor" },
         { image: "casacor-lavamanos-terracota", alt: "Baño con lavamanos de madera terracota y dos espejos redondos iluminados" },
         { image: "casacor-atrio-reflejo-agua", alt: "Atrio de varios niveles reflejado en un espejo de agua" },
         { image: "casacor-biblioteca", alt: "Biblioteca de repisas de madera con objetos de cerámica y libros, junto a un sofá" },
         { image: "casacor-celosia-arcos-madera", alt: "Celosía de madera con arcos que deja ver el jardín" },
-        { image: "casacor-grupo-espaco", alt: "El grupo de Experience Design frente a un muro con el letrero «espaço» en CASACOR", caption: "São Paulo" },
+        { image: "casacor-grupo-espaco", alt: "El grupo de Experience Design frente a un muro con el letrero «espaço» en Casacor", caption: "São Paulo" },
         { image: "casacor-bontempo-espejo-agua", alt: "Letras de Casa Bontempo sobre un muro de hormigón, con jardín y espejo de agua", caption: "Casa Bontempo" },
         { image: "casacor-sala-naranja", alt: "Sala de luz naranja con una butaca acolchada y una obra circular en el muro" },
       ] as CollageItem[],
       gallery: [
-        { image: "casacor-celosia-arcos-madera" as ImageName, alt: "CASACOR São Paulo 2025: celosía de madera con arcos que deja ver el jardín" },
+        { image: "casacor-celosia-arcos-madera" as ImageName, alt: "Casacor São Paulo 2025: celosía de madera con arcos que deja ver el jardín" },
         { image: "casacor-terraza-jardin" as ImageName, alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },
         { image: "casacor-lavamanos-terracota" as ImageName, alt: "Baño con lavamanos de madera terracota y dos espejos redondos iluminados" },
         { image: "casacor-living-biblioteca" as ImageName, alt: "Living frente a una biblioteca iluminada, con una mesa de piedra cubierta de libros" },
@@ -909,31 +868,31 @@ export const destinations = {
 
 export const saoPaulo = {
   city: "São Paulo",
-  event: "CASACOR São Paulo",
+  event: "Casacor São Paulo",
   year: "Julio de 2025",
   statementA: "Una casa no se entiende en una foto.",
   statementB: "Se recorre.",
-  intro: "En CASACOR, arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes.",
+  intro: "En Casacor, arquitectos, interioristas y paisajistas transforman una casa en una secuencia de ambientes.",
   origin: "Aquí empezó todo: en 2023, la primera prueba de Experience Design fue en São Paulo, con tres participantes.",
   rooms: [
-    { n: "01", title: "La casa", text: "Una muestra que se recorre de puerta en puerta, ambiente por ambiente.", material: "plaster" as MaterialName, image: "casacor-atrio-desde-arriba" as ImageName, alt: "Atrio de CASACOR São Paulo visto desde arriba, con visitantes recorriendo el nivel inferior" },
+    { n: "01", title: "La casa", text: "Una muestra que se recorre de puerta en puerta, ambiente por ambiente.", material: "plaster" as MaterialName, image: "casacor-atrio-desde-arriba" as ImageName, alt: "Atrio de Casacor São Paulo visto desde arriba, con visitantes recorriendo el nivel inferior" },
     { n: "02", title: "Los ambientes", text: "Cada espacio es una propuesta distinta. Recorrerlos es comparar miradas.", material: "terracotta" as MaterialName, image: "casacor-dormitorio-muro-curvo" as ImageName, alt: "Dormitorio con un muro curvo revestido en madera y un velador redondo" },
     { n: "03", title: "Los materiales", text: "Lo que en catálogo es un nombre, aquí es luz, peso y temperatura.", material: "travertine" as MaterialName, image: "casacor-aplique-muro-marmolado" as ImageName, alt: "Aplique metálico sobre un muro de piedra con vetas verdes y ocres" },
     { n: "04", title: "Las marcas", text: "Bontempo, Todeschini, Eliane: los procesos detrás de lo que se ve en cada ambiente.", material: "terrazzo" as MaterialName, image: "casacor-cocina-marmol-verde" as ImageName, alt: "Cocina con una cubierta de mármol verde texturado y muebles de madera" },
-    { n: "05", title: "Las personas", text: "Quienes diseñan cada ambiente, y quienes lo recorren con nosotros.", material: "walnut" as MaterialName, image: "casacor-grupo-almuerzo" as ImageName, alt: "El grupo de Experience Design almorzando durante la visita a CASACOR São Paulo" },
+    { n: "05", title: "Las personas", text: "Quienes diseñan cada ambiente, y quienes lo recorren con nosotros.", material: "walnut" as MaterialName, image: "casacor-grupo-almuerzo" as ImageName, alt: "El grupo de Experience Design almorzando durante la visita a Casacor São Paulo" },
   ],
-  galleryLabel: "CASACOR São Paulo 2025",
+  galleryLabel: "Casacor São Paulo 2025",
   galleryTitle: "Lo que recorrimos.",
   gallery: [
     { image: "casacor-bontempo-espejo-agua", alt: "Letras de Casa Bontempo sobre un muro de hormigón, con jardín y espejo de agua" },
     { image: "casacor-ventana-arco", alt: "Baño de muros oscuros con una ventana en arco, plantas y piedras al pie del lavamanos" },
     { image: "casacor-biblioteca", alt: "Biblioteca de repisas de madera con objetos de cerámica y libros, junto a un sofá" },
     { image: "casacor-arbol-celosia", alt: "Un árbol interior frente a una celosía de cuadros iluminada" },
-    { image: "casacor-grupo-escalera", alt: "Participantes sentadas en una escalera de vidrio y madera en CASACOR" },
+    { image: "casacor-grupo-escalera", alt: "Participantes sentadas en una escalera de vidrio y madera en Casacor" },
     { image: "casacor-bar-cielo-estampado", alt: "Bar con cielo de papel estampado, repisas de vidrio y cubierta de piedra" },
     { image: "casacor-tocador-ventana", alt: "Tocador con espejo enmarcado en madera frente a un ventanal al jardín" },
     { image: "casacor-quiebravistas-plantas", alt: "Quiebravistas de lamas blancas sobre un jardín de plantas tropicales" },
-    { image: "casacor-grupo-atrio", alt: "Participantes sentadas en un sofá del atrio de CASACOR São Paulo" },
+    { image: "casacor-grupo-atrio", alt: "Participantes sentadas en un sofá del atrio de Casacor São Paulo" },
     { image: "casacor-jardin-sillas-rojas", alt: "Jardín con un muro verde y dos sillas rojas sobre pasto y piedra" },
     { image: "casacor-dormitorio-celosia", alt: "Dormitorio nocturno tras una celosía de lamas blancas, con un árbol en primer plano" },
     { image: "casacor-terraza-jardin", alt: "Terraza abierta a un jardín tropical, con sillas de madera y un pilar de hormigón" },
@@ -989,3 +948,6 @@ export const nextChapter = {
 export const footer = {
   statement: "Abrir la mirada hacia nuevas posibilidades.",
 };
+
+/** Crédito del sitio, al pie. */
+export const credit = { name: "Emilio Guerrero", url: "https://www.linkedin.com/in/emilio-guerrero-43a844235" };

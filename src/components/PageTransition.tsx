@@ -211,7 +211,7 @@ function DestinationCovers() {
           </div>
           <div className="milan__meta wrap">
             <p className="label">
-              {milan.event} · {milan.fair}
+              {milan.event}
             </p>
             <ul className="milan__topics">
               {milan.topics.map((t) => (

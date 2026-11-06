@@ -9,7 +9,7 @@ import { Link } from "../components/Link";
 import "./Milan.css";
 
 /**
- * Destino 01: Milán, Milan Design Week / Salone del Mobile.
+ * Destino 01: Milán, Milano Design Week.
  * `Milan`: la apertura, breve. La foto se abre desde una ventana hasta ocupar todo,
  * con "Milán" encima.
  * `MilanIntro` y `MilanRooms`: la idea y los seis capítulos con foto (los mismos
@@ -47,7 +47,7 @@ export function Milan() {
             <span aria-hidden="true">/</span>
             <span aria-current="page">01 {milan.city}</span>
           </nav>
-          <h1 id="milan-title" className="milan__city display" aria-label={`${milan.city}, ${milan.event}, ${milan.fair} ${milan.year}`}>
+          <h1 id="milan-title" className="milan__city display" aria-label={`${milan.city}, ${milan.event} ${milan.year}`}>
             <span aria-hidden="true">{milan.city}</span>
             <span aria-hidden="true" className="milan__year">
               {milan.year}
@@ -55,7 +55,7 @@ export function Milan() {
           </h1>
           <div className="milan__meta wrap">
             <p className="label">
-              {milan.event} · {milan.fair}
+              {milan.event}
             </p>
             <ul className="milan__topics">
               {milan.topics.map((t) => (

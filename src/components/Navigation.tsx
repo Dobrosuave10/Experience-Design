@@ -16,8 +16,7 @@ const CTA_LABEL = "Conversemos";
 
 /**
  * Navegación principal: Inicio, Nosotros, Programas, Destinos y Contacto (CTA).
- * Programas y Destinos despliegan sus subpáginas en escritorio; en móvil, el menú
- * a pantalla completa muestra las cinco entradas y debajo, más pequeño, sus subpáginas.
+ * Sólo enlaces directos, sin desplegables; en móvil, un menú a pantalla completa.
  */
 export function Navigation() {
   const header = useRef<HTMLElement>(null);
@@ -182,7 +181,7 @@ export function Navigation() {
     lockScroll(open);
     const m = menu.current!;
     if (!open) return;
-    const items = m.querySelectorAll<HTMLElement>(".menu__item, .menu__sub");
+    const items = m.querySelectorAll<HTMLElement>(".menu__item");
     if (!prefersReducedMotion()) gsap.fromTo(items, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.04, ease: "expo.out", delay: 0.15 });
     const focusables = m.querySelectorAll<HTMLElement>("a, button");
     focusables[0]?.focus();
@@ -215,7 +214,6 @@ export function Navigation() {
   };
   const current = (href: string) => (isActive(path, href) ? { "aria-current": "page" as const } : {});
   const all = [...nav, navContact];
-  const groups = nav.filter((n) => n.children);
 
   return (
     <>
@@ -231,25 +229,10 @@ export function Navigation() {
 
           <nav ref={links} className="nav__links" aria-label="Principal" onClick={(e) => (e.target as HTMLElement).closest("a") && quiet()}>
             {nav.map((n) => (
-              <div key={n.href} className={`nav__item ${n.children ? "has-sub" : ""}`}>
+              <div key={n.href} className="nav__item">
                 <Link to={n.href} className="nav__link" {...current(n.href)}>
                   {n.label}
                 </Link>
-                {n.children && (
-                  <div className="nav__sub">
-                    <ul className="nav__sub-list">
-                      {n.children.map((c, i) => (
-                        <li key={c.href}>
-                          <Link to={c.href} className="nav__sub-link" {...current(c.href)}>
-                            <span className="nav__sub-n label">0{i + 1}</span>
-                            <span className="nav__sub-name serif">{c.label}</span>
-                            {c.note && <span className="nav__sub-note">{c.note}</span>}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </div>
             ))}
           </nav>
@@ -300,23 +283,6 @@ export function Navigation() {
             </div>
           ))}
         </nav>
-        <div className="menu__subs">
-          {groups.map((g) => (
-            <div key={g.href} className="menu__group">
-              <p className="menu__group-title label">{g.label}</p>
-              <ul>
-                {g.children!.map((c) => (
-                  <li key={c.href}>
-                    <a href={c.href} className="menu__sub" onClick={go(c.href)} {...current(c.href)}>
-                      {c.label}
-                      {c.note && <span className="menu__sub-note">{c.note}</span>}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
         <a className="menu__ig label" href={brand.instagram.url} target="_blank" rel="noopener noreferrer">
           <InstagramLogo size={18} weight="light" aria-hidden />
           {brand.instagram.handle}
