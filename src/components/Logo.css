@@ -26,31 +26,14 @@
   transform: translateX(3%);
 }
 
-/* Sello: placa cuadrada terracota con doble marco (filete y cordón punteado) y la "E." marfil */
-.logo--seal {
-  position: relative;
-  border-radius: 4.5%;
-  background: radial-gradient(circle at 34% 28%, #b9714c, #8e4c2e 62%, #6f3a22);
-  color: var(--paper);
-  box-shadow: inset 0 0 0 calc(var(--logo-size) * 0.012) rgba(251, 248, 242, 0.55);
+/* Anillo: la "E." negra dentro de un círculo de trazo fino, sobre blanco (apertura y fin del túnel) */
+.logo--ring {
+  border: 1px solid #0e0c0b;
+  border-radius: 50%;
+  background: #fff;
+  color: #0e0c0b;
 }
-.logo--seal::before,
-.logo--seal::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-.logo--seal::before {
-  inset: 5.5%;
-  border-radius: 2.5%;
-  border: calc(var(--logo-size) * 0.008) dotted rgba(251, 248, 242, 0.6);
-}
-.logo--seal::after {
-  inset: 16%;
-  border-radius: 1.5%;
-  border: 1px solid rgba(251, 248, 242, 0.45);
-}
-.logo--seal .logo__mark {
-  height: 40%;
+.logo--ring .logo__mark {
+  height: 44%;
   transform: translateX(3%);
 }

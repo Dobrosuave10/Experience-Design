@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { hero, routes } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
 import { MOTION_OK, isLite, isSmallScreen, prefersReducedMotion, webglAvailable } from "../lib/env";
-import { onPageShown, setSealTarget } from "../lib/events";
+import { onPageShown } from "../lib/events";
 import { navigate } from "../lib/router";
 import { RevealText } from "../components/RevealText";
 import { MagneticButton } from "../components/MagneticButton";
@@ -15,9 +15,10 @@ import "./Hero.css";
 
 /**
  * 01 Entrar.
- * Escena WebGL: el sello de terracota suspendido frente a una galería de arcos.
- * Al hacer scroll la cámara atraviesa los arcos hacia la luz y la luz se vuelve papel:
- * así empieza la siguiente sección. Sin WebGL hay una composición estática equivalente.
+ * Escena WebGL: un túnel de anillos circulares que lleva a una luz blanca. Al hacer scroll
+ * la cámara lo atraviesa y, pasado el túnel, la pantalla queda blanca con la "E." negra
+ * en su círculo fino; después entra el contenido. Sin WebGL (teléfonos), un túnel
+ * circular estático que se acerca con una escala y el mismo cierre en blanco.
  */
 export function Hero() {
   const section = useRef<HTMLElement>(null);
@@ -41,8 +42,6 @@ export function Hero() {
       if (cancelled) return;
       await document.fonts.ready;
       measure();
-      // La apertura termina su sello sobre éste (sólo con el Hero arriba, en su encuadre inicial)
-      setSealTarget(() => (window.scrollY < 2 && sceneRef.current ? sceneRef.current.sealScreen() : null));
       setSceneReady(true);
     });
 
@@ -75,7 +74,6 @@ export function Hero() {
       io.disconnect();
       document.removeEventListener("visibilitychange", vis);
       window.removeEventListener("pointermove", move);
-      setSealTarget(null);
       scene?.dispose();
       sceneRef.current = null;
     };
@@ -98,7 +96,11 @@ export function Hero() {
         gsap
           .timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true } })
           .to(".hero__content", { opacity: 0, y: -60, ease: "none", duration: 0.3 }, 0.02)
-          .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.35 }, 0.65);
+          // El blanco cubre la escena cuando la cámara ya llegó a la luz; la "E." crece como la del túnel
+          .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.16 }, 0.78)
+          .fromTo(".hero__end", { scale: 0.8 }, { scale: 1, ease: "none", duration: 0.22 }, 0.78);
+        // Sin WebGL (teléfonos): el túnel estático se acerca con una escala barata
+        if (!gl) gsap.fromTo(".hero__tunnel", { scale: 1 }, { scale: 3.2, ease: "power1.in", scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true } });
 
         const off = onPageShown(() => {
           gsap.fromTo(".hero__stage", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 2.4, ease: "expo.out" });
@@ -120,8 +122,7 @@ export function Hero() {
             <canvas ref={canvas} className={`hero__canvas ${sceneReady ? "is-ready" : ""}`} />
           ) : (
             <div className="hero__fallback">
-              <span className="hero__fallback-arch" />
-              <Logo size="min(34vw, 260px)" decorative shape="seal" className="hero__fallback-logo" />
+              <span className="hero__tunnel" />
             </div>
           )}
         </div>
@@ -154,7 +155,10 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero__veil" aria-hidden="true" />
+        {/* Fin del túnel: blanco, con la "E." negra en su círculo fino */}
+        <div className="hero__veil" aria-hidden="true">
+          <Logo shape="ring" size="21vh" decorative className="hero__end" />
+        </div>
       </div>
     </section>
   );

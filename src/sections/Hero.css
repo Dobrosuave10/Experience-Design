@@ -25,27 +25,25 @@
   opacity: 1;
 }
 
-/* Sin WebGL: arco y sello estáticos */
+/* Sin WebGL (teléfonos): un túnel circular estático, anillos que se cierran hacia la luz blanca */
 .hero__fallback {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  background: radial-gradient(60% 70% at 50% 46%, #3a2a22 0%, var(--ink) 70%);
+  overflow: hidden;
+  background: radial-gradient(70% 60% at 50% 40%, #2a1d17 0%, var(--ink) 75%);
 }
-.hero__fallback-arch {
-  position: absolute;
-  width: min(44vw, 340px);
-  aspect-ratio: 2.6 / 4.9;
-  border-radius: 999px 999px 0 0;
-  background: radial-gradient(80% 60% at 50% 70%, #e9c9ae, #b7664f 60%, #3a221a);
-  opacity: 0.55;
+.hero__tunnel {
+  width: min(92vw, 640px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle, transparent 0 9.4%, rgba(255, 226, 200, 0.16) 9.4% 10%),
+    radial-gradient(circle, #fff 0 8%, #f4e6d8 12%, #c98b67 22%, #6b4535 38%, #3b2820 58%, #1c1511 74%, rgba(14, 12, 11, 0) 76%);
+  transform-origin: 50% 50%;
+  will-change: transform;
 }
-.hero__fallback-logo {
-  position: relative;
-  color: var(--paper);
-}
-
 .hero__content {
   position: absolute;
   inset: auto 0 0 0;
@@ -86,10 +84,13 @@
   color: #d9cfc4;
 }
 
+/* Fin del túnel: blanco con la "E." en su círculo fino */
 .hero__veil {
   position: absolute;
   inset: 0;
-  background: var(--paper);
+  display: grid;
+  place-items: center;
+  background: #fff;
   opacity: 0;
   pointer-events: none;
 }
@@ -112,6 +113,11 @@
   .hero {
     height: 145vh;
   }
+  /* El túnel arriba, sobre el texto */
+  .hero__fallback {
+    place-items: start center;
+    padding-top: calc(var(--nav-h) + 4vh);
+  }
   .hero__wordmark {
     width: min(54vw, 240px);
     margin-bottom: 0;
@@ -132,34 +138,5 @@
 @media (prefers-reduced-motion: reduce) {
   .hero {
     height: auto;
-  }
-}
-
-/* Sin WebGL, en pantallas anchas: misma composición que la escena (sello a la derecha) */
-@media (min-width: 1024px) {
-  .hero__fallback {
-    place-items: center end;
-    padding-right: 14vw;
-  }
-  .hero__fallback-arch {
-    right: calc(14vw + (min(34vw, 260px) - min(44vw, 340px)) / 2);
-  }
-}
-
-/* Teléfonos y táctiles (sin WebGL por rendimiento): la misma composición de la escena,
-   arco arriba, bajo la navegación, y el sello pequeño a su derecha, lejos del wordmark */
-@media (max-width: 767px), (pointer: coarse) and (max-width: 1023px) {
-  .hero__fallback {
-    place-items: start center;
-    padding-top: calc(var(--nav-h) + 3vh);
-  }
-  .hero__fallback-arch {
-    top: calc(var(--nav-h) + 3vh);
-    width: min(34vw, 260px);
-  }
-  .hero__fallback-logo {
-    --logo-size: min(15vw, 110px) !important;
-    justify-self: end;
-    margin: 4vh 10vw 0 0;
   }
 }
