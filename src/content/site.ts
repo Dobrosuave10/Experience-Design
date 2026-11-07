@@ -186,7 +186,7 @@ export const programsSpine = {
   /** Triángulo de los ejes: una foto por eje. */
   triangle: {
     experiencias: { image: "fuori-kerakoll-fachada" as ImageName, align: "xMidYMax" },
-    formacion: { image: "fuori-kerakoll-grupo-bolsa" as ImageName },
+    formacion: { image: "milan-calle-bolsas" as ImageName },
     "marca-personal": { image: "verona-antolini-bolsa" as ImageName },
   } as Record<string, { image: ImageName; align?: string }>,
   items: [
@@ -218,8 +218,8 @@ export const programsSpine = {
       text: "Herramientas específicas en formato presencial y online, con profesionales de marketing, fotografía, identidad y estrategia comercial.",
       href: routes.formacion as string | undefined,
       cta: "Conocer Formación" as string | undefined,
-      main: { image: "fuori-kerakoll-explicacion" as ImageName, alt: "Fuorisalone de Milán: el grupo, con la bolsa negra de Experience Design, escucha frente al muestrario de colores de Kerakoll" },
-      detail: { image: "fuori-kerakoll-grupo" as ImageName, alt: "Participantes con la bolsa de Experience Design frente al muro de colores de Kerakoll" },
+      main: { image: "fuori-guia-explica" as ImageName, alt: "Fuorisalone de Milán: un guía explica a una participante la obra expuesta en el muro" },
+      detail: { image: "fuori-grupo-escucha" as ImageName, alt: "El grupo de Experience Design escucha a un guía en una sala del Fuorisalone" },
     },
     {
       id: "marca-personal",
@@ -231,7 +231,7 @@ export const programsSpine = {
       text: "Construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa.",
       href: routes.marcaPersonal as string | undefined,
       cta: "Conocer Marca personal" as string | undefined,
-      main: { image: "marca-vestidor-retrato" as ImageName, alt: "Participante sentada en un puf capitoné de un showroom de vestidores en Milán, con la bolsa de Experience Design" },
+      main: { image: "marca-christian-explica-foto" as ImageName, alt: "Christian Erdmann explica con las manos a un participante en un showroom del Fuorisalone" },
       detail: { image: "verona-antolini-pasillo" as ImageName, alt: "Participante con la bolsa de Experience Design recorre la galería de piedras de Antolini, en Verona" },
     },
   ],
@@ -602,8 +602,8 @@ export const community = {
   disciplines: ["Arquitectura", "Interiorismo", "Diseño", "Marcas", "Materiales", "Iluminación", "Mobiliario", "Industrias creativas", "Artes", "Lujo"],
   body: "Las conversaciones empiezan y el aprendizaje dura para siempre.",
   image: {
-    image: "fuori-showroom-conversacion",
-    alt: "Participantes conversando en los sofás de un showroom del Fuorisalone, en Milán",
+    image: "charla-showroom",
+    alt: "Conversación con un diseñador invitado en un showroom de Milán, con público sentado alrededor",
     material: "travertine",
     brief: "Grupo conversando en un showroom (foto real).",
   } as ImageSlot,
@@ -895,7 +895,7 @@ export const media = {
   marcaPersonal: {
     label: "Marca personal, en el viaje",
     items: [
-    { video: { src: "/video/marca-christian-explica.mp4", poster: "/video/marca-christian-explica.jpg" }, alt: "Video: Christian explica al grupo una pieza en un showroom del Fuorisalone" },
+    { image: "christian-disenadores", alt: "Christian Erdmann junto a dos diseñadores, en una calle de Milán durante el Fuorisalone" },
     { image: "christian-venecia-bolsa", alt: "Christian Erdmann con la bolsa de Experience Design en un embarcadero de Venecia" },
     { video: { src: "/video/marca-bolsa-antolini.mp4", poster: "/video/marca-bolsa-antolini.jpg" }, alt: "Video: Christian Erdmann en el showroom de Antolini, en Verona, frente a una placa de piedra verde" },
   ] as MediaItem[],
@@ -1078,12 +1078,11 @@ export const invite = {
   cta: "Inscríbete",
 };
 
-/** Inicio: el podcast, bajo la invitación. El clip es un fragmento sin audio; el episodio está en YouTube. */
-export const podcast = {
-  label: "Podcast",
-  title: "Escucha cómo se vivió Milán, en nuestro podcast.",
-  video: { src: "/video/podcast-milan.mp4", poster: "/video/podcast-milan.jpg" },
-  alt: "Video: Danae y Christian conversan en una mesa al aire libre en Milán, durante la grabación del podcast",
+/** Inicio: un fragmento del video de Milán (sin audio), bajo la invitación; el video completo está en YouTube. */
+export const milanVideo = {
+  title: "Así se vivió Milán.",
+  video: { src: "/video/milan-asi-se-vivio.mp4", poster: "/video/milan-asi-se-vivio.jpg" },
+  alt: "Video: Danae y Christian conversan en una mesa al aire libre en Milán",
   cta: "Ver en YouTube",
   url: "https://www.youtube.com/@ExperiencedesignChile",
 };

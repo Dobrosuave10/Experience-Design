@@ -15,10 +15,11 @@ import "./Hero.css";
 
 /**
  * 01 Entrar.
- * Escena WebGL: un túnel de anillos circulares que lleva a una luz blanca. Al hacer scroll
- * la cámara lo atraviesa y, pasado el túnel, la pantalla queda blanca con la "E." negra
- * en su círculo fino; después entra el contenido. Sin WebGL (teléfonos), un túnel
- * circular estático que se acerca con una escala y el mismo cierre en blanco.
+ * Escena WebGL: una galería de arcos de medio punto que lleva a una abertura iluminada,
+ * marfil, con la "E." negra en su círculo. Al hacer scroll la cámara la atraviesa y, pasado
+ * el túnel, la pantalla queda marfil con esa "E." (el mismo fondo de la sección que sigue,
+ * sin línea entre ambas). Sin WebGL (teléfonos), un túnel estático que se acerca con una
+ * escala y el mismo cierre.
  */
 export function Hero() {
   const section = useRef<HTMLElement>(null);
@@ -96,11 +97,12 @@ export function Hero() {
         gsap
           .timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true } })
           .to(".hero__content", { opacity: 0, y: -60, ease: "none", duration: 0.3 }, 0.02)
-          // El blanco cubre la escena cuando la cámara ya llegó a la luz; la "E." crece como la del túnel
-          .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.16 }, 0.78)
-          .fromTo(".hero__end", { scale: 0.8 }, { scale: 1, ease: "none", duration: 0.22 }, 0.78);
+          // El marfil cubre la escena cuando la cámara ya llegó a la luz; la "E." del cierre aparece
+          // recién con el marfil casi opaco (así no se ve doble con la del túnel) y crece como ella
+          .to(".hero__veil", { opacity: 1, ease: "none", duration: 0.14 }, 0.74)
+          .fromTo(".hero__end", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, ease: "none", duration: 0.12 }, 0.84);
         // Sin WebGL (teléfonos): el túnel estático se acerca con una escala barata
-        if (!gl) gsap.fromTo(".hero__tunnel", { scale: 1 }, { scale: 3.2, ease: "power1.in", scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true } });
+        if (!gl) gsap.fromTo(".hero__tunnel", { scale: 1 }, { scale: 5, ease: "power1.in", scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true } });
 
         const off = onPageShown(() => {
           gsap.fromTo(".hero__stage", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 2.4, ease: "expo.out" });
@@ -122,7 +124,17 @@ export function Hero() {
             <canvas ref={canvas} className={`hero__canvas ${sceneReady ? "is-ready" : ""}`} />
           ) : (
             <div className="hero__fallback">
-              <span className="hero__tunnel" />
+              <svg className="hero__tunnel" viewBox="0 0 200 262" aria-hidden="true">
+                <path d="M8.0 262V104.0A92.0 92.0 0 0 1 192.0 104.0V262Z" fill="#2a1d17" />
+                <path d="M28.2 262V138.8A71.8 71.8 0 0 1 171.8 138.8V262Z" fill="#3b2820" />
+                <path d="M44.0 262V165.9A56.0 56.0 0 0 1 156.0 165.9V262Z" fill="#4f3427" />
+                <path d="M56.3 262V187.0A43.7 43.7 0 0 1 143.7 187.0V262Z" fill="#6b4535" />
+                <path d="M65.9 262V203.5A34.1 34.1 0 0 1 134.1 203.5V262Z" fill="#8e5a42" />
+                <path d="M73.4 262V216.4A26.6 26.6 0 0 1 126.6 216.4V262Z" fill="#b47a5c" />
+                <path d="M79.3 262V226.4A20.7 20.7 0 0 1 120.7 226.4V262Z" fill="var(--paper)" />
+                <circle cx="100" cy="226.4" r="12.8" fill="none" stroke="#0e0c0b" strokeWidth="0.6" />
+                <image href="/brand/mark-dark.svg" x="94.9" y="220.8" width="10.3" height="11.3" />
+              </svg>
             </div>
           )}
         </div>
@@ -157,7 +169,7 @@ export function Hero() {
 
         {/* Fin del túnel: blanco, con la "E." negra en su círculo fino */}
         <div className="hero__veil" aria-hidden="true">
-          <Logo shape="ring" size="21vh" decorative className="hero__end" />
+          <Logo shape="ring" size="min(38vh, 86vw)" decorative className="hero__end" />
         </div>
       </div>
     </section>

@@ -25,7 +25,7 @@
   opacity: 1;
 }
 
-/* Sin WebGL (teléfonos): un túnel circular estático, anillos que se cierran hacia la luz blanca */
+/* Sin WebGL (teléfonos): la galería de arcos estática, hacia la abertura marfil con la "E." */
 .hero__fallback {
   position: absolute;
   inset: 0;
@@ -35,13 +35,11 @@
   background: radial-gradient(70% 60% at 50% 40%, #2a1d17 0%, var(--ink) 75%);
 }
 .hero__tunnel {
-  width: min(92vw, 640px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    repeating-radial-gradient(circle, transparent 0 9.4%, rgba(255, 226, 200, 0.16) 9.4% 10%),
-    radial-gradient(circle, #fff 0 8%, #f4e6d8 12%, #c98b67 22%, #6b4535 38%, #3b2820 58%, #1c1511 74%, rgba(14, 12, 11, 0) 76%);
-  transform-origin: 50% 50%;
+  display: block;
+  width: min(84vw, 460px);
+  height: auto;
+  /* la escala acerca la abertura: el origen es su centro */
+  transform-origin: 50% 86.4%;
   will-change: transform;
 }
 .hero__content {
@@ -84,13 +82,13 @@
   color: #d9cfc4;
 }
 
-/* Fin del túnel: blanco con la "E." en su círculo fino */
+/* Fin del túnel: el marfil de la sección siguiente (sin línea entre ambas) con la "E." en su círculo */
 .hero__veil {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  background: #fff;
+  background: var(--paper);
   opacity: 0;
   pointer-events: none;
 }

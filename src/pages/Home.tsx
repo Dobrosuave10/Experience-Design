@@ -6,9 +6,9 @@ import { NeverLate } from "../sections/NeverLate";
 import { Community } from "../sections/Community";
 import { neverLate } from "../content/site";
 import { InviteBand } from "../sections/InviteBand";
-import { Podcast } from "../sections/Podcast";
+import { MilanVideo } from "../sections/MilanVideo";
 
-/** Inicio: la entrada (WebGL), la idea, los tres ejes, los destinos, la invitación y el podcast. */
+/** Inicio: la entrada (WebGL), la idea, los tres ejes, los destinos, la invitación y el video de Milán. */
 export default function Home() {
   return (
     <>
@@ -19,7 +19,7 @@ export default function Home() {
       <NeverLate body={neverLate.homeBody} />
       <Community />
       <InviteBand />
-      <Podcast />
+      <MilanVideo />
     </>
   );
 }

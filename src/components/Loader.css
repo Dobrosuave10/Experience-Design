@@ -6,7 +6,7 @@
   overflow: hidden;
   display: grid;
   place-items: center;
-  background: #fff;
+  background: var(--paper);
 }
 
 /* La "E." en su círculo fino entra suave (escala y opacidad) */

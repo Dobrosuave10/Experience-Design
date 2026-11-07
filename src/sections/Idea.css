@@ -8,10 +8,6 @@
   background: var(--paper);
   color: var(--fg);
 }
-/* En Inicio la hoja de papel sube sobre el final del hero: no queda una pantalla vacía entre ambos */
-.hero + .idea {
-  margin-top: -40vh;
-}
 .idea__inner {
   /* Sin fijar la pantalla: la frase y los cuatro verbos se ven juntos mientras la página sigue bajando */
   display: grid;
@@ -79,11 +75,6 @@
   .idea__verb:nth-child(2),
   .idea__verb:nth-child(4) {
     padding-left: 0.4em;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero + .idea {
-    margin-top: 0;
   }
 }
 .idea__kicker {

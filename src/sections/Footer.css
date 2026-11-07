@@ -53,10 +53,6 @@
 .footer__contact a {
   gap: 8px;
 }
-.footer__map a.footer__phone {
-  font-size: clamp(1.3rem, 1.5vw, 1.6rem);
-  color: var(--fg);
-}
 .footer__bottom {
   display: flex;
   flex-wrap: wrap;

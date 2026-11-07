@@ -10,7 +10,7 @@ type Props = {
   /**
    * "mark": la "E." oficial, en el color del texto (navegación, menú, Hero).
    * "circle": la "E." negra sobre el círculo terracota del manual (footer, telón).
-   * "ring": la "E." negra en un círculo de trazo fino sobre blanco (apertura y fin del túnel).
+   * "ring": la "E." negra en un círculo negro sobre marfil (apertura y fin del túnel).
    * "square" se mantiene como alias de "mark".
    */
   shape?: "mark" | "circle" | "ring" | "square";

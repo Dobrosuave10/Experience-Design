@@ -36,7 +36,7 @@ export function Footer() {
                 <ul className="footer__contact">
                   {brand.whatsapp && brand.whatsappLabel && (
                     <li>
-                      <a className="footer__phone serif" href={`tel:+${brand.whatsapp}`}>
+                      <a href={`tel:+${brand.whatsapp}`}>
                         {brand.whatsappLabel}
                       </a>
                     </li>

@@ -8,7 +8,7 @@ import "./Loader.css";
 
 /**
  * Apertura (sólo al abrir o recargar el sitio), igual en todos los dispositivos: sobre
- * blanco, la "E." negra dentro de un círculo fino entra suave (CSS, 0,6 s) y la capa se
+ * marfil, la "E." negra dentro de su círculo entra suave (CSS, 0,6 s) y la capa se
  * funde (~1,3 s en total). No usa WebGL. Con movimiento reducido, un fundido breve.
  * La capa queda encima (y toma los clics) hasta que termina; el Hero empieza a entrar
  * con el fundido. Capa aislada: sólo bloquea el scroll y avisa (markReady).
@@ -70,7 +70,7 @@ export function Loader() {
     <div ref={ref} className="opening" role="status" aria-live="polite">
       <span className="sr-only">Experience Design</span>
       <div className={`opening__mark ${enter ? "opening__mark--enter" : ""}`} aria-hidden="true">
-        <Logo shape="ring" size="min(30vw, 168px)" decorative />
+        <Logo shape="ring" size="min(48vw, 260px)" decorative />
       </div>
     </div>
   );

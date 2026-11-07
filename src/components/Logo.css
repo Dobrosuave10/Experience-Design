@@ -26,11 +26,11 @@
   transform: translateX(3%);
 }
 
-/* Anillo: la "E." negra dentro de un círculo de trazo fino, sobre blanco (apertura y fin del túnel) */
+/* Anillo: la "E." negra dentro de un círculo negro de 2 px, sobre marfil (apertura y fin del túnel) */
 .logo--ring {
-  border: 1px solid #0e0c0b;
+  border: 2px solid #0e0c0b;
   border-radius: 50%;
-  background: #fff;
+  background: var(--paper);
   color: #0e0c0b;
 }
 .logo--ring .logo__mark {
