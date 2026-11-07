@@ -67,7 +67,7 @@ export default function MilanPage() {
         <Chapter id="como-se-vivio">
           <MilanRooms tone={tone("como-se-vivio")} />
           <Gallery id="milan-galeria" label={milan.galleryLabel} title={milan.galleryTitle} photos={milan.gallery} tone={tone("como-se-vivio")} />
-          <MediaStrip id="milan-videos" label={media.milan.label} items={media.milan.items} tone={tone("como-se-vivio")} />
+          <MediaStrip id="milan-videos" label={media.milan.label} items={media.milan.items} uniform="9 / 16" tone={tone("como-se-vivio")} />
         </Chapter>
         <Chapter id="testimonios">
           <Testimonials tone={tone("testimonios")} />

@@ -17,7 +17,7 @@ export default function PersonalBrandPage() {
       <NeverLate label={page.notLabel} doubts={page.not} answer={page.notAnswer} body={page.notBody} tone="paper" />
       <WordList id="mp-focus" variant="index" tone="paper" groups={[{ label: page.focusLabel, items: page.focus }]} />
       <PersonalBrand />
-      <MediaStrip id="marca-videos" label={media.marcaPersonal.label} items={media.marcaPersonal.items} tone="paper" />
+      <MediaStrip id="marca-videos" label={media.marcaPersonal.label} items={media.marcaPersonal.items} uniform="3 / 4" tone="paper" />
       <Audience program={program} tone="paper" />
       <NextChapter tone="sand" />
     </>

@@ -66,17 +66,36 @@
   font-size: 0.95rem;
   color: var(--fg);
 }
-.footer__credit a {
+.footer__credit-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  transition: color 0.4s var(--ease-out);
+}
+.footer__credit-icon {
+  align-self: center;
+  flex: none;
+}
+.footer__credit-name {
   font-family: var(--serif);
   font-style: italic;
   font-size: 1.1rem;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
-  transition: color 0.4s var(--ease-out);
 }
-.footer__credit a:hover {
-  color: var(--accent);
+.footer__credit-arrow {
+  display: inline-block;
+  font-size: 0.95rem;
+  transition: transform 0.4s var(--ease-out);
+}
+.footer__credit-link:hover,
+.footer__credit-link:focus-visible {
+  color: var(--clay-soft);
+}
+.footer__credit-link:hover .footer__credit-arrow,
+.footer__credit-link:focus-visible .footer__credit-arrow {
+  transform: translate(2px, -2px);
 }
 
 @media (max-width: 899px) {

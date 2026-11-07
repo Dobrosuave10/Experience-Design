@@ -184,10 +184,20 @@
   border-radius: 0;
   max-height: none;
 }
-/* Vertical (Formación): la altura manda, el ancho sale de la proporción */
+/* Vertical (Formación): la altura manda, el ancho sale de la proporción. El contenedor se
+   ajusta al video, así la foto chica queda superpuesta a su esquina y no flotando aparte */
+.ph--video-tall .ph__frame-wrap {
+  width: fit-content;
+  justify-self: start;
+}
 .ph--video-tall .ph__frame {
   height: min(70vh, 720px);
   width: auto;
+}
+.ph--video-tall .ph__detail {
+  right: -24%;
+  bottom: -6%;
+  width: 46%;
 }
 /* Horizontal (Marca personal): más columnas, para que no quede chico */
 .ph--marca-personal.ph--video-wide .ph__text {

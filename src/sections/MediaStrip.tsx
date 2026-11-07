@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { gsap } from "gsap";
 import type { MediaItem } from "../content/site";
 import { useGsap } from "../hooks/useGsap";
@@ -16,13 +16,19 @@ type Props = {
   tone?: "paper" | "sand" | "ink" | "warm";
   /** Columnas en escritorio (en el teléfono siempre son dos). */
   columns?: 3 | 4;
+  /**
+   * Proporción común (ej. "3 / 4"): las piezas van en filas centradas, todas del mismo
+   * tamaño; una fila incompleta queda al centro. Sin ella, columnas de alturas libres.
+   */
+  uniform?: string;
 };
 
 /**
  * Fotos y videos cortos (sin audio, en bucle, sólo mientras están en pantalla) en columnas
  * de alturas libres: cada pieza en su proporción, sin recortes; las horizontales, grandes.
+ * Con `uniform`, filas centradas de piezas iguales.
  */
-export function MediaStrip({ id, label, title, items, tone = "paper", columns = 3 }: Props) {
+export function MediaStrip({ id, label, title, items, tone = "paper", columns = 3, uniform }: Props) {
   const ref = useRef<HTMLElement>(null);
 
   useGsap(
@@ -45,11 +51,14 @@ export function MediaStrip({ id, label, title, items, tone = "paper", columns = 
           </p>
           {title && <RevealText id={`${id}-title`} as="h2" className="media__title display" lines={[title]} />}
         </header>
-        <ul className={`media__grid media__grid--${columns}`}>
+        <ul
+          className={`media__grid media__grid--${columns} ${uniform ? "media__grid--rows" : ""}`}
+          style={uniform ? ({ "--media-ratio": uniform } as CSSProperties) : undefined}
+        >
           {items.map((m) => (
             <li key={m.image ?? m.video?.src} className={`media__item ${m.wide ? "media__item--wide" : ""}`}>
               {m.video ? (
-                <span className="media__video" style={{ aspectRatio: m.ratio ?? "9 / 16" }}>
+                <span className="media__video" style={uniform ? undefined : { aspectRatio: m.ratio ?? "9 / 16" }}>
                   <InViewVideo src={m.video.src} poster={m.video.poster} label={m.alt} />
                 </span>
               ) : (

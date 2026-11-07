@@ -13,7 +13,7 @@ export default function FormationPage() {
     <>
       <ProgramHero program={program} />
       <Formation interest={program.interest} tone="paper" showStatus={false} />
-      <MediaStrip id="formacion-videos" label={media.formacion.label} items={media.formacion.items} columns={4} tone="paper" />
+      <MediaStrip id="formacion-videos" label={media.formacion.label} items={media.formacion.items} uniform="9 / 16" tone="paper" />
       <Audience program={program} tone="sand" />
       <NextChapter tone="ink" />
     </>
