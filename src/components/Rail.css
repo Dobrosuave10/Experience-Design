@@ -129,6 +129,13 @@
   height: 100%;
   object-fit: cover;
 }
+.rail__photo--wide {
+  aspect-ratio: auto;
+  align-self: center;
+}
+.rail__photo--wide img {
+  height: auto;
+}
 
 /* ---------- Destinos: el collage se arma con el scroll ---------- */
 .rail__item--dest {

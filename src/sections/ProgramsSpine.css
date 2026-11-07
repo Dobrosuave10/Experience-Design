@@ -168,9 +168,9 @@
   aspect-ratio: 4 / 5;
   width: 82%;
 }
-/* Christian explicando: su cara y sus manos, no el piso del showroom */
+/* El grupo con sus bolsas: el centro de la foto */
 .spine__block--marca-personal .spine__frame img {
-  object-position: 30% 22%;
+  object-position: 50% 55%;
 }
 
 /* pieza secundaria superpuesta */

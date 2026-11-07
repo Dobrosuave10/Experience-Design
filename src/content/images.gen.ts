@@ -85,12 +85,6 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
-  "casacor-estanteria-libros": {
-    "src": "/img/casacor-estanteria-libros-1350.webp",
-    "srcSet": "/img/casacor-estanteria-libros-480.webp 480w, /img/casacor-estanteria-libros-960.webp 960w, /img/casacor-estanteria-libros-1350.webp 1350w",
-    "w": 1350,
-    "h": 2400
-  },
   "casacor-grupo-almuerzo": {
     "src": "/img/casacor-grupo-almuerzo-1920.webp",
     "srcSet": "/img/casacor-grupo-almuerzo-480.webp 480w, /img/casacor-grupo-almuerzo-960.webp 960w, /img/casacor-grupo-almuerzo-1600.webp 1600w, /img/casacor-grupo-almuerzo-1920.webp 1920w",
@@ -265,6 +259,12 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "fundadores-juntos": {
+    "src": "/img/fundadores-juntos-1350.webp",
+    "srcSet": "/img/fundadores-juntos-480.webp 480w, /img/fundadores-juntos-960.webp 960w, /img/fundadores-juntos-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "fundadores-showroom": {
     "src": "/img/fundadores-showroom-848.webp",
     "srcSet": "/img/fundadores-showroom-480.webp 480w, /img/fundadores-showroom-848.webp 848w",
@@ -301,9 +301,21 @@ export const images = {
     "w": 1350,
     "h": 2400
   },
+  "fuori-kerakoll-explicacion": {
+    "src": "/img/fuori-kerakoll-explicacion-1350.webp",
+    "srcSet": "/img/fuori-kerakoll-explicacion-480.webp 480w, /img/fuori-kerakoll-explicacion-960.webp 960w, /img/fuori-kerakoll-explicacion-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "fuori-kerakoll-fachada": {
     "src": "/img/fuori-kerakoll-fachada-1350.webp",
     "srcSet": "/img/fuori-kerakoll-fachada-480.webp 480w, /img/fuori-kerakoll-fachada-960.webp 960w, /img/fuori-kerakoll-fachada-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
+  "fuori-kerakoll-grupo-bolsa": {
+    "src": "/img/fuori-kerakoll-grupo-bolsa-1350.webp",
+    "srcSet": "/img/fuori-kerakoll-grupo-bolsa-480.webp 480w, /img/fuori-kerakoll-grupo-bolsa-960.webp 960w, /img/fuori-kerakoll-grupo-bolsa-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },
@@ -325,6 +337,12 @@ export const images = {
     "w": 2400,
     "h": 1350
   },
+  "fuori-showroom-conversacion": {
+    "src": "/img/fuori-showroom-conversacion-1350.webp",
+    "srcSet": "/img/fuori-showroom-conversacion-480.webp 480w, /img/fuori-showroom-conversacion-960.webp 960w, /img/fuori-showroom-conversacion-1350.webp 1350w",
+    "w": 1350,
+    "h": 2400
+  },
   "fuori-showroom-lampara": {
     "src": "/img/fuori-showroom-lampara-1350.webp",
     "srcSet": "/img/fuori-showroom-lampara-480.webp 480w, /img/fuori-showroom-lampara-960.webp 960w, /img/fuori-showroom-lampara-1350.webp 1350w",
@@ -340,12 +358,6 @@ export const images = {
   "lago-como-grupo-glicinas": {
     "src": "/img/lago-como-grupo-glicinas-1350.webp",
     "srcSet": "/img/lago-como-grupo-glicinas-480.webp 480w, /img/lago-como-grupo-glicinas-960.webp 960w, /img/lago-como-grupo-glicinas-1350.webp 1350w",
-    "w": 1350,
-    "h": 2400
-  },
-  "marca-christian-explica-foto": {
-    "src": "/img/marca-christian-explica-foto-1350.webp",
-    "srcSet": "/img/marca-christian-explica-foto-480.webp 480w, /img/marca-christian-explica-foto-960.webp 960w, /img/marca-christian-explica-foto-1350.webp 1350w",
     "w": 1350,
     "h": 2400
   },

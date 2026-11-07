@@ -6,6 +6,7 @@ import { MOTION_OK, isLite } from "../lib/env";
 import { onPageShown } from "../lib/events";
 import { AtmosphereCanvas } from "../components/AtmosphereCanvas";
 import { Figure } from "../components/MaterialPlate";
+import { InViewVideo } from "../components/InViewVideo";
 import { Link } from "../components/Link";
 import "./ProgramHero.css";
 
@@ -48,7 +49,7 @@ export function ProgramHero({ program: p }: { program: Program }) {
   );
 
   return (
-    <section ref={ref} className={`ph ph--${p.id} section`} data-tone={p.tone} aria-labelledby="ph-title">
+    <section ref={ref} className={`ph ph--${p.id} ${p.heroVideo ? `ph--video ph--video-${p.heroVideo.ratio === "16 / 9" ? "wide" : "tall"}` : ""} section`} data-tone={p.tone} aria-labelledby="ph-title">
       <AtmosphereCanvas color={p.glow} />
       <div className="wrap ph__grid">
         <nav className="ph__crumbs label ph__fade" aria-label="Estás en">
@@ -60,7 +61,14 @@ export function ProgramHero({ program: p }: { program: Program }) {
         </nav>
 
         <div className="ph__frame-wrap">
-          <Figure slot={p.image} className="ph__frame" ratio={p.id === "formacion" ? "1 / 1" : "3 / 4"} sizes="(max-width: 899px) 90vw, 45vw" />
+          {p.heroVideo ? (
+            // Video en su proporción (horizontal u vertical), sin recorte
+            <figure className="ph__frame ph__frame--video" style={{ aspectRatio: p.heroVideo.ratio }}>
+              <InViewVideo src={p.heroVideo.src} poster={p.heroVideo.poster} label={p.heroVideo.alt} />
+            </figure>
+          ) : (
+            <Figure slot={p.image} className="ph__frame" ratio={p.id === "formacion" ? "1 / 1" : "3 / 4"} sizes="(max-width: 899px) 90vw, 45vw" />
+          )}
           {p.detail && <Figure slot={p.detail} className="ph__detail ph__fade" ratio="4 / 5" sizes="220px" />}
         </div>
 

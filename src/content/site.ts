@@ -203,7 +203,7 @@ export const programsSpine = {
       /** El CTA de Experiencias lleva al formulario de inscripción. */
       enroll: true,
       main: { image: "milan-grupo-lago-como" as ImageName, alt: "El grupo de Experience Design en un barco en el lago de Como" },
-      detail: { image: "casacor-estanteria-libros" as ImageName, alt: "Casacor São Paulo: estantería de madera iluminada, con libros y objetos" },
+      detail: { image: "milan-duomo-grupo-vertical" as ImageName, alt: "El grupo de Experience Design frente a la fachada iluminada del Duomo de Milán, de noche" },
       destinations: ["São Paulo", "Milano Design Week", "Colonia", "Buenos Aires"],
       /** Sin fecha cuando no la tenemos: no se inventa. */
       next: { label: "Próximas experiencias", items: [{ place: "Milano Design Week", note: "Abril 2027" }, { place: "Casacor São Paulo", note: "Julio 2027" }] as { place: string; note?: string }[] },
@@ -231,7 +231,7 @@ export const programsSpine = {
       text: "Construir tu propia marca y desarrollar el sello que te distingue como profesional, en tu estudio o en tu empresa.",
       href: routes.marcaPersonal as string | undefined,
       cta: "Conocer Marca personal" as string | undefined,
-      main: { image: "marca-christian-explica-foto" as ImageName, alt: "Christian Erdmann explica con las manos a un participante en un showroom del Fuorisalone" },
+      main: { image: "venecia-grupo-mirador" as ImageName, alt: "El grupo de Experience Design, con sus bolsas negras de la marca, en un mirador sobre el Gran Canal de Venecia" },
       detail: { image: "verona-antolini-pasillo" as ImageName, alt: "Participante con la bolsa de Experience Design recorre la galería de piedras de Antolini, en Verona" },
     },
   ],
@@ -285,8 +285,8 @@ export const milan = {
       title: "Las personas",
       text: "Detrás de cada showroom y cada estudio hay alguien que tomó decisiones.",
       material: "walnut" as MaterialName,
-      image: "milan-grupo-gessi" as ImageName,
-      alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milan Design Week",
+      image: "fuori-kerakoll-explicacion" as ImageName,
+      alt: "Fuorisalone de Milán: el grupo, con la bolsa negra de Experience Design, escucha a un anfitrión frente al muestrario de colores de Kerakoll",
     },
     {
       n: "06",
@@ -572,15 +572,15 @@ export const formation = {
   status: "Programa en desarrollo",
   cta: "Avísame",
   image: {
-    image: "fuori-kerakoll-muestrario",
-    alt: "Fuorisalone de Milán: un anfitrión explica el muestrario de colores de Kerakoll al grupo de Experience Design",
+    image: "danae-espejo-showroom",
+    alt: "Danae Barla se fotografía en un espejo de un showroom del Fuorisalone",
     material: "plaster",
     brief: "Aprender frente al material.",
   } as ImageSlot,
   /** Foto de "Después": el resultado, con criterio propio en un espacio de diseño. */
   afterImage: {
-    image: "formacion-despues-retrato" as ImageName,
-    alt: "Retrato en un showroom de Gessi durante el Fuorisalone de Milán, junto a un lavamanos de piedra y espejos redondos iluminados",
+    image: "fundadores-espejo-showroom" as ImageName,
+    alt: "Danae y Christian fotografiados en un espejo iluminado de un showroom, con la bolsa de Experience Design",
   },
 };
 
@@ -639,7 +639,7 @@ export const about = {
   motto: "Vivirlo. Cuestionarlo. Hacerlo propio.",
   promise: "No vienes solo a conocer el mundo del diseño. Vienes a descubrir qué puede despertar en ti.",
   image: {
-    image: "fundadores-showroom",
+    image: "fundadores-juntos",
     alt: "Danae Barla y Christian Erdmann en un showroom de baño con muros de mármol",
     material: "travertine",
     brief: "Danae y Christian juntos, en un lugar de diseño.",
@@ -714,6 +714,8 @@ export type Program = {
   glow: string;
   material: MaterialName;
   image: ImageSlot;
+  /** Portada en video (sin audio, en bucle): reemplaza a `image` en la cabecera del programa. */
+  heroVideo?: { src: string; poster: string; ratio: string; alt: string };
   /** Segunda imagen pequeña (el material de cerca). */
   detail?: ImageSlot;
   /** Foto de la página Programas. */
@@ -746,20 +748,20 @@ export const programs = {
       glow: "#C97B4A",
       material: "travertine",
       image: {
-        image: "milan-duomo-grupo-vertical",
-        alt: "El grupo de Experience Design frente a la fachada iluminada del Duomo de Milán, de noche",
+        image: "fuori-kerakoll-grupo-bolsa",
+        alt: "El grupo de Experience Design, con la bolsa negra de la marca, frente al muro de colores de Kerakoll en el Fuorisalone",
         material: "travertine",
         brief: "Grupo en Milán.",
       },
       detail: {
-        image: "venecia-grupo-mirador",
-        alt: "El grupo de Experience Design en un mirador de madera sobre el Gran Canal de Venecia, con bolsas de la marca",
+        image: "fuori-showroom-conversacion",
+        alt: "Participantes conversando en los sofás de un showroom del Fuorisalone, en Milán",
         material: "walnut",
         brief: "Grupo en Venecia.",
       },
       railImage: {
-        image: "milan-grupo-suelo-rojo",
-        alt: "El grupo de Experience Design sentado sobre un piso rojo durante la Milano Design Week",
+        image: "milan-grupo-gessi",
+        alt: "El grupo de Experience Design reunido en el espacio de Gessi durante la Milano Design Week",
       },
       audience: [],
       interest: "milan",
@@ -778,6 +780,8 @@ export const programs = {
       tone: "ink",
       glow: "#C97B4A",
       material: "travertine",
+      /** Portada: video sin audio en vez de foto (en su proporción, sin recorte). */
+      heroVideo: { src: "/video/formacion-christian-explica.mp4", poster: "/video/formacion-christian-explica.jpg", ratio: "9 / 16", alt: "Video: Christian Erdmann explica una pieza al grupo en un showroom del Fuorisalone" },
       image: {
         image: "fuori-charla-arcos",
         alt: "Charla durante el Fuorisalone de Milán: el público sentado bajo una galería de arcos frente a una pantalla",
@@ -791,8 +795,8 @@ export const programs = {
         brief: "Material de cerca.",
       },
       railImage: {
-        image: "fuori-charla-retrato",
-        alt: "Charla durante el Fuorisalone de Milán: el público escucha sentado bajo una bóveda de arcos",
+        image: "christian-showroom-cocina",
+        alt: "Christian Erdmann en un showroom de cocinas del Fuorisalone, junto a una isla con una obra de arte",
       },
       audience: [
         { name: "Arquitectos", text: "Fotografía, identidad y estrategia comercial para mostrar tus proyectos." },
@@ -818,6 +822,7 @@ export const programs = {
       tone: "clay",
       glow: "#F1D6BF",
       material: "linen",
+      heroVideo: { src: "/video/salone-video-mesa.mp4", poster: "/video/salone-video-mesa.jpg", ratio: "16 / 9", alt: "Video: un living de sofás claros en un stand del Salone del Mobile" },
       image: {
         image: "marca-retrato-backdrop",
         alt: "Participante sonriendo frente al muro de prensa de un evento de diseño en Milán",
@@ -825,8 +830,8 @@ export const programs = {
         brief: "Retrato de una participante, luz natural, vertical.",
       },
       railImage: {
-        image: "marca-showroom-retrato",
-        alt: "Participante sentada en un showroom de Milán, entre espejos redondos y butacas de cuero",
+        image: "milan-grupo-eurocucina",
+        alt: "El grupo de Experience Design frente al telón de EuroCucina en el Salone del Mobile",
       },
       audience: [
         { name: "Arquitectos", text: "Tu trayectoria y tu mirada, ordenadas en una marca que se reconoce." },
@@ -869,9 +874,8 @@ export const media = {
   nosotros: {
     label: "Danae y Christian, en el viaje",
     items: [
-    { image: "christian-showroom-cocina", alt: "Christian Erdmann en un showroom de cocinas del Fuorisalone, junto a una isla con una obra de arte" },
+    { image: "marca-vestidor-retrato", alt: "Danae Barla sentada en un puf capitoné de un showroom de vestidores en Milán, con la bolsa de Experience Design" },
     { video: { src: "/video/danae-antolini-marmol.mp4", poster: "/video/danae-antolini-marmol.jpg" }, alt: "Video: Danae Barla recorre con la mano las vetas de una placa de mármol en Antolini, Verona" },
-    { image: "fundadores-espejo-showroom", alt: "Danae y Christian fotografiados en un espejo iluminado de un showroom, con la bolsa de Experience Design" },
     { video: { src: "/video/christian-fuori-bolsa.mp4", poster: "/video/christian-fuori-bolsa.jpg" }, alt: "Video: el grupo camina por una calle arbolada del Fuorisalone, con la bolsa de Experience Design" },
     { image: "danae-lavamanos-espejo", alt: "Danae Barla prueba la grifería de un lavamanos de piedra frente a un espejo redondo" },
     { video: { src: "/video/danae-fuori-biblioteca.mp4", poster: "/video/danae-fuori-biblioteca.jpg" }, alt: "Video: una biblioteca de madera en un showroom del Fuorisalone", ratio: "16 / 9" },
@@ -879,7 +883,6 @@ export const media = {
     { video: { src: "/video/fundadores-salone.mp4", poster: "/video/fundadores-salone.jpg" }, alt: "Video: bajo la cubierta de Fiera Milano Rho, durante el Salone del Mobile" },
     { image: "danae-escalinata-salone", alt: "Danae sentada en la escalinata roja del Salone del Mobile, con la bolsa de Experience Design" },
     { video: { src: "/video/christian-salone.mp4", poster: "/video/christian-salone.jpg" }, alt: "Video: participantes recorren un stand del Salone del Mobile" },
-    { image: "danae-espejo-showroom", alt: "Danae se fotografía en un espejo de un showroom del Fuorisalone" },
     { video: { src: "/video/danae-showroom-deco.mp4", poster: "/video/danae-showroom-deco.jpg" }, alt: "Video: un showroom luminoso con una mesa baja, flores y repisas de objetos" },
   ] as MediaItem[],
   },
@@ -888,7 +891,6 @@ export const media = {
     items: [
     { video: { src: "/video/formacion-charla-fuori.mp4", poster: "/video/formacion-charla-fuori.jpg" }, alt: "Video: el grupo escucha una charla bajo una galería de arcos durante el Fuorisalone" },
     { video: { src: "/video/formacion-marangoni-placa.mp4", poster: "/video/formacion-marangoni-placa.jpg" }, alt: "Video: la placa del Istituto Marangoni en la fachada de su sede de Milán" },
-    { video: { src: "/video/formacion-marangoni-entrada.mp4", poster: "/video/formacion-marangoni-entrada.jpg" }, alt: "Video: la entrada del Istituto Marangoni, en una calle de Milán" },
     { video: { src: "/video/formacion-muestras.mp4", poster: "/video/formacion-muestras.jpg" }, alt: "Video: muestras de color de un muestrario, ordenadas en una repisa" },
   ] as MediaItem[],
   },
@@ -903,7 +905,6 @@ export const media = {
   milan: {
     label: "Milano Design Week 2026, en video",
     items: [
-    { video: { src: "/video/salone-video-mesa.mp4", poster: "/video/salone-video-mesa.jpg" }, alt: "Video: un living de sofás claros en un stand del Salone del Mobile", ratio: "16 / 9" },
     { video: { src: "/video/fuori-video-gessi-pieza.mp4", poster: "/video/fuori-video-gessi-pieza.jpg" }, alt: "Video: una pieza de grifería sobre un bloque de mármol en el espacio de Gessi" },
     { video: { src: "/video/salone-video-bancos.mp4", poster: "/video/salone-video-bancos.jpg" }, alt: "Video: lámparas de vidrio suspendidas sobre un comedor, en un stand del Salone del Mobile" },
     { video: { src: "/video/fuori-video-flor.mp4", poster: "/video/fuori-video-flor.jpg" }, alt: "Video: una gran ilustración de una flor en blanco y negro durante el Fuorisalone" },
@@ -953,7 +954,6 @@ export const destinations = {
         { video: { src: "/video/pol-fuori-espejo.mp4", poster: "/video/pol-fuori-espejo.jpg" }, alt: "Video: tres participantes se fotografían en un espejo de un showroom del Fuorisalone" },
         { image: "aeropuerto-bolsa-maleta", alt: "La bolsa de Experience Design sobre una maleta, frente a las pantallas de salidas del aeropuerto" },
         { video: { src: "/video/pol-fuori-selfie.mp4", poster: "/video/pol-fuori-selfie.jpg" }, alt: "Video: Danae y Christian en una selfie en una calle de Milán" },
-        { image: "milan-grupo-eurocucina", alt: "El grupo de Experience Design frente al telón de EuroCucina en el Salone del Mobile" },
         { video: { src: "/video/pol-venecia-bolsa.mp4", poster: "/video/pol-venecia-bolsa.jpg" }, alt: "Video: la bolsa de Experience Design en alto, sobre el Gran Canal de Venecia" },
         { image: "milan-galleria-noche-fundadores", alt: "Danae y Christian de noche, con la Galleria Vittorio Emanuele II iluminada detrás" },
         { video: { src: "/video/pol-fuori-microcar.mp4", poster: "/video/pol-fuori-microcar.jpg" }, alt: "Video: un pequeño auto verde agua con la puerta frontal abierta, en una calle de Milán" },

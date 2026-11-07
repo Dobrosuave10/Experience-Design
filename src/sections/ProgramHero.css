@@ -173,7 +173,38 @@
   letter-spacing: 0.005em;
 }
 
+/* Portada en video: en su proporción, sin recorte ni arco */
+.ph__frame--video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ph--video .ph__frame {
+  border-radius: 0;
+  max-height: none;
+}
+/* Vertical (Formación): la altura manda, el ancho sale de la proporción */
+.ph--video-tall .ph__frame {
+  height: min(70vh, 720px);
+  width: auto;
+}
+/* Horizontal (Marca personal): más columnas, para que no quede chico */
+.ph--marca-personal.ph--video-wide .ph__text {
+  grid-column: 1 / span 5;
+}
+.ph--marca-personal.ph--video-wide .ph__frame-wrap {
+  grid-column: 6 / span 7;
+}
+
 @media (max-width: 899px) {
+  .ph--video-tall .ph__frame {
+    height: auto;
+    width: 100%;
+  }
+  .ph--marca-personal.ph--video-wide .ph__frame-wrap {
+    width: 100%;
+  }
   .ph__grid {
     grid-template-columns: 1fr;
     grid-template-rows: none;

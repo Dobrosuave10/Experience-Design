@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import { programs } from "../content/site";
+import { images } from "../content/images.gen";
 import { MOTION_OK } from "../lib/env";
 import { navigate } from "../lib/router";
 import { MagneticButton } from "../components/MagneticButton";
@@ -46,7 +47,8 @@ export function ProgramsRail() {
                 </MagneticButton>
               </div>
             </div>
-            <figure className="rail__photo">
+            {/* Las horizontales se muestran enteras (sin recorte a vertical) */}
+            <figure className={`rail__photo ${images[p.railImage.image].w > images[p.railImage.image].h ? "rail__photo--wide" : ""}`}>
               <Photo name={p.railImage.image} alt={p.railImage.alt} sizes="(max-width: 767px) 88vw, 42vw" />
             </figure>
           </div>
