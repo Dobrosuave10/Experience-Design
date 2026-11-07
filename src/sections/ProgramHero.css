@@ -134,14 +134,15 @@
 }
 .ph--experiencias .ph__detail {
   position: absolute;
-  left: -30%;
+  left: -18%;
   bottom: -8%;
   width: 40%;
   border: 8px solid var(--bg);
 }
 .ph--experiencias .ph__name {
   font-family: var(--serif);
-  font-size: clamp(3.6rem, 7vw, 8.4rem);
+  /* que no llegue a la foto en pantallas anchas */
+  font-size: clamp(3.4rem, 5.8vw, 7rem);
   letter-spacing: -0.01em;
 }
 
@@ -185,13 +186,12 @@
   max-height: none;
 }
 /* Vertical (Formación): díptico. El video manda en altura; la foto secundaria va a su lado,
-   alineada abajo y con presencia (75 % del ancho del video). El par ocupa la mitad izquierda
-   y el texto las columnas 8 a 12, con aire entre ambos en todas las anchuras. */
+   alineada abajo y con presencia (75 % del ancho del video). El texto sigue al par con un
+   espacio fijo (64-96 px); lo que sobra de ancho queda a la derecha, no entre ambos. */
 .ph--video-tall {
   --ph-video-h: min(76vh, 740px);
 }
 .ph--formacion.ph--video-tall .ph__frame-wrap {
-  grid-column: 1 / span 7;
   justify-self: start;
   display: flex;
   align-items: flex-end;
@@ -208,19 +208,37 @@
   width: calc(var(--ph-video-h) * 9 / 16 * 0.75);
   border: 0;
 }
+/* El texto sigue al díptico con un espacio fijo, en cualquier ancho de pantalla */
+.ph--formacion.ph--video-tall .ph__grid {
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(40px, 5vw, 96px);
+}
+.ph--formacion.ph--video-tall .ph__frame-wrap {
+  grid-column: 1;
+}
 .ph--formacion.ph--video-tall .ph__text {
-  grid-column: 8 / span 5;
+  grid-column: 2;
+  max-width: 40rem;
 }
 /* Horizontal (Marca personal): más columnas, para que no quede chico */
 .ph--marca-personal.ph--video-wide .ph__text {
   grid-column: 1 / span 5;
 }
+/* con el video al lado, el título no debe salirse de su columna */
+.ph--marca-personal.ph--video-wide .ph__name {
+  font-size: clamp(3.6rem, 6.6vw, 8rem);
+}
 .ph--marca-personal.ph--video-wide .ph__frame-wrap {
   grid-column: 6 / span 7;
+  /* mismo aire entre texto y foto que en las otras portadas (64-96 px) */
+  padding-left: clamp(36px, 4vw, 64px);
 }
 
 @media (max-width: 899px) {
   /* Teléfono: el mismo díptico, a lo ancho de la pantalla */
+  .ph--formacion.ph--video-tall .ph__grid {
+    grid-template-columns: 1fr;
+  }
   .ph--formacion.ph--video-tall .ph__frame-wrap {
     width: 100%;
     gap: 12px;
