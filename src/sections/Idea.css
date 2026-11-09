@@ -8,6 +8,18 @@
   background: var(--paper);
   color: var(--fg);
 }
+/* En Inicio, viene del cierre negro del Hero: empieza con un degradado de negro a marfil */
+.hero + .idea::before {
+  content: "";
+  display: block;
+  height: clamp(160px, 34vh, 360px);
+  background: linear-gradient(180deg, var(--ink) 0%, #2a2420 22%, #8a827b 62%, var(--paper) 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero + .idea::before {
+    height: 0;
+  }
+}
 .idea__inner {
   /* Sin fijar la pantalla: la frase y los cuatro verbos se ven juntos mientras la página sigue bajando */
   display: grid;

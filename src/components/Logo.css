@@ -25,15 +25,3 @@
   /* la "E." se apoya un poco a la izquierda por el punto: se compensa para centrarla ópticamente */
   transform: translateX(3%);
 }
-
-/* Anillo: la "E." negra dentro de un círculo negro de 2 px, sobre marfil (apertura y fin del túnel) */
-.logo--ring {
-  border: 2px solid #0e0c0b;
-  border-radius: 50%;
-  background: var(--paper);
-  color: #0e0c0b;
-}
-.logo--ring .logo__mark {
-  height: 44%;
-  transform: translateX(3%);
-}

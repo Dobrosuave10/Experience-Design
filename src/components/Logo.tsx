@@ -10,10 +10,9 @@ type Props = {
   /**
    * "mark": la "E." oficial, en el color del texto (navegación, menú, Hero).
    * "circle": la "E." negra sobre el círculo terracota del manual (footer, telón).
-   * "ring": la "E." negra en un círculo negro sobre marfil (apertura y fin del túnel).
    * "square" se mantiene como alias de "mark".
    */
-  shape?: "mark" | "circle" | "ring" | "square";
+  shape?: "mark" | "circle" | "square";
 };
 
 /**
@@ -24,7 +23,7 @@ type Props = {
 export function Logo({ size = 40, className, decorative = false, shape = "mark" }: Props) {
   const a11y = decorative ? { "aria-hidden": true } : { role: "img", "aria-label": brand.name };
   const style = { "--logo-size": typeof size === "number" ? `${size}px` : size, "--logo-src": `url("${brand.logoAsset}")` } as CSSProperties;
-  const kind = shape === "circle" || shape === "ring" ? shape : "mark";
+  const kind = shape === "circle" ? shape : "mark";
   return (
     <span className={`logo logo--${kind} ${className ?? ""}`} style={style} {...a11y}>
       <span className="logo__mark" />

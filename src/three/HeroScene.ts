@@ -50,8 +50,8 @@ function archGeometry() {
   });
 }
 
-/** Marfil del sitio (--paper): el fondo del túnel es el mismo de la sección que sigue. */
-const PAPER = "#fbf8f2";
+/** Negro del sitio (--ink): al fondo del túnel, la "E." blanca sobre negro, igual que el cierre del Hero. */
+const INK_END = "#0e0c0b";
 
 function loadImage(src: string) {
   return new Promise<HTMLImageElement | null>((resolve) => {
@@ -62,21 +62,16 @@ function loadImage(src: string) {
   });
 }
 
-/** Fin del túnel: la "E." negra dentro de un círculo negro (mismas proporciones que .logo--ring). */
+/** Fin del túnel: la "E." blanca, sin círculo; ocupa el 80 % del alto de la textura. */
 async function endMarkTexture(markSrc: string) {
   const size = 1024;
   const c = document.createElement("canvas");
   c.width = c.height = size;
   const ctx = c.getContext("2d")!;
-  ctx.strokeStyle = "#0e0c0b";
-  ctx.lineWidth = size * 0.012;
-  ctx.beginPath();
-  ctx.arc(size / 2, size / 2, size * 0.46, 0, Math.PI * 2);
-  ctx.stroke();
   const mark = await loadImage(markSrc);
   if (mark) {
-    const h = size * 0.92 * 0.44, w = h * (441 / 484);
-    ctx.drawImage(mark, size / 2 - w / 2 + w * 0.03, size / 2 - h / 2, w, h);
+    const h = size * 0.8, w = h * (441.3 / 483.8);
+    ctx.drawImage(mark, size / 2 - w / 2, size / 2 - h / 2, w, h);
   }
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
@@ -237,16 +232,16 @@ export class HeroScene {
     const lastZ = depths[depths.length - 1] - WALL_DEPTH;
     const backdrop = new THREE.Mesh(
       new THREE.PlaneGeometry(46, 30),
-      new THREE.MeshBasicMaterial({ color: PAPER, fog: false, toneMapped: false }),
+      new THREE.MeshBasicMaterial({ color: INK_END, fog: false, toneMapped: false }),
     );
     backdrop.position.set(0, 2, lastZ - 9);
     scene.add(backdrop);
-    // En la abertura iluminada, la "E." en su círculo, a la altura de la cámara. Al final del
-    // recorrido mide lo mismo que la del cierre del Hero (≈ 38 % del alto de pantalla).
-    const markTex = await endMarkTexture("/brand/mark-dark.svg");
+    // En la abertura, la "E." blanca, a la altura de la cámara. Al final del recorrido mide lo
+    // mismo que la del cierre del Hero (≈ 18 % del alto de pantalla).
+    const markTex = await endMarkTexture("/brand/mark-light.svg");
     if (this.disposed) return;
     const mark = new THREE.Mesh(
-      new THREE.PlaneGeometry(1.8, 1.8),
+      new THREE.PlaneGeometry(0.96, 0.96),
       new THREE.MeshBasicMaterial({ map: markTex, transparent: true, fog: false, toneMapped: false }),
     );
     mark.position.set(0, 0.25, lastZ - 8.98);

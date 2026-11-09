@@ -11,6 +11,15 @@ import "./AxesTriangle.css";
  */
 const A = [500, 24], B = [20, 855], C = [980, 855];
 const G = [500, (A[1] + B[1] + C[1]) / 3];
+
+/*
+ * La "E." oficial (441,3 × 483,8). La letra E ocupa del 0,9 % al 67,9 % del ancho; su centro
+ * está al 34,41 %. Se alinea la E (no el conjunto "E.") con la línea vertical del medio y el
+ * punto queda colgando a la derecha. Verticalmente la E llena el alto: se centra en el círculo.
+ */
+const MARK_H = 48;
+const MARK_W = MARK_H * (441.3 / 483.8);
+const MARK_E_CENTER = 0.3441;
 const mid = (p: number[], q: number[]) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
 const AB = mid(A, B), AC = mid(A, C), BC = mid(B, C);
 const pts = (...ps: number[][]) => ps.map((p) => p.join(",")).join(" ");
@@ -92,7 +101,9 @@ export function AxesTriangle() {
       <g className="tri__center" aria-hidden="true">
         <circle cx={G[0]} cy={G[1]} r={62} className="tri__disc" />
         <circle cx={G[0]} cy={G[1]} r={52} className="tri__ring" />
-        {brand.logoAsset && <image href={brand.logoAsset} x={G[0] - 22} y={G[1] - 24} width={46} height={48} preserveAspectRatio="xMidYMid meet" />}
+        {brand.logoAsset && (
+          <image href={brand.logoAsset} x={G[0] - MARK_W * MARK_E_CENTER} y={G[1] - MARK_H / 2} width={MARK_W} height={MARK_H} preserveAspectRatio="none" />
+        )}
       </g>
     </svg>
   );

@@ -6,10 +6,11 @@
   overflow: hidden;
   display: grid;
   place-items: center;
-  background: var(--paper);
+  color: var(--paper);
+  background: var(--ink);
 }
 
-/* La "E." en su círculo fino entra suave (escala y opacidad) */
+/* La "E." entra suave (escala y opacidad) */
 .opening__mark--enter .logo {
   animation: opening-mark-in 0.6s var(--ease-out) both;
 }

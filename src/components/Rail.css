@@ -111,6 +111,12 @@
 .rail__program .rail__text {
   grid-column: 1 / span 5;
 }
+/* El nombre no debe salirse de su columna ni tocar la foto en pantallas anchas */
+.rail__program .rail__name {
+  font-size: clamp(3rem, 5.4vw, 6.2rem);
+}
+/* Todas las fotos de Programas comparten el mismo ancho y la misma columna: los bordes se
+   alinean entre una y otra, sean verticales u horizontales */
 .rail__photo {
   grid-column: 7 / -1;
   margin: 0;
@@ -120,17 +126,15 @@
   justify-self: end;
   width: 100%;
 }
-.rail__item:nth-child(even) .rail__photo {
-  grid-column: 7 / span 5;
-  justify-self: start;
-}
 .rail__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+/* Horizontal: entera, a todo el ancho de la columna, sin recorte a vertical */
 .rail__photo--wide {
   aspect-ratio: auto;
+  max-height: none;
   align-self: center;
 }
 .rail__photo--wide img {

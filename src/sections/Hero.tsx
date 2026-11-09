@@ -131,9 +131,8 @@ export function Hero() {
                 <path d="M56.3 262V187.0A43.7 43.7 0 0 1 143.7 187.0V262Z" fill="#6b4535" />
                 <path d="M65.9 262V203.5A34.1 34.1 0 0 1 134.1 203.5V262Z" fill="#8e5a42" />
                 <path d="M73.4 262V216.4A26.6 26.6 0 0 1 126.6 216.4V262Z" fill="#b47a5c" />
-                <path d="M79.3 262V226.4A20.7 20.7 0 0 1 120.7 226.4V262Z" fill="var(--paper)" />
-                <circle cx="100" cy="226.4" r="12.8" fill="none" stroke="#0e0c0b" strokeWidth="0.6" />
-                <image href="/brand/mark-dark.svg" x="94.9" y="220.8" width="10.3" height="11.3" />
+                <path d="M79.3 262V226.4A20.7 20.7 0 0 1 120.7 226.4V262Z" fill="var(--ink)" />
+                <image href="/brand/mark-light.svg" x="94.5" y="220.4" width="11" height="12" />
               </svg>
             </div>
           )}
@@ -169,7 +168,7 @@ export function Hero() {
 
         {/* Fin del túnel: blanco, con la "E." negra en su círculo fino */}
         <div className="hero__veil" aria-hidden="true">
-          <Logo shape="ring" size="min(38vh, 86vw)" decorative className="hero__end" />
+          <Logo size="18vh" decorative className="hero__end" />
         </div>
       </div>
     </section>

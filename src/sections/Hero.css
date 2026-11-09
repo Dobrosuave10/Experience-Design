@@ -82,13 +82,15 @@
   color: #d9cfc4;
 }
 
-/* Fin del túnel: el marfil de la sección siguiente (sin línea entre ambas) con la "E." en su círculo */
+/* Fin del túnel: negro con la "E." blanca, sin círculo. La sección siguiente empieza con un
+   degradado de negro a marfil (Idea.css), así no hay línea entre ambas. */
 .hero__veil {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  background: var(--paper);
+  color: var(--paper);
+  background: var(--ink);
   opacity: 0;
   pointer-events: none;
 }
