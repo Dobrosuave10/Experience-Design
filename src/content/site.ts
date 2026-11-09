@@ -961,6 +961,7 @@ export const destinations = {
         { video: { src: "/video/pol-lago-como-banderas.mp4", poster: "/video/pol-lago-como-banderas.jpg" }, alt: "Video: Christian junto al lago de Como, bajo banderas de Italia" },
         { video: { src: "/video/pol-fuori-escultura.mp4", poster: "/video/pol-fuori-escultura.jpg" }, alt: "Video: una escultura de tela plisada en el patio de un palacio, durante el Fuorisalone" },
         { video: { src: "/video/pol-lago-como-bolsa.mp4", poster: "/video/pol-lago-como-bolsa.jpg" }, alt: "Video: de cerca, la «E.» bordada en la bolsa negra de Experience Design" },
+        { video: { src: "/video/pol-salone-5883.mp4", poster: "/video/pol-salone-5883.jpg" }, alt: "Video: participantes con la bolsa de Experience Design recorren un stand de la Milano Design Week" },
         { image: "milan-scala-cafe-mesa", alt: "Mesa del café de La Scala: una flor, cubiertos dorados y la carta, el último día en Milán" },
       ] as CollageItem[],
       gallery: [

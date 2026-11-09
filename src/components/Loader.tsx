@@ -70,7 +70,7 @@ export function Loader() {
     <div ref={ref} className="opening" role="status" aria-live="polite">
       <span className="sr-only">Experience Design</span>
       <div className={`opening__mark ${enter ? "opening__mark--enter" : ""}`} aria-hidden="true">
-        <Logo size="min(30vw, 150px)" decorative />
+        <Logo size="min(36vw, 184px)" decorative />
       </div>
     </div>
   );

@@ -140,6 +140,12 @@
     aspect-ratio: 4 / 5.4;
     grid-column: auto;
   }
+  /* número impar de piezas: la última, sola, al centro */
+  .collage--tall .collage__photo.polaroid:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 7px);
+  }
   .collage__photo.polaroid--video {
     aspect-ratio: 9 / 15;
   }

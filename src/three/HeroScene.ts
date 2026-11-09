@@ -237,11 +237,11 @@ export class HeroScene {
     backdrop.position.set(0, 2, lastZ - 9);
     scene.add(backdrop);
     // En la abertura, la "E." blanca, a la altura de la cámara. Al final del recorrido mide lo
-    // mismo que la del cierre del Hero (≈ 18 % del alto de pantalla).
+    // mismo que la del cierre del Hero (≈ 22 % del alto de pantalla).
     const markTex = await endMarkTexture("/brand/mark-light.svg");
     if (this.disposed) return;
     const mark = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.96, 0.96),
+      new THREE.PlaneGeometry(1.17, 1.17),
       new THREE.MeshBasicMaterial({ map: markTex, transparent: true, fog: false, toneMapped: false }),
     );
     mark.position.set(0, 0.25, lastZ - 8.98);

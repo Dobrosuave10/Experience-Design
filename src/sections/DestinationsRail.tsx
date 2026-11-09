@@ -17,7 +17,7 @@ import "./DestinationsMap.css";
  */
 type Slot = { x: number; y: number; w: number; h: number; d: number };
 const LAYOUTS: Record<string, Slot[]> = {
-  // Doce piezas verticales (fotos y videos), en tres filas desfasadas; abajo a la izquierda, la rosa de los vientos
+  // Trece piezas verticales (fotos y videos), en tres filas desfasadas; abajo a la izquierda, la rosa de los vientos
   milan: [
     { x: 0, y: 1, w: 16, h: 31, d: 0 },
     { x: 20, y: 4, w: 16, h: 31, d: 0.08 },
@@ -28,9 +28,10 @@ const LAYOUTS: Record<string, Slot[]> = {
     { x: 30, y: 39, w: 16, h: 31, d: 0.38 },
     { x: 51, y: 35, w: 16, h: 31, d: 0.44 },
     { x: 72, y: 39, w: 16, h: 31, d: 0.5 },
-    { x: 26, y: 72, w: 16, h: 28, d: 0.56 },
-    { x: 49, y: 70, w: 16, h: 28, d: 0.62 },
-    { x: 72, y: 73, w: 16, h: 27, d: 0.68 },
+    { x: 21, y: 72, w: 16, h: 28, d: 0.56 },
+    { x: 41, y: 70, w: 16, h: 28, d: 0.62 },
+    { x: 62, y: 73, w: 16, h: 27, d: 0.68 },
+    { x: 83, y: 69, w: 16, h: 29, d: 0.74 },
   ],
   "sao-paulo": [
     { x: 0, y: 4, w: 24, h: 44, d: 0 },
