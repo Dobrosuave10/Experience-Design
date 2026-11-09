@@ -1,5 +1,9 @@
+import { useRef } from "react";
+import { gsap } from "gsap";
 import { EnvelopeSimple, InstagramLogo, WhatsappLogo } from "@phosphor-icons/react";
 import { brand, milan, milan2027 } from "../content/site";
+import { useGsap } from "../hooks/useGsap";
+import { MOTION_OK, isLite } from "../lib/env";
 import { EnrollButton } from "../components/EnrollButton";
 import { RevealText } from "../components/RevealText";
 import "./MilanDetails.css";
@@ -63,8 +67,29 @@ export function MilanPlaces({ tone = "sand" }: { tone?: Tone }) {
 
 export function MilanIncludes({ tone = "warm" }: { tone?: Tone }) {
   const inc = milan2027.includes;
+  const ref = useRef<HTMLElement>(null);
+
+  // Nuevo en 2027, Requisito y No incluye suben uno tras otro, arrastrados por el scroll
+  // (scrub suave; cada columna con un poco más de recorrido). En teléfonos, una entrada
+  // simple al aparecer. Con movimiento reducido quedan quietos. Sólo transform y opacidad.
+  useGsap(
+    (mm, el) => {
+      mm.add(MOTION_OK, () => {
+        const boxes = gsap.utils.toArray<HTMLElement>(".md__box", el);
+        if (isLite()) {
+          gsap.from(boxes, { y: 48, opacity: 0, duration: 0.9, ease: "power2.out", stagger: 0.12, scrollTrigger: { trigger: ".md__boxes", start: "top 88%", once: true } });
+          return;
+        }
+        gsap
+          .timeline({ scrollTrigger: { trigger: ".md__boxes", start: "top bottom", end: "top 42%", scrub: 0.8 } })
+          .fromTo(boxes, { y: (i) => 90 + i * 30, opacity: 0 }, { y: 0, opacity: 1, ease: "power2.out", duration: 1, stagger: 0.18 });
+      });
+    },
+    ref,
+  );
+
   return (
-    <section className="md section" data-tone={tone} aria-labelledby="md-includes">
+    <section ref={ref} className="md section" data-tone={tone} aria-labelledby="md-includes">
       <div className="wrap">
         <Head id="md-includes" label={inc.label} title={inc.title} />
         <p className="md__lead">{inc.body}</p>
