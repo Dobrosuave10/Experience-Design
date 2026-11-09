@@ -24,28 +24,18 @@ Programas y destinos son cosas distintas: los programas responden "¿qué camino
 
 El router es propio (`src/lib/router.ts`, History API) y cada cambio de página pasa por el telón terracota de `PageTransition`.
 
-## Publicar en el hosting
+## Publicar
 
-El sitio se publica reemplazando carpetas en el hosting de experience-design.cl (cPanel / Apache). El dominio no cambia.
+El sitio está en Vercel y se publica solo: cada push a `main` dispara un nuevo despliegue.
 
-1. `npm run build`. Genera `dist/` con una carpeta e `index.html` por cada ruta (`scripts/static-routes.mjs`), así los enlaces directos funcionan aunque el servidor no tenga reglas.
-2. En el administrador de archivos (o por FTP), sube el **contenido** de `dist/` (no la carpeta) a `public_html`, reemplazando lo que había.
-3. Verifica que `.htaccess` quedó en `public_html` (es un archivo oculto; viene en `dist/`). Hace el respaldo a `index.html` y las redirecciones 301 de las URLs del sitio anterior:
-
-| URL anterior | Redirige a |
-|---|---|
-| `/milan-salone-del-mobile2026`, `/milan-salone-del-mobile` | `/destinos/milan` |
-| `/sao-paulo-casacor-2025` | `/destinos/sao-paulo` |
-| `/inicio` | `/` |
-| `/programas/estudiantes`, `/programas/profesionales` | `/programas` |
-
-En otro hosting estático (Netlify, Vercel, GitHub Pages) basta con subir `dist/`; las redirecciones se configuran en ese servicio.
+- `npm run build` genera `dist/` con una carpeta e `index.html` por cada ruta (`scripts/static-routes.mjs`), así los enlaces directos y las recargas funcionan sin reglas en el servidor.
+- También genera `dist/404.html`: una ruta que no existe responde 404 y muestra la página "no encontrada" del sitio.
+- No hay redirecciones desde las URLs del sitio anterior (Canva).
 
 ## Dónde se edita
 
 - **Link del formulario de inscripción (Google Form):** se pega en `src/content/site.ts`, en `inscripcion.googleFormUrl` (línea marcada «PEGAR AQUÍ»). Si se deja en `null`, los botones abren WhatsApp.
 - **Todo el texto, las rutas y los datos:** `src/content/site.ts`. Lo que aún no está definido (fechas, valor, programa, cupos, cursos, biografías) se muestra como "Por confirmar", "En desarrollo" o "Próximamente".
-- **Nuevo destino en el archivo:** agrega una entrada a `archive.entries`.
 - **Colores y tipografía:** `src/styles/tokens.css`.
 
 ## Imágenes

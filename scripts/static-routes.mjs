@@ -19,4 +19,7 @@ for (const p of paths) {
   mkdirSync(dir, { recursive: true });
   copyFileSync(join(dist, "index.html"), join(dir, "index.html"));
 }
-console.log(`static-routes: ${paths.length} rutas → ${paths.join(", ")}`);
+// Página para rutas que no existen: Vercel sirve dist/404.html con estado 404; la app
+// dibuja ahí su propia página "no encontrada" (sin redirigir a ninguna parte).
+copyFileSync(join(dist, "index.html"), join(dist, "404.html"));
+console.log(`static-routes: ${paths.length} rutas → ${paths.join(", ")} (+ 404.html)`);
